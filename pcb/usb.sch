@@ -8647,6 +8647,11 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <pinref part="U2" gate="G$1" pin="OUT"/>
 <label x="88.9" y="86.36" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="JP1" gate="G$1" pin="1"/>
+<wire x1="144.78" y1="33.02" x2="154.94" y2="33.02" width="0.1524" layer="91"/>
+<label x="154.94" y="33.02" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="RX" class="0">
 <segment>
@@ -8755,6 +8760,11 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <wire x1="134.62" y1="86.36" x2="129.54" y2="86.36" width="0.1524" layer="91"/>
 <label x="129.54" y="86.36" size="1.778" layer="95" rot="R180"/>
 </segment>
+<segment>
+<pinref part="JP2" gate="G$1" pin="8"/>
+<wire x1="129.54" y1="33.02" x2="119.38" y2="33.02" width="0.1524" layer="91"/>
+<label x="119.38" y="33.02" size="1.778" layer="95" rot="R180"/>
+</segment>
 </net>
 <net name="N$19" class="1">
 <segment>
@@ -8840,13 +8850,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <label x="154.94" y="50.8" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="GPIO0" class="0">
-<segment>
-<wire x1="223.52" y1="99.06" x2="236.22" y2="99.06" width="0.1524" layer="91"/>
-<label x="226.06" y="99.06" size="1.778" layer="95"/>
-<pinref part="Q2" gate="G$1" pin="C"/>
-</segment>
-</net>
 <net name="RTS" class="0">
 <segment>
 <wire x1="223.52" y1="81.28" x2="223.52" y2="83.82" width="0.1524" layer="91"/>
@@ -8901,13 +8904,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <pinref part="Q2" gate="G$1" pin="B"/>
 </segment>
 </net>
-<net name="+3V3" class="1">
-<segment>
-<pinref part="JP1" gate="G$1" pin="1"/>
-<wire x1="144.78" y1="33.02" x2="154.94" y2="33.02" width="0.1524" layer="91"/>
-<label x="154.94" y="33.02" size="1.778" layer="95"/>
-</segment>
-</net>
 <net name="D1/GPIO5" class="0">
 <segment>
 <pinref part="JP2" gate="G$1" pin="3"/>
@@ -8927,6 +8923,11 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <pinref part="JP2" gate="G$1" pin="5"/>
 <wire x1="129.54" y1="40.64" x2="119.38" y2="40.64" width="0.1524" layer="91"/>
 <label x="119.38" y="40.64" size="1.778" layer="95" rot="R180"/>
+</segment>
+<segment>
+<wire x1="223.52" y1="99.06" x2="236.22" y2="99.06" width="0.1524" layer="91"/>
+<label x="226.06" y="99.06" size="1.778" layer="95"/>
+<pinref part="Q2" gate="G$1" pin="C"/>
 </segment>
 </net>
 <net name="D4/GPIO2" class="0">
@@ -8976,13 +8977,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <pinref part="JP1" gate="G$1" pin="3"/>
 <wire x1="144.78" y1="38.1" x2="154.94" y2="38.1" width="0.1524" layer="91"/>
 <label x="154.94" y="38.1" size="1.778" layer="95"/>
-</segment>
-</net>
-<net name="5V" class="0">
-<segment>
-<pinref part="JP2" gate="G$1" pin="8"/>
-<wire x1="129.54" y1="33.02" x2="119.38" y2="33.02" width="0.1524" layer="91"/>
-<label x="119.38" y="33.02" size="1.778" layer="95" rot="R180"/>
 </segment>
 </net>
 </nets>
