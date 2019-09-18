@@ -4876,8 +4876,8 @@ Metric Code Size 5664</description>
 <attribute name="NAME" x="122.936" y="48.895" size="1.778" layer="95"/>
 <attribute name="VALUE" x="122.936" y="44.069" size="1.778" layer="96"/>
 </instance>
-<instance part="GND11" gate="1" x="121.92" y="38.1" smashed="yes">
-<attribute name="VALUE" x="119.38" y="35.56" size="1.778" layer="96"/>
+<instance part="GND11" gate="1" x="121.92" y="40.64" smashed="yes">
+<attribute name="VALUE" x="119.38" y="38.1" size="1.778" layer="96"/>
 </instance>
 <instance part="+3V4" gate="G$1" x="180.34" y="76.2" smashed="yes" rot="MR0">
 <attribute name="VALUE" x="182.88" y="71.12" size="1.778" layer="96" rot="MR90"/>
@@ -4924,7 +4924,6 @@ Metric Code Size 5664</description>
 <segment>
 <pinref part="C10" gate="G$1" pin="2"/>
 <pinref part="GND11" gate="1" pin="GND"/>
-<wire x1="121.92" y1="43.18" x2="121.92" y2="40.64" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <wire x1="160.02" y1="53.34" x2="175.26" y2="53.34" width="0.1524" layer="91"/>
@@ -4964,8 +4963,7 @@ Metric Code Size 5664</description>
 <label x="121.92" y="53.34" size="1.778" layer="95" rot="R180"/>
 <pinref part="X1" gate="G$1" pin="VCC"/>
 <pinref part="C10" gate="G$1" pin="1"/>
-<wire x1="121.92" y1="45.72" x2="121.92" y2="50.8" width="0.1524" layer="91"/>
-<wire x1="121.92" y1="45.72" x2="121.92" y2="53.34" width="0.1524" layer="91"/>
+<wire x1="121.92" y1="50.8" x2="121.92" y2="53.34" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="JP1" gate="G$1" pin="1"/>
@@ -5002,7 +5000,7 @@ Metric Code Size 5664</description>
 <pinref part="R10" gate="G$1" pin="2"/>
 <wire x1="124.46" y1="66.04" x2="116.84" y2="66.04" width="0.1524" layer="91"/>
 <pinref part="X1" gate="G$1" pin="CH_PD"/>
-<label x="116.84" y="66.04" size="1.778" layer="95"/>
+<label x="121.92" y="66.04" size="1.778" layer="95" rot="R180"/>
 </segment>
 </net>
 <net name="RESET" class="0">
@@ -5090,6 +5088,11 @@ Metric Code Size 5664</description>
 <wire x1="149.86" y1="5.08" x2="160.02" y2="5.08" width="0.1524" layer="91"/>
 <label x="160.02" y="5.08" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="X1" gate="G$1" pin="GPIO12"/>
+<wire x1="124.46" y1="58.42" x2="121.92" y2="58.42" width="0.1524" layer="91"/>
+<label x="121.92" y="58.42" size="1.778" layer="95" rot="R180"/>
+</segment>
 </net>
 <net name="D5/GPIO14/SCK" class="0">
 <segment>
@@ -5121,6 +5124,11 @@ Metric Code Size 5664</description>
 <wire x1="149.86" y1="12.7" x2="160.02" y2="12.7" width="0.1524" layer="91"/>
 <label x="160.02" y="12.7" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="X1" gate="G$1" pin="ADC"/>
+<wire x1="124.46" y1="68.58" x2="121.92" y2="68.58" width="0.1524" layer="91"/>
+<label x="121.92" y="68.58" size="1.778" layer="95" rot="R180"/>
+</segment>
 </net>
 <net name="D7/GPIO13/MOSI" class="0">
 <segment>
@@ -5141,28 +5149,9 @@ Metric Code Size 5664</description>
 <label x="124.46" y="-2.54" size="1.778" layer="95" rot="R180"/>
 </segment>
 </net>
-<net name="N$2" class="0">
-<segment>
-<pinref part="X1" gate="G$1" pin="GPIO12"/>
-<wire x1="124.46" y1="58.42" x2="121.92" y2="58.42" width="0.1524" layer="91"/>
-</segment>
-</net>
 </nets>
 </sheet>
 </sheets>
-<errors>
-<approved hash="104,1,30.48,96.52,U2,IN,VIN,,,"/>
-<approved hash="104,1,50.8,96.52,U2,OUT,3.3V,,,"/>
-<approved hash="104,1,124.46,27.94,CN1,SD_VDD,3.3V,,,"/>
-<approved hash="103,1,124.46,162.56,U1,NC(GND),GND,,,"/>
-<approved hash="104,1,124.46,160.02,U1,VCC,13V,,,"/>
-<approved hash="104,1,124.46,154.94,U1,VDDIO,3.3V,,,"/>
-<approved hash="104,1,124.46,99.06,U1,VDD,N$3,,,"/>
-<approved hash="104,1,124.46,96.52,U1,VCI,3.3V,,,"/>
-<approved hash="104,1,124.46,93.98,U1,VSS,GND,,,"/>
-<approved hash="103,1,124.46,88.9,U1,NC(GND),GND,,,"/>
-<approved hash="115,1,246.617,133.481,JP1,,,,,"/>
-</errors>
 </schematic>
 </drawing>
 <compatibility>
