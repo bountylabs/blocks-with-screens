@@ -14,23 +14,28 @@ function ensureDirSync(dirpath) {
 ensureDirSync(TMP_DIR);
 
 module.exports = (req, res) => {
-  const { mode, block } = req.query;
+  const timeStart = Date.now();
 
-  let data;
+  const { mode, block } = req.query;
 
   switch (mode) {
     case 'write': {
       const { data } = req.query;
       memory[block] = data;
-      fs.writeFile(
+      fs.writeFileSync(
         `${TMP_DIR}/${block}`,
         data,
         err => err && console.error(err)
       );
 
-      return res.json({
+      const timeEnd = Date.now();
+      const response = {
         success: true,
-      });
+        time: timeEnd - timeStart,
+      };
+
+      console.info(req.url, response);
+      return res.json(response);
     }
     case 'read':
     default: {
@@ -40,10 +45,14 @@ module.exports = (req, res) => {
         data = fs.readFileSync(path, 'utf8');
       }
 
-      return res.json({
+      const timeEnd = Date.now();
+      const response = {
         block,
         data,
-      });
+        time: timeEnd - timeStart,
+      };
+      console.info(req.url, response);
+      return res.json(response);
     }
   }
 };
