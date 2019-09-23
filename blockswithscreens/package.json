@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "deploy": "now",
-    "deploy:prod": "now --target production"
+    "deploy:prod": "now --prod"
   },
   "devDependencies": {
     "now": "^16.2.0",
