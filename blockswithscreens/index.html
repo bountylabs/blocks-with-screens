@@ -1,0 +1,28 @@
+<html>
+  <head></head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <div style="display:none;">
+      <img
+        id="source"
+        src="/static/Twitter_Logo_Blue.png"
+        width="400"
+        height="400"
+      />
+    </div>
+
+    <script>
+      const canvas = document.getElementById('canvas');
+      canvas.width = canvas.height = 400;
+      const ctx = canvas.getContext('2d');
+      const image = document.getElementById('source');
+
+      image.addEventListener('load', e => {
+        ctx.drawImage(image, 0, 0, 400, 400, 0, 0, 400, 400);
+      });
+
+      const imgData = ctx.getImageData(x, y, width, height).data;
+      debugger;
+    </script>
+  </body>
+</html>
