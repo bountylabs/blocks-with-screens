@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "deploy": "now",
+    "deploy:prod": "now --target production"
+  },
   "devDependencies": {
     "prettier": "^1.18.2"
   }
