@@ -34,7 +34,11 @@ module.exports = (req, res) => {
     }
     case 'read':
     default: {
-      const data = fs.readFileSync(`${TMP_DIR}/${block}`, 'utf8');
+      const path = `${TMP_DIR}/${block}`;
+      let data = null;
+      if (fs.existsSync(path)) {
+        data = fs.readFileSync(path, 'utf8');
+      }
 
       return res.json({
         block,
