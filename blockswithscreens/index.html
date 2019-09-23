@@ -19,10 +19,50 @@
 
       image.addEventListener('load', e => {
         ctx.drawImage(image, 0, 0, 400, 400, 0, 0, 400, 400);
-      });
 
-      const imgData = ctx.getImageData(x, y, width, height).data;
-      debugger;
+        const imgData = ctx.getImageData(0, 0, 400, 400).data;
+        const numPixels = 400 * 400;
+
+        for (let p = 0; p < numPixels; p++) {
+          // pixels are layed out as 4 bytes [R G B A]
+          // so for a given pixel we will look at 4*p as
+          // the start of array of RGBA values
+          const pixelStart = p * 4;
+
+          // extract RGB (ignore A)
+          let r = imgData[p];
+          let g = imgData[p + 1];
+          let b = imgData[p + 2];
+
+          if (r || g || b) {
+            console.info({ r, g, b });
+            debugger;
+          }
+
+          // convert 8 bits to 5 bits (000RRRRR)
+          r = r >> 3;
+          // convert 8 bits to 6 bits (00GGGGGG)
+          g = g >> 2;
+          // convert 8 bits to 5 bits (000BBBBB)
+          b = b >> 3;
+
+          // 565 RGB output format for LCD screen
+          // 2 bytes per RGB pixel
+          // [RRRRRGGG][GGGBBBBB]
+          // r << 3 == shift 5 bits of r into top 5 bits of 8-bit value
+          // 000RRRRR << 3 == RRRRR000
+          // g >> 3 == shift 6 bits of g into bottom 3 bits of 8-bit value
+          // 00GGGGGG >> 3 == 00000GGG
+          // (r << 3) | (g >> 3)
+          // RRRRR000 | 00000GGG == RRRRRGGG
+          // g << 5 == shift 6 bits of g into top 3 bits of 8-bit value
+          // 00GGGGGG << 5 == GGG00000
+          // (g << 5) | b
+          // GGG00000 | 000BBBBB == GGGBBBBB
+          const byteA = (r << 3) | (g >> 3);
+          const byteB = (g << 5) | b;
+        }
+      });
     </script>
   </body>
 </html>
