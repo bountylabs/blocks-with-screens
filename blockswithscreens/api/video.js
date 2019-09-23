@@ -22,13 +22,11 @@ module.exports = (req, res) => {
     case 'write': {
       const { data } = req.query;
       memory[block] = data;
-      fs.writeFile(`${TMP_DIR}/${block}`, data, err => {
-        if (err) {
-          return console.log(err);
-        }
-
-        console.info('The file was saved!');
-      });
+      fs.writeFile(
+        `${TMP_DIR}/${block}`,
+        data,
+        err => err && console.error(err)
+      );
 
       return res.json({
         success: true,
@@ -36,7 +34,7 @@ module.exports = (req, res) => {
     }
     case 'read':
     default: {
-      const data = memory[block];
+      const data = fs.readFileSync(`${TMP_DIR}/${block}`, 'utf8');
 
       return res.json({
         block,
