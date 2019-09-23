@@ -8,6 +8,7 @@
     "deploy:prod": "now --target production"
   },
   "devDependencies": {
+    "now": "^16.2.0",
     "prettier": "^1.18.2"
   }
 }
