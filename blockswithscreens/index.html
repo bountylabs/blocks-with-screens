@@ -15,6 +15,8 @@
   </head>
 
   <body>
+    <button onclick="sendRGB565()">Send RGB565 (B56)</button>
+
     <h2>Input</h2>
 
     <input type="file" name="input" id="input" onchange="onInputSource()" />
@@ -107,6 +109,18 @@
         });
       }
 
+      function sendRGB565() {
+        const xhttp = new XMLHttpRequest();
+        xhttp.open(
+          'POST',
+          'http://localhost:3000/api/video?mode=write&block=56',
+          true
+        );
+
+        const rgb565array = canvasToRGB565();
+        xhttp.send(rgb565array);
+      }
+
       function onInputSource() {
         resetAllInputs();
 
@@ -147,36 +161,46 @@
 
             break;
           case 'image':
-            console.info('image detected');
+            {
+              console.info('image detected');
 
-            // set image src and draw when loaded
-            const loadedImage = new Image();
-            loadedImage.src = url;
-            loadedImage.onload = function() {
-              image.style.display = 'block';
-              image.src = url;
+              // set image src and draw when loaded
+              const loadedImage = new Image();
+              loadedImage.src = url;
+              loadedImage.onload = function() {
+                const options = {
+                  width: this.width,
+                  height: this.height,
+                  fill: fillInput.checked,
+                  rotate: rotateInput.checked,
+                };
 
-              EXIF.getData(image, function() {
-                const metadata = EXIF.getAllTags(this);
-                console.info({ metadata });
-              });
+                console.info(
+                  image.width,
+                  image.height,
+                  this.width,
+                  this.height,
+                  options
+                );
 
-              const options = {
-                width: image.naturalWidth,
-                height: image.naturalHeight,
-                fill: fillInput.checked,
-                rotate: rotateInput.checked,
+                EXIF.getData(loadedImage, function() {
+                  const metadata = EXIF.getAllTags(this);
+                  console.info('exif loadedImage', { metadata });
+                });
+
+                // display the image for debugging (not required for canvas drawing)
+                image.style.display = 'block';
+                image.onload = () => {
+                  EXIF.getData(image, function() {
+                    const metadata = EXIF.getAllTags(this);
+                    console.info('exif domImage', { metadata });
+                  });
+                };
+                image.src = url;
+
+                drawCanvas(loadedImage, options);
               };
-              console.info(
-                image.width,
-                image.height,
-                this.width,
-                this.height,
-                options
-              );
-
-              drawCanvas(image, options);
-            };
+            }
 
             break;
           default:
@@ -187,6 +211,7 @@
 
       function drawCanvas(source, options) {
         cancelAnimationFrame(rafID);
+
         const {
           width,
           height,
@@ -231,6 +256,9 @@
           );
         }
 
+        // black out canvas because empty canvas is written as black (0's)
+        context.fillStyle = '#000000';
+        context.fillRect(0, 0, SIZE, SIZE);
         // draw source to canvas proportionally
         context.drawImage(
           source,

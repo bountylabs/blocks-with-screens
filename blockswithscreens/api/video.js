@@ -24,15 +24,31 @@ module.exports = (req, res) => {
 
   const { mode, block } = req.query;
 
+  console.info({ req });
+  console.info(req.body);
+
   switch (mode) {
     case 'write': {
-      const { data } = req.query;
-      memory[block] = data;
-      fs.writeFileSync(
-        `${TMP_DIR}/${block}`,
-        data,
-        err => err && console.error(err)
-      );
+      const data = [];
+
+      req
+        .on('data', chunk => {
+          console.info('chunk', chunk);
+          data.push(chunk);
+        })
+        .on('end', () => {
+          //at this point data is an array of Buffers
+          //so Buffer.concat() can make us a new Buffer
+          //of all of them together
+          const buffer = Buffer.concat(data);
+          console.info('buffer', buffer);
+
+          fs.writeFileSync(
+            `${TMP_DIR}/${block}`,
+            buffer,
+            err => err && console.error(err)
+          );
+        });
 
       const timeEnd = Date.now();
       const response = {
