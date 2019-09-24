@@ -7,17 +7,18 @@
     <h2>Input</h2>
     <input type="file" name="input" id="input" onchange="onInputSource()" />
     <button onclick="cameraCapture()">Camera Capture</button>
+    <video
+      id="video"
+      style="width: 100%;"
+      autoplay
+      loop
+      muted
+      playsinline
+    ></video>
+    <img id="image" />
 
     <h2>Output</h2>
     <canvas id="canvas" style="width: 100%; border: 1px solid red;"></canvas>
-
-    <!-- Must be visible to playback in Safari -->
-    <div
-      style="width: 1px; height: 1px; position: absolute; bottom: 0; right: 0;"
-    >
-      <video id="video" autoplay loop muted playsinline></video>
-      <img id="image" />
-    </div>
 
     <script>
       const SIZE = 128;
@@ -66,6 +67,10 @@
       }
 
       function onInputSource() {
+        if (video.srcObject) {
+          video.srcObject.getTracks().forEach(track => track.stop());
+        }
+
         const inputFile = input.files[0];
 
         if (!inputFile) {
