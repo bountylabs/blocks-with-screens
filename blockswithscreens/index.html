@@ -7,18 +7,21 @@
     <h2>Input</h2>
     <input type="file" name="input" id="input" onchange="onInputSource()" />
     <button onclick="cameraCapture()">Camera Capture</button>
-    <video
-      id="video"
-      style="width: 100%;"
-      autoplay
-      loop
-      muted
-      playsinline
-    ></video>
-    <img id="image" />
+
+    <div style="border: 1px solid red;">
+      <video
+        id="video"
+        style="width: 100%;"
+        autoplay
+        loop
+        muted
+        playsinline
+      ></video>
+      <img id="image" style="width: 100%;" />
+    </div>
 
     <h2>Output</h2>
-    <canvas id="canvas" style="width: 100%; border: 1px solid red;"></canvas>
+    <canvas id="canvas" style="width: 100%; border: 1px solid green;"></canvas>
 
     <script>
       const SIZE = 128;
@@ -48,8 +51,21 @@
         console.info(label, { time });
       }
 
+      function resetAllInputs() {
+        delete image.src;
+        delete video.src;
+        video.style.display = 'none';
+        image.style.display = 'none';
+        if (video.srcObject) {
+          video.srcObject.getTracks().forEach(track => track.stop());
+        }
+      }
+
       function cameraCapture() {
+        resetAllInputs();
+
         navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+          video.style.display = 'block';
           video.srcObject = stream;
           video.load();
 
@@ -67,9 +83,7 @@
       }
 
       function onInputSource() {
-        if (video.srcObject) {
-          video.srcObject.getTracks().forEach(track => track.stop());
-        }
+        resetAllInputs();
 
         const inputFile = input.files[0];
 
@@ -92,6 +106,7 @@
             console.info('video detected');
 
             // setup video with url draw to canvas once loaded
+            video.style.display = 'block';
             video.src = url;
             video.load();
 
@@ -111,10 +126,11 @@
             console.info('image detected');
 
             // set image src and draw when loaded
+            image.style.display = 'block';
             image.addEventListener('load', e => {
               drawCanvas(image, {
-                width: image.width,
-                height: image.height,
+                width: image.naturalWidth,
+                height: image.naturalHeight,
               });
             });
             image.src = url;
@@ -130,7 +146,9 @@
         cancelAnimationFrame(rafID);
         const { width, height } = dimensions;
 
-        const proportionalHeight = (SIZE / width) * height;
+        const ratio = SIZE / width;
+        const proportionalHeight = ratio * height;
+        const proportionalWidth = ratio * width;
         const heightDiff = SIZE - proportionalHeight;
         // split heightDiff across top and bottom to center source vertically
         const yStart = heightDiff / 2;
@@ -144,7 +162,7 @@
           height,
           0,
           yStart,
-          SIZE,
+          proportionalWidth,
           proportionalHeight
         );
 
