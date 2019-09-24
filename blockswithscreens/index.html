@@ -151,7 +151,7 @@
         const proportionalWidth = ratio * width;
         const heightDiff = SIZE - proportionalHeight;
         // split heightDiff across top and bottom to center source vertically
-        const yStart = heightDiff / 2;
+        const yStart = Math.max(0, heightDiff / 2);
 
         // draw source to canvas proportionally
         ctx.drawImage(
