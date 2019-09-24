@@ -1,12 +1,30 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style>
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin: 8px 0;
+      }
+    </style>
   </head>
 
   <body>
     <h2>Input</h2>
+
     <input type="file" name="input" id="input" onchange="onInputSource()" />
     <button onclick="cameraCapture()">Camera Capture</button>
+
+    <h4>Options</h4>
+    <label>
+      <input id="fillInput" type="checkbox" name="fillInput" checked />
+      Fill
+    </label>
 
     <div style="border: 1px solid red;">
       <video
@@ -32,6 +50,7 @@
       const video = document.getElementById('video');
       const image = document.getElementById('image');
       const input = document.getElementById('input');
+      const fillInput = document.getElementById('fillInput');
       const canvas = document.getElementById('canvas');
       const context = canvas.getContext('2d');
 
@@ -76,6 +95,7 @@
               width: video.videoWidth,
               height: video.videoHeight,
               raf: true,
+              fill: fillInput.checked,
             });
           };
         });
@@ -114,6 +134,7 @@
                 width: video.videoWidth,
                 height: video.videoHeight,
                 raf: true,
+                fill: fillInput.checked,
               });
             };
 
@@ -132,6 +153,7 @@
               drawCanvas(image, {
                 width: image.naturalWidth,
                 height: image.naturalHeight,
+                fill: fillInput.checked,
               });
             });
             image.src = url;
@@ -145,7 +167,7 @@
 
       function drawCanvas(source, options) {
         cancelAnimationFrame(rafID);
-        const { width, height, raf = false, fill = true } = options;
+        const { width, height, raf = false, fill = false } = options;
 
         const ratioFunction = fill ? Math.max : Math.min;
         const ratio = ratioFunction(SIZE / width, SIZE / height);
