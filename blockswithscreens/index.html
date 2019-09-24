@@ -14,6 +14,7 @@
 
     <script>
       const SIZE = 128;
+      const PIXELS = SIZE * SIZE;
       const FILETYPE_REGEX = /(.*)\//;
 
       const video = document.getElementById('video');
@@ -129,48 +130,54 @@
         }
       }
 
-      // // convert SIZExSIZE canvas UINT8Array of pixels to RGB565 format
-      // const imgData = ctx.getImageData(0, 0, SIZE, SIZE).data;
-      // const numPixels = SIZE * SIZE;
+      // convert canvas image data uint8 array to RGB565 format
+      function canvasToRGB565() {
+        // canvas Uint8Array uses 4 bytes per pixel (RGBA)
+        const imgData = ctx.getImageData(0, 0, SIZE, SIZE).data;
+        // RGB565 uses 2 bytes per pixel ([RRRRRGGG][GGGBBBBB])
+        // this results in a Uint8 array of half the size
+        const rgb565 = new Uint8Array(PIXELS * 2);
 
-      // for (let p = 0; p < numPixels; p++) {
-      //   // pixels are layed out as 4 bytes [R G B A]
-      //   // so for a given pixel we will look at 4*p as
-      //   // the start of array of RGBA values
-      //   const pixelStart = p * 4;
+        for (let p = 0; p < PIXELS; p++) {
+          // pixels are layed out as 4 bytes [R G B A]
+          // so for a given pixel we will look at 4*p as
+          // the start of array of RGBA values
 
-      //   // extract RGB (ignore A)
-      //   let r = imgData[p];
-      //   let g = imgData[p + 1];
-      //   let b = imgData[p + 2];
+          // extract RGB (ignore A)
+          let r = imgData[p * 4 + 0];
+          let g = imgData[p * 4 + 1];
+          let b = imgData[p * 4 + 2];
 
-      //   if (r || g || b) {
-      //     console.info({ r, g, b });
-      //   }
+          // if (r || g || b) {
+          //   console.info({ r, g, b });
+          // }
 
-      //   // convert 8 bits to 5 bits (000RRRRR)
-      //   r = r >> 3;
-      //   // convert 8 bits to 6 bits (00GGGGGG)
-      //   g = g >> 2;
-      //   // convert 8 bits to 5 bits (000BBBBB)
-      //   b = b >> 3;
+          // convert 8 bits to 5 bits (000RRRRR)
+          r = r >> 3;
+          // convert 8 bits to 6 bits (00GGGGGG)
+          g = g >> 2;
+          // convert 8 bits to 5 bits (000BBBBB)
+          b = b >> 3;
 
-      //   // RGB565 output format for LCD screen
-      //   // 2 bytes per RGB pixel
-      //   // [RRRRRGGG][GGGBBBBB]
-      //   // r << 3 == shift 5 bits of r into top 5 bits of 8-bit value
-      //   // 000RRRRR << 3 == RRRRR000
-      //   // g >> 3 == shift 6 bits of g into bottom 3 bits of 8-bit value
-      //   // 00GGGGGG >> 3 == 00000GGG
-      //   // (r << 3) | (g >> 3)
-      //   // RRRRR000 | 00000GGG == RRRRRGGG
-      //   // g << 5 == shift 6 bits of g into top 3 bits of 8-bit value
-      //   // 00GGGGGG << 5 == GGG00000
-      //   // (g << 5) | b
-      //   // GGG00000 | 000BBBBB == GGGBBBBB
-      //   const byteA = (r << 3) | (g >> 3);
-      //   const byteB = (g << 5) | b;
-      // }
+          // RGB565 output format for LCD screen
+          // 2 bytes per RGB pixel
+          // [RRRRRGGG][GGGBBBBB]
+          // r << 3 == shift 5 bits of r into top 5 bits of 8-bit value
+          // 000RRRRR << 3 == RRRRR000
+          // g >> 3 == shift 6 bits of g into bottom 3 bits of 8-bit value
+          // 00GGGGGG >> 3 == 00000GGG
+          // (r << 3) | (g >> 3)
+          // RRRRR000 | 00000GGG == RRRRRGGG
+          // g << 5 == shift 6 bits of g into top 3 bits of 8-bit value
+          // 00GGGGGG << 5 == GGG00000
+          // (g << 5) | b
+          // GGG00000 | 000BBBBB == GGGBBBBB
+          rgb565[p * 2 + 0] = (r << 3) | (g >> 3);
+          rgb565[p * 2 + 1] = (g << 5) | b;
+        }
+
+        return rgb565;
+      }
     </script>
   </body>
 </html>
