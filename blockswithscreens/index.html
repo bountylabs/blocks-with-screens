@@ -6,6 +6,7 @@
   <body>
     <h2>Input</h2>
     <input type="file" name="input" id="input" onchange="onInputSource()" />
+    <button onclick="cameraCapture()">Camera Capture</button>
 
     <h2>Output</h2>
     <canvas id="canvas" style="width: 100%; border: 1px solid red;"></canvas>
@@ -43,6 +44,24 @@
         console.info(label, { time });
       }
 
+      function cameraCapture() {
+        navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+          video.srcObject = stream;
+          video.load();
+
+          video.onloadeddata = () => {
+            drawCanvas(
+              video,
+              {
+                width: video.videoWidth,
+                height: video.videoHeight,
+              },
+              true
+            );
+          };
+        });
+      }
+
       function onInputSource() {
         const inputFile = input.files[0];
 
@@ -58,10 +77,6 @@
         if (!match || match.length < 2) {
           return console.error('Unable to identify file type', inputFile);
         }
-
-        let source;
-        let width;
-        let height;
 
         const type = match[1];
         switch (type) {
