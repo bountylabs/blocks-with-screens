@@ -13,6 +13,12 @@ function ensureDirSync(dirpath) {
 
 ensureDirSync(TMP_DIR);
 
+// http://localhost:3000/api/video?mode=write&block=56&data=0001
+// http://localhost:3000/api/video?mode=read&block=56
+
+// Working with Octet Streams in Javascript
+// https://medium.com/@julientregoat/working-with-octet-streams-in-javascript-d43d81ad7f47
+
 module.exports = (req, res) => {
   const timeStart = Date.now();
 
