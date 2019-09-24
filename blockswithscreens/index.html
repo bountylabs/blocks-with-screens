@@ -23,6 +23,7 @@
     <h2>Output</h2>
     <canvas id="canvas" style="width: 100%; border: 1px solid green;"></canvas>
 
+    <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
     <script>
       const SIZE = 128;
       const PIXELS = SIZE * SIZE;
@@ -71,14 +72,11 @@
           video.load();
 
           video.onloadeddata = () => {
-            drawCanvas(
-              video,
-              {
-                width: video.videoWidth,
-                height: video.videoHeight,
-              },
-              true
-            );
+            drawCanvas(video, {
+              width: video.videoWidth,
+              height: video.videoHeight,
+              raf: true,
+            });
           };
         });
       }
@@ -112,14 +110,11 @@
             video.load();
 
             video.onloadeddata = () => {
-              drawCanvas(
-                video,
-                {
-                  width: video.videoWidth,
-                  height: video.videoHeight,
-                },
-                true
-              );
+              drawCanvas(video, {
+                width: video.videoWidth,
+                height: video.videoHeight,
+                raf: true,
+              });
             };
 
             break;
@@ -129,6 +124,11 @@
             // set image src and draw when loaded
             image.style.display = 'block';
             image.addEventListener('load', e => {
+              EXIF.getData(image, function() {
+                const metadata = EXIF.getAllTags(this);
+                console.info({ metadata });
+              });
+
               drawCanvas(image, {
                 width: image.naturalWidth,
                 height: image.naturalHeight,
@@ -143,22 +143,25 @@
         }
       }
 
-      function drawCanvas(source, dimensions, raf) {
+      function drawCanvas(source, options) {
         cancelAnimationFrame(rafID);
-        const { width, height } = dimensions;
+        const { width, height, raf = false, fill = true } = options;
 
-        const ratio = Math.min(SIZE / width, SIZE / height);
+        const ratioFunction = fill ? Math.max : Math.min;
+        const ratio = ratioFunction(SIZE / width, SIZE / height);
 
-        let proportionalHeight = ratio * height;
-        let proportionalWidth = ratio * width;
+        const proportionalHeight = ratio * height;
+        const proportionalWidth = ratio * width;
+        const heightDiff = SIZE - proportionalHeight;
+        const widthDiff = SIZE - proportionalWidth;
         let xStart = 0;
         let yStart = 0;
+
         // split dimension diff across to center source
-        if (width > height) {
-          const heightDiff = SIZE - proportionalHeight;
+        if (fill || width > height) {
           yStart = heightDiff / 2;
-        } else {
-          const widthDiff = SIZE - proportionalWidth;
+        }
+        if (fill || height > width) {
           xStart = widthDiff / 2;
         }
 
@@ -178,7 +181,7 @@
         // draw again if raf
         if (raf) {
           rafID = requestAnimationFrame(() => {
-            drawCanvas(source, dimensions, raf);
+            drawCanvas(source, options);
           });
         }
       }
