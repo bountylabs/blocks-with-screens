@@ -214,10 +214,21 @@
         }
 
         if (rotate) {
-          context.save();
-          context.translate(SIZE / 2, SIZE / 2);
-          context.rotate((90 * Math.PI) / 180.0);
-          context.translate(-SIZE / 2, -SIZE / 2);
+          // const tmpStart = yStart;
+          // yStart = xStart;
+          // xStart = tmpStart;
+          // context.save();
+          // context.translate(SIZE / 2, SIZE / 2);
+          // context.rotate((90 * Math.PI) / 180.0);
+          // context.translate(-SIZE / 2, -SIZE / 2);
+          context.setTransform(
+            0,
+            1, // x axis down
+            -1,
+            0, // y axis from left to right
+            context.canvas.height, // origin x and y to top right
+            0
+          );
         }
 
         // draw source to canvas proportionally
