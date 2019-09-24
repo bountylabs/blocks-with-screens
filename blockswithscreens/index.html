@@ -143,20 +143,31 @@
             console.info('image detected');
 
             // set image src and draw when loaded
-            image.style.display = 'block';
-            image.addEventListener('load', e => {
+            const loadedImage = new Image();
+            loadedImage.src = url;
+            loadedImage.onload = function() {
+              image.style.display = 'block';
+              image.src = url;
+
               EXIF.getData(image, function() {
                 const metadata = EXIF.getAllTags(this);
                 console.info({ metadata });
               });
 
-              drawCanvas(image, {
+              const options = {
                 width: image.naturalWidth,
                 height: image.naturalHeight,
                 fill: fillInput.checked,
-              });
-            });
-            image.src = url;
+              };
+              console.info(
+                image.width,
+                image.height,
+                this.width,
+                this.height,
+                options
+              );
+              drawCanvas(image, options);
+            };
 
             break;
           default:
