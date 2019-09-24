@@ -1,68 +1,176 @@
 <html>
   <head></head>
   <body>
-    <canvas id="canvas"></canvas>
-    <div style="display:none;">
-      <img
-        id="source"
-        src="/static/Twitter_Logo_Blue.png"
-        width="400"
-        height="400"
-      />
+    <h2>Input</h2>
+    <input type="file" name="input" id="input" onchange="onInputSource()" />
+
+    <h2>Output</h2>
+    <canvas id="canvas" style="border: 1px solid red;"></canvas>
+
+    <div style="visibility: hidden">
+      <video id="video" autoplay loop muted playsInline></video>
+      <img id="image" />
     </div>
 
     <script>
+      const SIZE = 128;
+      const FILETYPE_REGEX = /(.*)\//;
+
+      const video = document.getElementById('video');
+      const image = document.getElementById('image');
+      const input = document.getElementById('input');
       const canvas = document.getElementById('canvas');
-      canvas.width = canvas.height = 400;
       const ctx = canvas.getContext('2d');
-      const image = document.getElementById('source');
 
-      image.addEventListener('load', e => {
-        ctx.drawImage(image, 0, 0, 400, 400, 0, 0, 400, 400);
+      let rafID = 0;
 
-        const imgData = ctx.getImageData(0, 0, 400, 400).data;
-        const numPixels = 400 * 400;
+      canvas.width = canvas.height = SIZE;
 
-        for (let p = 0; p < numPixels; p++) {
-          // pixels are layed out as 4 bytes [R G B A]
-          // so for a given pixel we will look at 4*p as
-          // the start of array of RGBA values
-          const pixelStart = p * 4;
+      function time(label, operation) {
+        console.time(label);
+        const start = performance.now();
 
-          // extract RGB (ignore A)
-          let r = imgData[p];
-          let g = imgData[p + 1];
-          let b = imgData[p + 2];
+        operation();
 
-          if (r || g || b) {
-            console.info({ r, g, b });
-            debugger;
-          }
+        console.timeEnd(label);
 
-          // convert 8 bits to 5 bits (000RRRRR)
-          r = r >> 3;
-          // convert 8 bits to 6 bits (00GGGGGG)
-          g = g >> 2;
-          // convert 8 bits to 5 bits (000BBBBB)
-          b = b >> 3;
+        const end = performance.now();
+        const time = end - start;
+        console.info(label, { time });
+      }
 
-          // 565 RGB output format for LCD screen
-          // 2 bytes per RGB pixel
-          // [RRRRRGGG][GGGBBBBB]
-          // r << 3 == shift 5 bits of r into top 5 bits of 8-bit value
-          // 000RRRRR << 3 == RRRRR000
-          // g >> 3 == shift 6 bits of g into bottom 3 bits of 8-bit value
-          // 00GGGGGG >> 3 == 00000GGG
-          // (r << 3) | (g >> 3)
-          // RRRRR000 | 00000GGG == RRRRRGGG
-          // g << 5 == shift 6 bits of g into top 3 bits of 8-bit value
-          // 00GGGGGG << 5 == GGG00000
-          // (g << 5) | b
-          // GGG00000 | 000BBBBB == GGGBBBBB
-          const byteA = (r << 3) | (g >> 3);
-          const byteB = (g << 5) | b;
+      function onInputSource() {
+        const inputFile = input.files[0];
+
+        if (!inputFile) {
+          return console.error('no files input');
         }
-      });
+
+        // setup blob url
+        const url = URL.createObjectURL(inputFile);
+
+        // determine video or image
+        const match = inputFile.type.match(FILETYPE_REGEX);
+        if (!match || match.length < 2) {
+          return console.error('Unable to identify file type', inputFile);
+        }
+
+        let source;
+        let width;
+        let height;
+
+        const type = match[1];
+        switch (type) {
+          case 'video':
+            console.info('video detected');
+
+            // setup video with url draw to canvas once loaded
+            video.src = url;
+            video.load();
+
+            video.onloadeddata = () => {
+              drawCanvas(
+                video,
+                {
+                  width: video.videoWidth,
+                  height: video.videoHeight,
+                },
+                true
+              );
+            };
+
+            break;
+          case 'image':
+            console.info('image detected');
+
+            // set image src and draw when loaded
+            image.addEventListener('load', e => {
+              drawCanvas(image, {
+                width: image.width,
+                height: image.height,
+              });
+            });
+            image.src = url;
+
+            break;
+          default:
+            console.error('unrecognized type', type, inputFile);
+            return;
+        }
+      }
+
+      function drawCanvas(source, dimensions, raf) {
+        cancelAnimationFrame(rafID);
+        const { width, height } = dimensions;
+
+        const proportionalHeight = (SIZE / width) * height;
+        const heightDiff = SIZE - proportionalHeight;
+        // split heightDiff across top and bottom to center source vertically
+        const yStart = heightDiff / 2;
+
+        // draw source to canvas proportionally
+        ctx.drawImage(
+          source,
+          0,
+          0,
+          width,
+          height,
+          0,
+          yStart,
+          SIZE,
+          proportionalHeight
+        );
+
+        // draw again if raf
+        if (raf) {
+          rafID = requestAnimationFrame(() => {
+            drawCanvas(source, dimensions, raf);
+          });
+        }
+      }
+
+      // // convert SIZExSIZE canvas UINT8Array of pixels to RGB565 format
+      // const imgData = ctx.getImageData(0, 0, SIZE, SIZE).data;
+      // const numPixels = SIZE * SIZE;
+
+      // for (let p = 0; p < numPixels; p++) {
+      //   // pixels are layed out as 4 bytes [R G B A]
+      //   // so for a given pixel we will look at 4*p as
+      //   // the start of array of RGBA values
+      //   const pixelStart = p * 4;
+
+      //   // extract RGB (ignore A)
+      //   let r = imgData[p];
+      //   let g = imgData[p + 1];
+      //   let b = imgData[p + 2];
+
+      //   if (r || g || b) {
+      //     console.info({ r, g, b });
+      //   }
+
+      //   // convert 8 bits to 5 bits (000RRRRR)
+      //   r = r >> 3;
+      //   // convert 8 bits to 6 bits (00GGGGGG)
+      //   g = g >> 2;
+      //   // convert 8 bits to 5 bits (000BBBBB)
+      //   b = b >> 3;
+
+      //   // RGB565 output format for LCD screen
+      //   // 2 bytes per RGB pixel
+      //   // [RRRRRGGG][GGGBBBBB]
+      //   // r << 3 == shift 5 bits of r into top 5 bits of 8-bit value
+      //   // 000RRRRR << 3 == RRRRR000
+      //   // g >> 3 == shift 6 bits of g into bottom 3 bits of 8-bit value
+      //   // 00GGGGGG >> 3 == 00000GGG
+      //   // (r << 3) | (g >> 3)
+      //   // RRRRR000 | 00000GGG == RRRRRGGG
+      //   // g << 5 == shift 6 bits of g into top 3 bits of 8-bit value
+      //   // 00GGGGGG << 5 == GGG00000
+      //   // (g << 5) | b
+      //   // GGG00000 | 000BBBBB == GGGBBBBB
+      //   const byteA = (r << 3) | (g >> 3);
+      //   const byteB = (g << 5) | b;
+      // }
     </script>
   </body>
 </html>
