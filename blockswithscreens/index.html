@@ -32,7 +32,7 @@
       const image = document.getElementById('image');
       const input = document.getElementById('input');
       const canvas = document.getElementById('canvas');
-      const ctx = canvas.getContext('2d');
+      const context = canvas.getContext('2d');
 
       let rafID = 0;
 
@@ -59,6 +59,7 @@
         if (video.srcObject) {
           video.srcObject.getTracks().forEach(track => track.stop());
         }
+        context.clearRect(0, 0, canvas.width, canvas.height);
       }
 
       function cameraCapture() {
@@ -146,21 +147,29 @@
         cancelAnimationFrame(rafID);
         const { width, height } = dimensions;
 
-        const ratio = SIZE / width;
-        const proportionalHeight = ratio * height;
-        const proportionalWidth = ratio * width;
-        const heightDiff = SIZE - proportionalHeight;
-        // split heightDiff across top and bottom to center source vertically
-        const yStart = Math.max(0, heightDiff / 2);
+        const ratio = Math.min(SIZE / width, SIZE / height);
+
+        let proportionalHeight = ratio * height;
+        let proportionalWidth = ratio * width;
+        let xStart = 0;
+        let yStart = 0;
+        // split dimension diff across to center source
+        if (width > height) {
+          const heightDiff = SIZE - proportionalHeight;
+          yStart = heightDiff / 2;
+        } else {
+          const widthDiff = SIZE - proportionalWidth;
+          xStart = widthDiff / 2;
+        }
 
         // draw source to canvas proportionally
-        ctx.drawImage(
+        context.drawImage(
           source,
           0,
           0,
           width,
           height,
-          0,
+          xStart,
           yStart,
           proportionalWidth,
           proportionalHeight
@@ -177,7 +186,7 @@
       // convert canvas image data uint8 array to RGB565 format
       function canvasToRGB565() {
         // canvas Uint8Array uses 4 bytes per pixel (RGBA)
-        const imgData = ctx.getImageData(0, 0, SIZE, SIZE).data;
+        const imgData = context.getImageData(0, 0, SIZE, SIZE).data;
         // RGB565 uses 2 bytes per pixel ([RRRRRGGG][GGGBBBBB])
         // this results in a Uint8 array of half the size
         const rgb565 = new Uint8Array(PIXELS * 2);
