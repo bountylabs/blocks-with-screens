@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "start": "now dev",
     "deploy": "now",
     "deploy:prod": "now --prod"
   },
