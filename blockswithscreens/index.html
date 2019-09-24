@@ -1,11 +1,14 @@
 <html>
-  <head></head>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+
   <body>
     <h2>Input</h2>
     <input type="file" name="input" id="input" onchange="onInputSource()" />
 
     <h2>Output</h2>
-    <canvas id="canvas" style="border: 1px solid red;"></canvas>
+    <canvas id="canvas" style="width: 100%; border: 1px solid red;"></canvas>
 
     <div style="visibility: hidden">
       <video id="video" autoplay loop muted playsInline></video>
