@@ -24,8 +24,8 @@ module.exports = (req, res) => {
 
   const { mode, block } = req.query;
 
-  console.info({ req });
-  console.info(req.body);
+  // console.info({ req });
+  // console.info(req.url, { block, mode });
 
   switch (mode) {
     case 'write': {
@@ -33,7 +33,7 @@ module.exports = (req, res) => {
 
       req
         .on('data', chunk => {
-          console.info('chunk', chunk);
+          // console.info('chunk', chunk);
           data.push(chunk);
         })
         .on('end', () => {
@@ -41,7 +41,7 @@ module.exports = (req, res) => {
           //so Buffer.concat() can make us a new Buffer
           //of all of them together
           const buffer = Buffer.concat(data);
-          console.info('buffer', buffer);
+          // console.info('buffer', buffer);
 
           fs.writeFileSync(
             `${TMP_DIR}/${block}`,
@@ -62,19 +62,24 @@ module.exports = (req, res) => {
     case 'read':
     default: {
       const path = `${TMP_DIR}/${block}`;
-      let data = null;
-      if (fs.existsSync(path)) {
-        data = fs.readFileSync(path, 'utf8');
+
+      const fileExists = fs.existsSync(path);
+      // console.info({ path, fileExists });
+
+      if (fileExists) {
+        // Content-type is very interesting part that guarantee that
+        // Web browser will handle response in an appropriate manner.
+        res.writeHead(200, {
+          'Content-Type': 'application/octet-stream',
+        });
+        fs.createReadStream(path).pipe(res);
+
+        const timeEnd = Date.now();
+        console.info(req.url, timeEnd - timeStart);
+        return;
       }
 
-      const timeEnd = Date.now();
-      const response = {
-        block,
-        data,
-        time: timeEnd - timeStart,
-      };
-      console.info(req.url, response);
-      return res.json(response);
+      return res.json({ success: false });
     }
   }
 };
