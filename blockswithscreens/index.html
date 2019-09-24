@@ -22,8 +22,12 @@
 
     <h4>Options</h4>
     <label>
-      <input id="fillInput" type="checkbox" name="fillInput" checked />
+      <input id="fillInput" type="checkbox" name="fillInput" />
       Fill
+    </label>
+    <label>
+      <input id="rotateInput" type="checkbox" name="rotateInput" />
+      Rotate
     </label>
 
     <div style="border: 1px solid red;">
@@ -51,6 +55,7 @@
       const image = document.getElementById('image');
       const input = document.getElementById('input');
       const fillInput = document.getElementById('fillInput');
+      const rotateInput = document.getElementById('rotateInput');
       const canvas = document.getElementById('canvas');
       const context = canvas.getContext('2d');
 
@@ -96,6 +101,7 @@
               height: video.videoHeight,
               raf: true,
               fill: fillInput.checked,
+              rotate: rotateInput.checked,
             });
           };
         });
@@ -135,6 +141,7 @@
                 height: video.videoHeight,
                 raf: true,
                 fill: fillInput.checked,
+                rotate: rotateInput.checked,
               });
             };
 
@@ -158,6 +165,7 @@
                 width: image.naturalWidth,
                 height: image.naturalHeight,
                 fill: fillInput.checked,
+                rotate: rotateInput.checked,
               };
               console.info(
                 image.width,
@@ -166,6 +174,7 @@
                 this.height,
                 options
               );
+
               drawCanvas(image, options);
             };
 
@@ -178,7 +187,13 @@
 
       function drawCanvas(source, options) {
         cancelAnimationFrame(rafID);
-        const { width, height, raf = false, fill = false } = options;
+        const {
+          width,
+          height,
+          raf = false,
+          fill = false,
+          rotate = false,
+        } = options;
 
         const ratioFunction = fill ? Math.max : Math.min;
         const ratio = ratioFunction(SIZE / width, SIZE / height);
@@ -198,6 +213,13 @@
           xStart = widthDiff / 2;
         }
 
+        if (rotate) {
+          context.save();
+          context.translate(SIZE / 2, SIZE / 2);
+          context.rotate((90 * Math.PI) / 180.0);
+          context.translate(-SIZE / 2, -SIZE / 2);
+        }
+
         // draw source to canvas proportionally
         context.drawImage(
           source,
@@ -210,6 +232,10 @@
           proportionalWidth,
           proportionalHeight
         );
+
+        if (rotate) {
+          context.restore();
+        }
 
         // draw again if raf
         if (raf) {
