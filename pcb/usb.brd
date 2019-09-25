@@ -158,6 +158,7 @@
 <layer number="255" name="routoute" color="7" fill="1" visible="no" active="yes"/>
 </layers>
 <board>
+<fusionsync huburn="a.cGVyc29uYWw6dWUyODFhMTI5" projecturn="a.cGVyc29uYWw6dWUyODFhMTI5IzIwMTkwOTE3MjE1ODk1MzI2" f3durn="urn:adsk.wipprod:dm.lineage:P5lhZWs8S_KHtQ88bDf2NQ" pcbguid="cd0c53a3-0c54-43de-9435-58563155f29e" lastpulledtime="" lastsyncedchangeguid="3e3746fe-27d4-2d90-7210-416215d1e299"/>
 <plain>
 <rectangle x1="44.831" y1="46.953" x2="45.339" y2="47.207" layer="42" rot="R90"/>
 <rectangle x1="46.101" y1="47.461" x2="46.355" y2="47.969" layer="42" rot="R90"/>
@@ -1447,7 +1448,7 @@ Note, that not all DRC settings must be set by the manufacturer. Several can be 
 </signal>
 </signals>
 <mfgpreviewcolors>
-<mfgpreviewcolor name="soldermaskcolor" color="0xC8008000"/>
+<mfgpreviewcolor name="soldermaskcolor" color="0xC8410380"/>
 <mfgpreviewcolor name="silkscreencolor" color="0xFFFEFEFE"/>
 <mfgpreviewcolor name="backgroundcolor" color="0xFF282828"/>
 <mfgpreviewcolor name="coppercolor" color="0xFFFFBF00"/>
@@ -1470,6 +1471,11 @@ Note, that not all DRC settings must be set by the manufacturer. Several can be 
 Since Version 8.2, EAGLE supports online libraries. The ids
 of those online libraries will not be understood (or retained)
 with this version.
+</note>
+<note version="8.3" severity="warning">
+Since Version 8.3, EAGLE supports Fusion synchronisation.
+This feature will not be available in this version and saving
+the document will break the link to the Fusion PCB feature.
 </note>
 <note version="8.3" severity="warning">
 Since Version 8.3, EAGLE supports URNs for individual library

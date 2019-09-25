@@ -158,6 +158,7 @@
 <layer number="255" name="routoute" color="7" fill="1" visible="no" active="yes"/>
 </layers>
 <board>
+<fusionsync huburn="a.cGVyc29uYWw6dWUyODFhMTI5" projecturn="a.cGVyc29uYWw6dWUyODFhMTI5IzIwMTkwOTE3MjE1ODk1MzI2" f3durn="urn:adsk.wipprod:dm.lineage:P5lhZWs8S_KHtQ88bDf2NQ" pcbguid="41a5d6a7-389c-46a8-a506-c144d03ed23a" lastpulledtime="" lastsyncedchangeguid="8a204f6f-dc2d-3ee4-bfb7-58d6c85a98a5"/>
 <plain>
 <wire x1="0" y1="26.162" x2="0" y2="0" width="0" layer="20"/>
 <wire x1="0" y1="0" x2="26.162" y2="0" width="0" layer="20"/>
@@ -684,7 +685,7 @@ chip</description>
 </signal>
 </signals>
 <mfgpreviewcolors>
-<mfgpreviewcolor name="soldermaskcolor" color="0xC8008000"/>
+<mfgpreviewcolor name="soldermaskcolor" color="0xC8410380"/>
 <mfgpreviewcolor name="silkscreencolor" color="0xFFFEFEFE"/>
 <mfgpreviewcolor name="backgroundcolor" color="0xFF282828"/>
 <mfgpreviewcolor name="coppercolor" color="0xFFFFBF00"/>
@@ -697,6 +698,11 @@ chip</description>
 Since Version 8.2, EAGLE supports online libraries. The ids
 of those online libraries will not be understood (or retained)
 with this version.
+</note>
+<note version="8.3" severity="warning">
+Since Version 8.3, EAGLE supports Fusion synchronisation.
+This feature will not be available in this version and saving
+the document will break the link to the Fusion PCB feature.
 </note>
 <note version="8.3" severity="warning">
 Since Version 8.3, EAGLE supports URNs for individual library
