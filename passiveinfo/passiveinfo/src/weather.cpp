@@ -1,6 +1,7 @@
 #include <ArduinoJson.h>
 
 #include "constants.h"
+#include "secrets.h"
 
 float convertKelvinToCelsius(float kelvinTemp);
 float convertKelvinToFahrenheit(float kelvinTemp);
