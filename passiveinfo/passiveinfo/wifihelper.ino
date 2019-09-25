@@ -17,10 +17,18 @@ void setupWifi() {
 
   Serial.println("");
   Serial.println("WiFi connected");  
-  Serial.println("IP address: ");
+  Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
   Serial.print("Netmask: ");
   Serial.println(WiFi.subnetMask());
   Serial.print("Gateway: ");
   Serial.println(WiFi.gatewayIP());
+}
+
+bool connectToHost(WiFiClient* client, String host) {
+  if (!client->connect(OPEN_WEATHER_HOST, HTTP_PORT)) {
+    Serial.println("connection failed");
+    return false;
+  }
+  return true;
 }
