@@ -1,7 +1,9 @@
 const fs = require('fs');
+const path = require('path');
+
 const memory = {};
 
-const TMP_DIR = '/tmp/blockswithscreens';
+const TMP_DIR = path.resolve(process.cwd(), 'tmp/blockswithscreens');
 
 function ensureDirSync(dirpath) {
   try {
@@ -12,7 +14,7 @@ function ensureDirSync(dirpath) {
 }
 
 function blockPath(block) {
-  return path.resolve(process.cwd(), `${TMP_DIR}/${block}`);
+  return path.join(TMP_DIR, block);
 }
 
 ensureDirSync(TMP_DIR);
@@ -27,8 +29,10 @@ module.exports = (req, res) => {
   const timeStart = Date.now();
 
   const { mode, block } = req.query;
+  const cwd = process.cwd();
   const path = blockPath(block);
 
+  console.info({ cwd, path });
   // console.info({ req });
   // console.info(req.url, { block, mode });
 
