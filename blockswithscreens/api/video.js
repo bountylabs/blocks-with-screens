@@ -11,6 +11,10 @@ function ensureDirSync(dirpath) {
   }
 }
 
+function blockPath(block) {
+  return path.resolve(process.cwd(), `${TMP_DIR}/${block}`);
+}
+
 ensureDirSync(TMP_DIR);
 
 // http://localhost:3000/api/video?mode=write&block=56&data=0001
@@ -23,6 +27,7 @@ module.exports = (req, res) => {
   const timeStart = Date.now();
 
   const { mode, block } = req.query;
+  const path = blockPath(block);
 
   // console.info({ req });
   // console.info(req.url, { block, mode });
@@ -43,11 +48,7 @@ module.exports = (req, res) => {
           const buffer = Buffer.concat(data);
           // console.info('buffer', buffer);
 
-          fs.writeFileSync(
-            `${TMP_DIR}/${block}`,
-            buffer,
-            err => err && console.error(err)
-          );
+          fs.writeFileSync(path, buffer, err => err && console.error(err));
         });
 
       const timeEnd = Date.now();
@@ -61,8 +62,6 @@ module.exports = (req, res) => {
     }
     case 'read':
     default: {
-      const path = `${TMP_DIR}/${block}`;
-
       const fileExists = fs.existsSync(path);
       // console.info({ path, fileExists });
 
