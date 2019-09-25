@@ -1,6 +1,10 @@
-void setup() {
-  // put your setup code here, to run once:
+#include <ESP8266WiFi.h>
 
+void setup() {
+  Serial.begin(115200);
+  delay(100);
+
+  setupWifi();
 }
 
 void loop() {
