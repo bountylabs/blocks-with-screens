@@ -1,3 +1,4 @@
+#include <Arduino.h>
 
 String getHttpGETRequestWithUrlAndHost(String host, String url) {
   return String("GET ") + url + " HTTP/1.1\r\n" +

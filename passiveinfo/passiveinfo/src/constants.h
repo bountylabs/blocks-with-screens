@@ -3,6 +3,8 @@
 
 #define DEBUG
 
+#include <Arduino.h>
+
 const int HTTP_PORT = 80;
 
 const String OPEN_WEATHER_API_KEY = "67055f669d18a0f4546e08811dc5c973";

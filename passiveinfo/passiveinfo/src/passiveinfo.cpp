@@ -1,6 +1,12 @@
+#include <Arduino.h>
 #include <ESP8266WiFi.h>
 #include <ArduinoJson.h>
+
+#include "passiveinfo.h"
 #include "constants.h"
+#include "wifihelper.h"
+#include "weather.h"
+#include "httphelper.h"
 
 void setup() {
   Serial.begin(115200);

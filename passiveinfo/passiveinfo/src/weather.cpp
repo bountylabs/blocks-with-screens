@@ -1,11 +1,16 @@
+#include <ArduinoJson.h>
+
 #include "constants.h"
 
-String getWeatherUrlForZipCountry(String zip, String country) {
-  return String(OPEN_WEATHER_COMMON_URL) + String(OPEN_WEATHER_ZIP_URL) + zip + "," + country + "&" + getWeatherAppIdUrl();
-}
+float convertKelvinToCelsius(float kelvinTemp);
+float convertKelvinToFahrenheit(float kelvinTemp);
 
 String getWeatherAppIdUrl() {
   return String(OPEN_WEATHER_APPID) + String(OPEN_WEATHER_API_KEY);
+}
+
+String getWeatherUrlForZipCountry(String zip, String country) {
+  return String(OPEN_WEATHER_COMMON_URL) + String(OPEN_WEATHER_ZIP_URL) + zip + "," + country + "&" + getWeatherAppIdUrl();
 }
 
 void parseWeatherZipResponse(DynamicJsonDocument* docPtr) {
