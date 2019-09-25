@@ -1,11 +1,10 @@
 {
-  "name": "my-app",
+  "name": "blockswithscreens",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node server",
-    "build": "next build",
-    "start": "NODE_ENV=production node server",
+    "dev": "node index.js",
+    "start": "NODE_ENV=production node index.js",
     "deploy": "now",
     "deploy:prod": "now --prod"
   },

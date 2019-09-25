@@ -2,39 +2,27 @@
 // Make sure the syntax and sources this file requires are compatible with the current node version you are running
 // See https://github.com/zeit/next.js/issues/1245 for discussions on Universal Webpack or universal Babel
 // https://nextjs.org/docs/#custom-server-and-routing
-const http = require('http');
-const next = require('next');
-const expressApp = require('express')();
-const server = http.Server(expressApp);
+const express = require("express");
 
-const config = require('./config');
+const port = process.env.PORT || 3000;
+const app = express();
 
-const dev = process.env.NODE_ENV !== 'production';
-const nextApp = next({ dev });
-const handle = nextApp.getRequestHandler();
+app.use(express.json());
+app.listen(port, err => {
+  if (err) throw err;
+  console.log(`> Ready On Server http://localhost:${port}`);
+});
 
-// Ping self every 2 minutes
-setInterval(() => {
-  console.info('Pinging localhost to keep server warm...');
-  http.get(config.LOCALHOST);
-}, 1000 * 60 * 2);
+app.use(express.static("static"));
 
-nextApp.prepare().then(() => {
-  expressApp.all('/api/video', require('./api/video'));
-
-  expressApp.get('*', (req, res) => {
-    try {
-      return handle(req, res);
-    } catch (err) {
-      console.error('server-catch', err);
-      res.status(500).send(err.stack);
-    }
-  });
-
-  // Setup socket server
-  server.listen(config.PORT, err => {
-    if (err) throw err;
-
-    console.log(`> Ready on ${config.LOCALHOST}`);
+app.get("/version", (req, res, next) => {
+  res.json({
+    version: process.env.VERSION
   });
 });
+
+app.post("/echo", function(request, response) {
+  response.send(request.body);
+});
+
+app.all("/api/video", require("./api/video"));
