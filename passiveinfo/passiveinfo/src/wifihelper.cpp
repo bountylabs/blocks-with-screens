@@ -31,7 +31,16 @@ void setupWifi() {
 }
 
 bool connectToHost(WiFiClient* client, String host) {
-  if (!client->connect(OPEN_WEATHER_HOST, HTTP_PORT)) {
+  if (!client->connect(host, HTTP_PORT)) {
+    Serial.println("connection failed");
+    return false;
+  }
+  return true;
+}
+
+bool connectToSecureHost(WiFiClientSecure* client, String host) {
+  client->setInsecure();
+  if (!client->connect(host, HTTPS_PORT)) {
     Serial.println("connection failed");
     return false;
   }

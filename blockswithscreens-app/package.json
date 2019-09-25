@@ -1,0 +1,20 @@
+{
+  "name": "blockswithscreens",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "node index.js",
+    "start": "NODE_ENV=production node index.js",
+    "deploy": "now",
+    "deploy:prod": "now --prod"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "next": "9.0.6",
+    "react": "16.9.0",
+    "react-dom": "16.9.0"
+  },
+  "devDependencies": {
+    "prettier": "^1.18.2"
+  }
+}

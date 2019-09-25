@@ -1,0 +1,7 @@
+{
+  "editor.formatOnSave": true,
+  "flow.useNPMPackagedFlow": true,
+  "javascript.validate.enable": false,
+  "editor.cursorStyle": "line",
+  "editor.cursorWidth": 2
+}
