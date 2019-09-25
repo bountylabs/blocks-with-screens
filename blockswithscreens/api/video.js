@@ -71,6 +71,8 @@ module.exports = (req, res) => {
         // Web browser will handle response in an appropriate manner.
         res.writeHead(200, {
           'Content-Type': 'application/octet-stream',
+          'Content-Length': 32768,
+          'transfer-encoding': '',
         });
         fs.createReadStream(path).pipe(res);
 
