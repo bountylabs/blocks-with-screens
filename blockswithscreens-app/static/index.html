@@ -353,19 +353,21 @@
           // RGB565 output format for LCD screen
           // 2 bytes per RGB pixel
           // [RRRRRGGG][GGGBBBBB]
+          // the chipset on the block expects little endian RGB565le (little endian)
+          // so we reverse the byte order to [GGGBBBBB][RRRRRGGG]
 
+          // g << 5 == shift 6 bits of g into top 3 bits of 8-bit value
+          // 00GGGGGG << 5 == GGG00000
+          // (g << 5) | b
+          // GGG00000 | 000BBBBB == GGGBBBBB
+          rgb565[p * 2 + 0] = (g << 5) | b;
           // r << 3 == shift 5 bits of r into top 5 bits of 8-bit value
           // 000RRRRR << 3 == RRRRR000
           // g >> 3 == shift 6 bits of g into bottom 3 bits of 8-bit value
           // 00GGGGGG >> 3 == 00000GGG
           // (r << 3) | (g >> 3)
           // RRRRR000 | 00000GGG == RRRRRGGG
-          rgb565[p * 2 + 0] = (r << 3) | (g >> 3);
-          // g << 5 == shift 6 bits of g into top 3 bits of 8-bit value
-          // 00GGGGGG << 5 == GGG00000
-          // (g << 5) | b
-          // GGG00000 | 000BBBBB == GGGBBBBB
-          rgb565[p * 2 + 1] = (g << 5) | b;
+          rgb565[p * 2 + 1] = (r << 3) | (g >> 3);
         }
 
         return rgb565;
