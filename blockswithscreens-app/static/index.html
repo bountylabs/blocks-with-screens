@@ -16,49 +16,52 @@
       h6 {
         margin: 8px 0;
       }
-
-      .jsgif canvas {
-        width: 1px;
-        height: 1px;
-      }
     </style>
   </head>
 
   <body>
-    <button onclick="sendRGB565()">Send RGB565 (Block 3)</button>
-    <a target="_blank" href="/api/video?mode=read&block=3">Retrieve Block 3</a>
+    <div id="container">
+      <button onclick="sendRGB565()">Send RGB565 (Block 3)</button>
+      <a target="_blank" href="/api/video?mode=read&block=3"
+        >Retrieve Block 3</a
+      >
 
-    <h2>Input</h2>
+      <h2>Input</h2>
 
-    <button onclick="cameraCapture()">Camera Capture</button>
-    <input type="file" name="input" id="input" onchange="onInputSource()" />
+      <button onclick="cameraCapture()">Camera Capture</button>
+      <input type="file" name="input" id="input" onchange="onInputSource()" />
 
-    <h4>Options</h4>
-    <label>
-      <input id="fillInput" type="checkbox" name="fillInput" />
-      Fill
-    </label>
-    <label>
-      <input id="rotateInput" type="checkbox" name="rotateInput" />
-      Rotate
-    </label>
+      <h4>Options</h4>
+      <label>
+        <input id="fillInput" type="checkbox" name="fillInput" />
+        Fill
+      </label>
+      <label>
+        <input id="rotateInput" type="checkbox" name="rotateInput" />
+        Rotate
+      </label>
 
-    <div style="border: 1px solid red;">
-      <video
-        id="video"
-        style="width: 100%;"
-        autoplay
-        loop
-        muted
-        playsinline
-      ></video>
-      <img id="image" style="width: 100%;" />
-      <img id="gifImage" />
+      <div style="border: 1px solid red;">
+        <video
+          id="video"
+          style="width: 100%;"
+          autoplay
+          loop
+          muted
+          playsinline
+        ></video>
+        <img id="image" style="width: 100%;" />
+        <img id="gifImage" />
+      </div>
+
+      <h2>Output</h2>
+      <canvas
+        id="canvas"
+        style="width: 100%; border: 1px solid green;"
+      ></canvas>
     </div>
 
-    <h2>Output</h2>
-    <canvas id="canvas" style="width: 100%; border: 1px solid green;"></canvas>
-
+    <!-- Javascript -->
     <script src="/static/libgif.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
     <script>
@@ -203,16 +206,6 @@
                   console.info("exif loadedImage", { metadata });
                 });
 
-                // display the image for debugging (not required for canvas drawing)
-                image.style.display = "block";
-                image.onload = () => {
-                  EXIF.getData(image, function() {
-                    const metadata = EXIF.getAllTags(this);
-                    console.info("exif domImage", { metadata });
-                  });
-                };
-                image.src = url;
-
                 if (inputFile.type === "image/gif") {
                   // special gif logic
                   console.info("gif detected");
@@ -221,7 +214,8 @@
                   gifImage.style.display = "block";
                   gifImage.src = url;
                   const superGif = new SuperGif({
-                    gif: gifImage
+                    gif: gifImage,
+                    progressbar_height: 4
                   });
                   superGif.load(() => {
                     console.info({ superGif });
@@ -230,6 +224,16 @@
                   });
                   return;
                 } else {
+                  // display the image for debugging (not required for canvas drawing)
+                  image.style.display = "block";
+                  image.onload = () => {
+                    EXIF.getData(image, function() {
+                      const metadata = EXIF.getAllTags(this);
+                      console.info("exif domImage", { metadata });
+                    });
+                  };
+                  image.src = url;
+
                   drawCanvas(loadedImage, options);
                 }
               };
