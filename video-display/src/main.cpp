@@ -23,6 +23,7 @@
 #include <SPI.h>
 #include <ESP8266WiFi.h>
 #include <WiFiUdp.h>
+#include "secrets.h"
 
 // NETWORK STUFF
 IPAddress local_ip(192,168,4,22);
@@ -32,9 +33,6 @@ IPAddress subnet(255, 255, 255, 0);
 WiFiUDP udp;
 unsigned int localUdpPort = 4210;
 char incomingPacket[1025];
-
-const char* ssid = "";
-const char* password = "";
 
 // Hardware SPI mode only works if you make a hack in SPI.c under the hood. In short, find the two
 // lines with `pinMode(MISO` in them and comment them out
