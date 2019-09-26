@@ -1,0 +1,5 @@
+{
+  "name": "BlockChain with Screen",
+  "description": "Backend to the blockswithscreen Twitter #hackweek project",
+  "image": "heroku/java"
+}

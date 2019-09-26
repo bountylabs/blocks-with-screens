@@ -108,7 +108,7 @@ fun Application.module(testing: Boolean = false) {
                         return@get
                     }
                 }
-
+                
                 val url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=$symbol&apikey=${Secrets.ALPHAV_API_KEY}"
                 val alphaVantageResponse = client.get<String>(url)
                 val jsonElement = JsonParser()
