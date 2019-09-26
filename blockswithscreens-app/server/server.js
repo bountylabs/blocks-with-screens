@@ -7,13 +7,16 @@ const express = require("express");
 const port = process.env.PORT || 3000;
 const app = express();
 
-app.use(express.json());
 app.listen(port, err => {
   if (err) throw err;
   console.log(`> Ready On Server http://localhost:${port}`);
 });
 
-app.use(express.static("static"));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(__dirname + "/static"));
+} else {
+  app.use(express.static("static"));
+}
 
 app.get("/version", (req, res, next) => {
   res.json({

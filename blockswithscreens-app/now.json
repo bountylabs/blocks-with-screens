@@ -2,8 +2,19 @@
   "version": 2,
   "name": "blockswithscreens",
   "alias": ["blockswithscreens.now.sh"],
-  "builds": [{ "src": "index.js", "use": "@now/node-server" }],
+  "builds": [
+    { "src": "static/**", "use": "@now/static" },
+    { "src": "index.js", "use": "@now/node-server" }
+  ],
   "routes": [
+    {
+      "src": "^/$",
+      "dest": "/static/index.html"
+    },
+    {
+      "src": "/(.+svg|.+png|.+ico|.+html|robots.txt|browserconfig.xml)",
+      "dest": "/static/$1"
+    },
     {
       "headers": {
         "Access-Control-Allow-Origin": "*",

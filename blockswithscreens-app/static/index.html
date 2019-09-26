@@ -3,6 +3,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <style>
+      body {
+        margin: 50px auto;
+        max-width: 640px;
+      }
+
       h1,
       h2,
       h3,
@@ -20,8 +25,8 @@
 
     <h2>Input</h2>
 
-    <input type="file" name="input" id="input" onchange="onInputSource()" />
     <button onclick="cameraCapture()">Camera Capture</button>
+    <input type="file" name="input" id="input" onchange="onInputSource()" />
 
     <h4>Options</h4>
     <label>
@@ -54,13 +59,13 @@
       const PIXELS = SIZE * SIZE;
       const FILETYPE_REGEX = /(.*)\//;
 
-      const video = document.getElementById('video');
-      const image = document.getElementById('image');
-      const input = document.getElementById('input');
-      const fillInput = document.getElementById('fillInput');
-      const rotateInput = document.getElementById('rotateInput');
-      const canvas = document.getElementById('canvas');
-      const context = canvas.getContext('2d');
+      const video = document.getElementById("video");
+      const image = document.getElementById("image");
+      const input = document.getElementById("input");
+      const fillInput = document.getElementById("fillInput");
+      const rotateInput = document.getElementById("rotateInput");
+      const canvas = document.getElementById("canvas");
+      const context = canvas.getContext("2d");
 
       let rafID = 0;
 
@@ -82,8 +87,8 @@
       function resetAllInputs() {
         delete image.src;
         delete video.src;
-        video.style.display = 'none';
-        image.style.display = 'none';
+        video.style.display = "none";
+        image.style.display = "none";
         if (video.srcObject) {
           video.srcObject.getTracks().forEach(track => track.stop());
         }
@@ -94,7 +99,7 @@
         resetAllInputs();
 
         navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
-          video.style.display = 'block';
+          video.style.display = "block";
           video.srcObject = stream;
           video.load();
 
@@ -104,7 +109,7 @@
               height: video.videoHeight,
               raf: true,
               fill: fillInput.checked,
-              rotate: rotateInput.checked,
+              rotate: rotateInput.checked
             });
           };
         });
@@ -112,11 +117,7 @@
 
       function sendRGB565() {
         const xhttp = new XMLHttpRequest();
-        xhttp.open(
-          'POST',
-          'http://localhost:3000/api/video?mode=write&block=3',
-          true
-        );
+        xhttp.open("POST", "/api/video?mode=write&block=3", true);
 
         const rgb565array = canvasToRGB565();
         xhttp.send(rgb565array);
@@ -128,7 +129,7 @@
         const inputFile = input.files[0];
 
         if (!inputFile) {
-          return console.error('no files input');
+          return console.error("no files input");
         }
 
         // setup blob url
@@ -137,16 +138,16 @@
         // determine video or image
         const match = inputFile.type.match(FILETYPE_REGEX);
         if (!match || match.length < 2) {
-          return console.error('Unable to identify file type', inputFile);
+          return console.error("Unable to identify file type", inputFile);
         }
 
         const type = match[1];
         switch (type) {
-          case 'video':
-            console.info('video detected');
+          case "video":
+            console.info("video detected");
 
             // setup video with url draw to canvas once loaded
-            video.style.display = 'block';
+            video.style.display = "block";
             video.src = url;
             video.load();
 
@@ -156,14 +157,14 @@
                 height: video.videoHeight,
                 raf: true,
                 fill: fillInput.checked,
-                rotate: rotateInput.checked,
+                rotate: rotateInput.checked
               });
             };
 
             break;
-          case 'image':
+          case "image":
             {
-              console.info('image detected');
+              console.info("image detected");
 
               // set image src and draw when loaded
               const loadedImage = new Image();
@@ -173,7 +174,7 @@
                   width: this.width,
                   height: this.height,
                   fill: fillInput.checked,
-                  rotate: rotateInput.checked,
+                  rotate: rotateInput.checked
                 };
 
                 console.info(
@@ -186,15 +187,15 @@
 
                 EXIF.getData(loadedImage, function() {
                   const metadata = EXIF.getAllTags(this);
-                  console.info('exif loadedImage', { metadata });
+                  console.info("exif loadedImage", { metadata });
                 });
 
                 // display the image for debugging (not required for canvas drawing)
-                image.style.display = 'block';
+                image.style.display = "block";
                 image.onload = () => {
                   EXIF.getData(image, function() {
                     const metadata = EXIF.getAllTags(this);
-                    console.info('exif domImage', { metadata });
+                    console.info("exif domImage", { metadata });
                   });
                 };
                 image.src = url;
@@ -205,7 +206,7 @@
 
             break;
           default:
-            console.error('unrecognized type', type, inputFile);
+            console.error("unrecognized type", type, inputFile);
             return;
         }
       }
@@ -218,7 +219,7 @@
           height,
           raf = false,
           fill = false,
-          rotate = false,
+          rotate = false
         } = options;
 
         const ratioFunction = fill ? Math.max : Math.min;
@@ -258,7 +259,7 @@
         }
 
         // black out canvas because empty canvas is written as black (0's)
-        context.fillStyle = '#000000';
+        context.fillStyle = "#000000";
         context.fillRect(0, 0, SIZE, SIZE);
         // draw source to canvas proportionally
         context.drawImage(
