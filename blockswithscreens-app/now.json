@@ -12,7 +12,7 @@
       "dest": "/static/index.html"
     },
     {
-      "src": "/(.+svg|.+png|.+ico|.+html|robots.txt|browserconfig.xml)",
+      "src": "/(.+js|.+svg|.+png|.+ico|.+html|robots.txt|browserconfig.xml)",
       "dest": "/static/$1"
     },
     {
