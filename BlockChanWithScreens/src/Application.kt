@@ -1,17 +1,19 @@
 package com.blockchainwithscreens
 
+import com.blockchainwithscreens.model.OpenWeatherZipCodeResponse
+import com.blockchainwithscreens.model.weather.WeatherZipCodeResponse
+import com.google.gson.Gson
 import io.ktor.application.*
 import io.ktor.response.*
-import io.ktor.request.*
 import io.ktor.routing.*
 import io.ktor.http.*
-import io.ktor.html.*
 import kotlinx.html.*
 import kotlinx.css.*
 import io.ktor.client.*
 import io.ktor.client.engine.apache.*
 import io.ktor.client.features.json.*
 import io.ktor.client.request.*
+import io.ktor.features.ContentNegotiation
 import kotlinx.coroutines.*
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
@@ -23,6 +25,8 @@ fun Application.module(testing: Boolean = false) {
         install(JsonFeature) {
             serializer = GsonSerializer()
         }
+    }
+    install(ContentNegotiation) {
     }
     runBlocking {
         // Sample for making a HTTP Client request
@@ -40,7 +44,27 @@ fun Application.module(testing: Boolean = false) {
             call.respondText("HELLO WORLD!", contentType = ContentType.Text.Plain)
         }
         route("/weather") {
-
+            get("/zip/{zipcode}") {
+                // Make call to open weather API
+                val zipcodeParam = call.parameters["zipcode"]
+                val url = "http://api.openweathermap.org/data/2.5/weather?zip=$zipcodeParam,us&appid=aacee67b7605f7655a3dc492df9ea8a8"
+                val tempClient = HttpClient()
+                val openWeatherResponse = tempClient.get<String>(url)
+                val gson = Gson()
+                val weather = gson.fromJson(openWeatherResponse, OpenWeatherZipCodeResponse::class.java)
+                val weatherDescriptions = weather.weather[0]
+                val weatherMain = weather.main
+                val response = WeatherZipCodeResponse(
+                    weather.name,
+                    weatherDescriptions.main,
+                    weatherDescriptions.description,
+                    weatherDescriptions.icon,
+                    weatherMain.temp,
+                    weatherMain.temp_min,
+                    weatherMain.temp_max
+                )
+                call.respondText { gson.toJson(response) }
+            }
         }
         route("/stocks") {
 
