@@ -33,8 +33,8 @@ WiFiUDP udp;
 unsigned int localUdpPort = 4210;
 char incomingPacket[1025];
 
-const char* ssid = "";
-const char* password = "";
+const char* ssid = "Boiles";
+const char* password = "stinaissohot";
 
 
 // Software bit-banged SPI mode works just fine but is slow

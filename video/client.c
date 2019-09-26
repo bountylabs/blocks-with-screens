@@ -19,7 +19,7 @@ int main(int argc, char** argv) {
     struct sockaddr_in     servaddr;
     
     int num_frames = 1;
-    int num_msgs = 1;
+    int num_msgs = 32;
     char msg[MAXLINE];
     
     // Creating socket file descriptor
@@ -33,7 +33,7 @@ int main(int argc, char** argv) {
     // Filling server information
     servaddr.sin_family = AF_INET;
     servaddr.sin_port = htons(4210);
-    servaddr.sin_addr.s_addr = inet_addr("192.168.1.31");
+    servaddr.sin_addr.s_addr = inet_addr("10.0.0.175");
     
     int n, len;
     
@@ -42,8 +42,17 @@ int main(int argc, char** argv) {
         for (int i = 0; i < num_msgs; i++)
         {
             msg[0] = i;
+            fread(&msg[1], 1, MAXLINE-1, stdin);
             
-            fread(msg, 1, MAXLINE, stdin);
+            /*
+            // hack to reverse image byte order
+            for (int b = 0; b < MAXLINE-1; b+=2)
+            {
+                unsigned char temp = msg[1+b];
+                msg[1+b] = msg[1+b+1];
+                msg[1+b+1] = temp;
+            }
+            */
             
             sendto(sockfd, (const char*)msg, MAXLINE,
                    0, (const struct sockaddr *) &servaddr,
@@ -51,8 +60,7 @@ int main(int argc, char** argv) {
             //printf("sent message %d\n", i);
         }
         printf("sent frame %d\n", f);
-        
-        usleep(50000);
+        usleep(17000);
     }
      
     close(sockfd);
