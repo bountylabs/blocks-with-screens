@@ -33,12 +33,8 @@ WiFiUDP udp;
 unsigned int localUdpPort = 4210;
 char incomingPacket[1025];
 
-const char* ssid = "Boiles";
-const char* password = "stinaissohot";
-
-
-// Software bit-banged SPI mode works just fine but is slow
-// Adafruit_SSD1351 tft = Adafruit_SSD1351(SCREEN_WIDTH, SCREEN_HEIGHT, CS_PIN, DC_PIN, MOSI_PIN, SCLK_PIN, RST_PIN);  
+const char* ssid = "";
+const char* password = "";
 
 // Hardware SPI mode only works if you make a hack in SPI.c under the hood. In short, find the two
 // lines with `pinMode(MISO` in them and comment them out
