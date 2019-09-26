@@ -2,6 +2,8 @@
 #include <ESP8266WiFi.h>
 #include <WiFiClientSecure.h>
 #include <ArduinoJson.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1351.h>
 
 #include "passiveinfo.h"
 #include "constants.h"
@@ -10,23 +12,29 @@
 #include "httphelper.h"
 #include "stocks.h"
 
+Adafruit_SSD1351 display = Adafruit_SSD1351(16, 12, 13, 14, 15);
+
 void setup() {
   Serial.begin(115200);
-
+  display.begin();
   setupWifi();
 }
 
 void loop() {
   // Use WiFiClient class to create TCP connections
   WiFiClientSecure client;
-  // getCurrentWeather(client);
+  getCurrentWeather(client);
 
   getStockPrice(client, "TWTR");
+
+  display.fillTriangle(0,0, 10, 10, 0, 20, 0x0000FF);
+
+  delay(60000);
 }
 
-void getCurrentWeather(WiFiClient client) {
+void getCurrentWeather(WiFiClientSecure client) {
   bool successful = false;
-  successful = connectToHost(&client, OPEN_WEATHER_HOST);
+  successful = connectToSecureHost(&client, HOST);
   if (!successful) {
     return;
   }
@@ -35,7 +43,7 @@ void getCurrentWeather(WiFiClient client) {
   Serial.print("Requesting URL: ");
   Serial.println(url);
 
-  client.print(getHttpGETRequestWithUrlAndHost(OPEN_WEATHER_HOST, url));
+  client.print(getHttpGETRequestWithUrlAndHost(HOST, url));
   delay(300);
 
   String line;
@@ -43,31 +51,21 @@ void getCurrentWeather(WiFiClient client) {
   while(client.available()){
     line = client.readStringUntil('\r');
     Serial.println(line);
-    Serial.println();
   }
 
-  DynamicJsonDocument doc(2048);
+  DynamicJsonDocument doc(10048);
   DeserializationError error = deserializeJson(doc, line);
   if (error) {
     Serial.print(F("deserializeJson() failed: "));
     Serial.println(error.c_str());
-    delay(600000);
     return;
   }
-
-  int cod = doc["cod"];
-  if (cod == 200) {
-    parseWeatherZipResponse(&doc);
-  } else {
-    Serial.println("Request was not successful");
-  }
-
-  delay(600000);
+  parseWeatherZipResponse(&doc);
 }
 
 void getStockPrice(WiFiClientSecure client, String symbol) {
   bool successful = false;
-  successful = connectToSecureHost(&client, ALPHAV_HOST);
+  successful = connectToSecureHost(&client, HOST);
   if (!successful) {
     return;
   }
@@ -76,7 +74,7 @@ void getStockPrice(WiFiClientSecure client, String symbol) {
   Serial.print("Requesting URL: ");
   Serial.println(url);
 
-  client.print(getHttpGETRequestWithUrlAndHost(ALPHAV_HOST, url));
+  client.print(getHttpGETRequestWithUrlAndHost(HOST, url));
   int counter = 0;
   while(!client.available()) {
     Serial.println("Response is not available yet: " + String(++counter));
@@ -85,30 +83,27 @@ void getStockPrice(WiFiClientSecure client, String symbol) {
 
   String line;
   while(client.available()){
-    // Serial.println("Num of Bytes: " + String(client.available()));
-    // line = client.readStringUntil('\r');
-    // Serial.println(line);
-    Serial.print(char(client.read()));
-    // Serial.println();
+    line = client.readStringUntil('\r');
+    Serial.println(line);
   }
 
-  while(1);
+  DynamicJsonDocument doc(2048);
+  DeserializationError error = deserializeJson(doc, line);
+  if (error) {
+    Serial.print(F("deserializeJson() failed: "));
+    Serial.println(error.c_str());
+    return;
+  }
 
-  // DynamicJsonDocument doc;
-  // JsonObject& obj = doc.parseObject(client.getStream());
-  // DeserializationError error = deserializeJson(doc, line);
-  // if (error) {
-  //   Serial.print(F("deserializeJson() failed: "));
-  //   Serial.println(error.c_str());
-  //   delay(600000);
-  //   return;
-  // }
+  const char* symbolFromAPI = doc["symbol"];
+  const float openPrice = doc["open"];
+  const float closePrice = doc["close"];
+  const float lowPrice = doc["low"];
+  const float highPrice = doc["high"];
 
-  // const char* symbolFromAPI = doc["Meta Data"]["2. Symbol"];
-  // const char* lastRefreshedDate = doc["Meta Data"]["3. Last Refreshed"];
-  // const char* openPrice = doc["Times Series (Daily)"][lastRefreshedDate]["open"];
-  // const char* closePrice = doc["Times Series (Daily)"][lastRefreshedDate]["close"];
-  // Serial.println("Symbol: " + String(symbolFromAPI));
-  // Serial.println("Open Price: " + String(openPrice));
-  // Serial.println("Close Price: " + String(closePrice));
+  Serial.println("Symbol: " + String(symbolFromAPI));
+  Serial.println("Open Price: " + String(openPrice));
+  Serial.println("Close Price: " + String(closePrice));
+  Serial.println("Low Price: " + String(lowPrice));
+  Serial.println("High Price: " + String(highPrice));
 }

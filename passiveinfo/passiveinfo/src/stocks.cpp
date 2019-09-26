@@ -8,7 +8,5 @@ String getAlphaVAPIKeyUrl() {
 }
 
 String getAlphaVUrlForTimeSeriesDaily(String symbol) {
-    return String(ALPHAV_COMMON_URL) + 
-    String(ALPHAV_FUNCTION_URL) + String(ALPHAV_STOCK_FUNCTION_TIME_SERIES_DAILY) +
-    "&" + String(ALPHAV_STOCK_SYMBOL) + symbol + "&" + getAlphaVAPIKeyUrl();
+    return String(STOCKS_PATH) + symbol;
 }
