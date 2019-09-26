@@ -16,6 +16,11 @@
       h6 {
         margin: 8px 0;
       }
+
+      .jsgif {
+        visibility: hidden;
+        height: 1px;
+      }
     </style>
   </head>
 
@@ -48,6 +53,7 @@
         playsinline
       ></video>
       <img id="image" style="width: 100%;" />
+      <img id="gifImage" />
     </div>
 
     <h2>Output</h2>
@@ -60,11 +66,17 @@
       const PIXELS = SIZE * SIZE;
       const FILETYPE_REGEX = /(.*)\//;
 
+      // source input elements
       const video = document.getElementById("video");
       const image = document.getElementById("image");
+      const gifImage = document.getElementById("gifImage");
+
+      // auxiliary elements
       const input = document.getElementById("input");
       const fillInput = document.getElementById("fillInput");
       const rotateInput = document.getElementById("rotateInput");
+
+      // output elements
       const canvas = document.getElementById("canvas");
       const context = canvas.getContext("2d");
 
@@ -201,7 +213,25 @@
                 };
                 image.src = url;
 
-                drawCanvas(loadedImage, options);
+                if (inputFile.type === "image/gif") {
+                  // special gif logic
+                  console.info("gif detected");
+
+                  // draw image for parsing with SuperGif
+                  gifImage.style.display = "block";
+                  gifImage.src = url;
+                  const superGif = new SuperGif({
+                    gif: gifImage
+                  });
+                  superGif.load(() => {
+                    console.info({ superGif });
+                    const superGifCanvas = superGif.get_canvas();
+                    drawCanvas(superGifCanvas, { ...options, raf: true });
+                  });
+                  return;
+                } else {
+                  drawCanvas(loadedImage, options);
+                }
               };
             }
 
