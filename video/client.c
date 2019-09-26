@@ -9,7 +9,7 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 
-#define PORT     8080
+#define PORT     4210
 #define MAXLINE 1025
 
 // Driver code
@@ -32,35 +32,29 @@ int main(int argc, char** argv) {
     
     // Filling server information
     servaddr.sin_family = AF_INET;
-    servaddr.sin_port = htons(4210);
+    servaddr.sin_port = htons(PORT);
     servaddr.sin_addr.s_addr = inet_addr("10.0.0.175");
     
     int n, len;
     
-    for (int f = 0; f < num_frames; f++)
+    int f = 0;
+    while(1)
     {
         for (int i = 0; i < num_msgs; i++)
         {
             msg[0] = i;
-            fread(&msg[1], 1, MAXLINE-1, stdin);
-            
-            /*
-            // hack to reverse image byte order
-            for (int b = 0; b < MAXLINE-1; b+=2)
+            size_t size = fread(&msg[1], 1, MAXLINE-1, stdin);
+            if (size != MAXLINE-1)
             {
-                unsigned char temp = msg[1+b];
-                msg[1+b] = msg[1+b+1];
-                msg[1+b+1] = temp;
+                exit(0);
             }
-            */
             
             sendto(sockfd, (const char*)msg, MAXLINE,
                    0, (const struct sockaddr *) &servaddr,
                    sizeof(servaddr));
-            //printf("sent message %d\n", i);
         }
-        printf("sent frame %d\n", f);
-        usleep(17000);
+        printf("sent frame %d\n", f++);
+        usleep(66666);
     }
      
     close(sockfd);
