@@ -1,6 +1,7 @@
 package com.blockchainwithscreens
 
 import com.blockchainwithscreens.model.OpenWeatherZipCodeResponse
+import com.blockchainwithscreens.model.Secrets
 import com.blockchainwithscreens.model.weather.WeatherZipCodeResponse
 import com.google.gson.Gson
 import io.ktor.application.*
@@ -24,6 +25,8 @@ val weatherZipCodeCache = HashMap<String, WeatherZipCodeResponse>()
 
 // Keeps track of the last time the data for the weather at a zip code was updated
 val weatherZipCodeLastUpdate = HashMap<String, Long>()
+
+val gson = Gson()
 
 @Suppress("unused") // Referenced in application.conf
 @kotlin.jvm.JvmOverloads
@@ -53,7 +56,6 @@ fun Application.module(testing: Boolean = false) {
         route("/weather") {
             get("/zip/{zipcode}") {
                 // Make call to open weather API
-                val gson = Gson()
                 val zipcodeParam = call.parameters["zipcode"] ?: return@get
 
                 val lastUpdate = weatherZipCodeLastUpdate[zipcodeParam]
@@ -65,7 +67,7 @@ fun Application.module(testing: Boolean = false) {
                     }
                 }
 
-                val url = "http://api.openweathermap.org/data/2.5/weather?zip=$zipcodeParam,us&appid=aacee67b7605f7655a3dc492df9ea8a8"
+                val url = "http://api.openweathermap.org/data/2.5/weather?zip=$zipcodeParam,us&appid=${Secrets.OPEN_WEATHER_API_KEY}"
                 val tempClient = HttpClient()
                 val openWeatherResponse = tempClient.get<String>(url)
                 val weather = gson.fromJson(openWeatherResponse, OpenWeatherZipCodeResponse::class.java)
