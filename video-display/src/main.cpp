@@ -45,7 +45,7 @@ const char* password = "stinaissohot";
 Adafruit_SSD1351 tft = Adafruit_SSD1351(SCREEN_WIDTH, SCREEN_HEIGHT, &SPI, CS_PIN, DC_PIN, RST_PIN);
 uint8_t image[128*128*2];
 
-int pixpos = 0;
+int expectedPacket;
 
 void joinNetwork()
 {
@@ -73,7 +73,7 @@ void setup(void) {
   joinNetwork();
   udp.begin(localUdpPort);
   Serial.printf("Now listening at IP %s, UDP port %d\n", WiFi.localIP().toString().c_str(), localUdpPort);
-
+  expectedPacket = 0;
 }
 
 void loop() {
@@ -83,15 +83,26 @@ void loop() {
     int len = udp.read(incomingPacket, 1025);
     if (len > 0)
     {
-      Serial.printf("packet %d\n", incomingPacket[0]);
+      //Serial.printf("packet %d\n", incomingPacket[0]);
       int position = incomingPacket[0] * 1024;
       memcpy(&image[position], &incomingPacket[1], 1024);
 
+      if (incomingPacket[0] != expectedPacket)
+      {
+        Serial.printf("missing packet %d\n", expectedPacket);
+      }
+      
       if (incomingPacket[0] == 31)
       {
-        Serial.printf("got frame!");
+        //Serial.printf("got frame!");
         tft.drawRGBBitmap(0, 0, (uint16_t*)image, 128, 128);
+        expectedPacket = 0;
       }
+      else
+      {
+        expectedPacket = incomingPacket[0]+1;
+      }
+      
     }
   }
 
