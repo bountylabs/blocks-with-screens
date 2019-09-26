@@ -1,0 +1,6 @@
+*.s#*
+*.b#*
+*.job
+.DS_Store
+.pio
+.vscode
