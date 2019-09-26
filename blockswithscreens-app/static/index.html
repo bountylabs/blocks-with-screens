@@ -21,7 +21,7 @@
 
   <body>
     <div id="container">
-      <button onclick="sendRGB565()">Send RGB565 (Block 3)</button>
+      <button onclick="autoSendRGB565()">Send RGB565 (Block 3)</button>
       <a target="_blank" href="/api/video?mode=read&block=3"
         >Retrieve Block 3</a
       >
@@ -129,6 +129,19 @@
             });
           };
         });
+      }
+
+      function autoSendRGB565() {
+        // 20fps (1000ms / 20 ticks) ~= 50ms/tick
+        const fps = 1000 / 20;
+
+        const frameUpdate = () => {
+          console.info("autoSendRGB565", "frameUpdate");
+          sendRGB565();
+          setTimeout(frameUpdate, fps);
+        };
+
+        frameUpdate();
       }
 
       function sendRGB565() {
