@@ -4,3 +4,4 @@
 .DS_Store
 .pio
 .vscode
+secrets.h
