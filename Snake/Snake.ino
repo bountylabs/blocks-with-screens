@@ -558,13 +558,13 @@ void setup() {
   Serial.begin(9600);  // set the same baud rate on your Serial Monitor
 
   display.begin();
+  display.fillScreen(0x00);
 
   setUpWifi();
   setUpRouting();
   
   initializeGame();     // initialize pins & LED matrix
   showSnakeMessage();   // scrolls the 'snake' message around the matrix
-  display.fillScreen(0x00);
   drawBounds();
 }
 
