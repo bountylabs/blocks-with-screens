@@ -32,6 +32,7 @@ module.exports = (req, res) => {
         .on("data", chunk => {
           // console.info('chunk', chunk);
           data.push(chunk);
+          console.info("chunk");
         })
         .on("end", () => {
           //at this point data is an array of Buffers
@@ -41,16 +42,17 @@ module.exports = (req, res) => {
 
           console.info("writing to memory at", block);
           memory[block] = buffer;
+
+          const timeEnd = Date.now();
+          const response = {
+            success: true,
+            time: timeEnd - timeStart
+          };
+
+          console.info(req.url, response);
+          return res.json(response);
         });
-
-      const timeEnd = Date.now();
-      const response = {
-        success: true,
-        time: timeEnd - timeStart
-      };
-
-      console.info(req.url, response);
-      return res.json(response);
+      break;
     }
     case "read":
     default: {
