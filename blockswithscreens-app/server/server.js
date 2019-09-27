@@ -44,8 +44,8 @@ app.all("/api/rgb565", require("./api/rgb565"));
 https
   .createServer(
     {
-      key: fs.readFileSync("server.key"),
-      cert: fs.readFileSync("server.cert")
+      key: fs.readFileSync("devcerts/server.key"),
+      cert: fs.readFileSync("devcerts/server.cert")
     },
     app
   )
