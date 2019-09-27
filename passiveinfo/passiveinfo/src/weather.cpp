@@ -11,25 +11,26 @@ String getWeatherAppIdUrl() {
 }
 
 String getWeatherUrlForZipCountry(String zip, String country) {
-  return String(OPEN_WEATHER_COMMON_URL) + String(OPEN_WEATHER_ZIP_URL) + zip + "," + country + "&" + getWeatherAppIdUrl();
+  return String(WEATHER_ZIP_PATH) + zip;
 }
 
 void parseWeatherZipResponse(DynamicJsonDocument* docPtr) {
   DynamicJsonDocument doc = *docPtr;
-  const char* cityName = doc["name"];
-  const char* currentWeather = doc["weather"][0]["main"];
-  const char* currentWeatherDescription = doc["weather"][0]["description"];
-  const char* icon = doc["weather"]["icon"];
-  float currentTemp = doc["main"]["temp"];
-  float minTemp = doc["main"]["temp_min"];
-  float maxTemp = doc["main"]["temp_max"];
+  const char* cityName = doc["city_name"];
+  const char* mainDescription = doc["main_description"];
+  const char* secondaryDescription = doc["secondary_description"];
+  const char* iconUrl = doc["icon_url"];
+  const float currentTemp = doc["current_temp"];
+  const float minTemp = doc["temp_min"];
+  const float maxTemp = doc["temp_max"];
   
   Serial.println("City: " + String(cityName));
   Serial.println("Temp: " + String(convertKelvinToFahrenheit(currentTemp)) + " F");
   Serial.println("Min Temp: " + String(convertKelvinToFahrenheit(minTemp)) + " F");
   Serial.println("Max Temp: " + String(convertKelvinToFahrenheit(maxTemp)) + " F");
-  Serial.println("Current Weather: " + String(currentWeather));
-  Serial.println(String(currentWeatherDescription));
+  Serial.println("Current Weather: " + String(mainDescription));
+  Serial.println("Secondary Description: " + String(secondaryDescription));
+  Serial.println("Icon Url:" + String(iconUrl));
 }
 
 float convertKelvinToCelsius(float kelvinTemp) {

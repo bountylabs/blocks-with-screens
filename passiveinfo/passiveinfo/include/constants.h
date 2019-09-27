@@ -5,10 +5,22 @@
 
 #include <Arduino.h>
 
+const int RED = 0xF800;
+const int GREEN = 0x07E0;
+const int WHITE = 0xFFFF;
+
 const int HTTP_PORT = 80;
 const int HTTPS_PORT = 443;
 
 const float KELVIN_AT_0_C = 273.15;
+
+const String HOST = "blockchainwithscreens.herokuapp.com";
+
+// Weather API
+const String WEATHER_ZIP_PATH = "/weather/zip/";
+
+// Stocks API
+const String STOCKS_PATH = "/stocks/symbol/";
 
 // Open Weather API
 const String OPEN_WEATHER_HOST = "api.openweathermap.org";

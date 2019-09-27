@@ -78,11 +78,12 @@ fun Application.module(testing: Boolean = false) {
                 val weather = gson.fromJson(openWeatherResponse, OpenWeatherZipCodeResponse::class.java)
                 val weatherDescriptions = weather.weather[0]
                 val weatherMain = weather.main
+                val iconUrl = "http://openweathermap.org/img/wn/" + weatherDescriptions.icon + ".png"
                 val response = WeatherZipCodeResponse(
                     weather.name,
                     weatherDescriptions.main,
                     weatherDescriptions.description,
-                    weatherDescriptions.icon,
+                    iconUrl,
                     weatherMain.temp,
                     weatherMain.temp_min,
                     weatherMain.temp_max
@@ -95,9 +96,6 @@ fun Application.module(testing: Boolean = false) {
         }
         route("/stocks") {
             get("/symbol/{symbol}") {
-                //https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=TWTR&interval=1min&apikey=1FHB8WWQS1CBVHDM
-                // Make call to alpha vantage, TIME_SERIES_DAILY
-                // Parse "Meta Data" and "Times Series (Daily)" for the lastest day, the close price always represents the most up to date price
                 val symbol = call.parameters["symbol"] ?: return@get
 
                 val lastUpdate = stocksLastUpdate[symbol]
@@ -146,34 +144,6 @@ fun Application.module(testing: Boolean = false) {
                 call.respondText { gson.toJson(response) }
             }
         }
-
-
-//        get("/html-dsl") {
-//            call.respondHtml {
-//                body {
-//                    h1 { +"HTML" }
-//                    ul {
-//                        for (n in 1..10) {
-//                            li { +"$n" }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//
-//        get("/styles.css") {
-//            call.respondCss {
-//                body {
-//                    backgroundColor = Color.red
-//                }
-//                p {
-//                    fontSize = 2.em
-//                }
-//                rule("p.myclass") {
-//                    color = Color.blue
-//                }
-//            }
-//        }
     }
 }
 

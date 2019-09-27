@@ -1,23 +1,32 @@
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
+#include <Adafruit_GFX.h>
 
+#include "wifihelper.h"
 #include "constants.h"
 #include "secrets.h"
 
 const char* ssid     = WIFI_SSID;
 const char* password = WIFI_PASS;
+String connectingStr = "";
+char buffer[128];
 
-void setupWifi() {
+void setupWifi(Adafruit_SSD1351& screen) {
   Serial.println();
   Serial.println();
   Serial.print("Connecting to ");
   Serial.println(ssid);
-  
+  sprintf(buffer, "Connecting to %s", ssid);
+  screen.setCursor(0, 0);
+  screen.setTextColor(WHITE);
+  screen.print(buffer);
+
   WiFi.begin(ssid, password);
-  
+  String tempConnectingStr = String(buffer);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
+    screen.print(" .");
   }
 
   Serial.println("");
