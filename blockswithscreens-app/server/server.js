@@ -36,22 +36,24 @@ if (process.env.NODE_ENV !== "production") {
   );
 }
 
-// HTTP
-// app.listen(port, err => {
-//   if (err) throw err;
-//   console.log(`> Ready On Server http://localhost:${port}`);
-// });
-
-// HTTPS
-https
-  .createServer(
-    {
-      key: fs.readFileSync("devcerts/server.key"),
-      cert: fs.readFileSync("devcerts/server.cert")
-    },
-    app
-  )
-  .listen(port, err => {
+// HTTPS locally
+if (process.env.NODE_ENV !== "production") {
+  https
+    .createServer(
+      {
+        key: fs.readFileSync("devcerts/server.key"),
+        cert: fs.readFileSync("devcerts/server.cert")
+      },
+      app
+    )
+    .listen(port, err => {
+      if (err) throw err;
+      console.log(`> Ready On Server http://localhost:${port}`);
+    });
+} else {
+  // HTTP in prod
+  app.listen(port, err => {
     if (err) throw err;
     console.log(`> Ready On Server http://localhost:${port}`);
   });
+}
