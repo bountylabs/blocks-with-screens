@@ -16,10 +16,15 @@ import io.ktor.client.engine.apache.*
 import io.ktor.client.features.json.*
 import io.ktor.client.request.*
 import io.ktor.features.ContentNegotiation
+import io.ktor.http.ContentDisposition.Companion.File
+import io.ktor.http.content.files
+import io.ktor.http.content.static
+import io.ktor.http.content.staticRootFolder
 import kotlinx.coroutines.*
 import model.stocks.StockResponse
 import model.thirdparty.alphavantage.MetaData
 import model.thirdparty.alphavantage.TimeSeriesDaily
+import java.io.File
 import java.util.concurrent.TimeUnit
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
@@ -42,8 +47,7 @@ fun Application.module(testing: Boolean = false) {
             serializer = GsonSerializer()
         }
     }
-    install(ContentNegotiation) {
-    }
+
     runBlocking {
         // Sample for making a HTTP Client request
         /*
@@ -78,7 +82,7 @@ fun Application.module(testing: Boolean = false) {
                 val weather = gson.fromJson(openWeatherResponse, OpenWeatherZipCodeResponse::class.java)
                 val weatherDescriptions = weather.weather[0]
                 val weatherMain = weather.main
-                val iconUrl = "http://openweathermap.org/img/wn/" + weatherDescriptions.icon + ".png"
+                val iconUrl = "https://blockchainwithscreens.herokuapp.com/weather/image/" + weatherDescriptions.icon + ".jpg"
                 val response = WeatherZipCodeResponse(
                     weather.name,
                     weatherDescriptions.main,
@@ -142,6 +146,12 @@ fun Application.module(testing: Boolean = false) {
                 stocksLastUpdate[symbol] = System.currentTimeMillis()
                 stocksCache[symbol] = response
                 call.respondText { gson.toJson(response) }
+            }
+        }
+        static("/weather") {
+            staticRootFolder = File("weather")
+            static("/image") {
+                files("image")
             }
         }
     }
