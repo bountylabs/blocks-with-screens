@@ -239,10 +239,24 @@ void setup(void) {
   WiFiClient wifiClient;
 
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  unsigned long time = millis();
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
     tft.print(".");
+
+    // There seems to be a bug where sometimes wifi will hang forever trying to connect
+    // Try to work around by resetting some things
+    // See https://github.com/esp8266/Arduino/issues/5527
+    if ((millis() - time) > 5000) {
+      Serial.print("Restarting Wifi");
+      tft.setTextColor(RED);
+      tft.println("Restarting Wifi");
+      tft.setTextColor(WHITE);
+      WiFi.disconnect(true);
+      WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+      time = millis();
+    }
   }
   tft.println("!");
   tft.setTextColor(GREEN);
@@ -254,13 +268,13 @@ void setup(void) {
   tft.setTextColor(WHITE);
   tft.println("Configuring SPIFFS...");
   SPIFFS.begin();
-  SPIFFS.format();
-  // formatSPIFFSIfNecessary();
+  // SPIFFS.format();
+  formatSPIFFSIfNecessary();
   FSInfo fsInfo;
   SPIFFS.info(fsInfo);
 
   tft.setTextColor(GREEN);
-  tft.printf("%d / %d bytes used\n", fsInfo.usedBytes, fsInfo.totalBytes);
+  tft.printf("%d / %d kb used\n", fsInfo.usedBytes / 1000, fsInfo.totalBytes / 1000);
 }
 
 void loop() {
@@ -270,8 +284,9 @@ void loop() {
   tft.setTextColor(WHITE);
   tft.println("Downloading file");
   start = millis();
-  int bytesDownloaded = downloadFile("http://10.0.0.20:3000/api/gif?block=johnsgifs", "/out2.raw", "");
-  // int bytesDownloaded = downloadFile("https://blockswithscreens.now.sh/api/gif?block=johnsgifs", "/out.raw", "50 C4 95 BF 61 81 79 51 F3 DE 80 AB B6 DF 6D 31 54 57 AA C4");
+  // int bytesDownloaded = downloadFile("http://10.0.0.20:3000/api/gif?block=johnsgifs", "/out2.raw", "");
+  // int bytesDownloaded = downloadFile("https://blockswithscreens.now.sh/api/gif?block=johnsgifs", "/out2.raw", "50 C4 95 BF 61 81 79 51 F3 DE 80 AB B6 DF 6D 31 54 57 AA C4");
+  int bytesDownloaded = downloadFile("http://blockswithscreens.appspot.com/api/gif?block=johnsgifs", "/out2.raw", "");
   time = millis() - start;
   Serial.printf("Downloaded %d bytes in %dms!\n", bytesDownloaded, time);
   tft.setTextColor(GREEN);
@@ -287,7 +302,6 @@ void loop() {
   while (true) {
     yield();
     ArduinoOTA.handle();
-    delay(500);
     drawFSBmp("/out2.raw", 0, 0, 128, 128);
   }
 }
