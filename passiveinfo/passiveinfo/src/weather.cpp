@@ -33,6 +33,7 @@ void drawWeather(
   char charBuffer[128];
   sprintf(charBuffer, "%s", cityName.c_str());
 
+  screen.setTextSize(1.5);
   int16_t ignoredX;
   int16_t ignoredY;
   uint16_t cityNameWidth;
@@ -50,11 +51,10 @@ void drawWeather(
   uint8_t cityNameX = (screen.width() - cityNameWidth) / 2;
   screen.setTextColor(BLACK);
   screen.setCursor(cityNameX, 10);
-  screen.setTextSize(1.5);
   screen.print(cityName);
 
   sprintf(charBuffer, "%.1f%cF", currentTempF, (char)247);
-
+  screen.setTextSize(2);
   uint16_t currentTempWidth;
   uint16_t currentTempHeight;
   screen.getTextBounds(
@@ -70,6 +70,5 @@ void drawWeather(
   uint8_t currentTempX = (screen.width() - currentTempWidth) / 2;
   uint8_t currentTempY = screen.height() - currentTempHeight - 10;
   screen.setCursor(currentTempX, currentTempY);
-  screen.setTextSize(2);
   screen.print(charBuffer);
 }
