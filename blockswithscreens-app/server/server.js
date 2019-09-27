@@ -20,7 +20,6 @@ if (process.env.NODE_ENV !== "production") {
   app.use("/$", (req, res) =>
     res.sendFile(path.join(STATIC_PATH, "index.html"))
   );
-  console.info({ STATIC_PATH });
   app.use("/static", express.static(STATIC_PATH));
 }
 
@@ -35,3 +34,4 @@ app.post("/echo", function(request, response) {
 });
 
 app.all("/api/video", require("./api/video"));
+app.all("/api/gif", require("./api/gif"));

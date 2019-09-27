@@ -233,6 +233,9 @@
                   superGif.load(() => {
                     console.info({ superGif });
                     const superGifCanvas = superGif.get_canvas();
+
+                    buildGifStream(superGif, options);
+
                     drawCanvas(superGifCanvas, { ...options, raf: true });
                   });
                   return;
@@ -257,6 +260,38 @@
             console.error("unrecognized type", type, inputFile);
             return;
         }
+      }
+
+      function buildGifStream(superGif, options) {
+        // build a super long stream of the entire gif
+        const frameCount = superGif.get_length();
+        const superGifCanvas = superGif.get_canvas();
+        console.info({ frameCount });
+
+        const gifRGB565Array = new Uint8Array(PIXELS * 2 * frameCount);
+
+        // step through each frame
+        for (let f = 0; f < frameCount; f++) {
+          superGif.move_to(f);
+          // draw to canvas
+          drawCanvas(superGifCanvas, options);
+          // grab rgb565 representation of canvas
+          const rgb565array = canvasToRGB565();
+
+          // then compose the super big uint8 stream
+
+          // calculate frame offset for placing into gifRGB565Array
+          const frameOffset = PIXELS * 2 * f;
+          // fill each rgb565 bytes for this frame into its place in gifRGB565Array
+          for (let b = 0; b < rgb565array.length; b++) {
+            gifRGB565Array[frameOffset + b] = rgb565array[b];
+          }
+        }
+
+        // send data to gif endpoint once
+        const xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "/api/gif?mode=write&block=3", true);
+        xhttp.send(gifRGB565Array);
       }
 
       function drawCanvas(source, options) {
