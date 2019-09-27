@@ -19,6 +19,8 @@
 // Note, the ESP8266 can supposedly can go up to 30MHz but seems to cause instability
 #define SPI_SPEED 15000000
 
+//#define USE_TCP 1
+
 #include <Adafruit_SSD1351.h>
 #include <SPI.h>
 #include <ESP8266WiFi.h>
@@ -30,9 +32,13 @@ IPAddress local_ip(192,168,4,22);
 IPAddress gateway(192,168,4,9);
 IPAddress subnet(255, 255, 255, 0);
 
+#ifdef USE_TCP
+WiFiServer wifiServer(80);
+#else
 WiFiUDP udp;
 unsigned int localUdpPort = 4210;
 char incomingPacket[1025];
+#endif
 
 // Hardware SPI mode only works if you make a hack in SPI.c under the hood. In short, find the two
 // lines with `pinMode(MISO` in them and comment them out
@@ -65,11 +71,42 @@ void setup(void) {
   tft.begin(15000000);
 
   joinNetwork();
+
+  #ifdef USE_TCP
+  wifiServer.begin();
+  Serial.printf("TCP server listening IP %s, TCP port %d\n", WiFi.localIP().toString().c_str(), 8888);
+  #else
   udp.begin(localUdpPort);
   Serial.printf("Now listening at IP %s, UDP port %d\n", WiFi.localIP().toString().c_str(), localUdpPort);
+  #endif
   expectedPacket = 0;
 }
 
+#ifdef USE_TCP
+void loop() {
+  WiFiClient client = wifiServer.available();
+  if (client) {
+    while (client.connected()) {
+      Serial.printf("connected!\n");
+      uint8_t* imgptr = image;
+      int bytesLeft = 128*128*2;
+      while (client.available() > 0) {
+        size_t bytesRead = client.readBytes(imgptr, bytesLeft);
+        bytesLeft -= bytesRead;
+        imgptr += bytesRead;
+        if (bytesLeft == 0)
+        {
+          Serial.printf("got frame!\n");
+          imgptr = image;
+          bytesLeft = 128*128*2;
+          tft.drawRGBBitmap(0, 0, (uint16_t*)image, 128, 128);
+        }
+      }
+    }
+  }
+}
+
+#else
 void loop() {
   int packetSize = udp.parsePacket();
   if (packetSize)
@@ -96,9 +133,9 @@ void loop() {
       {
         expectedPacket = incomingPacket[0]+1;
       }
-      
     }
   }
 
   yield();
 }
+#endif
