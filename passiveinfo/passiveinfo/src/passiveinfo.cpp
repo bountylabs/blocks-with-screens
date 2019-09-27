@@ -14,20 +14,24 @@
 
 Adafruit_SSD1351 display = Adafruit_SSD1351(16, 12, 13, 14, 15);
 
+float closePrice = 0;
+float deltaPrice = 0;
+
 void setup() {
   Serial.begin(115200);
   display.begin();
-  setupWifi();
+  display.fillScreen(0x000000);
+  setupWifi(display);
 }
 
 void loop() {
   // Use WiFiClient class to create TCP connections
   WiFiClientSecure client;
-  getCurrentWeather(client);
-
+  // getCurrentWeather(client);
   getStockPrice(client, "TWTR");
 
-  display.fillTriangle(0,0, 10, 10, 0, 20, 0x0000FF);
+  display.fillScreen(0x000000);
+  drawStock(display, "TWTR", closePrice, deltaPrice, 2, 10, 10);
 
   delay(60000);
 }
@@ -97,9 +101,10 @@ void getStockPrice(WiFiClientSecure client, String symbol) {
 
   const char* symbolFromAPI = doc["symbol"];
   const float openPrice = doc["open"];
-  const float closePrice = doc["close"];
+  closePrice = doc["close"];
   const float lowPrice = doc["low"];
   const float highPrice = doc["high"];
+  deltaPrice = closePrice - openPrice;
 
   Serial.println("Symbol: " + String(symbolFromAPI));
   Serial.println("Open Price: " + String(openPrice));
