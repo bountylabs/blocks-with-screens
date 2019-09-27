@@ -9,7 +9,7 @@ const path = require("path");
 
 const STATIC_PATH = path.join(__dirname, "../static");
 const port = process.env.PORT || 3000;
-const forceHTTP = !!process.env.HTTP;
+const { HTTP, ON_HEROKU } = process.env;
 const app = express();
 
 app.get("/version", (req, res, next) => {
@@ -38,7 +38,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 // HTTPS locally when HTTP flag passed
-if (process.env.NODE_ENV !== "production" && !forceHTTP) {
+if (process.env.NODE_ENV !== "production" && !HTTP) {
   https
     .createServer(
       {
