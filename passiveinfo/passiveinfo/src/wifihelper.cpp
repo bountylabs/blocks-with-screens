@@ -26,7 +26,7 @@ void setupWifi(Adafruit_SSD1351& screen) {
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
-    screen.print(" .");
+    screen.print(".");
   }
 
   Serial.println("");
