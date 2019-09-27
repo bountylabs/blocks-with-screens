@@ -9,6 +9,7 @@ const path = require("path");
 
 const STATIC_PATH = path.join(__dirname, "../static");
 const port = process.env.PORT || 3000;
+const forceHTTP = !!process.env.HTTP;
 const app = express();
 
 app.get("/version", (req, res, next) => {
@@ -36,8 +37,8 @@ if (process.env.NODE_ENV !== "production") {
   );
 }
 
-// HTTPS locally
-if (process.env.NODE_ENV !== "production") {
+// HTTPS locally when HTTP flag passed
+if (process.env.NODE_ENV !== "production" && !forceHTTP) {
   https
     .createServer(
       {
@@ -48,10 +49,10 @@ if (process.env.NODE_ENV !== "production") {
     )
     .listen(port, err => {
       if (err) throw err;
-      console.log(`> Ready On Server http://localhost:${port}`);
+      console.log(`> Ready On Server https://localhost:${port}`);
     });
 } else {
-  // HTTP in prod
+  // HTTP
   app.listen(port, err => {
     if (err) throw err;
     console.log(`> Ready On Server http://localhost:${port}`);
