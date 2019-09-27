@@ -82,7 +82,7 @@ fun Application.module(testing: Boolean = false) {
                 val weather = gson.fromJson(openWeatherResponse, OpenWeatherZipCodeResponse::class.java)
                 val weatherDescriptions = weather.weather[0]
                 val weatherMain = weather.main
-                val iconUrl = "https://blockchainwithscreens.herokuapp.com//weather/image/" + weatherDescriptions.icon + ".jpg"
+                val iconUrl = "https://blockchainwithscreens.herokuapp.com/weather/image/" + weatherDescriptions.icon + ".jpg"
                 val response = WeatherZipCodeResponse(
                     weather.name,
                     weatherDescriptions.main,
