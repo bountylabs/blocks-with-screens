@@ -1,0 +1,4 @@
+runtime: nodejs
+env: flex
+env_variables:
+  ON_GCLOUD: 1

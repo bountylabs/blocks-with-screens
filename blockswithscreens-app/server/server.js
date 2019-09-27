@@ -9,7 +9,7 @@ const path = require("path");
 
 const STATIC_PATH = path.join(__dirname, "../static");
 const port = process.env.PORT || 3000;
-const { HTTP, ON_HEROKU } = process.env;
+const { HTTP, ON_GCLOUD } = process.env;
 const app = express();
 
 app.get("/version", (req, res, next) => {
@@ -27,7 +27,7 @@ app.all("/api/gif", require("./api/gif"));
 app.all("/api/rgb565", require("./api/rgb565"));
 
 // do this last so we don't match too early
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV !== "production" || ON_GCLOUD) {
   // mimic now.json routes config with express
   // for local development
   app.use("/static", express.static(STATIC_PATH));
