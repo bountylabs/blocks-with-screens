@@ -267,8 +267,8 @@
       }
 
       function autoSendRGB565() {
-        // 20fps (1000ms / 20 ticks) ~= 50ms/tick
-        const fps = 1000 / 20;
+        // 20fps (1000ms / 60 ticks) ~= 16.667ms/tick
+        const fps = 1000 / 60;
 
         const frameUpdate = () => {
           console.info("autoSendRGB565", "frameUpdate");
