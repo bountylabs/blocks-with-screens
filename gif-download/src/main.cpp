@@ -102,14 +102,14 @@ int downloadFile(const char *URL, const char *filepath, const char *fingerprint 
             tft.printf("File write error %d\n", f.getWriteError());
             Serial.printf("File write error %d\n", f.getWriteError());
             f.close();
-            return 0;
+            return bytesDownloaded;
           } else if (sizeWritten != bytesToWrite) {
             tft.println();
             tft.setTextColor(RED);
             tft.printf("Write size mismatch %d %d\n", sizeWritten, bytesToWrite);
             Serial.printf("Write size mismatch %d %d\n", sizeWritten, bytesToWrite);
             f.close();
-            return 0;
+            return bytesDownloaded;
           }
           bytesDownloaded += c;
           if (len > 0) {
@@ -254,11 +254,13 @@ void setup(void) {
   tft.setTextColor(WHITE);
   tft.println("Configuring SPIFFS...");
   SPIFFS.begin();
-  // SPIFFS.format();
-  formatSPIFFSIfNecessary();
-  tft.setTextColor(GREEN);
-  tft.println("SPIFFS is ready!");
+  SPIFFS.format();
+  // formatSPIFFSIfNecessary();
+  FSInfo fsInfo;
+  SPIFFS.info(fsInfo);
 
+  tft.setTextColor(GREEN);
+  tft.printf("%d / %d bytes used\n", fsInfo.usedBytes, fsInfo.totalBytes);
 }
 
 void loop() {
