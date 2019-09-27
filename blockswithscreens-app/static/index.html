@@ -206,6 +206,9 @@
       let rafID = 0;
       let shouldFaceUser = false;
 
+      const urlParams = new URLSearchParams(window.location.search);
+      const block = urlParams.get("block") || 3;
+
       canvas.width = canvas.height = SIZE;
 
       function time(label, operation) {
@@ -284,7 +287,7 @@
 
       function sendRGB565() {
         const xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "/api/video?mode=write&block=3", true);
+        xhttp.open("POST", `/api/video?mode=write&block=${block}`, true);
 
         const rgb565array = canvasToRGB565();
         xhttp.send(rgb565array);
@@ -428,7 +431,7 @@
 
         // send data to gif endpoint once
         const xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "/api/gif?mode=write&block=3", true);
+        xhttp.open("POST", `/api/gif?mode=write&block=${block}`, true);
         xhttp.send(gifRGB565Array);
       }
 
