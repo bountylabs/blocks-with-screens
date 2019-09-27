@@ -8,6 +8,7 @@
 const int RED = 0xF800;
 const int GREEN = 0x07E0;
 const int WHITE = 0xFFFF;
+const int BLACK = 0x000000;
 
 const int HTTP_PORT = 80;
 const int HTTPS_PORT = 443;
