@@ -61,6 +61,8 @@ int downloadFile(const char *URL, const char *filepath) {
       fs::File f = SPIFFS.open(filepath, "w");
       if (!f) {
           Serial.println("File open failed");
+          tft.setTextColor(RED);
+          tft.println("File open failed");
       }
 
       // Get lenght of document (is -1 when Server sends no Content-Length header)
@@ -91,6 +93,8 @@ int downloadFile(const char *URL, const char *filepath) {
       Serial.print("[HTTP] connection closed or file end.\n");
     } else {
       Serial.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
+      tft.setTextColor(RED);
+      tft.printf("HTTP Status: %d\n", httpCode);
     }
   }
   http.end();
@@ -260,7 +264,9 @@ void setup(void) {
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
+    tft.print(".");
   }
+  tft.println("!");
   tft.setTextColor(GREEN);
   tft.println("Connected!");
 
@@ -297,5 +303,6 @@ void loop() {
   while (true) {
     yield();
     ArduinoOTA.handle();
+    delay(1000);
   }
 }
