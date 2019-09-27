@@ -2,10 +2,32 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link
+      rel="stylesheet"
+      href="https://code.getmdl.io/1.3.0/material.blue_grey-blue.min.css"
+    />
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
     <style>
       body {
-        margin: 50px auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      #container {
         max-width: 640px;
+      }
+
+      #input-options {
+        width: 330px;
+        margin: 0 auto;
       }
 
       h1,
@@ -16,49 +38,147 @@
       h6 {
         margin: 8px 0;
       }
+
+      .mdl-card {
+        margin: 20px auto;
+      }
+
+      .mdl-card--expand {
+        padding: 0;
+      }
+
+      .mdl-card__actions {
+        position: absolute;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+      }
+
+      .jsgif,
+      .jsgif canvas {
+        max-width: 100%;
+      }
+
+      #input {
+        display: none;
+      }
+
+      #input-container {
+        z-index: 999;
+        position: absolute;
+        bottom: 86;
+        left: 20;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      #camera-input {
+        z-index: 999;
+        position: absolute;
+        bottom: 20;
+        left: 20;
+      }
+
+      #send-to-box {
+        z-index: 999;
+        position: absolute;
+        bottom: 20;
+        right: 20;
+      }
     </style>
   </head>
 
   <body>
     <div id="container">
-      <button onclick="autoSendRGB565()">Send RGB565 (Block 3)</button>
-      <a target="_blank" href="/api/video?mode=read&block=3"
-        >Retrieve Block 3</a
-      >
-
-      <h2>Input</h2>
-
-      <button onclick="cameraCapture()">Camera Capture</button>
-      <input type="file" name="input" id="input" onchange="onInputSource()" />
-
-      <h4>Options</h4>
-      <label>
-        <input id="fillInput" type="checkbox" name="fillInput" />
-        Fill
-      </label>
-      <label>
-        <input id="rotateInput" type="checkbox" name="rotateInput" />
-        Rotate
-      </label>
-
-      <div style="border: 1px solid red;">
-        <video
-          id="video"
-          style="width: 100%;"
-          autoplay
-          loop
-          muted
-          playsinline
-        ></video>
-        <img id="image" style="width: 100%;" />
-        <img id="gifImage" />
+      <div class="demo-card-image mdl-card mdl-shadow--2dp">
+        <div class="mdl-card__title mdl-card--expand">
+          <video
+            id="video"
+            style="width: 100%;"
+            autoplay
+            loop
+            muted
+            playsinline
+          ></video>
+          <img id="image" style="width: 100%;" />
+          <img id="gifImage" />
+        </div>
+        <div class="mdl-card__actions">
+          <span class="demo-card-image__filename">Input</span>
+        </div>
       </div>
 
-      <h2>Output</h2>
-      <canvas
-        id="canvas"
-        style="width: 100%; border: 1px solid green;"
-      ></canvas>
+      <div id="input-options">
+        <label
+          class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+          for="fillInput"
+        >
+          <input
+            type="checkbox"
+            id="fillInput"
+            name="fillInput"
+            class="mdl-checkbox__input"
+          />
+          <span class="mdl-checkbox__label">Cover</span>
+        </label>
+
+        <label
+          class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+          for="rotateInput"
+        >
+          <input
+            type="checkbox"
+            id="rotateInput"
+            name="rotateInput"
+            class="mdl-checkbox__input"
+          />
+          <span class="mdl-checkbox__label">Rotate 90°</span>
+        </label>
+      </div>
+
+      <div class="demo-card-image mdl-card mdl-shadow--2dp">
+        <div class="mdl-card__title mdl-card--expand">
+          <canvas id="canvas" style="width: 100%;"></canvas>
+        </div>
+        <div class="mdl-card__actions">
+          <span class="demo-card-image__filename">Output</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- <button onclick="">Send RGB565 (Block 3)</button>
+    <a target="_blank" href="/api/video?mode=read&block=3">Retrieve Block 3</a> -->
+
+    <div id="fab-actions">
+      <!-- Colored FAB button -->
+      <button
+        id="send-to-box"
+        onclick="autoSendRGB565()"
+        class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect mdl-button--raised"
+      >
+        <i class="material-icons">move_to_inbox</i>
+      </button>
+
+      <!-- Colored FAB button -->
+      <button
+        id="camera-input"
+        onclick="cameraCapture()"
+        class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect mdl-button--raised"
+      >
+        <i class="material-icons">photo_camera</i>
+      </button>
+
+      <div id="input-container">
+        <!-- Colored FAB button -->
+        <button
+          id="file-input"
+          onclick="clickFileInput()"
+          class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect mdl-button--raised"
+        >
+          <i class="material-icons">cloud_upload</i>
+        </button>
+        <input type="file" name="input" id="input" onchange="onInputSource()" />
+      </div>
     </div>
 
     <!-- Javascript -->
@@ -84,6 +204,7 @@
       const context = canvas.getContext("2d");
 
       let rafID = 0;
+      let shouldFaceUser = false;
 
       canvas.width = canvas.height = SIZE;
 
@@ -100,6 +221,10 @@
         console.info(label, { time });
       }
 
+      function clickFileInput() {
+        input.click();
+      }
+
       function resetAllInputs() {
         delete image.src;
         delete video.src;
@@ -114,21 +239,34 @@
       function cameraCapture() {
         resetAllInputs();
 
-        navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
-          video.style.display = "block";
-          video.srcObject = stream;
-          video.load();
+        // flip camera
+        shouldFaceUser = !shouldFaceUser;
 
-          video.onloadeddata = () => {
-            drawCanvas(video, {
-              width: video.videoWidth,
-              height: video.videoHeight,
-              raf: true,
-              fill: fillInput.checked,
-              rotate: rotateInput.checked
-            });
-          };
-        });
+        navigator.mediaDevices
+          .getUserMedia({
+            video: true,
+            facingMode: shouldFaceUser ? "user" : "environment"
+          })
+          .then(stream => {
+            // change camera icon to flip camera icon
+            document
+              .getElementById("camera-input")
+              .querySelector(".material-icons").innerText = "flip_camera_ios";
+
+            video.style.display = "block";
+            video.srcObject = stream;
+            video.load();
+
+            video.onloadeddata = () => {
+              drawCanvas(video, {
+                width: video.videoWidth,
+                height: video.videoHeight,
+                raf: true,
+                fill: fillInput.checked,
+                rotate: rotateInput.checked
+              });
+            };
+          });
       }
 
       function autoSendRGB565() {
