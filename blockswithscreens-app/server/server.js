@@ -11,15 +11,6 @@ const STATIC_PATH = path.join(__dirname, "../static");
 const port = process.env.PORT || 3000;
 const app = express();
 
-if (process.env.NODE_ENV !== "production") {
-  // mimic now.json routes config with express
-  // for local development
-  app.use("/$", (req, res) =>
-    res.sendFile(path.join(STATIC_PATH, "index.html"))
-  );
-  app.use("/static", express.static(STATIC_PATH));
-}
-
 app.get("/version", (req, res, next) => {
   res.json({
     version: process.env.VERSION
@@ -33,6 +24,17 @@ app.post("/echo", function(request, response) {
 app.all("/api/video", require("./api/video"));
 app.all("/api/gif", require("./api/gif"));
 app.all("/api/rgb565", require("./api/rgb565"));
+
+// do this last so we don't match too early
+if (process.env.NODE_ENV !== "production") {
+  // mimic now.json routes config with express
+  // for local development
+  app.use("/static", express.static(STATIC_PATH));
+
+  app.use("/", (req, res) =>
+    res.sendFile(path.join(STATIC_PATH, "index.html"))
+  );
+}
 
 // HTTP
 // app.listen(port, err => {
