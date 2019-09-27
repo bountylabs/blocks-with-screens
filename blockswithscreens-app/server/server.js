@@ -3,16 +3,13 @@
 // See https://github.com/zeit/next.js/issues/1245 for discussions on Universal Webpack or universal Babel
 // https://nextjs.org/docs/#custom-server-and-routing
 const express = require("express");
+const fs = require("fs");
+const https = require("https");
 const path = require("path");
 
 const STATIC_PATH = path.join(__dirname, "../static");
 const port = process.env.PORT || 3000;
 const app = express();
-
-app.listen(port, err => {
-  if (err) throw err;
-  console.log(`> Ready On Server http://localhost:${port}`);
-});
 
 if (process.env.NODE_ENV !== "production") {
   // mimic now.json routes config with express
@@ -36,3 +33,23 @@ app.post("/echo", function(request, response) {
 app.all("/api/video", require("./api/video"));
 app.all("/api/gif", require("./api/gif"));
 app.all("/api/rgb565", require("./api/rgb565"));
+
+// HTTP
+// app.listen(port, err => {
+//   if (err) throw err;
+//   console.log(`> Ready On Server http://localhost:${port}`);
+// });
+
+// HTTPS
+https
+  .createServer(
+    {
+      key: fs.readFileSync("server.key"),
+      cert: fs.readFileSync("server.cert")
+    },
+    app
+  )
+  .listen(port, err => {
+    if (err) throw err;
+    console.log(`> Ready On Server http://localhost:${port}`);
+  });
