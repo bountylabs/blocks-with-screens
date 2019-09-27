@@ -35,3 +35,4 @@ app.post("/echo", function(request, response) {
 
 app.all("/api/video", require("./api/video"));
 app.all("/api/gif", require("./api/gif"));
+app.all("/api/rgb565", require("./api/rgb565"));
