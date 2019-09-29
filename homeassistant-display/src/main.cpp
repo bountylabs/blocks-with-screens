@@ -36,8 +36,7 @@ void setup(void) {
   tft.setTextSize(1);
 
   tft.setTextColor(WHITE);
-  tft.println("Connecting to WiFi");
-
+  tft.print("Connecting to WiFi");
 
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   unsigned long time = millis();
@@ -59,7 +58,7 @@ void setup(void) {
       time = millis();
     }
   }
-  tft.println("!");
+  tft.println();
   tft.setTextColor(GREEN);
   tft.println("Connected!");
 
