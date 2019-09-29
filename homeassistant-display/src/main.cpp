@@ -12,61 +12,64 @@
 #include "colors.h"
 
 // Software bit-banged SPI mode works just fine but is slow
-// Adafruit_SSD1351 tft = Adafruit_SSD1351(SCREEN_WIDTH, SCREEN_HEIGHT, CS_PIN, DC_PIN, MOSI_PIN, SCLK_PIN, RST_PIN);
+// Adafruit_SSD1351 TFT = Adafruit_SSD1351(SCREEN_WIDTH, SCREEN_HEIGHT, CS_PIN, DC_PIN, MOSI_PIN, SCLK_PIN, RST_PIN);
 
 // Hardware SPI mode only works if you make a hack in SPI.c under the hood. In short, find the two
 // lines with `pinMode(MISO` in them and comment them out
-Adafruit_SSD1351 tft = Adafruit_SSD1351(SCREEN_WIDTH, SCREEN_HEIGHT, &SPI, CS_PIN, DC_PIN, RST_PIN);
+Adafruit_SSD1351 TFT = Adafruit_SSD1351(SCREEN_WIDTH, SCREEN_HEIGHT, &SPI, CS_PIN, DC_PIN, RST_PIN);
 
-WiFiClient wifiClient;
-HARestAPI haClient(wifiClient);
+WiFiClient WifiClient;
+HARestAPI HAClient(WifiClient);
 
 bool OTARunning;
+// In order to avoid blanking the screen on every update, we will just overwrite the text.
+// But in some cases we will need to clear the entire screen (e.g. after a failed OTA transfer).
+bool NeedsScreenRefresh;
 
 void setup(void) {
   Serial.begin(115200);
   Serial.print("setup");
 
   // 15MHz SPI
-  tft.begin(SPI_SPEED);
+  TFT.begin(SPI_SPEED);
 
-  tft.fillScreen(BLACK);
-  tft.setCursor(0, 0);
-  tft.setTextWrap(true);
-  tft.setTextSize(1);
+  TFT.fillScreen(BLACK);
+  TFT.setCursor(0, 0);
+  TFT.setTextWrap(true);
+  TFT.setTextSize(1);
 
-  tft.setTextColor(WHITE);
-  tft.print("Connecting to WiFi");
+  TFT.setTextColor(WHITE);
+  TFT.print("Connecting to WiFi");
 
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   unsigned long time = millis();
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
-    tft.print(".");
+    TFT.print(".");
 
     // There seems to be a bug where sometimes wifi will hang forever trying to connect
     // Try to work around by resetting some things
     // See https://github.com/esp8266/Arduino/issues/5527
     if ((millis() - time) > 10000) {
       Serial.print("Restarting Wifi");
-      tft.setTextColor(RED);
-      tft.println("\nRestarting Wifi");
-      tft.setTextColor(WHITE);
+      TFT.setTextColor(RED);
+      TFT.println("\nRestarting Wifi");
+      TFT.setTextColor(WHITE);
       WiFi.disconnect(true);
       WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
       time = millis();
     }
   }
-  tft.println();
-  tft.setTextColor(GREEN);
-  tft.println("Connected!");
+  TFT.println();
+  TFT.setTextColor(GREEN);
+  TFT.println("Connected!");
 
   const char* haIp = HOME_ASSISTANT_IP;
   uint16_t haPort = HOME_ASSISTANT_PORT;
   const char* haPassword = HOME_ASSISTANT_TOKEN;
-  haClient.setHAServer(haIp, haPort);
-  haClient.setHAPassword(haPassword);
+  HAClient.setHAServer(haIp, haPort);
+  HAClient.setHAPassword(haPassword);
 
   // Configure OTA programming
   ArduinoOTA.setHostname("ha-display");
@@ -74,32 +77,33 @@ void setup(void) {
   // ArduinoOTA.setPassword((const char *)"123");
   ArduinoOTA.onStart([]() {
     Serial.println("OTA Start");
-    tft.fillScreen(BLACK);
-    tft.setCursor(0, 0);
-    tft.setTextWrap(true);
-    tft.setTextSize(1);
-    tft.setTextColor(GREEN);
-    tft.println("OTA Programming");
+    TFT.fillScreen(BLACK);
+    TFT.setCursor(0, 0);
+    TFT.setTextWrap(true);
+    TFT.setTextSize(1);
+    TFT.setTextColor(GREEN);
+    TFT.println("OTA Programming");
     OTARunning = true;
+    NeedsScreenRefresh = true;
   });
   ArduinoOTA.onEnd([]() {
     Serial.println("OTA End");
-    tft.setTextColor(GREEN);
-    tft.println("OTA Done!");
-    tft.setTextColor(WHITE);
-    tft.println("Restarting");
+    TFT.setTextColor(GREEN);
+    TFT.println("OTA Done!");
+    TFT.setTextColor(WHITE);
+    TFT.println("Restarting");
     OTARunning = false;
   });
   ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {
     Serial.printf("OTA Progress: %u%%\r\n", (progress / (total / 100)));
-    tft.setTextColor(WHITE, BLACK);
-    tft.setCursor(0, 10);
-    tft.printf("%u%%\n", (progress / (total / 100)));
+    TFT.setTextColor(WHITE, BLACK);
+    TFT.setCursor(0, 10);
+    TFT.printf("%u%%\n", (progress / (total / 100)));
   });
   ArduinoOTA.onError([](ota_error_t error) {
     Serial.printf("OTA Error[%u]: ", error);
-    tft.setTextColor(RED);
-    tft.printf("Error: %d\n", error);
+    TFT.setTextColor(RED);
+    TFT.printf("Error: %d\n", error);
     if (error == OTA_AUTH_ERROR) Serial.println("OTA Auth Failed");
     else if (error == OTA_BEGIN_ERROR) Serial.println("OTA Begin Failed");
     else if (error == OTA_CONNECT_ERROR) Serial.println("OTA Connect Failed");
@@ -108,10 +112,12 @@ void setup(void) {
     OTARunning = false;
   });
   ArduinoOTA.begin();
+
+  NeedsScreenRefresh = true;
 }
 
 DeserializationError getHAEntity(const char *entityId, JsonDocument &doc) {
-  String resp = haClient.sendGetHA(String("/api/states/") + String(entityId), "");
+  String resp = HAClient.sendGetHA(String("/api/states/") + String(entityId), "");
   DeserializationError err = deserializeJson(doc, resp);
   return err;
 }
@@ -137,13 +143,13 @@ void waitAndHandle(unsigned long ms) {
 }
 
 void printStatLine(const char *label, const char *format, float value, const char *unit) {
-  tft.setTextColor(CYAN);
-  tft.print(label);
-  tft.setTextColor(GREEN);
-  tft.printf(format, value);
-  tft.setTextColor(LIGHT_GRAY);
-  tft.print(unit);
-  tft.println();
+  TFT.setTextColor(CYAN, BLACK);
+  TFT.print(label);
+  TFT.setTextColor(GREEN, BLACK);
+  TFT.printf(format, value);
+  TFT.setTextColor(LIGHT_GRAY, BLACK);
+  TFT.print(unit);
+  TFT.println();
 }
 
 void printEnvInfo(float temp, float humidity, float absHumidity) {
@@ -165,23 +171,26 @@ void loop() {
   float outsideHumidity = getHAEntityStateFloat("sensor.outside_humidity");
   float outsideAbsHumidity = getHAEntityStateFloat("sensor.outside_absolutehumidity");
 
-  tft.fillScreen(BLACK);
-  tft.setCursor(0, 0);
+  if (NeedsScreenRefresh) {
+    TFT.fillScreen(BLACK);
+    NeedsScreenRefresh = false;
+  }
+  TFT.setCursor(0, 0);
 
-  tft.setTextColor(WHITE);
-  tft.setTextSize(2);
-  tft.println("Inside:");
-  tft.setTextSize(1);
-  tft.println("");
+  TFT.setTextColor(WHITE, BLACK);
+  TFT.setTextSize(2);
+  TFT.println("Inside:");
+  TFT.setTextSize(1);
+  TFT.println("");
   printEnvInfo(insideTemp, insideHumidity, insideAbsHumidity);
 
-  tft.println("");
+  TFT.println("");
 
-  tft.setTextColor(WHITE);
-  tft.setTextSize(2);
-  tft.println("Outside:");
-  tft.setTextSize(1);
-  tft.println("");
+  TFT.setTextColor(WHITE, BLACK);
+  TFT.setTextSize(2);
+  TFT.println("Outside:");
+  TFT.setTextSize(1);
+  TFT.println("");
   printEnvInfo(outsideTemp, outsideHumidity, outsideAbsHumidity);
 
   waitAndHandle(10000);
