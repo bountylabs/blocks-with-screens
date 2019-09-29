@@ -36,7 +36,7 @@ void setup(void) {
   tft.setTextSize(1);
 
   tft.setTextColor(WHITE);
-  tft.println("Connecting to WiFi...");
+  tft.println("Connecting to WiFi");
 
 
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
