@@ -155,9 +155,9 @@ void printStatLine(const char *label, const char *format, float value, const cha
 void printEnvInfo(float temp, float humidity, float absHumidity) {
   char tempUnit;
   sprintf(&tempUnit, "%cF", (char)247);
-  printStatLine("Temp:       ", "%.1f", temp, &tempUnit);
-  printStatLine("Humidity:   ", "%.0f", humidity, "%");
-  printStatLine("Abs. Hum.:  ", "%.2f", absHumidity, "g/m^3");
+  printStatLine("Temp:      ", "%.1f", temp, &tempUnit);
+  printStatLine("Humidity:  ", "%.0f", humidity, "%");
+  printStatLine("Abs. Hum.: ", "%.2f", absHumidity, "g/m^3");
 }
 
 void loop() {
