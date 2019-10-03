@@ -54,90 +54,49 @@ int downloadFile(const char *URL, const char *filepath, const char *fingerprint 
 
   Serial.printf("[HTTP] GET %s code: %d\n", URL, httpCode);
 
-  if(httpCode > 0) {
-    // HTTP header has been sent and Server response header has been handled
-    Serial.printf("[HTTP] GET... code: %d\n", httpCode);
-
-    // File found at server
-    if(httpCode == HTTP_CODE_OK) {
-
-      if (SPIFFS.exists(filepath)) {
-        tft.setTextColor(WHITE);
-        tft.printf("Deleting %s\n", filepath);
-        SPIFFS.remove(filepath);
-      }
-      // Open a file for writing
-      fs::File f = SPIFFS.open(filepath, "w");
-      if (!f) {
-          Serial.println("File open failed");
-          tft.setTextColor(RED);
-          tft.print("File open failed");
-          return 0;
-      }
-
-      // Get lenght of document (is -1 when Server sends no Content-Length header)
-      int len = http.getSize();
-      const int total = len;
-      uint8_t buff[128] = { 0 };
-      WiFiClient *stream = http.getStreamPtr();
-
-      tft.setTextColor(WHITE);
-      tft.print("Downloading\n");
-      int cursorX = tft.getCursorX();
-      int cursorY = tft.getCursorY();
-      int kbDownloaded = 0;
-
-      // Read all data from server
-      while (http.connected() && (len > 0 || len == -1)) {
-        // Get available data size
-        size_t size = stream->available();
-        if (size) {
-          // Read up to buffer size
-          int bytesToWrite = ((size > sizeof(buff)) ? sizeof(buff) : size);
-          int c = stream->readBytes(buff, bytesToWrite);
-          int sizeWritten = f.write(buff, bytesToWrite);
-          if (f.getWriteError()) {
-            tft.println();
-            tft.setTextColor(RED);
-            tft.printf("File write error %d\n", f.getWriteError());
-            Serial.printf("File write error %d\n", f.getWriteError());
-            f.close();
-            return bytesDownloaded;
-          } else if (sizeWritten != bytesToWrite) {
-            tft.println();
-            tft.setTextColor(RED);
-            tft.printf("Write size mismatch %d %d\n", sizeWritten, bytesToWrite);
-            Serial.printf("Write size mismatch %d %d\n", sizeWritten, bytesToWrite);
-            f.close();
-            return bytesDownloaded;
-          }
-          bytesDownloaded += c;
-          if (len > 0) {
-            len -= c;
-          }
-          if (bytesDownloaded / 1000 != kbDownloaded) {
-            kbDownloaded = bytesDownloaded / 1000;
-            tft.setTextColor(WHITE, BLACK);
-            tft.setCursor(cursorX, cursorY);
-            tft.printf("%d kb", kbDownloaded);
-          }
-        }
-        yield();
-        ArduinoOTA.handle();
-      }
-      f.flush();
-      f.close();
-
-      tft.println("");
-      Serial.println();
-      Serial.print("[HTTP] connection closed or file end.\n");
-    } else {
-      Serial.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
-      tft.setTextColor(RED);
-      tft.printf("HTTP Status: %d\n", httpCode);
-    }
+  if (httpCode != HTTP_CODE_OK) {
+    Serial.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
+    tft.setTextColor(RED);
+    tft.printf("HTTP Status: %d\n", httpCode);
+    http.end();
+    return 0;
   }
+
+  // Delete file if exists
+  if (SPIFFS.exists(filepath)) {
+    tft.setTextColor(WHITE);
+    tft.printf("Deleting %s\n", filepath);
+    SPIFFS.remove(filepath);
+  }
+
+  // Open a file for writing
+  fs::File f = SPIFFS.open(filepath, "w");
+  if (!f) {
+      Serial.println("File open failed");
+      tft.setTextColor(RED);
+      tft.println("File open failed");
+      return 0;
+  }
+
+  tft.setTextColor(WHITE);
+  tft.println("Downloading...");
+
+  // Write response to file
+  // TODO: Would be nice to modify writeToStream to support progress
+  int bytesWritten = http.writeToStream(&f);
+  if (bytesWritten < 0) {
+    Serial.printf("writeToStream error %d\n", bytesWritten);
+    tft.setTextColor(RED);
+    tft.printf("writeToStream error %d\n", bytesWritten);
+  } else {
+    Serial.printf("Wrote %d kb\n", bytesWritten / 1000);
+    tft.setTextColor(WHITE);
+    tft.printf("Wrote %d kb\n", bytesWritten / 1000);
+  }
+
+  f.close();
   http.end();
+
   return bytesDownloaded;
 }
 
@@ -282,7 +241,6 @@ void loop() {
   uint16_t time;
 
   tft.setTextColor(WHITE);
-  tft.println("Downloading file");
   start = millis();
   // int bytesDownloaded = downloadFile("http://10.0.0.20:3000/api/gif?block=johnsgifs", "/out2.raw", "");
   // int bytesDownloaded = downloadFile("https://blockswithscreens.now.sh/api/gif?block=johnsgifs", "/out2.raw", "50 C4 95 BF 61 81 79 51 F3 DE 80 AB B6 DF 6D 31 54 57 AA C4");
