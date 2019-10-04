@@ -30,9 +30,7 @@ module.exports = (req, res) => {
 
       req
         .on("data", chunk => {
-          // console.info('chunk', chunk);
           data.push(chunk);
-          console.info("chunk");
         })
         .on("end", () => {
           //at this point data is an array of Buffers
@@ -40,7 +38,7 @@ module.exports = (req, res) => {
           //of all of them together
           const buffer = Buffer.concat(data);
 
-          console.info("writing to memory at", block);
+          // console.info("writing to memory at", block);
           memory[block] = buffer;
 
           const timeEnd = Date.now();
@@ -49,14 +47,14 @@ module.exports = (req, res) => {
             time: timeEnd - timeStart
           };
 
-          console.info(req.url, response);
+          // console.info(req.url, response);
           return res.json(response);
         });
       break;
     }
     case "read":
     default: {
-      console.info("memory at ", block, !!memory[block]);
+      // console.info("memory at ", block, !!memory[block]);
       if (memory[block]) {
         // Content-type is very interesting part that guarantee that
         // Web browser will handle response in an appropriate manner.
@@ -69,7 +67,7 @@ module.exports = (req, res) => {
         bufferToStream(memory[block]).pipe(res);
 
         const timeEnd = Date.now();
-        console.info(req.url, timeEnd - timeStart);
+        // console.info(req.url, timeEnd - timeStart);
         return;
       }
 
