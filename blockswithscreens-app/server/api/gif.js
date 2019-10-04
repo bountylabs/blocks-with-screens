@@ -62,6 +62,7 @@ module.exports = (req, res) => {
         // Web browser will handle response in an appropriate manner.
         res.writeHead(200, {
           "Content-Type": "application/octet-stream",
+          "Content-Length": memory[block].length,
           "transfer-encoding": ""
         });
 
