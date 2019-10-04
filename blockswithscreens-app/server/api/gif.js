@@ -72,7 +72,7 @@ module.exports = (req, res) => {
         return;
       }
 
-      return res.json({ success: false });
+      return res.status(404).json({ success: false });
     }
   }
 };
