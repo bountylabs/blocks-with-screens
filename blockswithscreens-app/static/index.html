@@ -147,7 +147,7 @@
       <!-- Colored FAB button -->
       <button
         id="send-to-box"
-        onclick="autoSendRGB565()"
+        onclick="handleSendData()"
         class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect mdl-button--raised"
       >
         <i class="material-icons">move_to_inbox</i>
@@ -199,6 +199,8 @@
 
       let rafID = 0;
       let shouldFaceUser = false;
+      let sendVideo = false;
+      let sendImage = false;
 
       const urlParams = new URLSearchParams(window.location.search);
       const block = urlParams.get("block") || 3;
@@ -250,6 +252,8 @@
               .getElementById("camera-input")
               .querySelector(".material-icons").innerText = "flip_camera_ios";
 
+            sendVideo = true;
+            sendImage = false;
             video.style.display = "block";
             video.srcObject = stream;
             video.load();
@@ -266,9 +270,18 @@
           });
       }
 
+      function handleSendData() {
+        // determine video or image
+        if (sendImage) {
+          sendRGB565();
+        } else {
+          autoSendRGB565();
+        }
+      }
+
       function autoSendRGB565() {
-        // 20fps (1000ms / 60 ticks) ~= 16.667ms/tick
-        const fps = 1000 / 60;
+        // 20fps (1000ms / 20 ticks) ~= 50ms/tick
+        const fps = 1000 / 20;
 
         const frameUpdate = () => {
           console.info("autoSendRGB565", "frameUpdate");
@@ -311,6 +324,8 @@
             console.info("video detected");
 
             // setup video with url draw to canvas once loaded
+            sendVideo = true;
+            sendImage = false;
             video.style.display = "block";
             video.src = url;
             video.load();
@@ -359,6 +374,8 @@
                   console.info("gif detected");
 
                   // draw image for parsing with SuperGif
+                  sendVideo = true;
+                  sendImage = false;
                   gifImage.style.display = "block";
                   gifImage.src = url;
                   const superGif = new SuperGif({
@@ -376,6 +393,8 @@
                   return;
                 } else {
                   // display the image for debugging (not required for canvas drawing)
+                  sendVideo = false;
+                  sendImage = true;
                   image.style.display = "block";
                   image.onload = () => {
                     EXIF.getData(image, function() {
