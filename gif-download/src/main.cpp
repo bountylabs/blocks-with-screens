@@ -33,6 +33,7 @@
 #include <ESP8266HTTPClient.h>
 #include <ArduinoOTA.h>
 #include <FS.h>
+#include <QRCode.h>
 #include "secrets.h"
 
 // Software bit-banged SPI mode works just fine but is slow
@@ -50,22 +51,21 @@ int downloadFile(const char *URL, const char *filepath, const char *fingerprint 
     http.begin(URL);
   }
   int httpCode = http.GET();
-  int bytesDownloaded = 0;
 
   Serial.printf("[HTTP] GET %s code: %d\n", URL, httpCode);
 
   if (httpCode != HTTP_CODE_OK) {
     Serial.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
-    tft.setTextColor(RED);
-    tft.printf("HTTP Status: %d\n", httpCode);
+    // tft.setTextColor(RED);
+    // tft.printf("HTTP Status: %d\n", httpCode);
     http.end();
     return 0;
   }
 
   // Delete file if exists
   if (SPIFFS.exists(filepath)) {
-    tft.setTextColor(WHITE);
-    tft.printf("Deleting %s\n", filepath);
+    // tft.setTextColor(WHITE);
+    // tft.printf("Deleting %s\n", filepath);
     SPIFFS.remove(filepath);
   }
 
@@ -78,8 +78,8 @@ int downloadFile(const char *URL, const char *filepath, const char *fingerprint 
       return 0;
   }
 
-  tft.setTextColor(WHITE);
-  tft.println("Downloading...");
+  // tft.setTextColor(WHITE);
+  // tft.println("Downloading...");
 
   // Write response to file
   // TODO: Would be nice to modify writeToStream to support progress
@@ -90,14 +90,14 @@ int downloadFile(const char *URL, const char *filepath, const char *fingerprint 
     tft.printf("writeToStream error %d\n", bytesWritten);
   } else {
     Serial.printf("Wrote %d kb\n", bytesWritten / 1000);
-    tft.setTextColor(WHITE);
-    tft.printf("Wrote %d kb\n", bytesWritten / 1000);
+    // tft.setTextColor(WHITE);
+    // tft.printf("Wrote %d kb\n", bytesWritten / 1000);
   }
 
   f.close();
   http.end();
 
-  return bytesDownloaded;
+  return bytesWritten;
 }
 
 void drawFSBmp(const char *filename, int x, int y, int w, int h) {
@@ -236,20 +236,51 @@ void setup(void) {
   tft.printf("%d / %d kb used\n", fsInfo.usedBytes / 1000, fsInfo.totalBytes / 1000);
 }
 
+int getRandomNumber(int startNum, int endNum) {
+  randomSeed(ESP.getCycleCount());
+  return random(startNum, endNum);
+}
+
 void loop() {
   uint16_t start;
   uint16_t time;
 
-  tft.setTextColor(WHITE);
-  start = millis();
-  // int bytesDownloaded = downloadFile("http://10.0.0.20:3000/api/gif?block=johnsgifs", "/out2.raw", "");
-  // int bytesDownloaded = downloadFile("https://blockswithscreens.now.sh/api/gif?block=johnsgifs", "/out2.raw", "50 C4 95 BF 61 81 79 51 F3 DE 80 AB B6 DF 6D 31 54 57 AA C4");
-  int bytesDownloaded = downloadFile("http://blockswithscreens.appspot.com/api/gif?block=johnsgifs", "/out2.raw", "");
-  time = millis() - start;
-  Serial.printf("Downloaded %d bytes in %dms!\n", bytesDownloaded, time);
-  tft.setTextColor(GREEN);
-  tft.printf("Downloaded %d bytes in %dms\n", bytesDownloaded, time);
-  tft.setTextColor(WHITE);
+  int randomId = getRandomNumber(0, INT_MAX);
+  char url[64];
+  sprintf(url, "http://blockswithscreens.appspot.com?block=%d", randomId);
+
+  // The structure to manage the QR code
+  QRCode qrcode;
+  // Allocate a chunk of memory to store the QR code
+  uint8_t qrcodeBytes[qrcode_getBufferSize(4)];
+  qrcode_initText(&qrcode, qrcodeBytes, 4, ECC_LOW, url);
+  tft.fillScreen(BLACK);
+
+  int blockSize = tft.width() / qrcode.size;
+  int blockOffset = (tft.width() - qrcode.size * blockSize) / 2;
+  for (uint8 y = 0; y < qrcode.size; y++) {
+    for (uint8 x = 0; x < qrcode.size; x++) {
+        if (qrcode_getModule(&qrcode, x, y)) {
+          // tft.drawPixel(x, y, WHITE);
+          tft.fillRect(x*blockSize + blockOffset, y*blockSize + blockOffset, blockSize, blockSize, WHITE);
+        }
+    }
+  }
+  char downloadUrl[64];
+  sprintf(downloadUrl, "http://blockswithscreens.appspot.com/api/gif?block=%d", randomId);
+
+  while (true) {
+    delay(5000);
+    yield();
+    ArduinoOTA.handle();
+    start = millis();
+    int bytesDownloaded = downloadFile(downloadUrl, "/out2.raw", "");
+    if (bytesDownloaded > 100) {
+      time = millis() - start;
+      Serial.printf("Downloaded %d bytes in %dms!\n", bytesDownloaded, time);
+      break;
+    }
+  }
 
   tft.println("Rendering file");
   start = millis();
