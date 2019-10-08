@@ -24,10 +24,11 @@
 #include "adafruit_benchmark.h"
 
 // Software bit-banged SPI mode works just fine but is slow
-// Adafruit_SSD1351 tft = Adafruit_SSD1351(SCREEN_WIDTH, SCREEN_HEIGHT, CS_PIN, DC_PIN, MOSI_PIN, SCLK_PIN, RST_PIN);  
+// Adafruit_SSD1351 tft = Adafruit_SSD1351(SCREEN_WIDTH, SCREEN_HEIGHT, CS_PIN, DC_PIN, MOSI_PIN, SCLK_PIN, RST_PIN);
 
 // Hardware SPI mode only works if you make a hack in SPI.c under the hood. In short, find the two
 // lines with `pinMode(MISO` in them and comment them out
+// e.g. /Users/jboiles/.platformio/packages/framework-arduinoespressif8266/libraries/SPI/SPI.h
 Adafruit_SSD1351 tft = Adafruit_SSD1351(SCREEN_WIDTH, SCREEN_HEIGHT, &SPI, CS_PIN, DC_PIN, RST_PIN);
 
 void setup(void) {
