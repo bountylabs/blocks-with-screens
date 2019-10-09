@@ -192,7 +192,7 @@ void setup(void) {
   tft.setTextSize(1);
 
   tft.setTextColor(WHITE);
-  tft.println("Connecting to WiFi...");
+  tft.printf("Connecting to %s...", WIFI_SSID);
 
   // Connect wifi to support OTA programming
   WiFiClient wifiClient;
@@ -207,7 +207,7 @@ void setup(void) {
     // There seems to be a bug where sometimes wifi will hang forever trying to connect
     // Try to work around by resetting some things
     // See https://github.com/esp8266/Arduino/issues/5527
-    if ((millis() - time) > 5000) {
+    if ((millis() - time) > 60000) {
       Serial.print("Restarting Wifi");
       tft.setTextColor(RED);
       tft.println("Restarting Wifi");
