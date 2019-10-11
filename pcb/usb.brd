@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.5.0">
+<eagle version="9.5.1">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -158,7 +158,7 @@
 <layer number="255" name="routoute" color="7" fill="1" visible="no" active="yes"/>
 </layers>
 <board>
-<fusionsync huburn="a.cGVyc29uYWw6dWUyODFhMTI5" projecturn="a.cGVyc29uYWw6dWUyODFhMTI5IzIwMTkwOTE3MjE1ODk1MzI2" f3durn="urn:adsk.wipprod:dm.lineage:P5lhZWs8S_KHtQ88bDf2NQ" pcbguid="cd0c53a3-0c54-43de-9435-58563155f29e" lastpulledtime="" lastsyncedchangeguid="3e3746fe-27d4-2d90-7210-416215d1e299"/>
+<fusionsync huburn="a.cGVyc29uYWw6dWUyODFhMTI5" projecturn="a.cGVyc29uYWw6dWUyODFhMTI5IzIwMTkwOTE3MjE1ODk1MzI2" f3durn="urn:adsk.wipprod:dm.lineage:P5lhZWs8S_KHtQ88bDf2NQ" pcbguid="cd0c53a3-0c54-43de-9435-58563155f29e" lastpulledtime="" lastsyncedchangeguid="89411407-e078-885e-39c3-f9a9a76d8070"/>
 <plain>
 <rectangle x1="44.831" y1="46.953" x2="45.339" y2="47.207" layer="42" rot="R90"/>
 <rectangle x1="46.101" y1="47.461" x2="46.355" y2="47.969" layer="42" rot="R90"/>
