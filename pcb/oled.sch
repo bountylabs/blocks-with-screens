@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.5.0">
+<eagle version="9.5.1">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -4878,6 +4878,48 @@ type 0309, grid 2.5 mm</description>
 </deviceset>
 </devicesets>
 </library>
+<library name="SparkFun-PowerSymbols" urn="urn:adsk.eagle:library:530">
+<description>&lt;h3&gt;SparkFun Power Symbols&lt;/h3&gt;
+This library contains power, ground, and voltage-supply symbols.
+&lt;br&gt;
+&lt;br&gt;
+We've spent an enormous amount of time creating and checking these footprints and parts, but it is &lt;b&gt; the end user's responsibility&lt;/b&gt; to ensure correctness and suitablity for a given componet or application. 
+&lt;br&gt;
+&lt;br&gt;If you enjoy using this library, please buy one of our products at &lt;a href=" www.sparkfun.com"&gt;SparkFun.com&lt;/a&gt;.
+&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;Licensing:&lt;/b&gt; Creative Commons ShareAlike 4.0 International - https://creativecommons.org/licenses/by-sa/4.0/ 
+&lt;br&gt;
+&lt;br&gt;
+You are welcome to use this library for commercial purposes. For attribution, we ask that when you begin to sell your device using our footprint, you email us with a link to the product being sold. We want bragging rights that we helped (in a very small part) to create your 8th world wonder. We would like the opportunity to feature your device on our homepage.</description>
+<packages>
+</packages>
+<symbols>
+<symbol name="VIN" urn="urn:adsk.eagle:symbol:39426/1" library_version="1">
+<description>&lt;h3&gt;Input Voltage Supply&lt;/h3&gt;</description>
+<wire x1="0.762" y1="1.27" x2="0" y2="2.54" width="0.254" layer="94"/>
+<wire x1="0" y1="2.54" x2="-0.762" y2="1.27" width="0.254" layer="94"/>
+<pin name="VIN" x="0" y="0" visible="off" length="short" direction="sup" rot="R90"/>
+<text x="0" y="2.794" size="1.778" layer="96" align="bottom-center">&gt;VALUE</text>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="VIN" urn="urn:adsk.eagle:component:39447/1" prefix="SUPPLY" library_version="1">
+<description>&lt;h3&gt;Input Voltage Supply&lt;/h3&gt;
+&lt;p&gt;Generic voltage input supply symbol.&lt;/p&gt;</description>
+<gates>
+<gate name="G$1" symbol="VIN" x="0" y="0"/>
+</gates>
+<devices>
+<device name="">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -4913,7 +4955,6 @@ type 0309, grid 2.5 mm</description>
 <part name="U$13" library="microbuilder" deviceset="GND" device=""/>
 <part name="C8" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="0.1uF"/>
 <part name="U$16" library="microbuilder" deviceset="13V" device=""/>
-<part name="+3V3" library="microbuilder" deviceset="3.3V" device=""/>
 <part name="U1" library="microbuilder" deviceset="DISP_OLED_UG-2828GDEDF11" device="TOP" value="UG-2828GDEDF11"/>
 <part name="C2" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="10uF/16V"/>
 <part name="D3" library="microbuilder" deviceset="DIODE" device="SOD-323" value="1N4148"/>
@@ -4925,6 +4966,7 @@ type 0309, grid 2.5 mm</description>
 <part name="R1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" value="10K"/>
 <part name="U$2" library="microbuilder" deviceset="3.3V" device=""/>
 <part name="U$6" library="microbuilder" deviceset="GND" device=""/>
+<part name="SUPPLY1" library="SparkFun-PowerSymbols" library_urn="urn:adsk.eagle:library:530" deviceset="VIN" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -5027,9 +5069,6 @@ type 0309, grid 2.5 mm</description>
 <instance part="U$16" gate="G$1" x="256.54" y="180.34" smashed="yes">
 <attribute name="VALUE" x="255.016" y="181.356" size="1.27" layer="96"/>
 </instance>
-<instance part="+3V3" gate="G$1" x="193.04" y="180.34" smashed="yes">
-<attribute name="VALUE" x="191.516" y="181.356" size="1.27" layer="96"/>
-</instance>
 <instance part="U1" gate="G$1" x="149.86" y="137.16" smashed="yes">
 <attribute name="NAME" x="132.08" y="176.53" size="1.27" layer="95"/>
 <attribute name="VALUE" x="132.08" y="93.98" size="1.27" layer="95"/>
@@ -5070,6 +5109,9 @@ type 0309, grid 2.5 mm</description>
 </instance>
 <instance part="U$6" gate="G$1" x="294.64" y="154.94" smashed="yes">
 <attribute name="VALUE" x="293.116" y="152.4" size="1.27" layer="96"/>
+</instance>
+<instance part="SUPPLY1" gate="G$1" x="193.04" y="177.8" smashed="yes">
+<attribute name="VALUE" x="193.04" y="180.594" size="1.778" layer="96" align="bottom-center"/>
 </instance>
 </instances>
 <busses>
@@ -5292,23 +5334,6 @@ type 0309, grid 2.5 mm</description>
 <label x="238.76" y="83.82" size="1.778" layer="95"/>
 </segment>
 <segment>
-<wire x1="193.04" y1="167.64" x2="193.04" y2="160.02" width="0.1524" layer="91"/>
-<wire x1="210.82" y1="167.64" x2="208.28" y2="167.64" width="0.1524" layer="91"/>
-<wire x1="208.28" y1="167.64" x2="193.04" y2="167.64" width="0.1524" layer="91"/>
-<wire x1="210.82" y1="152.4" x2="208.28" y2="152.4" width="0.1524" layer="91"/>
-<wire x1="208.28" y1="152.4" x2="208.28" y2="167.64" width="0.1524" layer="91"/>
-<wire x1="208.28" y1="167.64" x2="208.28" y2="177.8" width="0.1524" layer="91"/>
-<wire x1="208.28" y1="177.8" x2="215.9" y2="177.8" width="0.1524" layer="91"/>
-<wire x1="193.04" y1="167.64" x2="193.04" y2="177.8" width="0.1524" layer="91"/>
-<junction x="208.28" y="167.64"/>
-<junction x="193.04" y="167.64"/>
-<pinref part="C7" gate="G$1" pin="P$1"/>
-<pinref part="U3" gate="G$1" pin="VIN"/>
-<pinref part="U3" gate="G$1" pin="SHDN"/>
-<pinref part="L1" gate="G$1" pin="1"/>
-<pinref part="+3V3" gate="G$1" pin="3.3V"/>
-</segment>
-<segment>
 <wire x1="129.54" y1="165.1" x2="119.38" y2="165.1" width="0.1524" layer="91"/>
 <wire x1="119.38" y1="165.1" x2="116.84" y2="165.1" width="0.1524" layer="91"/>
 <wire x1="119.38" y1="177.8" x2="119.38" y2="165.1" width="0.1524" layer="91"/>
@@ -5427,7 +5452,24 @@ type 0309, grid 2.5 mm</description>
 <pinref part="U1" gate="G$1" pin="D1/SDIN"/>
 </segment>
 </net>
-<net name="5V" class="0">
+<net name="VIN" class="1">
+<segment>
+<wire x1="193.04" y1="167.64" x2="193.04" y2="160.02" width="0.1524" layer="91"/>
+<wire x1="210.82" y1="167.64" x2="208.28" y2="167.64" width="0.1524" layer="91"/>
+<wire x1="208.28" y1="167.64" x2="193.04" y2="167.64" width="0.1524" layer="91"/>
+<wire x1="210.82" y1="152.4" x2="208.28" y2="152.4" width="0.1524" layer="91"/>
+<wire x1="208.28" y1="152.4" x2="208.28" y2="167.64" width="0.1524" layer="91"/>
+<wire x1="208.28" y1="167.64" x2="208.28" y2="177.8" width="0.1524" layer="91"/>
+<wire x1="208.28" y1="177.8" x2="215.9" y2="177.8" width="0.1524" layer="91"/>
+<wire x1="193.04" y1="167.64" x2="193.04" y2="177.8" width="0.1524" layer="91"/>
+<junction x="208.28" y="167.64"/>
+<junction x="193.04" y="167.64"/>
+<pinref part="C7" gate="G$1" pin="P$1"/>
+<pinref part="U3" gate="G$1" pin="VIN"/>
+<pinref part="U3" gate="G$1" pin="SHDN"/>
+<pinref part="L1" gate="G$1" pin="1"/>
+<pinref part="SUPPLY1" gate="G$1" pin="VIN"/>
+</segment>
 <segment>
 <pinref part="JP2" gate="G$1" pin="8"/>
 <wire x1="213.36" y1="83.82" x2="203.2" y2="83.82" width="0.1524" layer="91"/>
