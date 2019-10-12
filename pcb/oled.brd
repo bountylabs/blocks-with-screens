@@ -169,7 +169,7 @@
 <text x="23.368" y="23.241" size="0.8128" layer="25" font="vector" grouprefs="EVERYTHING">RST</text>
 <text x="1.016" y="23.368" size="0.8128" layer="25" font="vector" grouprefs="EVERYTHING">TX</text>
 <text x="23.368" y="2.032" size="0.8128" layer="25" font="vector" grouprefs="EVERYTHING">3.3V</text>
-<text x="1.016" y="2.159" size="0.8128" layer="25" font="vector" grouprefs="EVERYTHING">5V</text>
+<text x="0.762" y="2.032" size="0.8128" layer="25" font="vector" grouprefs="EVERYTHING">VIN</text>
 <text x="23.368" y="21.59" size="0.8128" layer="26" rot="MR0" grouprefs="EVERYTHING">RST</text>
 <text x="23.368" y="19.05" size="0.8128" layer="26" rot="MR0" grouprefs="EVERYTHING">A0</text>
 <text x="23.368" y="16.51" size="0.8128" layer="26" rot="MR0" grouprefs="EVERYTHING">D0(CS)</text>
