@@ -54,7 +54,7 @@ void setup(void)
   // 15MHz SPI
   tft.begin(15000000);
 
-  setupOTAUpdates("curvy-snake", WIFI_SSID, WIFI_PASSWORD);
+  OTAUpdates_setup("curvy-snake", WIFI_SSID, WIFI_PASSWORD);
 
   // initialize canvas
   canvas = new GFXcanvas16(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -68,7 +68,7 @@ void setup(void)
 
 void loop()
 {
-  handleOTAUpdates();
+  OTAUpdates_handle();
 
   uint16_t now = millis();
   uint16_t time = now - lastLoop;

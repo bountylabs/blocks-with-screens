@@ -1,5 +1,3 @@
-#include <string>
-#include <stdio.h>
 #include <Adafruit_SSD1351.h>
 #include <ArduinoOTA.h>
 
@@ -24,11 +22,11 @@ void outputln(const char* message, int color = WHITE, int size = 1) {
   tft.println(message);
 }
 
-void handleOTAUpdates() {
+void OTAUpdates_handle() {
   ArduinoOTA.handle();
 }
 
-void setupOTAUpdates(const char *hostname, const char *ssid, const char *password) {
+void OTAUpdates_setup(const char *hostname, const char *ssid, const char *password) {
   Serial.printf("setupOTAUpdates\n");
 
   tft.fillScreen(BLACK);
