@@ -23,6 +23,8 @@
 #include <SPI.h>
 #include <stdlib.h>
 #include "90fps.h"
+#include <OTAUpdates.h>
+#include "secrets.h"
 
 // Software bit-banged SPI mode works just fine but is slow
 // Adafruit_SSD1351 tft = Adafruit_SSD1351(SCREEN_WIDTH, SCREEN_HEIGHT, CS_PIN, DC_PIN, MOSI_PIN, SCLK_PIN, RST_PIN);
@@ -52,6 +54,8 @@ void setup(void)
   // 15MHz SPI
   tft.begin(15000000);
 
+  setupOTAUpdates("curvy-snake", WIFI_SSID, WIFI_PASSWORD);
+
   // initialize canvas
   canvas = new GFXcanvas16(SCREEN_WIDTH, SCREEN_HEIGHT);
 
@@ -64,6 +68,7 @@ void setup(void)
 
 void loop()
 {
+  handleOTAUpdates();
 
   uint16_t now = millis();
   uint16_t time = now - lastLoop;

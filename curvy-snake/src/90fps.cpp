@@ -1,4 +1,5 @@
 #include "90fps.h"
+#include <Colors.h>
 #include <Adafruit_SSD1351.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -6,18 +7,6 @@
 #include <time.h>
 #include <algorithm>
 
-// Color definitions
-#define BLACK 0x0000
-#define BLUE 0x001F
-#define RED 0xF800
-#define GREEN 0x07E0
-#define CYAN 0x07FF
-#define MAGENTA 0xF81F
-#define YELLOW 0xFFE0
-#define WHITE 0xFFFF
-
-const int COLORS_LEN = 7;
-const int COLORS[COLORS_LEN] = {BLUE, RED, GREEN, CYAN, MAGENTA, YELLOW, WHITE};
 const int DIRECTIONS_LEN = 3;
 const int DIRECTIONS[DIRECTIONS_LEN] = {-1, 0, 1};
 const int X = 0;
@@ -146,7 +135,7 @@ void run90FPS(GFXcanvas16 *canvas)
   pos.x = pos.x + vel.x;
   pos.y = pos.y + vel.y;
 
-  Serial.printf("(%f, %f) + (%f, %f) @ %ddeg\n", pos.x, pos.y, vel.x, vel.y, rotation);
+  // Serial.printf("(%f, %f) + (%f, %f) @ %ddeg\n", pos.x, pos.y, vel.x, vel.y, rotation);
 
   // cool idea: we could have it bounce when it hits an edge?
   // ensure we stay within bounds
