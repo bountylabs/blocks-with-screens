@@ -1,11 +1,23 @@
-#include "90fps.h"
-#include <Colors.h>
 #include <Adafruit_SSD1351.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
 #include <algorithm>
+
+#include <Colors.h>
+#include "config.h"
+#include "CurvySnake.h"
+
+
+extern Adafruit_SSD1351 tft;
+
+// in-memory 16-bit canvas
+GFXcanvas16 *canvas;
+uint16_t lastLoop;
+
+int screenWidth = -1;
+int screenHeight = -1;
 
 const int DIRECTIONS_LEN = 3;
 const int DIRECTIONS[DIRECTIONS_LEN] = {-1, 0, 1};
@@ -39,10 +51,6 @@ typedef struct _ColorPoint
   Point point;
   int color;
 } ColorPoint;
-
-// screen dimensions
-int height = -1;
-int width = -1;
 
 // state
 // point position location
@@ -82,30 +90,16 @@ void randomColor()
   color = COLORS[colorIndex];
 }
 
-void run90FPS(GFXcanvas16 *canvas)
+void flush()
 {
+  tft.drawRGBBitmap(0, 0, (uint16_t *)canvas->getBuffer(), screenWidth, screenHeight);
+  //tft.startWrite();
+  // SPI.writeBytes((uint8_t *)canvas->getBuffer(), 128 * 128 * 2);
+  //tft.endWrite();
+}
 
-  // init
-  if (height == -1)
-  {
-    // initialize srand
-    randomSeed(ESP.getCycleCount());
-
-    height = canvas->height();
-    width = canvas->width();
-    // start at random x, y
-    pos.x = floor(width * random());
-    pos.y = floor(height * random());
-
-    // init trail
-    for (int t = 0; t < TRAIL_LEN; t++)
-    {
-      trail[t] = {.point = {.x = pos.x, .y = pos.y}, .color = WHITE};
-    }
-
-    rotation = (int)floor(DEGREES_MAX * random());
-  }
-
+void tick()
+{
   // // 1% chance to reset
   // if (0.0001 > random())
   // {
@@ -139,7 +133,7 @@ void run90FPS(GFXcanvas16 *canvas)
 
   // cool idea: we could have it bounce when it hits an edge?
   // ensure we stay within bounds
-  if (pos.x >= width - 1)
+  if (pos.x >= screenWidth - 1)
   {
     // reduce and flip velocities; flip rotation
     vel.x = vel.x * -1 / 2;
@@ -147,7 +141,7 @@ void run90FPS(GFXcanvas16 *canvas)
     rotation = DEGREES_MAX - (rotation % DEGREES_MAX);
 
     // bump backward based on velocity
-    pos.x = (vel.x * 10) + (width - 1);
+    pos.x = (vel.x * 10) + (screenWidth - 1);
     pos.y = (vel.y * 10) + pos.y;
   }
   else if (pos.x <= 0)
@@ -161,14 +155,14 @@ void run90FPS(GFXcanvas16 *canvas)
     pos.y = (vel.y * 10) + pos.y;
   }
 
-  if (pos.y >= height - 1)
+  if (pos.y >= screenHeight - 1)
   {
     vel.x = vel.x * -1 / 2;
     vel.y = vel.y * -1 / 2;
     rotation = DEGREES_MAX - (rotation % DEGREES_MAX);
 
     pos.x = (vel.x * 10) + pos.x;
-    pos.y = (vel.y * 10) + (height - 1);
+    pos.y = (vel.y * 10) + (screenHeight - 1);
   }
   else if (pos.y <= 0)
   {
@@ -196,4 +190,56 @@ void run90FPS(GFXcanvas16 *canvas)
   //Serial.printf("\n");
 
   // delay(500);
+}
+
+void CurvySnake_setup() {
+  // save dimensions
+  screenWidth = tft.width();
+  screenHeight = tft.height();
+  // initialize canvas to all black
+  canvas = new GFXcanvas16(screenWidth, screenHeight);
+  canvas->fillScreen(BLACK);
+  flush();
+
+  // initialize srand
+  randomSeed(ESP.getCycleCount());
+
+  // start at random x, y
+  pos.x = floor(screenWidth * random());
+  pos.y = floor(screenHeight * random());
+
+  // init trail
+  for (int t = 0; t < TRAIL_LEN; t++)
+  {
+    trail[t] = {.point = {.x = pos.x, .y = pos.y}, .color = WHITE};
+  }
+
+  rotation = (int)floor(DEGREES_MAX * random());
+
+  lastLoop = millis();
+}
+
+void CurvySnake_loop() {
+  uint16_t now = millis();
+  uint16_t time = now - lastLoop;
+
+  // every ~16ms (60fps)
+  if (time > 16)
+  {
+    // track loop millis to keep steady fps
+    lastLoop = now;
+
+    // run!
+    tick();
+
+    // flush our in-memory canvas to the screen
+    flush();
+  }
+  // Serial.printf("frame %dms\n", time);
+
+  // // run!
+  // run90FPS(canvas);
+
+  // // flush our in-memory canvas to the screen
+  // flush();
 }
