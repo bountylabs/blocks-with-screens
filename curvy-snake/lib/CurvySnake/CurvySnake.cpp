@@ -6,27 +6,22 @@
 #include <algorithm>
 
 #include <Colors.h>
-#include "config.h"
 #include "CurvySnake.h"
+#include <GameStructs.h>
 
 
 extern Adafruit_SSD1351 tft;
 
 // in-memory 16-bit canvas
 GFXcanvas16 *canvas;
-uint16_t lastLoop;
-
 int screenWidth = -1;
 int screenHeight = -1;
 
-const int DIRECTIONS_LEN = 3;
-const int DIRECTIONS[DIRECTIONS_LEN] = {-1, 0, 1};
-const int X = 0;
-const int Y = 1;
-// Already defined in /Users/noah/.platformio/packages/framework-arduinoespressif8266/cores/esp8266/Arduino.h:66:20
-// const float PI = 3.14159265;
-// const float DEG_TO_RAD = PI/180;
-const int DEGREES_MAX = 360;
+// used by CurvySnake_loop for tick frequency
+const int FPS = floor(1000 / 60);// every ~16ms (60fps)
+// track last run time in ms for CurvySnake_loop
+uint16_t lastLoop = millis() - FPS + 1;
+
 
 double random()
 {
@@ -34,23 +29,6 @@ double random()
   return (double)rand() / (float)RAND_MAX;
 }
 
-typedef struct _Point
-{
-  double x;
-  double y;
-} Point;
-
-typedef struct _Vector
-{
-  double x;
-  double y;
-} Vector;
-
-typedef struct _ColorPoint
-{
-  Point point;
-  int color;
-} ColorPoint;
 
 // state
 // point position location
@@ -216,15 +194,14 @@ void CurvySnake_setup() {
 
   rotation = (int)floor(DEGREES_MAX * random());
 
-  lastLoop = millis();
+  Serial.printf("\nFPS=%d\n", FPS);
 }
 
 void CurvySnake_loop() {
   uint16_t now = millis();
   uint16_t time = now - lastLoop;
 
-  // every ~16ms (60fps)
-  if (time > 16)
+  if (time > FPS)
   {
     // track loop millis to keep steady fps
     lastLoop = now;

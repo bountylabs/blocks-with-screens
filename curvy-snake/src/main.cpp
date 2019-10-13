@@ -18,7 +18,6 @@
 #include <Adafruit_SSD1351.h>
 #include <SPI.h>
 
-#include "config.h"
 #include "secrets.h"
 #include <OTAUpdates.h>
 #include <CurvySnake.h>
