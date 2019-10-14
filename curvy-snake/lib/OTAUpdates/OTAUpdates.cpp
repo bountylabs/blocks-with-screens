@@ -6,7 +6,8 @@
 
 extern Adafruit_SSD1351 tft;
 
-void output(const char* message, int color = WHITE, int size = 1) {
+void output(const char* message, int color = WHITE, int size = 1)
+{
   Serial.print(message);
   tft.setTextWrap(true);
   tft.setTextSize(size);
@@ -14,7 +15,8 @@ void output(const char* message, int color = WHITE, int size = 1) {
   tft.print(message);
 }
 
-void outputln(const char* message, int color = WHITE, int size = 1) {
+void outputln(const char* message, int color = WHITE, int size = 1)
+{
   Serial.println(message);
   tft.setTextWrap(true);
   tft.setTextSize(size);
@@ -22,11 +24,13 @@ void outputln(const char* message, int color = WHITE, int size = 1) {
   tft.println(message);
 }
 
-void OTAUpdates_handle() {
+void OTAUpdates_handle()
+{
   ArduinoOTA.handle();
 }
 
-void OTAUpdates_setup(const char *hostname, const char *ssid, const char *password) {
+void OTAUpdates_setup(const char* hostname, const char* ssid, const char* password)
+{
   Serial.printf("setupOTAUpdates\n");
 
   tft.fillScreen(BLACK);
@@ -43,6 +47,9 @@ void OTAUpdates_setup(const char *hostname, const char *ssid, const char *passwo
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     output(".");
+
+    // IDEA / TODO: Define multiple ssid/password combos to attempt?
+    // Allow block to work in many places
 
     // There seems to be a bug where sometimes wifi will hang forever trying to connect
     // Try to work around by resetting some things
@@ -66,22 +73,23 @@ void OTAUpdates_setup(const char *hostname, const char *ssid, const char *passwo
   ArduinoOTA.setHostname(hostname);
   // No authentication by default
   // ArduinoOTA.setPassword((const char *)"123");
-  ArduinoOTA.onStart([]() {
-    Serial.println("OTA Start");
-  });
-  ArduinoOTA.onEnd([]() {
-    Serial.println("OTA End");
-  });
+  ArduinoOTA.onStart([]() { Serial.println("OTA Start"); });
+  ArduinoOTA.onEnd([]() { Serial.println("OTA End"); });
   ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {
     Serial.printf("OTA Progress: %u%%\r\n", (progress / (total / 100)));
   });
   ArduinoOTA.onError([](ota_error_t error) {
     Serial.printf("OTA Error[%u]: ", error);
-    if (error == OTA_AUTH_ERROR) Serial.println("OTA Auth Failed");
-    else if (error == OTA_BEGIN_ERROR) Serial.println("OTA Begin Failed");
-    else if (error == OTA_CONNECT_ERROR) Serial.println("OTA Connect Failed");
-    else if (error == OTA_RECEIVE_ERROR) Serial.println("OTA Receive Failed");
-    else if (error == OTA_END_ERROR) Serial.println("OTA End Failed");
+    if (error == OTA_AUTH_ERROR)
+      Serial.println("OTA Auth Failed");
+    else if (error == OTA_BEGIN_ERROR)
+      Serial.println("OTA Begin Failed");
+    else if (error == OTA_CONNECT_ERROR)
+      Serial.println("OTA Connect Failed");
+    else if (error == OTA_RECEIVE_ERROR)
+      Serial.println("OTA Receive Failed");
+    else if (error == OTA_END_ERROR)
+      Serial.println("OTA End Failed");
   });
   ArduinoOTA.begin();
 }
