@@ -1,3 +1,5 @@
+#include <Adafruit_SSD1351.h>
+
 typedef struct _Point
 {
   double x;
@@ -24,3 +26,21 @@ const int Y = 1;
 // const float PI = 3.14159265;
 // const float DEG_TO_RAD = PI/180;
 const int DEGREES_MAX = 360;
+
+class Entity
+{
+    private:
+        Point _pos;
+        Point _vel;
+        int _color;    // rgb565
+        int _rotation; // degrees
+
+    // public member function
+    public:
+        double  rotation()
+        {   // member function can access private
+            // data member radius
+            return _rotation * DEG_TO_RAD;
+        }
+
+};
