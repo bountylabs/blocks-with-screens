@@ -42,7 +42,7 @@ void OTAUpdates_setup(const char *hostname, const char *ssid, const char *passwo
   unsigned long time = millis();
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
-    Serial.print(".");
+    output(".");
 
     // There seems to be a bug where sometimes wifi will hang forever trying to connect
     // Try to work around by resetting some things
