@@ -23,6 +23,8 @@ const int FPS = floor(1000 / 60); // every ~16ms (60fps)
 // track last run time in ms for CurvySnake_loop
 uint16_t lastLoop = millis() - FPS + 1;
 
+const int TOTAL_ENTITIES = 5;
+
 // state
 std::vector<Entity> entities;
 
@@ -60,11 +62,14 @@ void CurvySnake_setup()
   canvas->fillScreen(BLACK);
   flush();
 
-  // create a single entity
-  entities.push_back(Entity(screenWidth, screenHeight));
+  // create entities
+  for (int i = 0; i != TOTAL_ENTITIES; i++) {
+    entities.push_back(Entity(screenWidth, screenHeight));
+  }
 
   Serial.printf("\nFPS=%d", FPS);
   Serial.printf("\nEntities[%d]", entities.size());
+  Serial.printf("\nEntity sizeof=%d", sizeof(entities[0]));
   Serial.printf("\n");
 
   // Serial.printf("\n%d -- %d\n", RGB565(255, 0, 0), RED);
