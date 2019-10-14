@@ -35,10 +35,6 @@ double random()
 Point pos = {.x = 0, .y = 0};
 // velocity in x and y direction
 Vector vel = {.x = 0, .y = 0};
-// x and y can be [-1,+1], representing the change in x,y over tick
-// e.g. x=1,y=-1 is moving in the downward right diagonal direction
-// covers all 8 directional moves in a 2d cartesian space
-Point dir = {.x = +0, .y = +1};
 // color of the pixel
 int color = WHITE;
 // rotation in degrees
