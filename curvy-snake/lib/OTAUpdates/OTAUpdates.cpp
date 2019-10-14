@@ -24,6 +24,11 @@ void outputln(const char* message, int color = WHITE, int size = 1)
   tft.println(message);
 }
 
+void displayReset() {
+  tft.fillScreen(BLACK);
+  tft.setCursor(0, 0);
+}
+
 void OTAUpdates_handle()
 {
   ArduinoOTA.handle();
@@ -33,8 +38,7 @@ void OTAUpdates_setup(const char* hostname, const char* ssid, const char* passwo
 {
   Serial.printf("setupOTAUpdates\n");
 
-  tft.fillScreen(BLACK);
-  tft.setCursor(0, 0);
+  displayReset();
 
   outputln(ssid);
   output("Connecting...");
@@ -73,12 +77,23 @@ void OTAUpdates_setup(const char* hostname, const char* ssid, const char* passwo
   ArduinoOTA.setHostname(hostname);
   // No authentication by default
   // ArduinoOTA.setPassword((const char *)"123");
-  ArduinoOTA.onStart([]() { Serial.println("OTA Start"); });
-  ArduinoOTA.onEnd([]() { Serial.println("OTA End"); });
+  ArduinoOTA.onStart([]() {
+    displayReset();
+    outputln("OTA Update", GREEN);
+  });
+  ArduinoOTA.onEnd([]() {
+    outputln("OTA Done!", GREEN);
+    outputln("Restarting...");
+  });
   ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {
     Serial.printf("OTA Progress: %u%%\r\n", (progress / (total / 100)));
+    tft.setTextColor(WHITE, BLACK);
+    tft.setCursor(0, 10);
+    tft.printf("%u%%\n", (progress / (total / 100)));
   });
   ArduinoOTA.onError([](ota_error_t error) {
+    tft.setTextColor(RED);
+    tft.printf("Error: %d\n", error);
     Serial.printf("OTA Error[%u]: ", error);
     if (error == OTA_AUTH_ERROR)
       Serial.println("OTA Auth Failed");
