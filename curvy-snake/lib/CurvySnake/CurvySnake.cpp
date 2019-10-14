@@ -191,6 +191,12 @@ void CurvySnake_setup() {
   rotation = (int)floor(DEGREES_MAX * random());
 
   Serial.printf("\nFPS=%d\n", FPS);
+  Serial.println("State");
+  Serial.printf("(%f, %f) + (%f, %f) @ %ddeg\n", pos.x, pos.y, vel.x, vel.y, rotation);
+
+  Serial.printf("\n%d -- %d\n", RGB565(255, 0, 0), RED);
+  Serial.printf("\n%d -- %d\n", RGB565(0, 255, 0), GREEN);
+  Serial.printf("\n%d -- %d\n", RGB565(0, 0, 255), BLUE);
 }
 
 void CurvySnake_loop() {
@@ -208,11 +214,4 @@ void CurvySnake_loop() {
     // flush our in-memory canvas to the screen
     flush();
   }
-  // Serial.printf("frame %dms\n", time);
-
-  // // run!
-  // run90FPS(canvas);
-
-  // // flush our in-memory canvas to the screen
-  // flush();
 }
