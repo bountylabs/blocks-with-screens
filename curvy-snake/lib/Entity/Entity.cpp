@@ -79,7 +79,7 @@ void Entity::handleScreenCollision()
   if (_pos.x >= _screen.x - 1) {
     // reduce and flip velocities; flip rotation
     _vel.x = _vel.x * -1 / 2;
-    _vel.y = _vel.y * -1 / 2;
+    _vel.y = _vel.y * +1 / 2;
     _rot = DEGREES_MAX - (_rot % DEGREES_MAX);
 
     // bump backward based on velocity
@@ -88,7 +88,7 @@ void Entity::handleScreenCollision()
   }
   else if (_pos.x <= 0) {
     _vel.x = _vel.x * -1 / 2;
-    _vel.y = _vel.y * -1 / 2;
+    _vel.y = _vel.y * +1 / 2;
     _rot = DEGREES_MAX - (_rot % DEGREES_MAX);
 
     // bump backward based on velocity
@@ -97,7 +97,7 @@ void Entity::handleScreenCollision()
   }
 
   if (_pos.y >= _screen.y - 1) {
-    _vel.x = _vel.x * -1 / 2;
+    _vel.x = _vel.x * +1 / 2;
     _vel.y = _vel.y * -1 / 2;
     _rot = DEGREES_MAX - (_rot % DEGREES_MAX);
 
@@ -105,7 +105,7 @@ void Entity::handleScreenCollision()
     _pos.y = (_vel.y * 10) + (_screen.y - 1);
   }
   else if (_pos.y <= 0) {
-    _vel.x = _vel.x * -1 / 2;
+    _vel.x = _vel.x * +1 / 2;
     _vel.y = _vel.y * -1 / 2;
     _rot = DEGREES_MAX - (_rot % DEGREES_MAX);
 
