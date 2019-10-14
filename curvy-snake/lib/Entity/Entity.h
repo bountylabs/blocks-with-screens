@@ -35,7 +35,7 @@ protected:
   // store the last _trailLen points along with their color
   std::vector<ColorPoint> _trail;
 
-  void addTrailPoint();
+  void recordTrailPoint();
   void move();
   void handleScreenCollision();
 

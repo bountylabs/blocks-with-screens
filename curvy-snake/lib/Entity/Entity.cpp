@@ -34,7 +34,7 @@ void Entity::debug()
                 _vel.x, _pos.y, _vel.y, _rot, _rotD, _color);
 }
 
-void Entity::addTrailPoint()
+void Entity::recordTrailPoint()
 {
   // shift every item down by one index
   for (int t = _trailLen - 1; t >= 1; t--) {
@@ -47,7 +47,13 @@ void Entity::addTrailPoint()
 
 void Entity::tick()
 {
-  addTrailPoint();
+  recordTrailPoint();
+
+  // 1% chance to reverse rotD and color
+  if (random() < 0.01) {
+    _rotD = _rotD * -1;
+    _color = randomColor();
+  }
 
   // move with velocity and rotation
   move();
