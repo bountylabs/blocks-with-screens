@@ -6,6 +6,7 @@
 #include <algorithm>
 
 #include <Colors.h>
+#include <Random.h>
 #include "CurvySnake.h"
 #include <GameStructs.h>
 
@@ -22,12 +23,6 @@ const int FPS = floor(1000 / 60);// every ~16ms (60fps)
 // track last run time in ms for CurvySnake_loop
 uint16_t lastLoop = millis() - FPS + 1;
 
-
-double random()
-{
-  // Use current time as seed for random generator
-  return (double)rand() / (float)RAND_MAX;
-}
 
 
 // state
@@ -57,12 +52,6 @@ void pushFront(ColorPoint *trail, ColorPoint newFront)
   trail[0] = newFront;
 }
 
-void randomColor()
-{
-  // random color
-  int colorIndex = floor(COLORS_LEN * random());
-  color = COLORS[colorIndex];
-}
 
 void flush()
 {
@@ -89,7 +78,7 @@ void tick()
   if (random() < 0.01)
   {
     rotationDirection = rotationDirection * -1;
-    randomColor();
+    color = randomColor();
   }
 
   // clear previous pixels
