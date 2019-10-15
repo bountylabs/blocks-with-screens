@@ -19,12 +19,17 @@
 // Note, the ESP8266 can supposedly can go up to 30MHz but seems to cause instability
 #define SPI_SPEED 15000000
 
+#define SERIALLOG 1
+#include <DLog.h>
+
 #include <Adafruit_SSD1351.h>
 #include <SPI.h>
 
 #include "secrets.h"
 #include <CurvySnake.h>
 #include <OTAUpdates.h>
+#include <Text.h>
+#include <WiFi.h>
 
 // Software bit-banged SPI mode works just fine but is slow
 // Adafruit_SSD1351 tft = Adafruit_SSD1351(SCREEN_WIDTH, SCREEN_HEIGHT, CS_PIN, DC_PIN, MOSI_PIN, SCLK_PIN, RST_PIN);
@@ -43,7 +48,9 @@ void setup(void)
   // initialize srand
   randomSeed(ESP.getCycleCount());
 
-  OTAUpdates_setup("curvy-snake", WIFI_SSID, WIFI_PASSWORD);
+  displayReset();
+  ConnectWifi(WIFI_SSID, WIFI_PASSWORD);
+  OTAUpdates_setup("curvy-snake");
   CurvySnake_setup();
 }
 

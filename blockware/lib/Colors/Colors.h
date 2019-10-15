@@ -1,3 +1,6 @@
+#ifndef COLORS_H
+#define COLORS_H
+
 #include <Random.h>
 
 // Color definitions
@@ -9,10 +12,18 @@
 #define MAGENTA 0xF81F
 #define YELLOW 0xFFE0
 #define WHITE 0xFFFF
-
-const int COLORS_LEN = 7;
-const int COLORS[COLORS_LEN] = {BLUE, RED, GREEN, CYAN, MAGENTA, YELLOW, WHITE};
+#define DARK_GRAY 0x4108
+#define GRAY 0x618C
+#define LIGHT_GRAY 0xA294
 
 #define RGB565(r, g, b) ((((r>>3)<<11) | ((g>>2)<<5) | (b>>3)))
 
-int randomColor();
+static inline int randomColor()
+{
+  // random color
+  const int COLORS[] = {BLUE, RED, GREEN, CYAN, MAGENTA, YELLOW, WHITE};
+  int colorIndex = floor((sizeof(COLORS)/sizeof(int)) * random());
+  return COLORS[colorIndex];
+}
+
+#endif

@@ -5,27 +5,13 @@
 #include <math.h>
 #include <time.h>
 #include <list>
-
-// Color definitions
-#define BLACK 0x0000
-#define BLUE 0x001F
-#define RED 0xF800
-#define GREEN 0x07E0
-#define CYAN 0x07FF
-#define MAGENTA 0xF81F
-#define YELLOW 0xFFE0
-#define WHITE 0xFFFF
+#include <Colors.h>
+#include <Random.h>
 
 const int COLORS_LEN = 7;
 const int COLORS[COLORS_LEN] = {BLUE, RED, GREEN, CYAN, MAGENTA, YELLOW, WHITE};
 const int DIRECTIONS_LEN = 3;
 const int DIRECTIONS[DIRECTIONS_LEN] = {-1, 0, 1};
-
-float random()
-{
-  // Use current time as seed for random generator
-  return (float)rand() / (float)RAND_MAX;
-}
 
 typedef struct _Point
 {
@@ -70,13 +56,6 @@ void pushFront(ColorPoint *trail, ColorPoint newFront)
 
   // put new point at front
   trail[0] = newFront;
-}
-
-void randomColor()
-{
-  // random color
-  int colorIndex = floor(COLORS_LEN * random());
-  color = COLORS[colorIndex];
 }
 
 void run90FPS(GFXcanvas16 *canvas)

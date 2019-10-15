@@ -2,6 +2,8 @@
   Example sketch for the Block with Screen
  ****************************************************/
 
+#define TELNETLOG 1
+#include <DLog.h>
 #include <Adafruit_SSD1351.h>
 #include <SPI.h>
 #include <HARestAPI.h>
@@ -9,7 +11,9 @@
 #include <ArduinoJson.h>
 #include <OTAUpdates.h>
 #include "config.h"
-#include "colors.h"
+#include <Colors.h>
+#include <Text.h>
+#include <WiFi.h>
 
 // Software bit-banged SPI mode works just fine but is slow
 // Adafruit_SSD1351 tft = Adafruit_SSD1351(SCREEN_WIDTH, SCREEN_HEIGHT, CS_PIN, DC_PIN, MOSI_PIN, SCLK_PIN, RST_PIN);
@@ -28,7 +32,7 @@ bool NeedsScreenRefresh;
 
 void setup(void) {
   Serial.begin(115200);
-  Serial.print("setup");
+  DLOG("setup");
 
   // 15MHz SPI
   tft.begin(SPI_SPEED);
@@ -40,7 +44,9 @@ void setup(void) {
   HAClient.setHAServer(haIp, haPort);
   HAClient.setHAPassword(haPassword);
 
-  OTAUpdates_setup(PSTR("ha-display"), PSTR(WIFI_SSID), PSTR(WIFI_SSID));
+  displayReset();
+  ConnectWifi(WIFI_SSID, WIFI_PASSWORD);
+  OTAUpdates_setup("ha-display");
 
   NeedsScreenRefresh = true;
 }
@@ -56,8 +62,7 @@ StaticJsonDocument<1024> doc;
 float getHAEntityStateFloat(const char *entityId) {
   DeserializationError err = getHAEntity(entityId, doc);
   if (err) {
-    Serial.print(F("deserializeJson() failed with code "));
-    Serial.println(err.c_str());
+    DLOG(PSTR("deserializeJson() failed with code %s"), err.c_str());
     return 0.0;
   }
   return doc["state"];
