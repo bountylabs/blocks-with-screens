@@ -10,10 +10,4 @@ static inline double random()
   return (double)rand() / (float)RAND_MAX;
 }
 
-static inline void randomSeed()
-{
-  // initialize srand
-  randomSeed(ESP.getCycleCount());
-}
-
 #endif
