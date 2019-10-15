@@ -10,9 +10,12 @@
 #define YELLOW 0xFFE0
 #define WHITE 0xFFFF
 
-const int COLORS_LEN = 7;
-const int COLORS[COLORS_LEN] = {BLUE, RED, GREEN, CYAN, MAGENTA, YELLOW, WHITE};
-
 #define RGB565(r, g, b) ((((r>>3)<<11) | ((g>>2)<<5) | (b>>3)))
 
-int randomColor();
+static inline int randomColor()
+{
+  // random color
+  const int COLORS[] = {BLUE, RED, GREEN, CYAN, MAGENTA, YELLOW, WHITE};
+  int colorIndex = floor((sizeof(COLORS)/sizeof(int)) * random());
+  return COLORS[colorIndex];
+}
