@@ -1,3 +1,6 @@
+#ifndef COLORS_H
+#define COLORS_H
+
 #include <Random.h>
 
 // Color definitions
@@ -22,3 +25,5 @@ static inline int randomColor()
   int colorIndex = floor((sizeof(COLORS)/sizeof(int)) * random());
   return COLORS[colorIndex];
 }
+
+#endif

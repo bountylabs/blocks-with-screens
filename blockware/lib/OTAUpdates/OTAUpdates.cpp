@@ -5,50 +5,25 @@
 #include <Colors.h>
 #include <DLog.h>
 #include <WiFi.h>
+#include <Text.h>
 
 extern Adafruit_SSD1351 tft;
-
-void output(const char* message, int color = WHITE, int size = 1)
-{
-  DLOG(message);
-  tft.setTextWrap(true);
-  tft.setTextSize(size);
-  tft.setTextColor(color);
-  tft.print(message);
-}
-
-void outputln(const char* message, int color = WHITE, int size = 1)
-{
-  DLOG(message);
-  DLOG("\n");
-  tft.setTextWrap(true);
-  tft.setTextSize(size);
-  tft.setTextColor(color);
-  tft.println(message);
-}
-
-void displayReset() {
-  tft.fillScreen(BLACK);
-  tft.setCursor(0, 0);
-}
 
 void OTAUpdates_handle()
 {
   ArduinoOTA.handle();
 }
 
-void OTAUpdates_setup(const char* hostname, const char* ssid, const char* password)
+void OTAUpdates_setup(const char* hostname, const char* password)
 {
   DLOG(PSTR("setupOTAUpdates\n"));
-
-  displayReset();
-
-  ConnectWifi(ssid, password);
 
   // Configure OTA programming
   ArduinoOTA.setHostname(hostname);
   // No authentication by default
-  // ArduinoOTA.setPassword((const char *)"123");
+  if (password != NULL) {
+    ArduinoOTA.setPassword(password);
+  }
   ArduinoOTA.onStart([]() {
     displayReset();
     outputln(PSTR("OTA Update"), GREEN);
@@ -64,8 +39,7 @@ void OTAUpdates_setup(const char* hostname, const char* ssid, const char* passwo
     tft.printf(PSTR("%u%%\n"), (progress / (total / 100)));
   });
   ArduinoOTA.onError([](ota_error_t error) {
-    tft.setTextColor(RED);
-    tft.printf(PSTR("Error: %d\n"), error);
+    outputf(RED, 1, PSTR("Error: %d\n"), error);
     DLOG(PSTR("OTA Error[%u]: "), error);
     if (error == OTA_AUTH_ERROR)
       DLOG(PSTR("OTA Auth Failed\n"));

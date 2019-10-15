@@ -5,14 +5,9 @@
 
 void ConnectWifi(const char* ssid, const char* password)
 {
-  DLOG(PSTR("ConnectWifi\n"));
-  displayReset();
+  DLOG(PSTR("ConnectWifi(%s, ****)\n"), ssid);
 
-  outputln(ssid);
-  output(PSTR("Connecting to wifi..."));
-
-  // Connect wifi to support OTA programming
-  WiFiClient wifiClient;
+  outputf(WHITE, 1, PSTR("Connecting to %s..."), ssid);
 
   WiFi.begin(ssid, password);
   unsigned long time = millis();
@@ -27,7 +22,7 @@ void ConnectWifi(const char* ssid, const char* password)
     // Try to work around by resetting some things
     // See https://github.com/esp8266/Arduino/issues/5527
     if ((millis() - time) > 60000) {
-      output(PSTR("Restarting Wifi"), RED);
+      outputln(PSTR("Restarting Wifi"), RED);
 
       WiFi.disconnect(true);
       WiFi.begin(ssid, password);

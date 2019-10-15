@@ -4,6 +4,13 @@
 
 extern Adafruit_SSD1351 tft;
 
+void outputf(int color, int size, const char *message, ...) {
+    va_list args;
+    va_start(args, message);
+    tft.printf(message, args);
+    va_end(args);
+}
+
 void output(const char* message, int color = WHITE, int size = 1)
 {
   DLOG(message);
