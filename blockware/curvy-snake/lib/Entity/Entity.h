@@ -22,14 +22,7 @@ class Entity {
 private:
 protected:
   Vec2d<int> _screen; // screen dimensions
-  Vec2d<float> _pos;  // position point
-  float _thrust;      // forward thrust
-  Vec2d<float> _vel;  // velocity position change rate
-  int _rot;           // rotation in degrees
-  int _rotD;          // rotation change rate
-  int _color;         // rgb565
   int _trailLen;      // trail size
-  float _massInv;     // inverse of mass in kg
   // store the last _trailLen points along with their color
   std::vector<ColorPoint> _trail;
 
@@ -38,6 +31,14 @@ protected:
   void handleScreenCollision();
 
 public:
+  Vec2d<float> _pos; // position point
+  float _thrust;     // forward thrust
+  Vec2d<float> _vel; // velocity position change rate
+  int _rot;          // rotation in degrees
+  int _rotD;         // rotation change rate
+  int _color;        // rgb565
+  float _massInv;    // inverse of mass in kg
+
   Entity(int screenWidth, int screenHeight);
   void debug();
   void draw(GFXcanvas16* canvas);
