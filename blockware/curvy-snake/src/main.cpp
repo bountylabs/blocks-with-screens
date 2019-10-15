@@ -19,6 +19,9 @@
 // Note, the ESP8266 can supposedly can go up to 30MHz but seems to cause instability
 #define SPI_SPEED 15000000
 
+#define SERIALLOG 1
+#include <DLog.h>
+
 #include <Adafruit_SSD1351.h>
 #include <SPI.h>
 

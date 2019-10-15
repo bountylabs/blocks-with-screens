@@ -3,12 +3,13 @@
 
 #include "OTAUpdates.h"
 #include <Colors.h>
+#include <DLog.h>
 
 extern Adafruit_SSD1351 tft;
 
 void output(const char* message, int color = WHITE, int size = 1)
 {
-  Serial.print(message);
+  DLOG(message);
   tft.setTextWrap(true);
   tft.setTextSize(size);
   tft.setTextColor(color);
@@ -17,7 +18,8 @@ void output(const char* message, int color = WHITE, int size = 1)
 
 void outputln(const char* message, int color = WHITE, int size = 1)
 {
-  Serial.println(message);
+  DLOG(message);
+  DLOG("\n");
   tft.setTextWrap(true);
   tft.setTextSize(size);
   tft.setTextColor(color);
@@ -36,12 +38,12 @@ void OTAUpdates_handle()
 
 void OTAUpdates_setup(const char* hostname, const char* ssid, const char* password)
 {
-  Serial.printf("setupOTAUpdates\n");
+  DLOG(PSTR("setupOTAUpdates\n"));
 
   displayReset();
 
   outputln(ssid);
-  output("Connecting...");
+  output(PSTR("Connecting..."));
 
   // Connect wifi to support OTA programming
   WiFiClient wifiClient;
@@ -59,7 +61,7 @@ void OTAUpdates_setup(const char* hostname, const char* ssid, const char* passwo
     // Try to work around by resetting some things
     // See https://github.com/esp8266/Arduino/issues/5527
     if ((millis() - time) > 60000) {
-      output("Restarting Wifi", RED);
+      output(PSTR("Restarting Wifi"), RED);
 
       WiFi.disconnect(true);
       WiFi.begin(ssid, password);
@@ -68,43 +70,38 @@ void OTAUpdates_setup(const char* hostname, const char* ssid, const char* passwo
   }
   outputln("!");
 
-  outputln("Connected!", GREEN);
-  outputln(WiFi.localIP().toString().c_str());
-  outputln("\nProceeding in 5 seconds...");
-  delay(5000);
-
   // Configure OTA programming
   ArduinoOTA.setHostname(hostname);
   // No authentication by default
   // ArduinoOTA.setPassword((const char *)"123");
   ArduinoOTA.onStart([]() {
     displayReset();
-    outputln("OTA Update", GREEN);
+    outputln(PSTR("OTA Update"), GREEN);
   });
   ArduinoOTA.onEnd([]() {
-    outputln("OTA Done!", GREEN);
-    outputln("Restarting...");
+    outputln(PSTR("OTA Done!"), GREEN);
+    outputln(PSTR("Restarting..."));
   });
   ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {
-    Serial.printf("OTA Progress: %u%%\r\n", (progress / (total / 100)));
+    DLOG(PSTR("OTA Progress: %u%%\n"), (progress / (total / 100)));
     tft.setTextColor(WHITE, BLACK);
     tft.setCursor(0, 10);
-    tft.printf("%u%%\n", (progress / (total / 100)));
+    tft.printf(PSTR("%u%%\n"), (progress / (total / 100)));
   });
   ArduinoOTA.onError([](ota_error_t error) {
     tft.setTextColor(RED);
-    tft.printf("Error: %d\n", error);
-    Serial.printf("OTA Error[%u]: ", error);
+    tft.printf(PSTR("Error: %d\n"), error);
+    DLOG(PSTR("OTA Error[%u]: "), error);
     if (error == OTA_AUTH_ERROR)
-      Serial.println("OTA Auth Failed");
+      DLOG(PSTR("OTA Auth Failed\n"));
     else if (error == OTA_BEGIN_ERROR)
-      Serial.println("OTA Begin Failed");
+      DLOG(PSTR("OTA Begin Failed\n"));
     else if (error == OTA_CONNECT_ERROR)
-      Serial.println("OTA Connect Failed");
+      DLOG(PSTR("OTA Connect Failed\n"));
     else if (error == OTA_RECEIVE_ERROR)
-      Serial.println("OTA Receive Failed");
+      DLOG(PSTR("OTA Receive Failed\n"));
     else if (error == OTA_END_ERROR)
-      Serial.println("OTA End Failed");
+      DLOG(PSTR("OTA End Failed\n"));
   });
   ArduinoOTA.begin();
 }
