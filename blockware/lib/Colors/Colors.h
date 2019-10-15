@@ -9,6 +9,9 @@
 #define MAGENTA 0xF81F
 #define YELLOW 0xFFE0
 #define WHITE 0xFFFF
+#define DARK_GRAY 0x4108
+#define GRAY 0x618C
+#define LIGHT_GRAY 0xA294
 
 #define RGB565(r, g, b) ((((r>>3)<<11) | ((g>>2)<<5) | (b>>3)))
 
