@@ -33,7 +33,7 @@
 #include <ESP8266HTTPClient.h>
 #include <ArduinoOTA.h>
 #include <FS.h>
-#include <QRCode.h>
+#include <qrcode.h>
 #include "secrets.h"
 
 // Software bit-banged SPI mode works just fine but is slow
