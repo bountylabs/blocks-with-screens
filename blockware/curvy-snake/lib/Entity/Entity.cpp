@@ -18,7 +18,7 @@ Entity::Entity(int screenWidth, int screenHeight)
   _rot = (int)floor(DEGREES_MAX * random());
   _rotD = +6;
   // color of the pixel
-  _color = WHITE;
+  _color = randomColor();
   // number of ColorPoints to store in trail
   _trailLen = 50;
   // inverse of mass in kg
