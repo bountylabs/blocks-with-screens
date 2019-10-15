@@ -11,6 +11,10 @@
 #define CS_PIN 16  // D0
 #define RST_PIN 15 // D8
 
+// serial data rate (115200 bits per second)
+// https://www.arduino.cc/reference/en/language/functions/communication/serial/begin/115200
+#define SERIAL_DATA_RATE 115200
+
 // 15MHz SPI
 // Note, the ESP8266 can supposedly can go up to 30MHz but seems to cause instability
 #define SPI_SPEED 15000000
@@ -33,11 +37,8 @@ Adafruit_SSD1351 tft =
 
 void setup(void)
 {
-  // 115200 bits per second
-  Serial.begin(115200);
-  Serial.print("setup");
-  // 15MHz SPI
-  tft.begin(15000000);
+  Serial.begin(SERIAL_DATA_RATE);
+  tft.begin(SPI_SPEED);
 
   // initialize srand
   randomSeed(ESP.getCycleCount());
