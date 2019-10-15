@@ -1,0 +1,2 @@
+test:
+	pio run
