@@ -21,6 +21,8 @@ Entity::Entity(int screenWidth, int screenHeight)
   _color = WHITE;
   // number of ColorPoints to store in trail
   _trailLen = 50;
+  // inverse of mass in kg
+  _massInv = 1 / 10;
 
   // init trail
   for (int t = 0; t < _trailLen; t++) {

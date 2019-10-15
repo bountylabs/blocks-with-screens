@@ -24,14 +24,15 @@ const int MAX_TRAIL_LEN = 50;
 class Entity {
 private:
 protected:
-  CartesianXY _screen; // screen dimensions
-  CartesianXY _pos;    // position point
-  double _thrust;      // forward thrust
-  CartesianXY _vel;    // velocity position change rate
-  int _rot;            // rotation in degrees
-  int _rotD;           // rotation change rate
-  int _color;          // rgb565
-  int _trailLen;       // trail size
+  CartesianXY _screen;  // screen dimensions
+  CartesianXY _pos;     // position point
+  double _thrust;       // forward thrust
+  CartesianXY _vel;     // velocity position change rate
+  int _rot;             // rotation in degrees
+  int _rotD;            // rotation change rate
+  int _color;           // rgb565
+  int _trailLen;        // trail size
+  double _massInv;      // inverse of mass in kg
   // store the last _trailLen points along with their color
   std::vector<ColorPoint> _trail;
 
