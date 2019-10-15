@@ -7,13 +7,13 @@
 Entity::Entity(int screenWidth, int screenHeight)
 {
   // screen dimensions
-  _screen = {.x = (double)screenWidth, .y = (double)screenHeight};
+  _screen = Vec2d<int>(screenWidth, screenHeight);
   // point position location
-  _pos = {.x = (screenWidth * random()), .y = floor(screenWidth * random())};
+  _pos = Vec2d<float>(screenWidth * random(), screenHeight * random());
   // forward thrust
   _thrust = 0.15;
   // velocity in x and y direction
-  _vel = {.x = 0, .y = 0};
+  _vel = Vec2d<float>();
   // rotation in degrees
   _rot = (int)floor(DEGREES_MAX * random());
   _rotD = +6;
@@ -26,7 +26,7 @@ Entity::Entity(int screenWidth, int screenHeight)
 
   // init trail
   for (int t = 0; t < _trailLen; t++) {
-    _trail.push_back({.point = {.x = floor(_pos.x), .y = floor(_pos.y)}, .color = _color});
+    _trail.push_back({.point = Vec2d<int>(floor(_pos.x), floor(_pos.y)), .color = _color});
   }
 }
 
@@ -44,7 +44,7 @@ void Entity::recordTrailPoint()
   }
 
   // put new point at front
-  _trail[0] = {.point = {.x = floor(_pos.x), .y = floor(_pos.y)}, .color = _color};
+  _trail[0] = {.point = Vec2d<int>(floor(_pos.x), floor(_pos.y)), .color = _color};
 }
 
 void Entity::tick()
