@@ -1,12 +1,12 @@
 #include <Adafruit_SSD1351.h>
 
-typedef struct _CartesianXY {
+typedef struct _Vec2 {
   double x;
   double y;
-} CartesianXY;
+} Vec2;
 
 typedef struct _ColorPoint {
-  CartesianXY point;
+  Vec2 point;
   int color;
 } ColorPoint;
 
@@ -24,10 +24,10 @@ const int MAX_TRAIL_LEN = 50;
 class Entity {
 private:
 protected:
-  CartesianXY _screen;  // screen dimensions
-  CartesianXY _pos;     // position point
+  Vec2 _screen;  // screen dimensions
+  Vec2 _pos;     // position point
   double _thrust;       // forward thrust
-  CartesianXY _vel;     // velocity position change rate
+  Vec2 _vel;     // velocity position change rate
   int _rot;             // rotation in degrees
   int _rotD;            // rotation change rate
   int _color;           // rgb565
