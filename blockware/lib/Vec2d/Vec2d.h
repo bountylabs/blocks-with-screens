@@ -1,5 +1,7 @@
 #include <Adafruit_SSD1351.h>
 
+#include <math.h>
+
 // generic T
 // e.g. Vec2d<double>
 // curated from https://gist.github.com/raizam/29fa7bcf127e6b36fc076c14c77d3d40
@@ -27,6 +29,13 @@ public:
     return *this;
   }
 
+  // ==
+  // test equality of component values
+  bool operator==(const T &s)
+  {
+    return (x == s) && (y == s);
+  }
+
   // +
   // return a new vector of this + constant
   Vec2d operator+(const T &s) const
@@ -45,6 +54,14 @@ public:
   {
     x += v.x;
     y += v.y;
+    return *this;
+  }
+  // +=
+  // update this ref by + from a constant
+  Vec2d &operator+=(const float v)
+  {
+    x = x + v;
+    y = y + v;
     return *this;
   }
 
@@ -68,6 +85,14 @@ public:
     y -= v.y;
     return *this;
   }
+  // -=
+  // update this ref by - from a constant
+  Vec2d &operator-=(const float v)
+  {
+    x = x - v;
+    y = y - v;
+    return *this;
+  }
 
   // *
   // return a new vector of this * constant
@@ -82,10 +107,18 @@ public:
     return Vec2d(x * v.x, y * v.y);
   }
   // *=
-  // update this ref by * from another vector ref
+  // update this ref by * from a vector
+  Vec2d &operator*=(const Vec2d &v)
+  {
+    x = x * v.x,
+    y = y * v.y;
+    return *this;
+  }
+  // *=
+  // update this ref by * from a constant
   Vec2d &operator*=(const float v)
   {
-    x = x * v,
+    x = x * v;
     y = y * v;
     return *this;
   }
@@ -103,10 +136,18 @@ public:
     return Vec2d(x / s, y / s);
   }
   // /=
-  // update this ref by / from another vector ref
+  // update this ref by / from a vector
+  Vec2d &operator/=(const Vec2d &v)
+  {
+    x = x / v.x;
+    y = y / v.y;
+    return *this;
+  }
+  // /=
+  // update this ref by / from a constant
   Vec2d &operator/=(const float v)
   {
-    x = x / v,
+    x = x / v;
     y = y / v;
     return *this;
   }
