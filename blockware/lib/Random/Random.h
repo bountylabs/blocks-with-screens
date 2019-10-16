@@ -4,10 +4,10 @@
 
 #include <stdlib.h>
 
-static inline double random()
+static inline float random()
 {
   // Use current time as seed for random generator
-  return (double)rand() / (float)RAND_MAX;
+  return (float)rand() / (float)RAND_MAX;
 }
 
 #endif
