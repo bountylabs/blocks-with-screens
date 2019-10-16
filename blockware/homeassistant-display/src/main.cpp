@@ -13,7 +13,7 @@
 #include "config.h"
 #include <Colors.h>
 #include <Text.h>
-#include <WiFi.h>
+#include <WifiHelper.h>
 
 // Software bit-banged SPI mode works just fine but is slow
 // Adafruit_SSD1351 tft = Adafruit_SSD1351(SCREEN_WIDTH, SCREEN_HEIGHT, CS_PIN, DC_PIN, MOSI_PIN, SCLK_PIN, RST_PIN);

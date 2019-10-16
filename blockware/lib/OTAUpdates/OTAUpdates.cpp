@@ -4,7 +4,7 @@
 #include "OTAUpdates.h"
 #include <Colors.h>
 #include <DLog.h>
-#include <WiFi.h>
+#include <WifiHelper.h>
 #include <Text.h>
 
 extern Adafruit_SSD1351 tft;
