@@ -1,12 +1,9 @@
 #include <Adafruit_SSD1351.h>
 
-typedef struct _CartesianXY {
-  double x;
-  double y;
-} CartesianXY;
+#include <Vec2d.h>
 
 typedef struct _ColorPoint {
-  CartesianXY point;
+  Vec2d<int> point;
   int color;
 } ColorPoint;
 
@@ -24,15 +21,8 @@ const int MAX_TRAIL_LEN = 50;
 class Entity {
 private:
 protected:
-  CartesianXY _screen;  // screen dimensions
-  CartesianXY _pos;     // position point
-  double _thrust;       // forward thrust
-  CartesianXY _vel;     // velocity position change rate
-  int _rot;             // rotation in degrees
-  int _rotD;            // rotation change rate
-  int _color;           // rgb565
-  int _trailLen;        // trail size
-  double _massInv;      // inverse of mass in kg
+  Vec2d<int> _screen; // screen dimensions
+  int _trailLen;      // trail size
   // store the last _trailLen points along with their color
   std::vector<ColorPoint> _trail;
 
@@ -41,6 +31,14 @@ protected:
   void handleScreenCollision();
 
 public:
+  Vec2d<float> _pos; // position point
+  float _thrust;     // forward thrust
+  Vec2d<float> _vel; // velocity position change rate
+  int _rot;          // rotation in degrees
+  int _rotD;         // rotation change rate
+  int _color;        // rgb565
+  float _massInv;    // inverse of mass in kg
+
   Entity(int screenWidth, int screenHeight);
   void debug();
   void draw(GFXcanvas16* canvas);
