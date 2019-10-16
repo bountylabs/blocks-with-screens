@@ -1,6 +1,7 @@
 #include "Text.h"
 #include <DLog.h>
 #include <Colors.h>
+#include <Adafruit_SSD1351.h>
 
 void output(const char* message, int color, int size)
 {
