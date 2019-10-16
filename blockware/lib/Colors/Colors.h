@@ -2,6 +2,7 @@
 #define COLORS_H
 
 #include <Random.h>
+#include <math.h>
 
 // Color definitions
 #define BLACK 0x0000
