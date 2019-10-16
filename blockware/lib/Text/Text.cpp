@@ -1,17 +1,8 @@
+#include "Text.h"
 #include <DLog.h>
-#include <Adafruit_SSD1351.h>
 #include <Colors.h>
 
-extern Adafruit_SSD1351 tft;
-
-void outputf(int color, int size, const char *message, ...) {
-    va_list args;
-    va_start(args, message);
-    tft.printf(message, args);
-    va_end(args);
-}
-
-void output(const char* message, int color = WHITE, int size = 1)
+void output(const char* message, int color, int size)
 {
   DLOG(message);
   tft.setTextWrap(true);
@@ -20,7 +11,7 @@ void output(const char* message, int color = WHITE, int size = 1)
   tft.print(message);
 }
 
-void outputln(const char* message, int color = WHITE, int size = 1)
+void outputln(const char* message, int color, int size)
 {
   DLOG(message);
   DLOG("\n");
