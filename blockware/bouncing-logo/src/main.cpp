@@ -1,6 +1,7 @@
 // Screen dimensions
 #define SCREEN_WIDTH 128
-#define SCREEN_HEIGHT 128 // Change this to 96 for 1.27" OLED.
+#define SCREEN_HEIGHT 128
+// Change this to 96 for 1.27" OLED.
 
 // Pin setup
 #define SCLK_PIN 14 // D5 -- ESP8266 Hardware SCLK
@@ -53,8 +54,8 @@ Vec2d<int> screen = Vec2d<int>();
 const int FPS = floor(1000 / 60); // every ~16ms (60fps)
 uint16_t lastLoop = millis() - FPS + 1;
 
-int tlWidth = 38;
-int tlHeight = 32;
+int tlWidth = 40;
+int tlHeight = 33;
 // position x,y
 Vec2d<int> position = Vec2d<int>();
 // velocity in x and y direction
@@ -196,9 +197,8 @@ void setup(void)
   // initialize srand
   randomSeed(ESP.getCycleCount());
 
-  displayReset();
-  ConnectWifi(WIFI_SSID, WIFI_PASSWORD);
-  OTAUpdates_setup("bouncing-logo");
+  // ConnectWifi(WIFI_SSID, WIFI_PASSWORD);
+  // OTAUpdates_setup("bouncing-logo");
 
   tft.setTextColor(WHITE);
   tft.println("Configuring SPIFFS...");
@@ -212,18 +212,18 @@ void setup(void)
   tft.printf("%d / %d kb used\n", fsInfo.usedBytes / 1000, fsInfo.totalBytes / 1000);
 
   // download logo binaries
-  downloadFile("http://192.168.1.20:8080/tl-blue.bin", "/tl-blue.bin", "");
-  Logos.push_back("/tl-blue.bin");
-  downloadFile("http://192.168.1.20:8080/tl-green.bin", "/tl-green.bin", "");
-  Logos.push_back("/tl-green.bin");
-  downloadFile("http://192.168.1.20:8080/tl-orange.bin", "/tl-orange.bin", "");
-  Logos.push_back("/tl-orange.bin");
-  downloadFile("http://192.168.1.20:8080/tl-purple.bin", "/tl-purple.bin", "");
-  Logos.push_back("/tl-purple.bin");
-  downloadFile("http://192.168.1.20:8080/tl-red.bin", "/tl-red.bin", "");
-  Logos.push_back("/tl-red.bin");
-  downloadFile("http://192.168.1.20:8080/tl-yellow.bin", "/tl-yellow.bin", "");
-  Logos.push_back("/tl-yellow.bin");
+  downloadFile("http://192.168.1.20:8080/tl-blue.raw", "/tl-blue.raw", "");
+  Logos.push_back("/tl-blue.raw");
+  downloadFile("http://192.168.1.20:8080/tl-green.raw", "/tl-green.raw", "");
+  Logos.push_back("/tl-green.raw");
+  downloadFile("http://192.168.1.20:8080/tl-orange.raw", "/tl-orange.raw", "");
+  Logos.push_back("/tl-orange.raw");
+  downloadFile("http://192.168.1.20:8080/tl-purple.raw", "/tl-purple.raw", "");
+  Logos.push_back("/tl-purple.raw");
+  downloadFile("http://192.168.1.20:8080/tl-red.raw", "/tl-red.raw", "");
+  Logos.push_back("/tl-red.raw");
+  downloadFile("http://192.168.1.20:8080/tl-yellow.raw", "/tl-yellow.raw", "");
+  Logos.push_back("/tl-yellow.raw");
 
   // save dimensions
   screen.x = tft.width();
@@ -281,7 +281,12 @@ void tick()
   else {
     // collision!
     // randomize logo
-    logo = Logos[floor(Logos.size() * random())];
+    char* nextLogo = Logos[floor(Logos.size() * random())];
+    while (nextLogo == logo) {
+      nextLogo = Logos[floor(Logos.size() * random())];
+    }
+
+    logo = nextLogo;
 
     // adjust velocity in terms of the normal direction
     if (abs(normal.x)) {
@@ -298,7 +303,7 @@ void tick()
 
 void loop()
 {
-  OTAUpdates_handle();
+  // OTAUpdates_handle();
 
   uint16_t now = millis();
   uint16_t time = now - lastLoop;
