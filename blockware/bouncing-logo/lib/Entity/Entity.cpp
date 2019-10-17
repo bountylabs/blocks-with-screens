@@ -1,9 +1,9 @@
 #include <Adafruit_SSD1351.h>
 #include <math.h>
 
+#include "Entity.h"
 #include <Colors.h>
 #include <Random.h>
-#include "Entity.h"
 
 Entity::Entity(int screenWidth, int screenHeight)
 {
@@ -82,13 +82,15 @@ void Entity::handleScreenCollision()
   Vec2d<float> normal = Vec2d<float>();
   if (_pos.x >= _screen.x - 1) {
     normal.set(-1.0, normal.y);
-  } else if (_pos.x <= 0) {
+  }
+  else if (_pos.x <= 0) {
     normal.set(+1.0, normal.y);
   }
 
   if (_pos.y >= _screen.y - 1) {
     normal.set(normal.x, -1.0);
-  } else if (_pos.y <= 0) {
+  }
+  else if (_pos.y <= 0) {
     normal.set(normal.x, +1.0);
   }
 
@@ -96,8 +98,7 @@ void Entity::handleScreenCollision()
   // Serial.printf("\nnormal (%3.1f,%3.1f)", normal.x, normal.y);
   // Serial.printf("\nvel=(%3.1f, %3.1f)", _vel.x, _vel.y);
 
-
-  if(normal == 0) {
+  if (normal == 0) {
     // Serial.println("no collision detected, skipping collision logic");
     return;
   }
@@ -108,14 +109,13 @@ void Entity::handleScreenCollision()
     return;
   }
 
-
   // colliding with a wall is like an entity with 0 velocity and very high mass
   // relative velocity will be velocity of entity
   // Vec2d<float> rv = _vel;
 
   // adjust velocity in terms of the normal direction
   if (abs(normal.x)) {
-    _vel.y *= -1;
+    _vel.x *= -1;
   }
 
   if (abs(normal.y)) {
