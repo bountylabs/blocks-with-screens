@@ -2,6 +2,8 @@
 
 Bouncing Twitter logo that cycles Twitter colors
 
+![Demo](static/demo.gif)
+
 # Inspiration
 
 ### Twitter color palette
