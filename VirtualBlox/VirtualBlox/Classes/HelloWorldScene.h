@@ -43,6 +43,10 @@ public:
 
     cocos2d::Texture2D* _tex;
     unsigned char* buf;
+
+private:
+    void startUDPServer();
+    int _sockfd;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

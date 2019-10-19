@@ -25,6 +25,15 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
 
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <unistd.h> 
+#include <string.h> 
+#include <sys/types.h> 
+#include <sys/socket.h>
+#include <arpa/inet.h> 
+#include <netinet/in.h> 
+
 USING_NS_CC;
 
 Scene* HelloWorld::createScene()
@@ -80,57 +89,20 @@ bool HelloWorld::init()
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 
-    /////////////////////////////
-    // 3. add your codes below...
-
-    // add a label shows "Hello World"
-    // create and initialize a label
-    /*
-    auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);
-    if (label == nullptr)
-    {
-        problemLoading("'fonts/Marker Felt.ttf'");
-    }
-    else
-    {
-        // position the label on the center of the screen
-        label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                                origin.y + visibleSize.height - label->getContentSize().height));
-
-        // add the label as a child to this layer
-        this->addChild(label, 1);
-    }
-    */
-
-    /*
-    // add "HelloWorld" splash screen"
-    auto sprite = Sprite::create("HelloWorld.png");
-    if (sprite == nullptr)
-    {
-        problemLoading("'HelloWorld.png'");
-    }
-    else
-    {
-        // position the sprite on the center of the screen
-        sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-
-        // add the sprite as a child to this layer
-        this->addChild(sprite, 0);
-    }
-    */
-
-    tex = new Texture2D();
+    _tex = new Texture2D();
     buf = (unsigned char*)malloc(128*128*2);
     memset(buf, 255, 128*128*2);
 
     Size s;
-    tex->initWithData(buf, 128*128*2, Texture2D::PixelFormat::RGB565, 128, 128, s);
+    _tex->initWithData(buf, 128*128*2, Texture2D::PixelFormat::RGB565, 128, 128, s);
 
-    auto sprite = Sprite::createWithTexture(tex);
+    auto sprite = Sprite::createWithTexture(_tex);
     sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
     
     // add the sprite as a child to this layer
     this->addChild(sprite, 0);
+
+    startUDPServer();
 
     return true;
 }
@@ -147,4 +119,77 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
     //_eventDispatcher->dispatchEvent(&customEndEvent);
 
 
+}
+
+void HelloWorld::startUDPServer()
+{
+    char buffer[1024]; 
+    char *hello = "Hello from server"; 
+    struct sockaddr_in servaddr, cliaddr; 
+      
+    // Creating socket file descriptor 
+    if ( (_sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) { 
+        perror("socket creation failed"); 
+        exit(EXIT_FAILURE); 
+    } 
+      
+    memset(&servaddr, 0, sizeof(servaddr)); 
+    memset(&cliaddr, 0, sizeof(cliaddr)); 
+      
+    // Filling server information 
+    servaddr.sin_family    = AF_INET; // IPv4 
+    servaddr.sin_addr.s_addr = INADDR_ANY; 
+    servaddr.sin_port = htons(9999); 
+      
+    // Bind the socket with the server address 
+    if ( bind(_sockfd, (const struct sockaddr *)&servaddr,  
+            sizeof(servaddr)) < 0 ) 
+    { 
+        perror("bind failed"); 
+        exit(EXIT_FAILURE); 
+    } 
+
+    struct timeval read_timeout;
+    read_timeout.tv_sec = 0;
+    read_timeout.tv_usec = 10;
+    setsockopt(_sockfd, SOL_SOCKET, SO_RCVTIMEO, &read_timeout, sizeof read_timeout);
+    
+    /*
+    int len, n; 
+    n = recvfrom(_sockfd, (char *)buffer, 1024,  
+                MSG_WAITALL, ( struct sockaddr *) &cliaddr, 
+                (socklen_t*)&len); 
+    buffer[n] = '\0'; 
+    printf("Client : %s\n", buffer); 
+    */
+    /*
+    sendto(_sockfd, (const char *)hello, strlen(hello),  
+        MSG_CONFIRM, (const struct sockaddr *) &cliaddr, 
+            len); 
+    printf("Hello message sent.\n");  
+    */
+    
+
+    //return 0; 
+}
+
+void HelloWorld::render(Renderer* renderer, const Mat4& eyeTransform, const Mat4* eyeProjection)
+{
+    //CurvySnake_loop();
+    //tex->updateWithData(getCanvas(), 0, 0, 128, 128);
+
+    char buffer[128];
+    struct sockaddr_in cliaddr;
+    int len, n;
+    n = recvfrom(_sockfd, (void *)buffer, 128,  
+                MSG_WAITALL, ( struct sockaddr *) &cliaddr, 
+                (socklen_t*)&len); 
+
+    if (n > 0)
+    {
+        buffer[n] = '\0'; 
+        printf("Client : %s\n", buffer); 
+    }
+
+    Scene::render(renderer, eyeTransform, eyeProjection);
 }
