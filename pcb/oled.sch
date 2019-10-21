@@ -5201,11 +5201,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <wire x1="213.36" y1="96.52" x2="203.2" y2="96.52" width="0.1524" layer="91"/>
 <label x="203.2" y="96.52" size="1.778" layer="95" rot="R180"/>
 </segment>
-<segment>
-<wire x1="129.54" y1="124.46" x2="111.76" y2="124.46" width="0.1524" layer="91"/>
-<label x="111.76" y="124.46" size="1.778" layer="95"/>
-<pinref part="U1" gate="G$1" pin="D/C#"/>
-</segment>
 </net>
 <net name="D2/GPIO4" class="0">
 <segment>
@@ -5226,6 +5221,11 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <pinref part="JP1" gate="G$1" pin="6"/>
 <wire x1="213.36" y1="88.9" x2="203.2" y2="88.9" width="0.1524" layer="91"/>
 <label x="203.2" y="88.9" size="1.778" layer="95" rot="R180"/>
+</segment>
+<segment>
+<wire x1="129.54" y1="124.46" x2="111.76" y2="124.46" width="0.1524" layer="91"/>
+<label x="111.76" y="124.46" size="1.778" layer="95"/>
+<pinref part="U1" gate="G$1" pin="D/C#"/>
 </segment>
 </net>
 <net name="D8/GPIO15" class="0">

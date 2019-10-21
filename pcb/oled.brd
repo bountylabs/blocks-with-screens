@@ -9,7 +9,7 @@
 </settings>
 <grid distance="0.005" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.025" altunitdist="inch" altunit="inch"/>
 <layers>
-<layer number="1" name="Top" color="4" fill="1" visible="no" active="yes"/>
+<layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
 <layer number="3" name="Route3" color="4" fill="3" visible="no" active="no"/>
 <layer number="4" name="Route4" color="1" fill="4" visible="no" active="no"/>
@@ -1165,20 +1165,7 @@ chip</description>
 </signal>
 <signal name="D1/GPIO5">
 <contactref element="JP1" pad="3"/>
-<contactref element="U1" pad="P$11"/>
-<wire x1="10.8712" y1="7.8232" x2="10.8712" y2="7.2136" width="0.2032" layer="1"/>
-<wire x1="11.5824" y1="8.5344" x2="10.8712" y2="7.8232" width="0.2032" layer="1"/>
-<wire x1="11.7856" y1="8.5344" x2="11.5824" y2="8.5344" width="0.2032" layer="1"/>
-<wire x1="12.0904" y1="8.8392" x2="11.7856" y2="8.5344" width="0.2032" layer="1"/>
-<wire x1="12.0904" y1="9.9568" x2="12.0904" y2="8.8392" width="0.2032" layer="1"/>
-<wire x1="12.2936" y1="10.16" x2="12.0904" y2="9.9568" width="0.2032" layer="1"/>
-<wire x1="12.2936" y1="10.5664" x2="12.2936" y2="10.16" width="0.2032" layer="1"/>
-<wire x1="9.5504" y1="10.5664" x2="12.2936" y2="10.5664" width="0.2032" layer="16"/>
-<wire x1="3.2512" y1="16.8656" x2="9.5504" y2="10.5664" width="0.2032" layer="16"/>
-<wire x1="1.7272" y1="16.8656" x2="3.2512" y2="16.8656" width="0.2032" layer="16"/>
-<wire x1="10.8712" y1="7.2136" x2="10.868" y2="7.202" width="0.2032" layer="1"/>
 <wire x1="1.7272" y1="16.8656" x2="1.651" y2="16.891" width="0.2032" layer="16"/>
-<via x="12.2936" y="10.5664" extent="1-16" drill="0.4"/>
 </signal>
 <signal name="D2/GPIO4">
 <contactref element="JP1" pad="4"/>
@@ -1188,6 +1175,22 @@ chip</description>
 </signal>
 <signal name="D4/GPIO2">
 <contactref element="JP1" pad="6"/>
+<contactref element="U1" pad="P$11"/>
+<wire x1="10.8712" y1="7.8232" x2="10.8712" y2="7.2136" width="0.2032" layer="1"/>
+<wire x1="11.5824" y1="8.5344" x2="10.8712" y2="7.8232" width="0.2032" layer="1"/>
+<wire x1="11.7856" y1="8.5344" x2="11.5824" y2="8.5344" width="0.2032" layer="1"/>
+<wire x1="12.0904" y1="8.8392" x2="11.7856" y2="8.5344" width="0.2032" layer="1"/>
+<wire x1="12.0904" y1="10.3632" x2="12.0904" y2="8.8392" width="0.2032" layer="1"/>
+<wire x1="12.2936" y1="10.5664" x2="12.0904" y2="10.3632" width="0.2032" layer="1"/>
+<wire x1="9.2456" y1="10.5664" x2="12.2936" y2="10.5664" width="0.2032" layer="16"/>
+<wire x1="6.1976" y1="13.6144" x2="9.2456" y2="10.5664" width="0.2032" layer="16"/>
+<wire x1="5.4864" y1="13.6144" x2="6.1976" y2="13.6144" width="0.2032" layer="16"/>
+<wire x1="3.4544" y1="11.5824" x2="5.4864" y2="13.6144" width="0.2032" layer="16"/>
+<wire x1="3.4544" y1="11.176" x2="3.4544" y2="11.5824" width="0.2032" layer="16"/>
+<wire x1="1.6256" y1="9.3472" x2="3.4544" y2="11.176" width="0.2032" layer="16"/>
+<wire x1="10.8712" y1="7.2136" x2="10.868" y2="7.202" width="0.2032" layer="1"/>
+<wire x1="1.6256" y1="9.3472" x2="1.651" y2="9.271" width="0.2032" layer="16"/>
+<via x="12.2936" y="10.5664" extent="1-16" drill="0.4"/>
 </signal>
 <signal name="D8/GPIO15">
 <contactref element="JP2" pad="2"/>
