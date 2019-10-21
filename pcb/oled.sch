@@ -4751,35 +4751,75 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </classes>
 <parts>
 <part name="GND2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="R2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" value="600K"/>
-<part name="C2" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="10uF/16V"/>
-<part name="C5" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="1.0uF"/>
-<part name="R3" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" value="50"/>
-<part name="D2" library="microbuilder" deviceset="DIODE" device="SOD-323" value="1N4148"/>
-<part name="C1" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="1.0uF"/>
-<part name="C3" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="10uF"/>
+<part name="R2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" value="600K">
+<attribute name="MPN" value="ERJ-6ENF5903V"/>
+</part>
+<part name="C2" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="10uF/16V">
+<attribute name="MPN" value="EMK212ABJ106KG-T"/>
+</part>
+<part name="C5" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="1.0uF">
+<attribute name="MPN" value="C0805C105K4RAC7210"/>
+</part>
+<part name="R3" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" value="50">
+<attribute name="MPN" value="CRCW080550R0FKTA"/>
+</part>
+<part name="D2" library="microbuilder" deviceset="DIODE" device="SOD-323" value="1N4148">
+<attribute name="MPN" value="1N4148WS-E3-08"/>
+</part>
+<part name="C1" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="1.0uF">
+<attribute name="MPN" value="C0805C105K4RAC7210"/>
+</part>
+<part name="C3" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="10uF">
+<attribute name="MPN" value="EMK212ABJ106KG-T"/>
+</part>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="P+1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+12V" device="" value="+13V"/>
 <part name="+3V31" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="+3V32" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
-<part name="U2" library="microbuilder" deviceset="FAN5331" device="" value="FAN5331SX"/>
-<part name="C6" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="10uF"/>
-<part name="L1" library="microbuilder" deviceset="INDUCTOR" device="" value="10uH"/>
-<part name="D3" library="microbuilder" deviceset="DIODE" device="SOD-123" value="BAT54T1G"/>
-<part name="R4" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" value="100K"/>
-<part name="R5" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" value="10K"/>
+<part name="U2" library="microbuilder" deviceset="FAN5331" device="" value="FAN5331SX">
+<attribute name="MPN" value="FAN5331SX"/>
+</part>
+<part name="C6" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="10uF">
+<attribute name="MPN" value="EMK212ABJ106KG-T"/>
+</part>
+<part name="L1" library="microbuilder" deviceset="INDUCTOR" device="" value="10uH">
+<attribute name="MPN" value="L0805R100MPWRT"/>
+</part>
+<part name="D3" library="microbuilder" deviceset="DIODE" device="SOD-123" value="BAT54T1G">
+<attribute name="MPN" value="BAT54T1G"/>
+</part>
+<part name="R4" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" value="100K">
+<attribute name="MPN" value="CR0805AFX-1003EAS"/>
+</part>
+<part name="R5" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" value="10K">
+<attribute name="MPN" value="CRCW080510K0FKEAC"/>
+</part>
 <part name="GND6" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="C7" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="0.1uF"/>
+<part name="C7" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="0.1uF">
+<attribute name="MPN" value="08051C104J4T4A"/>
+</part>
 <part name="P+2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+12V" device="" value="+13V"/>
-<part name="U1" library="microbuilder" deviceset="DISP_OLED_UG-2828GDEDF11" device="TOP" value="UG-2828GDEDF11"/>
-<part name="C4" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="10uF/16V"/>
-<part name="D1" library="microbuilder" deviceset="DIODE" device="SOD-323" value="1N4148"/>
+<part name="U1" library="microbuilder" deviceset="DISP_OLED_UG-2828GDEDF11" device="TOP" value="UG-2828GDEDF11">
+<attribute name="MPN" value="XF2M-3015-1A"/>
+</part>
+<part name="C4" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="10uF/16V">
+<attribute name="MPN" value="EMK212ABJ106KG-T"/>
+</part>
+<part name="D1" library="microbuilder" deviceset="DIODE" device="SOD-323" value="1N4148">
+<attribute name="MPN" value="1N4148WS-E3-08"/>
+</part>
 <part name="GND3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="R1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" value="10K"/>
-<part name="JP2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1"/>
-<part name="JP1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1"/>
+<part name="R1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" value="10K">
+<attribute name="MPN" value="CRCW080510K0FKEAC"/>
+</part>
+<part name="JP2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1">
+<attribute name="POPULATE" value="0"/>
+</part>
+<part name="JP1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1">
+<attribute name="POPULATE" value="0"/>
+</part>
 <part name="SUPPLY1" library="SparkFun-PowerSymbols" library_urn="urn:adsk.eagle:library:530" deviceset="VIN" device=""/>
 </parts>
 <sheets>
@@ -4804,30 +4844,37 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <instance part="R2" gate="G$1" x="93.98" y="119.38" smashed="yes">
 <attribute name="NAME" x="91.44" y="121.412" size="1.27" layer="95" font="vector"/>
 <attribute name="VALUE" x="91.44" y="116.205" size="1.27" layer="96" font="vector"/>
+<attribute name="MPN" x="93.98" y="119.38" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="C2" gate="G$1" x="96.52" y="170.18" smashed="yes" rot="R90">
 <attribute name="NAME" x="95.98" y="168.39" size="1.27" layer="95" font="vector" rot="R180"/>
 <attribute name="VALUE" x="95.98" y="173.18" size="1.27" layer="96" font="vector" rot="R180"/>
+<attribute name="MPN" x="96.52" y="170.18" size="1.778" layer="96" rot="R90" display="off"/>
 </instance>
 <instance part="C5" gate="G$1" x="114.3" y="165.1" smashed="yes" rot="R90">
 <attribute name="NAME" x="113.76" y="163.31" size="1.27" layer="95" font="vector" rot="R180"/>
 <attribute name="VALUE" x="113.76" y="168.1" size="1.27" layer="96" font="vector" rot="R180"/>
+<attribute name="MPN" x="114.3" y="165.1" size="1.778" layer="96" rot="R90" display="off"/>
 </instance>
 <instance part="R3" gate="G$1" x="124.46" y="162.56" smashed="yes">
 <attribute name="NAME" x="121.92" y="164.592" size="1.27" layer="95" font="vector"/>
 <attribute name="VALUE" x="121.92" y="159.385" size="1.27" layer="96" font="vector"/>
+<attribute name="MPN" x="124.46" y="162.56" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="D2" gate="G$1" x="99.06" y="162.56" smashed="yes" rot="R180">
 <attribute name="NAME" x="101.6" y="160.02" size="1.27" layer="95" rot="R180"/>
 <attribute name="VALUE" x="101.6" y="166.37" size="1.27" layer="96" rot="R180"/>
+<attribute name="MPN" x="99.06" y="162.56" size="1.778" layer="96" rot="R180" display="off"/>
 </instance>
 <instance part="C1" gate="G$1" x="88.9" y="109.22" smashed="yes" rot="R270">
 <attribute name="NAME" x="89.44" y="111.01" size="1.27" layer="95" font="vector"/>
 <attribute name="VALUE" x="89.44" y="106.22" size="1.27" layer="96" font="vector"/>
+<attribute name="MPN" x="88.9" y="109.22" size="1.778" layer="96" rot="R270" display="off"/>
 </instance>
 <instance part="C3" gate="G$1" x="96.52" y="106.68" smashed="yes" rot="R270">
 <attribute name="NAME" x="97.06" y="108.47" size="1.27" layer="95" font="vector"/>
 <attribute name="VALUE" x="97.06" y="103.68" size="1.27" layer="96" font="vector"/>
+<attribute name="MPN" x="96.52" y="106.68" size="1.778" layer="96" rot="R270" display="off"/>
 </instance>
 <instance part="GND1" gate="1" x="83.82" y="154.94" smashed="yes">
 <attribute name="VALUE" x="82.296" y="152.4" size="1.27" layer="96"/>
@@ -4844,26 +4891,32 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <instance part="U2" gate="G$1" x="220.98" y="160.02" smashed="yes">
 <attribute name="NAME" x="213.36" y="172.72" size="1.27" layer="95"/>
 <attribute name="VALUE" x="213.36" y="147.32" size="1.27" layer="96"/>
+<attribute name="MPN" x="220.98" y="160.02" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="C6" gate="G$1" x="193.04" y="154.94" smashed="yes">
 <attribute name="NAME" x="191.25" y="155.48" size="1.27" layer="95" font="vector" rot="R90"/>
 <attribute name="VALUE" x="196.04" y="155.48" size="1.27" layer="96" font="vector" rot="R90"/>
+<attribute name="MPN" x="193.04" y="154.94" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="L1" gate="G$1" x="220.98" y="177.8" smashed="yes">
 <attribute name="NAME" x="218.44" y="180.34" size="1.27" layer="95"/>
 <attribute name="VALUE" x="218.44" y="175.26" size="1.27" layer="96"/>
+<attribute name="MPN" x="220.98" y="177.8" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="D3" gate="G$1" x="238.76" y="177.8" smashed="yes">
 <attribute name="NAME" x="236.22" y="180.34" size="1.27" layer="95"/>
 <attribute name="VALUE" x="236.22" y="173.99" size="1.27" layer="96"/>
+<attribute name="MPN" x="238.76" y="177.8" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="R4" gate="G$1" x="248.92" y="167.64" smashed="yes" rot="R90">
 <attribute name="NAME" x="246.888" y="165.1" size="1.27" layer="95" font="vector" rot="R90"/>
 <attribute name="VALUE" x="252.095" y="165.1" size="1.27" layer="96" font="vector" rot="R90"/>
+<attribute name="MPN" x="248.92" y="167.64" size="1.778" layer="96" rot="R90" display="off"/>
 </instance>
 <instance part="R5" gate="G$1" x="248.92" y="152.4" smashed="yes" rot="R90">
 <attribute name="NAME" x="246.888" y="149.86" size="1.27" layer="95" font="vector" rot="R90"/>
 <attribute name="VALUE" x="252.095" y="149.86" size="1.27" layer="96" font="vector" rot="R90"/>
+<attribute name="MPN" x="248.92" y="152.4" size="1.778" layer="96" rot="R90" display="off"/>
 </instance>
 <instance part="GND6" gate="1" x="248.92" y="142.24" smashed="yes">
 <attribute name="VALUE" x="247.396" y="139.7" size="1.27" layer="96"/>
@@ -4877,6 +4930,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <instance part="C7" gate="G$1" x="256.54" y="167.64" smashed="yes">
 <attribute name="NAME" x="254.75" y="168.18" size="1.27" layer="95" font="vector" rot="R90"/>
 <attribute name="VALUE" x="259.54" y="168.18" size="1.27" layer="96" font="vector" rot="R90"/>
+<attribute name="MPN" x="256.54" y="167.64" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="P+2" gate="1" x="256.54" y="180.34" smashed="yes">
 <attribute name="VALUE" x="255.016" y="181.356" size="1.27" layer="96"/>
@@ -4884,14 +4938,17 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <instance part="U1" gate="G$1" x="149.86" y="137.16" smashed="yes">
 <attribute name="NAME" x="132.08" y="176.53" size="1.27" layer="95"/>
 <attribute name="VALUE" x="132.08" y="93.98" size="1.27" layer="95"/>
+<attribute name="MPN" x="149.86" y="137.16" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="C4" gate="G$1" x="104.14" y="167.64" smashed="yes" rot="R270">
 <attribute name="NAME" x="104.68" y="169.43" size="1.27" layer="95" font="vector"/>
 <attribute name="VALUE" x="104.68" y="164.64" size="1.27" layer="96" font="vector"/>
+<attribute name="MPN" x="104.14" y="167.64" size="1.778" layer="96" rot="R270" display="off"/>
 </instance>
 <instance part="D1" gate="G$1" x="88.9" y="162.56" smashed="yes" rot="R180">
 <attribute name="NAME" x="91.44" y="160.02" size="1.27" layer="95" rot="R180"/>
 <attribute name="VALUE" x="91.44" y="166.37" size="1.27" layer="96" rot="R180"/>
+<attribute name="MPN" x="88.9" y="162.56" size="1.778" layer="96" rot="R180" display="off"/>
 </instance>
 <instance part="GND3" gate="1" x="127" y="129.54" smashed="yes" rot="R270">
 <attribute name="VALUE" x="124.46" y="131.064" size="1.27" layer="96" rot="R270"/>
@@ -4899,14 +4956,17 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <instance part="R1" gate="G$1" x="83.82" y="127" smashed="yes" rot="R90">
 <attribute name="NAME" x="81.788" y="124.46" size="1.27" layer="95" font="vector" rot="R90"/>
 <attribute name="VALUE" x="86.995" y="124.46" size="1.27" layer="96" font="vector" rot="R90"/>
+<attribute name="MPN" x="83.82" y="127" size="1.778" layer="96" rot="R90" display="off"/>
 </instance>
 <instance part="JP2" gate="G$1" x="226.06" y="91.44" smashed="yes" rot="R180">
 <attribute name="NAME" x="232.41" y="80.645" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="232.41" y="106.68" size="1.778" layer="96" rot="R180"/>
+<attribute name="POPULATE" x="226.06" y="91.44" size="1.778" layer="96" rot="R180" display="off"/>
 </instance>
 <instance part="JP1" gate="G$1" x="215.9" y="93.98" smashed="yes">
 <attribute name="NAME" x="209.55" y="104.775" size="1.778" layer="95"/>
 <attribute name="VALUE" x="209.55" y="78.74" size="1.778" layer="96"/>
+<attribute name="POPULATE" x="215.9" y="93.98" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="SUPPLY1" gate="G$1" x="193.04" y="177.8" smashed="yes">
 <attribute name="VALUE" x="193.04" y="180.594" size="1.778" layer="96" align="bottom-center"/>
