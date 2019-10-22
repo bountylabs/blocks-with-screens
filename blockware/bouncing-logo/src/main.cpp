@@ -1,4 +1,4 @@
-// Screen dimensions
+// Scree dimensins
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 128
 // Change this to 96 for 1.27" OLED.
@@ -24,17 +24,15 @@
 #include <DLog.h>
 
 #include <Adafruit_SSD1351.h>
-#include <ESP8266HTTPClient.h>
 #include <SPI.h>
 #include <math.h>
 
 #include "secrets.h"
-#include <FS.h>
 #include <OTAUpdates.h>
 #include <Random.h>
+#include <TLLogos.h>
 #include <Text.h>
 #include <Vec2d.h>
-#include <WifiHelper.h>
 
 // Software bit-banged SPI mode works just fine but is slow
 // Adafruit_SSD1351 tft = Adafruit_SSD1351(SCREEN_WIDTH, SCREEN_HEIGHT, CS_PIN, DC_PIN, MOSI_PIN, SCLK_PIN, RST_PIN);
@@ -45,7 +43,7 @@
 Adafruit_SSD1351 tft =
   Adafruit_SSD1351(SCREEN_WIDTH, SCREEN_HEIGHT, &SPI, CS_PIN, DC_PIN, RST_PIN);
 
-std::vector<char*> Logos;
+std::vector<unsigned char*> Logos;
 
 // in-memory 16-bit canvas
 GFXcanvas16* canvas;
@@ -60,7 +58,7 @@ int tlHeight = 33;
 Vec2d<int> position = Vec2d<int>();
 // velocity in x and y direction
 Vec2d<int> velocity = Vec2d<int>();
-char* logo;
+unsigned char* logo;
 
 void flush()
 {
@@ -70,123 +68,9 @@ void flush()
   // tft.endWrite();
 }
 
-int downloadFile(const char* URL, const char* filepath, const char* fingerprint = NULL)
+void drawLogo(const unsigned char* logo, int x, int y, int w, int h)
 {
-  HTTPClient http;
-  if (fingerprint == NULL) {
-    http.begin(URL, fingerprint);
-  }
-  else {
-    http.begin(URL);
-  }
-  int httpCode = http.GET();
-
-  Serial.printf("[HTTP] GET %s code: %d\n", URL, httpCode);
-
-  if (httpCode != HTTP_CODE_OK) {
-    const char* errorString = http.errorToString(httpCode).c_str();
-    Serial.printf("[HTTP] GET... failed, error: %s\n", errorString);
-    // tft.setTextColor(RED);
-    // tft.printf("HTTP Status: %d\n", httpCode);
-    http.end();
-    return 0;
-  }
-
-  // Delete file if exists
-  if (SPIFFS.exists(filepath)) {
-    // tft.setTextColor(WHITE);
-    // tft.printf("Deleting %s\n", filepath);
-    SPIFFS.remove(filepath);
-  }
-
-  // Open a file for writing
-  fs::File f = SPIFFS.open(filepath, "w");
-  if (!f) {
-    Serial.println("File open failed");
-    tft.setTextColor(RED);
-    tft.println("File open failed");
-    return 0;
-  }
-
-  // tft.setTextColor(WHITE);
-  // tft.println("Downloading...");
-
-  // Write response to file
-  // TODO: Would be nice to modify writeToStream to support progress
-  int bytesWritten = http.writeToStream(&f);
-  if (bytesWritten < 0) {
-    Serial.printf("writeToStream error %d\n", bytesWritten);
-    tft.setTextColor(RED);
-    tft.printf("writeToStream error %d\n", bytesWritten);
-  }
-  else {
-    Serial.printf("Wrote %d kb\n", bytesWritten / 1000);
-    // tft.setTextColor(WHITE);
-    // tft.printf("Wrote %d kb\n", bytesWritten / 1000);
-  }
-
-  f.close();
-  http.end();
-
-  return bytesWritten;
-}
-
-void formatSPIFFSIfNecessary(void)
-{
-  if (!SPIFFS.exists("/formatComplete.txt")) {
-    tft.setTextColor(WHITE);
-    tft.println("SPIFFS Formatting...");
-
-    Serial.println("Please wait 30 secs for SPIFFS to be formatted");
-    SPIFFS.format();
-    Serial.println("Spiffs formatted");
-
-    File f = SPIFFS.open("/formatComplete.txt", "w");
-    if (!f) {
-      Serial.println("file open failed");
-      tft.setTextColor(RED);
-      tft.println("File open failed");
-    }
-    else {
-      f.println("Format Complete");
-    }
-  }
-  else {
-    Serial.println("SPIFFS is formatted. Moving along...");
-    tft.setTextColor(GREEN);
-    tft.println("SPIFFS is formatted");
-  }
-}
-
-void drawFSBmp(const char* filename, int x, int y, int w, int h)
-{
-  Serial.print("Drawing file: ");
-  Serial.println(filename);
-
-  fs::File bmpFile = SPIFFS.open(filename, "r");
-
-  if (!bmpFile) {
-    Serial.print("ERROR: File \"");
-    Serial.print(filename);
-    Serial.println("\" not found!");
-    return;
-  }
-
-  char buffer[tlWidth * tlHeight * 2];
-  bmpFile.readBytes(buffer, sizeof(buffer));
-
-  // for (int i = 0; i < tlWidth * tlHeight; i++) {
-  //   int ix = (i % tlWidth) + x;
-  //   int iy = floor(i / tlHeight) + y;
-  //   uint8_t d1 = buffer[i * 2];
-  //   uint8_t d2 = buffer[(i * 2) + 1];
-  //   uint16_t rgb565 = (d2 << 8) | d1;
-  //   canvas->writePixel(ix, iy, rgb565);
-  // }
-
-  canvas->drawRGBBitmap(x, y, (uint16_t*)buffer, tlWidth, tlHeight);
-
-  bmpFile.close();
+  canvas->drawRGBBitmap(x, y, (uint16_t*)logo, tlWidth, tlHeight);
 }
 
 void setup(void)
@@ -194,36 +78,21 @@ void setup(void)
   Serial.begin(SERIAL_DATA_RATE);
   tft.begin(SPI_SPEED);
 
+  tft.fillScreen(BLACK);
+
   // initialize srand
   randomSeed(ESP.getCycleCount());
 
   // ConnectWifi(WIFI_SSID, WIFI_PASSWORD);
-  // OTAUpdates_setup("bouncing-logo");
-
-  tft.setTextColor(WHITE);
-  tft.println("Configuring SPIFFS...");
-  SPIFFS.begin();
-  // SPIFFS.format();
-  formatSPIFFSIfNecessary();
-  FSInfo fsInfo;
-  SPIFFS.info(fsInfo);
-
-  tft.setTextColor(GREEN);
-  tft.printf("%d / %d kb used\n", fsInfo.usedBytes / 1000, fsInfo.totalBytes / 1000);
+  OTAUpdates_setup("bouncing-logo");
 
   // download logo binaries
-  downloadFile("http://192.168.1.20:8080/tl-blue.raw", "/tl-blue.raw", "");
-  Logos.push_back("/tl-blue.raw");
-  downloadFile("http://192.168.1.20:8080/tl-green.raw", "/tl-green.raw", "");
-  Logos.push_back("/tl-green.raw");
-  downloadFile("http://192.168.1.20:8080/tl-orange.raw", "/tl-orange.raw", "");
-  Logos.push_back("/tl-orange.raw");
-  downloadFile("http://192.168.1.20:8080/tl-purple.raw", "/tl-purple.raw", "");
-  Logos.push_back("/tl-purple.raw");
-  downloadFile("http://192.168.1.20:8080/tl-red.raw", "/tl-red.raw", "");
-  Logos.push_back("/tl-red.raw");
-  downloadFile("http://192.168.1.20:8080/tl-yellow.raw", "/tl-yellow.raw", "");
-  Logos.push_back("/tl-yellow.raw");
+  Logos.push_back(tl_blue);
+  Logos.push_back(tl_green);
+  Logos.push_back(tl_orange);
+  Logos.push_back(tl_purple);
+  Logos.push_back(tl_red);
+  Logos.push_back(tl_yellow);
 
   // save dimensions
   screen.x = tft.width();
@@ -281,7 +150,7 @@ void tick()
   else {
     // collision!
     // randomize logo
-    char* nextLogo = Logos[floor(Logos.size() * random())];
+    unsigned char* nextLogo = Logos[floor(Logos.size() * random())];
     while (nextLogo == logo) {
       nextLogo = Logos[floor(Logos.size() * random())];
     }
@@ -298,7 +167,7 @@ void tick()
     }
   }
 
-  drawFSBmp(logo, position.x, position.y, tlWidth, tlHeight);
+  drawLogo(logo, position.x, position.y, tlWidth, tlHeight);
 }
 
 void loop()
