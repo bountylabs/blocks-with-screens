@@ -10538,7 +10538,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <label x="71.12" y="17.78" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="N$7" class="0">
+<net name="N$7" class="1">
 <segment>
 <pinref part="D1" gate="G$1" pin="C"/>
 <wire x1="27.94" y1="68.58" x2="33.02" y2="68.58" width="0.1524" layer="91"/>
