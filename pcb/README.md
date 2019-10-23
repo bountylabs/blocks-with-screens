@@ -2,6 +2,10 @@
 
 ## Changelog
 
+### OLED Board V3
+
+* Uses `D4/GPIO2` for `OLED DC` instead of `D1/GPIO5` since that pin is I2C `SCK`.
+
 ### Microcontroller Board V2
 
 * Fixed disconnected decoupling capacitor.

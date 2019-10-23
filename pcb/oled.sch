@@ -4815,9 +4815,11 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="MPN" value="CRCW080510K0FKEAC"/>
 </part>
 <part name="JP2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1">
+<attribute name="MPN" value="10129378-908001BLF"/>
 <attribute name="POPULATE" value="0"/>
 </part>
 <part name="JP1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1">
+<attribute name="MPN" value="10129378-908001BLF"/>
 <attribute name="POPULATE" value="0"/>
 </part>
 <part name="SUPPLY1" library="SparkFun-PowerSymbols" library_urn="urn:adsk.eagle:library:530" deviceset="VIN" device=""/>
@@ -4962,11 +4964,13 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="NAME" x="232.41" y="80.645" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="232.41" y="106.68" size="1.778" layer="96" rot="R180"/>
 <attribute name="POPULATE" x="226.06" y="91.44" size="1.778" layer="96" rot="R180" display="off"/>
+<attribute name="MPN" x="226.06" y="91.44" size="1.778" layer="96" rot="R180" display="off"/>
 </instance>
 <instance part="JP1" gate="G$1" x="215.9" y="93.98" smashed="yes">
 <attribute name="NAME" x="209.55" y="104.775" size="1.778" layer="95"/>
 <attribute name="VALUE" x="209.55" y="78.74" size="1.778" layer="96"/>
 <attribute name="POPULATE" x="215.9" y="93.98" size="1.778" layer="96" display="off"/>
+<attribute name="MPN" x="215.9" y="93.98" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="SUPPLY1" gate="G$1" x="193.04" y="177.8" smashed="yes">
 <attribute name="VALUE" x="193.04" y="180.594" size="1.778" layer="96" align="bottom-center"/>
@@ -5328,9 +5332,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <approved hash="104,1,129.54,104.14,U1,VSS,GND,,,"/>
 <approved hash="103,1,129.54,99.06,U1,NC(GND),GND,,,"/>
 <approved hash="106,1,228.6,99.06,A0,,,,,"/>
+<approved hash="106,1,213.36,96.52,D1/GPIO5,,,,,"/>
 <approved hash="106,1,213.36,93.98,D2/GPIO4,,,,,"/>
 <approved hash="106,1,213.36,91.44,D3/GPIO0,,,,,"/>
-<approved hash="106,1,213.36,88.9,D4/GPIO2,,,,,"/>
 <approved hash="106,1,228.6,91.44,D6/GPIO12/MISO,,,,,"/>
 <approved hash="106,1,228.6,101.6,RESET,,,,,"/>
 <approved hash="106,1,213.36,99.06,RX,,,,,"/>
