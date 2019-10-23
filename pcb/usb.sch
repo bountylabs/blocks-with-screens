@@ -9998,8 +9998,12 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="Q2" library="SparkFun" deviceset="TRANSISTOR_NPN" device="SOT23-3" value="mmbt2222">
 <attribute name="MPN" value="MMBT2222A-G"/>
 </part>
-<part name="JP2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1"/>
-<part name="JP1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1"/>
+<part name="JP2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1">
+<attribute name="MPN" value="8Fx1L-254mm"/>
+</part>
+<part name="JP1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1">
+<attribute name="MPN" value="8Fx1L-254mm"/>
+</part>
 <part name="J2" library="Wurth_Elektronik_Electromechanic_Input-Output_Connectors_rev19b" library_urn="urn:adsk.eagle:library:488835" deviceset="614105150621" device="" package3d_urn="urn:adsk.eagle:package:3360156/4">
 <attribute name="MPN" value="614105150621"/>
 </part>
@@ -10131,10 +10135,12 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <instance part="JP2" gate="G$1" x="58.42" y="20.32" smashed="yes" rot="R180">
 <attribute name="NAME" x="64.77" y="9.525" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="64.77" y="35.56" size="1.778" layer="96" rot="R180"/>
+<attribute name="MPN" x="58.42" y="20.32" size="1.778" layer="96" rot="R180" display="off"/>
 </instance>
 <instance part="JP1" gate="G$1" x="48.26" y="22.86" smashed="yes">
 <attribute name="NAME" x="41.91" y="33.655" size="1.778" layer="95"/>
 <attribute name="VALUE" x="41.91" y="7.62" size="1.778" layer="96"/>
+<attribute name="MPN" x="48.26" y="22.86" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="J2" gate="G$1" x="182.88" y="22.86" smashed="yes">
 <attribute name="NAME" x="180.34" y="33.528" size="1.778" layer="95"/>
