@@ -2,6 +2,17 @@
 
 ## Changelog
 
+### Microcontroller Board V2
+
+* Fixed disconnected decoupling capacitor.
+* Added optional header for MMA8452QR1 accelerometer.
+* Added optional [Qwiic](https://www.sparkfun.com/qwiic) header for SparkFun accessories.
+* Added optional [5050 NeoPixel](https://www.adafruit.com/product/1655) pad.
+
+### USB Board V3
+
+* Fix width of power trace going to the switch.
+
 ### OLED Board V2
 
 * Uses `D1` for `OLED DC` instead of `D6` (`MISO`) so we don’t have to hack SPI.c for hardware SPI.
