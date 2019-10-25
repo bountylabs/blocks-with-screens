@@ -6189,7 +6189,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </classes>
 <parts>
 <part name="C1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" value="10uF">
-<attribute name="MPN" value="EMK212ABJ106KG-T"/>
+<attribute name="MPN" value="LMK212BJ106KG-T"/>
 </part>
 <part name="GND1" library="supply1" deviceset="GND" device=""/>
 <part name="GND2" library="supply1" deviceset="GND" device=""/>
@@ -6236,14 +6236,14 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="GND7" library="SparkFun" deviceset="GND" device=""/>
 <part name="SUPPLY4" library="SparkFun-PowerSymbols" library_urn="urn:adsk.eagle:library:530" deviceset="VIN" device=""/>
 <part name="C2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" value=".1uF">
-<attribute name="MPN" value="08051C104J4T4A"/>
+<attribute name="MPN" value="C0805C104M3RACTU"/>
 </part>
 <part name="C4" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" value=".1uF">
-<attribute name="MPN" value="08051C104J4T4A"/>
+<attribute name="MPN" value="C0805C104M3RACTU"/>
 <attribute name="POPULATE" value="0"/>
 </part>
 <part name="C3" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" value="10uF">
-<attribute name="MPN" value="EMK212ABJ106KG-T"/>
+<attribute name="MPN" value="LMK212BJ106KG-T"/>
 <attribute name="POPULATE" value="0"/>
 </part>
 <part name="SUPPLY1" library="SparkFun-PowerSymbols" deviceset="3.3V" device=""/>

@@ -4755,7 +4755,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="MPN" value="ERJ-6ENF5903V"/>
 </part>
 <part name="C2" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="10uF/16V">
-<attribute name="MPN" value="EMK212ABJ106KG-T"/>
+<attribute name="MPN" value="LMK212BJ106KG-T"/>
 </part>
 <part name="C5" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="1.0uF">
 <attribute name="MPN" value="C0805C105K4RAC7210"/>
@@ -4770,7 +4770,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="MPN" value="C0805C105K4RAC7210"/>
 </part>
 <part name="C3" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="10uF">
-<attribute name="MPN" value="EMK212ABJ106KG-T"/>
+<attribute name="MPN" value="LMK212BJ106KG-T"/>
 </part>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="P+1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+12V" device="" value="+13V"/>
@@ -4780,7 +4780,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="MPN" value="FAN5331SX"/>
 </part>
 <part name="C6" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="10uF">
-<attribute name="MPN" value="EMK212ABJ106KG-T"/>
+<attribute name="MPN" value="LMK212BJ106KG-T"/>
 </part>
 <part name="L1" library="microbuilder" deviceset="INDUCTOR" device="" value="10uH">
 <attribute name="MPN" value="L0805R100MPWRT"/>
@@ -4798,14 +4798,14 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="GND4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="C7" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="0.1uF">
-<attribute name="MPN" value="08051C104J4T4A"/>
+<attribute name="MPN" value="C0805C104M3RACTU"/>
 </part>
 <part name="P+2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+12V" device="" value="+13V"/>
 <part name="U1" library="microbuilder" deviceset="DISP_OLED_UG-2828GDEDF11" device="TOP" value="UG-2828GDEDF11">
 <attribute name="MPN" value="XF2M-3015-1A"/>
 </part>
 <part name="C4" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="10uF/16V">
-<attribute name="MPN" value="EMK212ABJ106KG-T"/>
+<attribute name="MPN" value="LMK212BJ106KG-T"/>
 </part>
 <part name="D1" library="microbuilder" deviceset="DIODE" device="SOD-323" value="1N4148">
 <attribute name="MPN" value="1N4148WS-E3-08"/>

@@ -852,7 +852,7 @@ http://cache.freescale.com/files/sensors/doc/app_note/AN4077.pdf</description>
 </autorouter>
 <elements>
 <element name="C1" library="adafruit" library_urn="urn:adsk.eagle:library:420" package="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" value="10uF" x="19.685" y="5.461" smashed="yes" rot="R180">
-<attribute name="MPN" value="EMK212ABJ106KG-T" x="19.685" y="5.461" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MPN" value="LMK212BJ106KG-T" x="19.685" y="5.461" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="NAME" x="17.526" y="5.969" size="1.27" layer="25" font="vector" rot="R180"/>
 <attribute name="VALUE" x="20.574" y="7.747" size="1.27" layer="27" rot="R180"/>
 </element>
@@ -907,18 +907,18 @@ http://cache.freescale.com/files/sensors/doc/app_note/AN4077.pdf</description>
 <attribute name="POPULATE" value="0" x="8.128" y="15.875" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
 <element name="C2" library="adafruit" library_urn="urn:adsk.eagle:library:420" package="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" value=".1uF" x="19.646" y="2.667" smashed="yes" rot="R180">
-<attribute name="MPN" value="08051C104J4T4A" x="19.646" y="2.667" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MPN" value="C0805C104M3RACTU" x="19.646" y="2.667" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="NAME" x="17.487" y="3.175" size="1.27" layer="25" font="vector" rot="R180"/>
 <attribute name="VALUE" x="20.535" y="4.953" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="C4" library="adafruit" library_urn="urn:adsk.eagle:library:420" package="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" value=".1uF" x="7.874" y="4.445" smashed="yes" rot="R180">
-<attribute name="MPN" value="08051C104J4T4A" x="7.874" y="4.445" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MPN" value="C0805C104M3RACTU" x="7.874" y="4.445" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="NAME" x="5.715" y="4.953" size="1.27" layer="25" font="vector" rot="R180"/>
 <attribute name="POPULATE" value="0" x="7.874" y="4.445" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="VALUE" x="8.763" y="6.731" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="C3" library="adafruit" library_urn="urn:adsk.eagle:library:420" package="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" value="10uF" x="7.874" y="7.366" smashed="yes" rot="R180">
-<attribute name="MPN" value="EMK212ABJ106KG-T" x="7.874" y="7.366" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MPN" value="LMK212BJ106KG-T" x="7.874" y="7.366" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="NAME" x="5.715" y="7.874" size="1.27" layer="25" font="vector" rot="R180"/>
 <attribute name="POPULATE" value="0" x="7.874" y="7.366" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="VALUE" x="8.763" y="9.652" size="1.27" layer="27" rot="R180"/>

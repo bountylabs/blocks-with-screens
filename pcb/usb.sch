@@ -9978,10 +9978,10 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </part>
 <part name="J1" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_02" device="" package3d_urn="urn:adsk.eagle:package:38039/1" value="JSTPH"/>
 <part name="C1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" value="10µF">
-<attribute name="MPN" value="EMK212ABJ106KG-T"/>
+<attribute name="MPN" value="LMK212BJ106KG-T"/>
 </part>
 <part name="C3" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" value="10µF">
-<attribute name="MPN" value="EMK212ABJ106KG-T"/>
+<attribute name="MPN" value="LMK212BJ106KG-T"/>
 </part>
 <part name="R3" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" value="10K\">
 <attribute name="MPN" value="CRCW080510K0FKEAC"/>
@@ -10023,7 +10023,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="MPN" value="C0805C105K4RAC7210"/>
 </part>
 <part name="C5" library="SparkFun-Capacitors" library_urn="urn:adsk.eagle:library:510" deviceset="1.0UF" device="-0805-25V-10%" package3d_urn="urn:adsk.eagle:package:37429/1" value="0.1uF">
-<attribute name="MPN" value="08051C104J4T4A"/>
+<attribute name="MPN" value="C0805C104M3RACTU"/>
 </part>
 <part name="ON" library="microbuilder" deviceset="LED" device="0805_NOOUTLINE" value="RED">
 <attribute name="MPN" value="SMLEN3WBC8W1"/>
@@ -10054,7 +10054,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="GND10" library="SparkFun-PowerSymbols" library_urn="urn:adsk.eagle:library:530" deviceset="GND" device=""/>
 <part name="GND11" library="SparkFun-PowerSymbols" library_urn="urn:adsk.eagle:library:530" deviceset="GND" device=""/>
 <part name="C2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" value="10uF">
-<attribute name="MPN" value="EMK212ABJ106KG-T"/>
+<attribute name="MPN" value="LMK212BJ106KG-T"/>
 </part>
 </parts>
 <sheets>
