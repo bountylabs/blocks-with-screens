@@ -8976,183 +8976,6 @@ BJT configuration in SOT23 package. MMBT2222 is the common NPN we use. Double ch
 </deviceset>
 </devicesets>
 </library>
-<library name="Wurth_Elektronik_Electromechanic_Input-Output_Connectors_rev19b" urn="urn:adsk.eagle:library:488835">
-<description>&lt;BR&gt;Wurth Elektronik - Input/Output Connectors &lt;br&gt;&lt;Hr&gt;
-&lt;BR&gt;&lt;BR&gt; 
-&lt;TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0&gt;
-&lt;TR&gt;   
-&lt;TD BGCOLOR="#cccccc" ALIGN=CENTER&gt;&lt;FONT FACE=ARIAL SIZE=3&gt;&lt;BR&gt;&lt;br&gt;
-      &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&lt;BR&gt;
-       &lt;BR&gt;
-       &lt;BR&gt;
-       &lt;BR&gt;&lt;BR&gt;&lt;/FONT&gt;
-    &lt;/TD&gt;
-&lt;TD BGCOLOR="#cccccc" ALIGN=CENTER&gt;&lt;FONT FACE=ARIAL SIZE=3&gt;&lt;br&gt;
-      -----&lt;BR&gt;
-      -----&lt;BR&gt;
-      -----&lt;BR&gt;
-      -----&lt;BR&gt;
-      -----&lt;BR&gt;&lt;BR&gt;&lt;/FONT&gt;
-    &lt;/TD&gt;
-    &lt;TD BGCOLOR="#cccccc" ALIGN=CENTER&gt; &lt;FONT FACE=ARIAL SIZE=3&gt;&lt;br&gt;
-      ---------------------------&lt;BR&gt;
-&lt;B&gt;&lt;I&gt;&lt;span style='font-size:26pt;
-  color:#FF6600;'&gt;WE &lt;/span&gt;&lt;/i&gt;&lt;/b&gt;
-&lt;BR&gt;
-      ---------------------------&lt;BR&gt;&lt;b&gt;Würth Elektronik&lt;/b&gt;&lt;/FONT&gt;
-    &lt;/TD&gt;
-    &lt;TD BGCOLOR="#cccccc" ALIGN=CENTER&gt;&lt;FONT FACE=ARIAL SIZE=3&gt;&lt;br&gt;
-      ---------O---&lt;BR&gt;
-      ----O--------&lt;BR&gt;
-      ---------O---&lt;BR&gt;
-      ----O--------&lt;BR&gt;
-      ---------O---&lt;BR&gt;&lt;BR&gt;&lt;/FONT&gt;
-    &lt;/TD&gt;
-   
-&lt;TD BGCOLOR="#cccccc" ALIGN=CENTER&gt;&lt;FONT FACE=ARIAL SIZE=3&gt;&lt;BR&gt;
-      &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&lt;BR&gt;
-       &lt;BR&gt;
-       &lt;BR&gt;
-       &lt;BR&gt;
-       &lt;BR&gt;&lt;BR&gt;&lt;/FONT&gt;
-    &lt;/TD&gt;
-  &lt;/TR&gt;
-
-  &lt;TR&gt;
-    &lt;TD COLSPAN=7&gt;&amp;nbsp;
-    &lt;/TD&gt;
-  &lt;/TR&gt;
-  
-&lt;/TABLE&gt;
-&lt;B&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;More than you expect&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;/B&gt;
-
-&lt;HR&gt;&lt;BR&gt;
-&lt;b&gt;Würth Elektronik eiSos GmbH &amp; Co. KG&lt;/b&gt;&lt;br&gt;
-EMC &amp; Inductive Solutions&lt;br&gt;
-
-Max-Eyth-Str.1&lt;br&gt;
-D-74638 Waldenburg&lt;br&gt;
-&lt;br&gt;
-Tel: +49 (0)7942-945-0&lt;br&gt;
-Fax:+49 (0)7942-945-405&lt;br&gt;
-&lt;br&gt;
-&lt;a href="http://www.we-online.com/web/en/electronic_components/produkte_pb/bauteilebibliotheken/eagle_4.php"&gt;www.we-online.com/eagle&lt;/a&gt;&lt;br&gt;
-&lt;a href="mailto:libraries@we-online.com"&gt;libraries@we-online.com&lt;/a&gt; &lt;BR&gt;&lt;BR&gt;
-&lt;br&gt;&lt;HR&gt;&lt;BR&gt;
-Neither Autodesk nor Würth Elektronik eiSos does warrant that this library is error-free or &lt;br&gt;
-that it meets your specific requirements.&lt;br&gt;&lt;BR&gt;
-Please contact us for more information.&lt;br&gt;&lt;BR&gt;&lt;br&gt;
-&lt;hr&gt;
-Eagle Version 6, Library Revision 2019a,2018-01-10&lt;br&gt;
-&lt;HR&gt;
-Copyright: Würth Elektronik</description>
-<packages>
-<package name="614105150621" urn="urn:adsk.eagle:footprint:3359947/4" library_version="5">
-<description>&lt;b&gt;614105150621&lt;/b&gt;&lt;p&gt;
-WR-COM_USB_Micro Type AB_Vertical_THT Micro Type AB Vertical THT - Tape &amp; Reel not for Pick &amp; Place machine</description>
-<wire x1="-4" y1="-1.45" x2="-4" y2="1.45" width="0.127" layer="51"/>
-<wire x1="-4" y1="-1.45" x2="4" y2="-1.45" width="0.127" layer="21"/>
-<wire x1="-4" y1="1.45" x2="4" y2="1.45" width="0.127" layer="21"/>
-<wire x1="4" y1="-1.45" x2="4" y2="1.45" width="0.127" layer="51"/>
-<wire x1="3.4" y1="0.505" x2="3.4" y2="-0.505" width="0.127" layer="46"/>
-<wire x1="3.75" y1="0.505" x2="3.75" y2="-0.505" width="0.127" layer="46"/>
-<wire x1="3.4" y1="0.505" x2="3.75" y2="0.505" width="0.127" layer="46" curve="-180"/>
-<wire x1="3.4" y1="-0.505" x2="3.75" y2="-0.505" width="0.127" layer="46" curve="180"/>
-<wire x1="-3.75" y1="0.505" x2="-3.75" y2="-0.505" width="0.127" layer="46"/>
-<wire x1="-3.4" y1="0.505" x2="-3.4" y2="-0.505" width="0.127" layer="46"/>
-<wire x1="-3.75" y1="0.505" x2="-3.4" y2="0.505" width="0.127" layer="46" curve="-180"/>
-<wire x1="-3.75" y1="-0.505" x2="-3.4" y2="-0.505" width="0.127" layer="46" curve="180"/>
-<pad name="1" x="-1.3" y="0.22" drill="0.4" rot="R270"/>
-<pad name="2" x="-0.65" y="-0.78" drill="0.4" rot="R90"/>
-<pad name="3" x="0" y="0.22" drill="0.4" rot="R270"/>
-<pad name="4" x="0.65" y="-0.78" drill="0.4" rot="R90"/>
-<pad name="5" x="1.3" y="0.22" drill="0.4" rot="R270"/>
-<pad name="SHELL" x="-3.575" y="0" drill="0.35" diameter="0.95" shape="long" rot="R90"/>
-<pad name="SHELL1" x="3.575" y="0" drill="0.35" diameter="0.95" shape="long" rot="R90"/>
-<text x="-2.2116" y="2.42271875" size="1.016" layer="25" font="vector" ratio="13" rot="SR0">&gt;NAME</text>
-<text x="-2.5916" y="-3.15" size="1.016" layer="27" font="vector" ratio="13" rot="SR0">&gt;VALUE</text>
-<text x="-2.33" y="-0.03" size="0.6096" layer="48">1</text>
-<text x="-1.72" y="-1.15" size="0.6096" layer="48">2</text>
-<text x="1.98" y="-0.03" size="0.6096" layer="48">5</text>
-<text x="-2.33" y="-0.03" size="0.6096" layer="21">1</text>
-<polygon width="0.127" layer="39">
-<vertex x="4.25" y="1.75"/>
-<vertex x="4.25" y="-1.75"/>
-<vertex x="-4.25" y="-1.75"/>
-<vertex x="-4.25" y="1.75"/>
-</polygon>
-</package>
-</packages>
-<packages3d>
-<package3d name="614105150621" urn="urn:adsk.eagle:package:3360156/4" type="box" library_version="5">
-<description>&lt;b&gt;614105150621&lt;/b&gt;&lt;p&gt;
-WR-COM_USB_Micro Type AB_Vertical_THT Micro Type AB Vertical THT - Tape &amp; Reel not for Pick &amp; Place machine</description>
-<packageinstances>
-<packageinstance name="614105150621"/>
-</packageinstances>
-</package3d>
-</packages3d>
-<symbols>
-<symbol name="5_USB_A" urn="urn:adsk.eagle:symbol:3359732/4" library_version="5">
-<wire x1="-2.54" y1="-7.62" x2="-2.54" y2="7.62" width="0.254" layer="94"/>
-<wire x1="-2.54" y1="7.62" x2="3.81" y2="7.62" width="0.254" layer="94"/>
-<wire x1="3.81" y1="-7.62" x2="-2.54" y2="-7.62" width="0.254" layer="94"/>
-<wire x1="5.08" y1="8.89" x2="5.08" y2="-8.89" width="0.254" layer="94" style="shortdash"/>
-<wire x1="5.08" y1="-8.89" x2="1.27" y2="-8.89" width="0.254" layer="94" style="shortdash"/>
-<wire x1="1.27" y1="-8.89" x2="1.27" y2="-10.16" width="0.254" layer="94" style="shortdash"/>
-<wire x1="0" y1="-10.16" x2="1.27" y2="-10.16" width="0.254" layer="94" style="shortdash"/>
-<wire x1="1.27" y1="8.89" x2="5.08" y2="8.89" width="0.254" layer="94" style="shortdash"/>
-<text x="-2.54" y="10.668" size="1.778" layer="95">&gt;NAME</text>
-<text x="-2.54" y="-13.97" size="1.778" layer="96">&gt;VALUE</text>
-<text x="4.445" y="-2.2225" size="1.778" layer="94" rot="R90">USB</text>
-<pin name="GND" x="-7.62" y="5.08" length="middle" direction="pas"/>
-<pin name="ID" x="-7.62" y="2.54" length="middle" direction="pas"/>
-<pin name="D+" x="-7.62" y="0" length="middle" direction="pas"/>
-<pin name="D-" x="-7.62" y="-2.54" length="middle" direction="pas"/>
-<pin name="VBUS" x="-7.62" y="-5.08" length="middle" direction="pas"/>
-<pin name="SHIELD" x="-5.08" y="-10.16" length="middle" direction="pas"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="614105150621" urn="urn:adsk.eagle:component:3360413/4" prefix="J" uservalue="yes" library_version="5">
-<description>&lt;b&gt;WR-COM_USB_Micro Type AB_Vertical_THT;&lt;BR&gt;
-&lt;/b&gt;Micro Type AB Vertical THT - Tape &amp; Reel not for Pick &amp; Place machine
-&lt;/b&gt;&lt;br&gt;Code : Con_I-O_COM_USB_2.0_AB_614105150621_614105150621
-
-
-
-
-&lt;p&gt;&lt;a href="http://katalog.we-online.de/media/images/eican/Con_I-O_COM_USB_2.0_AB_614105150621_pf2.jpg"&gt;
-
-&lt;img src="http://katalog.we-online.de/media/images/eican/Con_I-O_COM_USB_2.0_AB_614105150621_pf2.jpg" width="320"&gt;&lt;/a&gt;&lt;p&gt;
-
-&lt;p&gt;Details see: &lt;a href="http://katalog.we-online.de/em/datasheet/614105150621.pdf"&gt;http://katalog.we-online.de/em/datasheet/614105150621.pdf&lt;/a&gt;
-&lt;p&gt;Created 12/08/2014, Dan Xu
-&lt;p&gt;2014 (C) Wurth Elektronik</description>
-<gates>
-<gate name="G$1" symbol="5_USB_A" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="614105150621">
-<connects>
-<connect gate="G$1" pin="D+" pad="3"/>
-<connect gate="G$1" pin="D-" pad="2"/>
-<connect gate="G$1" pin="GND" pad="5"/>
-<connect gate="G$1" pin="ID" pad="4"/>
-<connect gate="G$1" pin="SHIELD" pad="SHELL SHELL1"/>
-<connect gate="G$1" pin="VBUS" pad="1"/>
-</connects>
-<package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:3360156/4"/>
-</package3dinstances>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="SparkFun-Switches" urn="urn:adsk.eagle:library:535">
 <description>&lt;h3&gt;SparkFun Switches, Buttons, Encoders&lt;/h3&gt;
 In this library you'll find switches, buttons, joysticks, and anything that moves to create or disrupt an electrical connection.
@@ -10070,6 +9893,183 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </deviceset>
 </devicesets>
 </library>
+<library name="Wurth_Elektronik_Electromechanic_Input-Output_Connectors_rev19b_wider_slots">
+<description>&lt;BR&gt;Wurth Elektronik - Input/Output Connectors &lt;br&gt;&lt;Hr&gt;
+&lt;BR&gt;&lt;BR&gt; 
+&lt;TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0&gt;
+&lt;TR&gt;   
+&lt;TD BGCOLOR="#cccccc" ALIGN=CENTER&gt;&lt;FONT FACE=ARIAL SIZE=3&gt;&lt;BR&gt;&lt;br&gt;
+      &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&lt;BR&gt;
+       &lt;BR&gt;
+       &lt;BR&gt;
+       &lt;BR&gt;&lt;BR&gt;&lt;/FONT&gt;
+    &lt;/TD&gt;
+&lt;TD BGCOLOR="#cccccc" ALIGN=CENTER&gt;&lt;FONT FACE=ARIAL SIZE=3&gt;&lt;br&gt;
+      -----&lt;BR&gt;
+      -----&lt;BR&gt;
+      -----&lt;BR&gt;
+      -----&lt;BR&gt;
+      -----&lt;BR&gt;&lt;BR&gt;&lt;/FONT&gt;
+    &lt;/TD&gt;
+    &lt;TD BGCOLOR="#cccccc" ALIGN=CENTER&gt; &lt;FONT FACE=ARIAL SIZE=3&gt;&lt;br&gt;
+      ---------------------------&lt;BR&gt;
+&lt;B&gt;&lt;I&gt;&lt;span style='font-size:26pt;
+  color:#FF6600;'&gt;WE &lt;/span&gt;&lt;/i&gt;&lt;/b&gt;
+&lt;BR&gt;
+      ---------------------------&lt;BR&gt;&lt;b&gt;Würth Elektronik&lt;/b&gt;&lt;/FONT&gt;
+    &lt;/TD&gt;
+    &lt;TD BGCOLOR="#cccccc" ALIGN=CENTER&gt;&lt;FONT FACE=ARIAL SIZE=3&gt;&lt;br&gt;
+      ---------O---&lt;BR&gt;
+      ----O--------&lt;BR&gt;
+      ---------O---&lt;BR&gt;
+      ----O--------&lt;BR&gt;
+      ---------O---&lt;BR&gt;&lt;BR&gt;&lt;/FONT&gt;
+    &lt;/TD&gt;
+   
+&lt;TD BGCOLOR="#cccccc" ALIGN=CENTER&gt;&lt;FONT FACE=ARIAL SIZE=3&gt;&lt;BR&gt;
+      &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&lt;BR&gt;
+       &lt;BR&gt;
+       &lt;BR&gt;
+       &lt;BR&gt;
+       &lt;BR&gt;&lt;BR&gt;&lt;/FONT&gt;
+    &lt;/TD&gt;
+  &lt;/TR&gt;
+
+  &lt;TR&gt;
+    &lt;TD COLSPAN=7&gt;&amp;nbsp;
+    &lt;/TD&gt;
+  &lt;/TR&gt;
+  
+&lt;/TABLE&gt;
+&lt;B&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;More than you expect&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;/B&gt;
+
+&lt;HR&gt;&lt;BR&gt;
+&lt;b&gt;Würth Elektronik eiSos GmbH &amp; Co. KG&lt;/b&gt;&lt;br&gt;
+EMC &amp; Inductive Solutions&lt;br&gt;
+
+Max-Eyth-Str.1&lt;br&gt;
+D-74638 Waldenburg&lt;br&gt;
+&lt;br&gt;
+Tel: +49 (0)7942-945-0&lt;br&gt;
+Fax:+49 (0)7942-945-405&lt;br&gt;
+&lt;br&gt;
+&lt;a href="http://www.we-online.com/web/en/electronic_components/produkte_pb/bauteilebibliotheken/eagle_4.php"&gt;www.we-online.com/eagle&lt;/a&gt;&lt;br&gt;
+&lt;a href="mailto:libraries@we-online.com"&gt;libraries@we-online.com&lt;/a&gt; &lt;BR&gt;&lt;BR&gt;
+&lt;br&gt;&lt;HR&gt;&lt;BR&gt;
+Neither Autodesk nor Würth Elektronik eiSos does warrant that this library is error-free or &lt;br&gt;
+that it meets your specific requirements.&lt;br&gt;&lt;BR&gt;
+Please contact us for more information.&lt;br&gt;&lt;BR&gt;&lt;br&gt;
+&lt;hr&gt;
+Eagle Version 6, Library Revision 2019b,2019-08-26&lt;br&gt;
+&lt;HR&gt;
+Copyright: Würth Elektronik</description>
+<packages>
+<package name="614105150621" urn="urn:adsk.eagle:footprint:3359947/4" locally_modified="yes">
+<description>&lt;b&gt;614105150621&lt;/b&gt;&lt;p&gt;
+WR-COM_USB_Micro Type AB_Vertical_THT Micro Type AB Vertical THT - Tape &amp; Reel not for Pick &amp; Place machine</description>
+<wire x1="-4" y1="-1.45" x2="-4" y2="1.45" width="0.127" layer="51"/>
+<wire x1="-4" y1="-1.45" x2="4" y2="-1.45" width="0.127" layer="21"/>
+<wire x1="-4" y1="1.45" x2="4" y2="1.45" width="0.127" layer="21"/>
+<wire x1="4" y1="-1.45" x2="4" y2="1.45" width="0.127" layer="51"/>
+<wire x1="3.3238" y1="0.505" x2="3.3238" y2="-0.505" width="0.127" layer="46"/>
+<wire x1="3.8262" y1="0.505" x2="3.8262" y2="-0.505" width="0.127" layer="46"/>
+<wire x1="3.3238" y1="0.505" x2="3.8262" y2="0.505" width="0.127" layer="46" curve="-180"/>
+<wire x1="3.3238" y1="-0.505" x2="3.8262" y2="-0.505" width="0.127" layer="46" curve="180"/>
+<wire x1="-3.8262" y1="0.505" x2="-3.8262" y2="-0.505" width="0.127" layer="46"/>
+<wire x1="-3.3238" y1="0.505" x2="-3.3238" y2="-0.505" width="0.127" layer="46"/>
+<wire x1="-3.8262" y1="0.505" x2="-3.3238" y2="0.505" width="0.127" layer="46" curve="-180"/>
+<wire x1="-3.8262" y1="-0.505" x2="-3.3238" y2="-0.505" width="0.127" layer="46" curve="180"/>
+<pad name="1" x="-1.3" y="0.22" drill="0.4" rot="R270"/>
+<pad name="2" x="-0.65" y="-0.78" drill="0.4" rot="R90"/>
+<pad name="3" x="0" y="0.22" drill="0.4" rot="R270"/>
+<pad name="4" x="0.65" y="-0.78" drill="0.4" rot="R90"/>
+<pad name="5" x="1.3" y="0.22" drill="0.4" rot="R270"/>
+<pad name="SHELL" x="-3.575" y="0" drill="0.35" diameter="0.95" shape="long" rot="R90"/>
+<pad name="SHELL1" x="3.575" y="0" drill="0.35" diameter="0.95" shape="long" rot="R90"/>
+<text x="-2.2116" y="2.42271875" size="1.016" layer="25" font="vector" ratio="13" rot="SR0">&gt;NAME</text>
+<text x="-2.5916" y="-3.15" size="1.016" layer="27" font="vector" ratio="13" rot="SR0">&gt;VALUE</text>
+<text x="-2.33" y="-0.03" size="0.6096" layer="48">1</text>
+<text x="-1.72" y="-1.15" size="0.6096" layer="48">2</text>
+<text x="1.98" y="-0.03" size="0.6096" layer="48">5</text>
+<text x="-2.33" y="-0.03" size="0.6096" layer="21">1</text>
+<polygon width="0.127" layer="39">
+<vertex x="4.25" y="1.75"/>
+<vertex x="4.25" y="-1.75"/>
+<vertex x="-4.25" y="-1.75"/>
+<vertex x="-4.25" y="1.75"/>
+</polygon>
+</package>
+</packages>
+<packages3d>
+<package3d name="614105150621" urn="urn:adsk.eagle:package:3360156/4" type="box">
+<description>&lt;b&gt;614105150621&lt;/b&gt;&lt;p&gt;
+WR-COM_USB_Micro Type AB_Vertical_THT Micro Type AB Vertical THT - Tape &amp; Reel not for Pick &amp; Place machine</description>
+<packageinstances>
+<packageinstance name="614105150621"/>
+</packageinstances>
+</package3d>
+</packages3d>
+<symbols>
+<symbol name="5_USB_A">
+<wire x1="-2.54" y1="-7.62" x2="-2.54" y2="7.62" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="7.62" x2="3.81" y2="7.62" width="0.254" layer="94"/>
+<wire x1="3.81" y1="-7.62" x2="-2.54" y2="-7.62" width="0.254" layer="94"/>
+<wire x1="5.08" y1="8.89" x2="5.08" y2="-8.89" width="0.254" layer="94" style="shortdash"/>
+<wire x1="5.08" y1="-8.89" x2="1.27" y2="-8.89" width="0.254" layer="94" style="shortdash"/>
+<wire x1="1.27" y1="-8.89" x2="1.27" y2="-10.16" width="0.254" layer="94" style="shortdash"/>
+<wire x1="0" y1="-10.16" x2="1.27" y2="-10.16" width="0.254" layer="94" style="shortdash"/>
+<wire x1="1.27" y1="8.89" x2="5.08" y2="8.89" width="0.254" layer="94" style="shortdash"/>
+<text x="-2.54" y="10.668" size="1.778" layer="95">&gt;NAME</text>
+<text x="-2.54" y="-13.97" size="1.778" layer="96">&gt;VALUE</text>
+<text x="4.445" y="-2.2225" size="1.778" layer="94" rot="R90">USB</text>
+<pin name="GND" x="-7.62" y="5.08" length="middle" direction="pas"/>
+<pin name="ID" x="-7.62" y="2.54" length="middle" direction="pas"/>
+<pin name="D+" x="-7.62" y="0" length="middle" direction="pas"/>
+<pin name="D-" x="-7.62" y="-2.54" length="middle" direction="pas"/>
+<pin name="VBUS" x="-7.62" y="-5.08" length="middle" direction="pas"/>
+<pin name="SHIELD" x="-5.08" y="-10.16" length="middle" direction="pas"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="614105150621" prefix="J" uservalue="yes">
+<description>&lt;b&gt;WR-COM_USB_Micro Type AB_Vertical_THT;&lt;BR&gt;
+&lt;/b&gt;Micro Type AB Vertical THT - Tape &amp; Reel not for Pick &amp; Place machine
+&lt;/b&gt;&lt;br&gt;Code : Con_I-O_COM_USB_2.0_AB_614105150621_614105150621
+
+
+
+
+&lt;p&gt;&lt;a href="http://katalog.we-online.de/media/images/eican/Con_I-O_COM_USB_2.0_AB_614105150621_pf2.jpg"&gt;
+
+&lt;img src="http://katalog.we-online.de/media/images/eican/Con_I-O_COM_USB_2.0_AB_614105150621_pf2.jpg" width="320"&gt;&lt;/a&gt;&lt;p&gt;
+
+&lt;p&gt;Details see: &lt;a href="http://katalog.we-online.de/em/datasheet/614105150621.pdf"&gt;http://katalog.we-online.de/em/datasheet/614105150621.pdf&lt;/a&gt;
+&lt;p&gt;Created 12/08/2014, Dan Xu
+&lt;p&gt;2014 (C) Wurth Elektronik</description>
+<gates>
+<gate name="G$1" symbol="5_USB_A" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="614105150621">
+<connects>
+<connect gate="G$1" pin="D+" pad="3"/>
+<connect gate="G$1" pin="D-" pad="2"/>
+<connect gate="G$1" pin="GND" pad="5"/>
+<connect gate="G$1" pin="ID" pad="4"/>
+<connect gate="G$1" pin="SHIELD" pad="SHELL SHELL1"/>
+<connect gate="G$1" pin="VBUS" pad="1"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:3360156/4"/>
+</package3dinstances>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -10122,7 +10122,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="JP1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1">
 <attribute name="MPN" value="8Fx1L-254mm"/>
 </part>
-<part name="J2" library="Wurth_Elektronik_Electromechanic_Input-Output_Connectors_rev19b" library_urn="urn:adsk.eagle:library:488835" deviceset="614105150621" device="" package3d_urn="urn:adsk.eagle:package:3360156/4">
+<part name="J2" library="Wurth_Elektronik_Electromechanic_Input-Output_Connectors_rev19b_wider_slots" deviceset="614105150621" device="" package3d_urn="urn:adsk.eagle:package:3360156/4">
 <attribute name="MPN" value="614105150621"/>
 </part>
 <part name="D1" library="microbuilder" deviceset="DIODE-SCHOTTKY" device="SOD-123" value="MBR120">
