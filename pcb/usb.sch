@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.5.1">
+<eagle version="9.6.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -10651,7 +10651,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <label x="170.18" y="17.78" size="1.778" layer="95" rot="R180"/>
 </segment>
 </net>
-<net name="3.3V" class="0">
+<net name="3.3V" class="1">
 <segment>
 <pinref part="C4" gate="G$1" pin="1"/>
 <pinref part="U2" gate="U1" pin="VCC"/>
@@ -10676,6 +10676,10 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </sheet>
 </sheets>
 <errors>
+<approved hash="104,1,63.5,71.12,U1,IN,VIN,,,"/>
+<approved hash="104,1,83.82,71.12,U1,OUT,3.3V,,,"/>
+<approved hash="104,1,81.28,111.76,U3,VSS,GND,,,"/>
+<approved hash="104,1,53.34,121.92,U3,VDD,V_USB,,,"/>
 <approved hash="106,1,60.96,27.94,A0,,,,,"/>
 <approved hash="106,1,60.96,25.4,D0/GPIO16,,,,,"/>
 <approved hash="106,1,45.72,25.4,D1/GPIO5,,,,,"/>
@@ -10685,6 +10689,10 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <approved hash="106,1,60.96,20.32,D6/GPIO12,,,,,"/>
 <approved hash="106,1,60.96,17.78,D7/GPIO13/MOSI,,,,,"/>
 <approved hash="106,1,60.96,15.24,D8/GPIO15,,,,,"/>
+<approved hash="113,1,60.7229,20.1244,JP2,,,,,"/>
+<approved hash="113,1,45.9571,23.0556,JP1,,,,,"/>
+<approved hash="113,1,182.011,23.4544,J2,,,,,"/>
+<approved hash="113,1,44.45,69.0795,S1,,,,,"/>
 </errors>
 </schematic>
 </drawing>
