@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.5.1">
+<eagle version="9.6.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -24,17 +24,17 @@
 <layer number="13" name="Route13" color="4" fill="5" visible="no" active="no"/>
 <layer number="14" name="Route14" color="1" fill="6" visible="no" active="no"/>
 <layer number="15" name="Route15" color="4" fill="6" visible="no" active="no"/>
-<layer number="16" name="Bottom" color="1" fill="1" visible="no" active="yes"/>
+<layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
 <layer number="17" name="Pads" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="18" name="Vias" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="yes"/>
 <layer number="20" name="Dimension" color="15" fill="1" visible="yes" active="yes"/>
 <layer number="21" name="tPlace" color="14" fill="1" visible="yes" active="yes"/>
-<layer number="22" name="bPlace" color="5" fill="1" visible="no" active="yes"/>
+<layer number="22" name="bPlace" color="5" fill="1" visible="yes" active="yes"/>
 <layer number="23" name="tOrigins" color="14" fill="1" visible="yes" active="yes"/>
-<layer number="24" name="bOrigins" color="13" fill="1" visible="no" active="yes"/>
+<layer number="24" name="bOrigins" color="13" fill="1" visible="yes" active="yes"/>
 <layer number="25" name="tNames" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="26" name="bNames" color="7" fill="1" visible="no" active="yes"/>
+<layer number="26" name="bNames" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="27" name="tValues" color="7" fill="1" visible="no" active="yes"/>
 <layer number="28" name="bValues" color="7" fill="1" visible="no" active="yes"/>
 <layer number="29" name="tStop" color="7" fill="3" visible="no" active="yes"/>
@@ -48,9 +48,9 @@
 <layer number="37" name="tTest" color="7" fill="1" visible="no" active="yes"/>
 <layer number="38" name="bTest" color="7" fill="1" visible="no" active="yes"/>
 <layer number="39" name="tKeepout" color="4" fill="11" visible="yes" active="yes"/>
-<layer number="40" name="bKeepout" color="1" fill="11" visible="no" active="yes"/>
+<layer number="40" name="bKeepout" color="1" fill="11" visible="yes" active="yes"/>
 <layer number="41" name="tRestrict" color="4" fill="10" visible="yes" active="yes"/>
-<layer number="42" name="bRestrict" color="1" fill="10" visible="no" active="yes"/>
+<layer number="42" name="bRestrict" color="1" fill="10" visible="yes" active="yes"/>
 <layer number="43" name="vRestrict" color="2" fill="10" visible="no" active="yes"/>
 <layer number="44" name="Drills" color="7" fill="1" visible="no" active="yes"/>
 <layer number="45" name="Holes" color="7" fill="1" visible="no" active="yes"/>
@@ -60,7 +60,7 @@
 <layer number="49" name="Reference" color="7" fill="1" visible="no" active="yes"/>
 <layer number="50" name="dxf" color="7" fill="1" visible="no" active="yes"/>
 <layer number="51" name="tDocu" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="52" name="bDocu" color="7" fill="1" visible="no" active="yes"/>
+<layer number="52" name="bDocu" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="53" name="tGND_GNDA" color="7" fill="9" visible="no" active="no"/>
 <layer number="54" name="bGND_GNDA" color="1" fill="9" visible="no" active="no"/>
 <layer number="56" name="wert" color="7" fill="1" visible="no" active="yes"/>
@@ -158,7 +158,7 @@
 <layer number="255" name="routoute" color="7" fill="1" visible="no" active="yes"/>
 </layers>
 <board>
-<fusionsync huburn="a.cGVyc29uYWw6dWUyODFhMTI5" projecturn="a.cGVyc29uYWw6dWUyODFhMTI5IzIwMTkwOTE3MjE1ODk1MzI2" f3durn="urn:adsk.wipprod:dm.lineage:P5lhZWs8S_KHtQ88bDf2NQ" pcbguid="41a5d6a7-389c-46a8-a506-c144d03ed23a" lastpulledtime="" lastsyncedchangeguid="8a204f6f-dc2d-3ee4-bfb7-58d6c85a98a5"/>
+<fusionsync huburn="a.cGVyc29uYWw6dWUyODFhMTI5" projecturn="a.cGVyc29uYWw6dWUyODFhMTI5IzIwMTkwOTE3MjE1ODk1MzI2" f3durn="urn:adsk.wipprod:dm.lineage:P5lhZWs8S_KHtQ88bDf2NQ" pcbguid="41a5d6a7-389c-46a8-a506-c144d03ed23a" lastpulledtime="" lastsyncedchangeguid="8a204f6f-dc2d-3ee4-bfb7-58d6c85a98a5" latestrevisionid="" lastsyncedrevisionid="" lastboardhashguid="" lastpushedtime="" linktopcb3d="false"/>
 <plain>
 <wire x1="0" y1="26.162" x2="0" y2="0" width="0" layer="20"/>
 <wire x1="0" y1="0" x2="26.162" y2="0" width="0" layer="20"/>
@@ -171,7 +171,7 @@
 <text x="0.508" y="1.016" size="1.27" layer="25" font="vector">VIN</text>
 <text x="25.654" y="2.413" size="1.27" layer="25" font="vector" rot="R180">3V3</text>
 <text x="13.462" y="25.146" size="1.4224" layer="25" font="vector" ratio="10" align="top-center">BWS
-uC V2</text>
+uC V3</text>
 <text x="23.495" y="21.59" size="0.8128" layer="26" rot="MR0">RST</text>
 <text x="23.495" y="19.05" size="0.8128" layer="26" rot="MR0">A0</text>
 <text x="23.495" y="16.51" size="0.8128" layer="26" rot="MR0">D0</text>
@@ -957,9 +957,8 @@ http://cache.freescale.com/files/sensors/doc/app_note/AN4077.pdf</description>
 <wire x1="14.224" y1="4.064" x2="13.716" y2="4.064" width="0.2032" layer="1"/>
 <wire x1="13.716" y1="4.064" x2="13.617" y2="4.072" width="0.2032" layer="1"/>
 <wire x1="14.224" y1="4.064" x2="14.34175" y2="4.07198125" width="0.2032" layer="1"/>
-<wire x1="14.224" y1="5.08" x2="13.716" y2="5.08" width="0.2032" layer="1"/>
-<wire x1="13.716" y1="5.08" x2="13.617" y2="5.072" width="0.2032" layer="1"/>
-<wire x1="14.224" y1="5.08" x2="14.34175" y2="5.07198125" width="0.2032" layer="1"/>
+<wire x1="14.34198125" y1="5.072" x2="13.617" y2="5.072" width="0.2032" layer="1"/>
+<wire x1="14.34198125" y1="5.072" x2="14.34175" y2="5.07198125" width="0.2032" layer="1"/>
 <wire x1="7.024" y1="4.445" x2="7.366" y2="4.103" width="0.4064" layer="1"/>
 <wire x1="7.366" y1="4.103" x2="7.366" y2="2.921" width="0.4064" layer="1"/>
 <via x="7.366" y="2.921" extent="1-16" drill="0.4"/>
@@ -1171,8 +1170,6 @@ http://cache.freescale.com/files/sensors/doc/app_note/AN4077.pdf</description>
 <wire x1="12.7" y1="6.858" x2="12.192" y2="7.366" width="0.4064" layer="1"/>
 <wire x1="12.192" y1="7.366" x2="8.724" y2="7.366" width="0.4064" layer="1"/>
 <wire x1="10.767" y1="5.572" x2="10.7106" y2="5.6284" width="0.254" layer="1"/>
-</signal>
-<signal name="N$1" class="1">
 <contactref element="C1" pad="1"/>
 <contactref element="X1" pad="8"/>
 <contactref element="C2" pad="1"/>
@@ -1185,6 +1182,8 @@ http://cache.freescale.com/files/sensors/doc/app_note/AN4077.pdf</description>
 <wire x1="20.6248" y1="3.556" x2="20.581" y2="3.581" width="0.4064" layer="16"/>
 <wire x1="20.6248" y1="2.54" x2="20.496" y2="2.667" width="0.4064" layer="1"/>
 <via x="21.844" y="2.3368" extent="1-16" drill="0.4"/>
+<wire x1="24.511" y1="4.191" x2="22.6568" y2="2.3368" width="0.4064" layer="1"/>
+<wire x1="22.6568" y1="2.3368" x2="21.844" y2="2.3368" width="0.4064" layer="1"/>
 </signal>
 <signal name="D6/GPIO12/MISO">
 <contactref element="JP2" pad="4"/>

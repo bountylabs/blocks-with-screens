@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.5.1">
+<eagle version="9.6.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -6249,6 +6249,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="SUPPLY1" library="SparkFun-PowerSymbols" deviceset="3.3V" device=""/>
 <part name="SUPPLY5" library="SparkFun-PowerSymbols" deviceset="3.3V" device=""/>
 <part name="SUPPLY6" library="SparkFun-PowerSymbols" deviceset="3.3V" device=""/>
+<part name="SUPPLY7" library="SparkFun-PowerSymbols" deviceset="3.3V" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -6372,6 +6373,9 @@ GPIO4 and GPIO5 are swapped</text>
 </instance>
 <instance part="SUPPLY6" gate="G$1" x="99.06" y="76.2" smashed="yes">
 <attribute name="VALUE" x="99.06" y="78.994" size="1.778" layer="96" align="bottom-center"/>
+</instance>
+<instance part="SUPPLY7" gate="G$1" x="96.52" y="53.34" smashed="yes">
+<attribute name="VALUE" x="96.52" y="56.134" size="1.778" layer="96" align="bottom-center"/>
 </instance>
 </instances>
 <busses>
@@ -6628,8 +6632,6 @@ GPIO4 and GPIO5 are swapped</text>
 <wire x1="121.92" y1="81.28" x2="121.92" y2="83.82" width="0.1524" layer="91"/>
 <pinref part="SUPPLY5" gate="G$1" pin="3.3V"/>
 </segment>
-</net>
-<net name="N$1" class="1">
 <segment>
 <pinref part="C1" gate="G$1" pin="1"/>
 <wire x1="109.22" y1="50.8" x2="109.22" y2="53.34" width="0.1524" layer="91"/>
@@ -6639,6 +6641,9 @@ GPIO4 and GPIO5 are swapped</text>
 <wire x1="119.38" y1="53.34" x2="124.46" y2="53.34" width="0.1524" layer="91"/>
 <wire x1="119.38" y1="53.34" x2="119.38" y2="50.8" width="0.1524" layer="91"/>
 <junction x="119.38" y="53.34"/>
+<pinref part="SUPPLY7" gate="G$1" pin="3.3V"/>
+<wire x1="109.22" y1="53.34" x2="96.52" y2="53.34" width="0.1524" layer="91"/>
+<junction x="109.22" y="53.34"/>
 </segment>
 </net>
 <net name="D6/GPIO12/MISO" class="0">
@@ -6706,7 +6711,7 @@ GPIO4 and GPIO5 are swapped</text>
 </sheet>
 </sheets>
 <errors>
-<approved hash="104,1,124.46,53.34,X1,VCC,N$1,,,"/>
+<approved hash="104,1,124.46,53.34,X1,VCC,3.3V,,,"/>
 <approved hash="104,1,218.44,12.7,J1,VCC,3.3V,,,"/>
 <approved hash="104,1,279.4,25.4,LED1,VDD,VIN,,,"/>
 <approved hash="113,1,142.24,66.04,X1,,,,,"/>

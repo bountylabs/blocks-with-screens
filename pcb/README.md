@@ -2,6 +2,16 @@
 
 ## Changelog
 
+### Microcontroller Board V3
+
+* Attach 3.3V to the ESP12 (doh!)
+
+### USB Board V4
+
+* Use thicker (power) trace for 3.3V
+* Add a jumper to make the switch unnecessary by default
+* Make the slots wider to comply with PCBWay
+
 ### OLED Board V3
 
 * Uses `D4/GPIO2` for `OLED DC` instead of `D1/GPIO5` since that pin is I2C `SCK`.
