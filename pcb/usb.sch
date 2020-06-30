@@ -9952,6 +9952,92 @@ WR-COM_USB_Micro Type AB_Vertical_THT Micro Type AB Vertical THT - Tape &amp; Re
 </deviceset>
 </devicesets>
 </library>
+<library name="con-jst2.rpt">
+<description>&lt;b&gt;J.S.T. Connectors&lt;/b&gt;&lt;p&gt;
+J.S.T Mfg Co.,Ltd.&lt;p&gt;
+http://www.jst-mfg.com&lt;p&gt;
+&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
+<packages>
+<package name="SM02B-SRSS-TB">
+<description>&lt;b&gt;Shrouded Header, side entry type&lt;/b&gt;</description>
+<wire x1="-1.873" y1="-1.473" x2="-1.873" y2="2.523" width="0.254" layer="51"/>
+<wire x1="-1.873" y1="2.523" x2="1.873" y2="2.523" width="0.254" layer="51"/>
+<wire x1="1.873" y1="2.523" x2="1.873" y2="-1.473" width="0.254" layer="51"/>
+<wire x1="1.873" y1="-1.473" x2="-1.873" y2="-1.473" width="0.254" layer="51"/>
+<wire x1="-1.873" y1="0.5" x2="-1.873" y2="2.523" width="0.254" layer="21"/>
+<wire x1="-1.873" y1="2.523" x2="-1.5" y2="2.523" width="0.254" layer="21"/>
+<wire x1="1.873" y1="0.5" x2="1.873" y2="2.523" width="0.254" layer="21"/>
+<wire x1="1.873" y1="2.523" x2="1.5" y2="2.523" width="0.254" layer="21"/>
+<wire x1="-0.5" y1="-1.473" x2="0.5" y2="-1.473" width="0.254" layer="21"/>
+<smd name="1" x="-0.5" y="2.975" dx="0.6" dy="1.55" layer="1"/>
+<smd name="2" x="0.5" y="2.975" dx="0.6" dy="1.55" layer="1"/>
+<smd name="FIT@1" x="-1.8" y="-0.9" dx="1.2" dy="1.8" layer="1"/>
+<smd name="FIT@2" x="1.8" y="-0.9" dx="1.2" dy="1.8" layer="1"/>
+<text x="-3.175" y="-1.905" size="1.27" layer="25" rot="R90">&gt;NAME</text>
+<text x="4.445" y="-1.905" size="1.27" layer="27" rot="R90">&gt;VALUE</text>
+</package>
+<package name="BM02B-SRSS-TB">
+<description>&lt;b&gt;Shrouded Header, top entry type&lt;/b&gt;</description>
+<wire x1="-1.873" y1="1.473" x2="-1.873" y2="-1.427" width="0.254" layer="51"/>
+<wire x1="-1.873" y1="-1.427" x2="1.873" y2="-1.427" width="0.254" layer="51"/>
+<wire x1="1.873" y1="-1.427" x2="1.873" y2="1.473" width="0.254" layer="51"/>
+<wire x1="1.873" y1="1.473" x2="-1.873" y2="1.473" width="0.254" layer="51"/>
+<wire x1="-1.873" y1="-0.5" x2="-1.873" y2="-1.427" width="0.254" layer="21"/>
+<wire x1="-1.873" y1="-1.427" x2="-1.5" y2="-1.427" width="0.254" layer="21"/>
+<wire x1="1.873" y1="-0.5" x2="1.873" y2="-1.427" width="0.254" layer="21"/>
+<wire x1="1.873" y1="-1.427" x2="1.5" y2="-1.427" width="0.254" layer="21"/>
+<wire x1="-0.5" y1="1.473" x2="0.5" y2="1.473" width="0.254" layer="21"/>
+<smd name="2" x="-0.5" y="-1.625" dx="0.6" dy="1.55" layer="1"/>
+<smd name="1" x="0.5" y="-1.625" dx="0.6" dy="1.55" layer="1"/>
+<smd name="FIT@1" x="1.8" y="0.9" dx="1.2" dy="1.8" layer="1"/>
+<smd name="FIT@2" x="-1.8" y="0.9" dx="1.2" dy="1.8" layer="1"/>
+<text x="-4.445" y="1.905" size="1.27" layer="25" rot="R270">&gt;NAME</text>
+<text x="3.175" y="1.905" size="1.27" layer="27" rot="R270">&gt;VALUE</text>
+</package>
+</packages>
+<symbols>
+<symbol name="KV">
+<wire x1="1.27" y1="0" x2="0" y2="0" width="0.6096" layer="94"/>
+<text x="2.54" y="-0.762" size="1.524" layer="95">&gt;NAME</text>
+<text x="-0.762" y="1.397" size="1.524" layer="96">&gt;VALUE</text>
+<pin name="S" x="-2.54" y="0" visible="off" length="short" direction="pas"/>
+</symbol>
+<symbol name="K">
+<wire x1="1.27" y1="0" x2="0" y2="0" width="0.6096" layer="94"/>
+<text x="2.54" y="-0.762" size="1.524" layer="95">&gt;NAME</text>
+<pin name="S" x="-2.54" y="0" visible="off" length="short" direction="pas"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="?M02B-SRSS-TB" prefix="X">
+<description>&lt;b&gt;Disconnectable Crimp style connector, 1.0mm pitch&lt;/b&gt;&lt;br&gt;2 contacts</description>
+<gates>
+<gate name="-1" symbol="KV" x="0" y="2.54" addlevel="always" swaplevel="1"/>
+<gate name="-2" symbol="K" x="0" y="0" addlevel="always" swaplevel="1"/>
+</gates>
+<devices>
+<device name="S" package="SM02B-SRSS-TB">
+<connects>
+<connect gate="-1" pin="S" pad="1"/>
+<connect gate="-2" pin="S" pad="2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="B" package="BM02B-SRSS-TB">
+<connects>
+<connect gate="-1" pin="S" pad="1"/>
+<connect gate="-2" pin="S" pad="2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -10056,6 +10142,9 @@ WR-COM_USB_Micro Type AB_Vertical_THT Micro Type AB Vertical THT - Tape &amp; Re
 <part name="C2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" value="10uF">
 <attribute name="MPN" value="LMK212BJ106KG-T"/>
 </part>
+<part name="X1" library="con-jst2.rpt" deviceset="?M02B-SRSS-TB" device="S"/>
+<part name="SUPPLY9" library="SparkFun-PowerSymbols" library_urn="urn:adsk.eagle:library:530" deviceset="V_BATT" device=""/>
+<part name="GND12" library="SparkFun-PowerSymbols" library_urn="urn:adsk.eagle:library:530" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -10254,6 +10343,19 @@ WR-COM_USB_Micro Type AB_Vertical_THT Micro Type AB Vertical THT - Tape &amp; Re
 <attribute name="VALUE" x="64.516" y="61.849" size="1.778" layer="96"/>
 <attribute name="MPN" x="63.5" y="66.04" size="1.778" layer="96" display="off"/>
 </instance>
+<instance part="X1" gate="-1" x="129.54" y="121.92" smashed="yes">
+<attribute name="NAME" x="132.08" y="121.158" size="1.524" layer="95"/>
+<attribute name="VALUE" x="128.778" y="123.317" size="1.524" layer="96"/>
+</instance>
+<instance part="X1" gate="-2" x="129.54" y="119.38" smashed="yes">
+<attribute name="NAME" x="132.08" y="118.618" size="1.524" layer="95"/>
+</instance>
+<instance part="SUPPLY9" gate="G$1" x="124.46" y="129.54" smashed="yes">
+<attribute name="VALUE" x="124.46" y="132.334" size="1.778" layer="96" align="bottom-center"/>
+</instance>
+<instance part="GND12" gate="1" x="124.46" y="109.22" smashed="yes">
+<attribute name="VALUE" x="124.46" y="108.966" size="1.778" layer="96" align="top-center"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -10332,6 +10434,12 @@ WR-COM_USB_Micro Type AB_Vertical_THT Micro Type AB Vertical THT - Tape &amp; Re
 <pinref part="U2" gate="U1" pin="GND"/>
 <wire x1="172.72" y1="109.22" x2="177.8" y2="109.22" width="0.1524" layer="91"/>
 <pinref part="GND11" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="X1" gate="-2" pin="S"/>
+<wire x1="127" y1="119.38" x2="124.46" y2="119.38" width="0.1524" layer="91"/>
+<pinref part="GND12" gate="1" pin="GND"/>
+<wire x1="124.46" y1="119.38" x2="124.46" y2="111.76" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="RX" class="0">
@@ -10616,6 +10724,12 @@ WR-COM_USB_Micro Type AB_Vertical_THT Micro Type AB Vertical THT - Tape &amp; Re
 <junction x="106.68" y="121.92"/>
 <pinref part="SUPPLY6" gate="G$1" pin="V_BATT"/>
 </segment>
+<segment>
+<pinref part="SUPPLY9" gate="G$1" pin="V_BATT"/>
+<wire x1="124.46" y1="129.54" x2="124.46" y2="121.92" width="0.1524" layer="91"/>
+<pinref part="X1" gate="-1" pin="S"/>
+<wire x1="124.46" y1="121.92" x2="127" y2="121.92" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="V_USB" class="1">
 <segment>
@@ -10689,8 +10803,8 @@ WR-COM_USB_Micro Type AB_Vertical_THT Micro Type AB Vertical THT - Tape &amp; Re
 <approved hash="106,1,60.96,20.32,D6/GPIO12,,,,,"/>
 <approved hash="106,1,60.96,17.78,D7/GPIO13/MOSI,,,,,"/>
 <approved hash="106,1,60.96,15.24,D8/GPIO15,,,,,"/>
-<approved hash="113,1,60.7229,20.1244,JP2,,,,,"/>
-<approved hash="113,1,45.9571,23.0556,JP1,,,,,"/>
+<approved hash="113,1,60.7229,20.0939,JP2,,,,,"/>
+<approved hash="113,1,45.9571,23.0861,JP1,,,,,"/>
 <approved hash="113,1,182.011,23.4544,J2,,,,,"/>
 <approved hash="113,1,54.61,69.0795,S1,,,,,"/>
 </errors>
