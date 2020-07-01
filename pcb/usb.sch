@@ -10053,29 +10053,29 @@ http://www.jst-mfg.com&lt;p&gt;
 <part name="U1" library="microbuilder" deviceset="VREG_SOT23-5" device="" value="MIC5225-3.3v">
 <attribute name="MPN" value="MIC5225-3.3YM5-TR"/>
 </part>
-<part name="U3" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="MCP73831" device="/OT" package3d_urn="urn:adsk.eagle:package:6240724/1" value="MCP73831T-2ACI/OT">
+<part name="U3" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="MCP73831" device="/OT" package3d_urn="urn:adsk.eagle:package:6240724/1" override_package3d_urn="urn:adsk.eagle:package:21520838/2" override_package_urn="urn:adsk.eagle:footprint:6240078/1" value="MCP73831T-2ACI/OT">
 <attribute name="MPN" value="MCP73831T-2ACI/OT"/>
 </part>
 <part name="CHG" library="microbuilder" deviceset="LED" device="0805_NOOUTLINE" value="RED">
 <attribute name="MPN" value="SMLD12E3N1WT86"/>
 </part>
-<part name="R2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" value="1K">
+<part name="R2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" override_package3d_urn="urn:adsk.eagle:package:21520789/2" override_package_urn="urn:adsk.eagle:footprint:6239920/1" value="1K">
 <attribute name="MPN" value="ESR10EZPJ102"/>
 </part>
 <part name="J1" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_02" device="" package3d_urn="urn:adsk.eagle:package:38039/1" value="JSTPH"/>
-<part name="C1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" value="10µF">
+<part name="C1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" override_package3d_urn="urn:adsk.eagle:package:21520831/3" override_package_urn="urn:adsk.eagle:footprint:6239686/1" value="10µF">
 <attribute name="MPN" value="LMK212BJ106KG-T"/>
 </part>
-<part name="C3" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" value="10µF">
+<part name="C3" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" override_package3d_urn="urn:adsk.eagle:package:21520830/2" override_package_urn="urn:adsk.eagle:footprint:6239686/1" value="10µF">
 <attribute name="MPN" value="LMK212BJ106KG-T"/>
 </part>
-<part name="R3" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" value="10K\">
+<part name="R3" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" override_package3d_urn="urn:adsk.eagle:package:21520802/2" override_package_urn="urn:adsk.eagle:footprint:6239920/1" value="10K\">
 <attribute name="MPN" value="CRCW080510K0FKEAC"/>
 </part>
-<part name="R6" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:6240565/1" value="10K">
+<part name="R6" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:6240565/1" override_package3d_urn="urn:adsk.eagle:package:21520799/2" override_package_urn="urn:adsk.eagle:footprint:6239919/1" value="10K">
 <attribute name="MPN" value="CRCW080510K0FKEAC"/>
 </part>
-<part name="R5" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:6240565/1" value="10K">
+<part name="R5" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:6240565/1" override_package3d_urn="urn:adsk.eagle:package:21520797/2" override_package_urn="urn:adsk.eagle:footprint:6239919/1" value="10K">
 <attribute name="MPN" value="CRCW080510K0FKEAC"/>
 </part>
 <part name="Q3" library="SparkFun" deviceset="TRANSISTOR_NPN" device="SOT23-3" value="mmbt2222">
@@ -10084,40 +10084,40 @@ http://www.jst-mfg.com&lt;p&gt;
 <part name="Q2" library="SparkFun" deviceset="TRANSISTOR_NPN" device="SOT23-3" value="mmbt2222">
 <attribute name="MPN" value="MMBT2222A-G"/>
 </part>
-<part name="JP2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1">
+<part name="JP2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1" override_package3d_urn="urn:adsk.eagle:package:21520758/2" override_package_urn="urn:adsk.eagle:footprint:6240062/1">
 <attribute name="MPN" value="8Fx1L-254mm"/>
 </part>
-<part name="JP1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1">
+<part name="JP1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1" override_package3d_urn="urn:adsk.eagle:package:21520677/2" override_package_urn="urn:adsk.eagle:footprint:6240062/1">
 <attribute name="MPN" value="8Fx1L-254mm"/>
 </part>
-<part name="J2" library="Wurth_Elektronik_Electromechanic_Input-Output_Connectors_rev19b_wider_slots" deviceset="614105150621" device="" package3d_urn="urn:adsk.eagle:package:3360156/4">
+<part name="J2" library="Wurth_Elektronik_Electromechanic_Input-Output_Connectors_rev19b_wider_slots" deviceset="614105150621" device="" package3d_urn="urn:adsk.eagle:package:3360156/4" override_package3d_urn="urn:adsk.eagle:package:21520771/2" override_package_urn="urn:adsk.eagle:footprint:21520772/1">
 <attribute name="MPN" value="614105150621"/>
 </part>
-<part name="D1" library="microbuilder" deviceset="DIODE-SCHOTTKY" device="SOD-123" value="MBR120">
+<part name="D1" library="microbuilder" deviceset="DIODE-SCHOTTKY" device="SOD-123" override_package3d_urn="urn:adsk.eagle:package:21520835/2" override_package_urn="urn:adsk.eagle:footprint:21520836/1" value="MBR120">
 <attribute name="MPN" value="MBR120ESFT1G"/>
 </part>
-<part name="Q1" library="microbuilder" deviceset="MOSFET-P" device="" value="ZXMP6A13FTA">
+<part name="Q1" library="microbuilder" deviceset="MOSFET-P" device="" override_package3d_urn="urn:adsk.eagle:package:21520810/2" override_package_urn="urn:adsk.eagle:footprint:21520811/1" value="ZXMP6A13FTA">
 <attribute name="MPN" value="ZXMP6A13FTA"/>
 </part>
-<part name="S1" library="SparkFun-Switches" library_urn="urn:adsk.eagle:library:535" deviceset="SWITCH-SPDT" device="-SMD-AYZ0202" package3d_urn="urn:adsk.eagle:package:40160/1">
+<part name="S1" library="SparkFun-Switches" library_urn="urn:adsk.eagle:library:535" deviceset="SWITCH-SPDT" device="-SMD-AYZ0202" package3d_urn="urn:adsk.eagle:package:40160/1" override_package3d_urn="urn:adsk.eagle:package:21520767/2" override_package_urn="urn:adsk.eagle:footprint:40100/1">
 <attribute name="MPN" value="AYZ0202AGRLC"/>
 </part>
 <part name="U2" library="SparkFun-IC-Comms" library_urn="urn:adsk.eagle:library:521" deviceset="CH340C" device="">
 <attribute name="MPN" value="CH340C"/>
 </part>
-<part name="C4" library="SparkFun-Capacitors" library_urn="urn:adsk.eagle:library:510" deviceset="1.0UF" device="-0805-25V-10%" package3d_urn="urn:adsk.eagle:package:37429/1" value="1.0uF">
+<part name="C4" library="SparkFun-Capacitors" library_urn="urn:adsk.eagle:library:510" deviceset="1.0UF" device="-0805-25V-10%" package3d_urn="urn:adsk.eagle:package:37429/1" override_package3d_urn="urn:adsk.eagle:package:21520808/2" override_package_urn="urn:adsk.eagle:footprint:37400/1" value="1.0uF">
 <attribute name="MPN" value="C0805C105K4RAC7210"/>
 </part>
-<part name="C5" library="SparkFun-Capacitors" library_urn="urn:adsk.eagle:library:510" deviceset="1.0UF" device="-0805-25V-10%" package3d_urn="urn:adsk.eagle:package:37429/1" value="0.1uF">
+<part name="C5" library="SparkFun-Capacitors" library_urn="urn:adsk.eagle:library:510" deviceset="1.0UF" device="-0805-25V-10%" package3d_urn="urn:adsk.eagle:package:37429/1" override_package3d_urn="urn:adsk.eagle:package:21520801/2" override_package_urn="urn:adsk.eagle:footprint:37400/1" value="0.1uF">
 <attribute name="MPN" value="C0805C104M3RACTU"/>
 </part>
 <part name="ON" library="microbuilder" deviceset="LED" device="0805_NOOUTLINE" value="RED">
 <attribute name="MPN" value="SMLEN3WBC8W1"/>
 </part>
-<part name="R4" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" value="1K">
+<part name="R4" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" override_package3d_urn="urn:adsk.eagle:package:21520793/2" override_package_urn="urn:adsk.eagle:footprint:6239920/1" value="1K">
 <attribute name="MPN" value="ESR10EZPJ102"/>
 </part>
-<part name="R1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" value="100K">
+<part name="R1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" override_package3d_urn="urn:adsk.eagle:package:21520834/2" override_package_urn="urn:adsk.eagle:footprint:6239920/1" value="100K">
 <attribute name="MPN" value="CR0805AFX-1003EAS"/>
 </part>
 <part name="SUPPLY8" library="SparkFun-PowerSymbols" deviceset="3.3V" device=""/>
@@ -10139,10 +10139,10 @@ http://www.jst-mfg.com&lt;p&gt;
 <part name="GND9" library="SparkFun-PowerSymbols" library_urn="urn:adsk.eagle:library:530" deviceset="GND" device=""/>
 <part name="GND10" library="SparkFun-PowerSymbols" library_urn="urn:adsk.eagle:library:530" deviceset="GND" device=""/>
 <part name="GND11" library="SparkFun-PowerSymbols" library_urn="urn:adsk.eagle:library:530" deviceset="GND" device=""/>
-<part name="C2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" value="10uF">
+<part name="C2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" override_package3d_urn="urn:adsk.eagle:package:21520809/2" override_package_urn="urn:adsk.eagle:footprint:6239686/1" value="10uF">
 <attribute name="MPN" value="LMK212BJ106KG-T"/>
 </part>
-<part name="X1" library="con-jst2.rpt" deviceset="?M02B-SRSS-TB" device="S"/>
+<part name="X1" library="con-jst2.rpt" deviceset="?M02B-SRSS-TB" device="S" override_package3d_urn="urn:adsk.eagle:package:21520875/2" override_package_urn="urn:adsk.eagle:footprint:21520876/1"/>
 <part name="SUPPLY9" library="SparkFun-PowerSymbols" library_urn="urn:adsk.eagle:library:530" deviceset="V_BATT" device=""/>
 <part name="GND12" library="SparkFun-PowerSymbols" library_urn="urn:adsk.eagle:library:530" deviceset="GND" device=""/>
 </parts>
@@ -10825,6 +10825,11 @@ will not be understood (or retained) with this version.
 Since Version 8.3, EAGLE supports the association of 3D packages
 with devices in libraries, schematics, and board files. Those 3D
 packages will not be understood (or retained) with this version.
+</note>
+<note version="9.4" severity="warning">
+Since Version 9.4, EAGLE supports the overriding of 3D packages
+in schematics and board files. Those overridden 3d packages
+will not be understood (or retained) with this version.
 </note>
 </compatibility>
 </eagle>

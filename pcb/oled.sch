@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.5.1">
+<eagle version="9.6.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -4751,25 +4751,25 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </classes>
 <parts>
 <part name="GND2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="R2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" value="600K">
+<part name="R2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" override_package3d_urn="urn:adsk.eagle:package:21520237/2" override_package_urn="urn:adsk.eagle:footprint:6239920/1" value="600K">
 <attribute name="MPN" value="ERJ-6ENF5903V"/>
 </part>
-<part name="C2" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="10uF/16V">
+<part name="C2" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" override_package3d_urn="urn:adsk.eagle:package:21520266/2" override_package_urn="urn:adsk.eagle:footprint:21520267/1" value="10uF/16V">
 <attribute name="MPN" value="LMK212BJ106KG-T"/>
 </part>
-<part name="C5" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="1.0uF">
+<part name="C5" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" override_package3d_urn="urn:adsk.eagle:package:21520244/3" override_package_urn="urn:adsk.eagle:footprint:21520245/1" value="1.0uF">
 <attribute name="MPN" value="C0805C105K4RAC7210"/>
 </part>
-<part name="R3" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" value="50">
+<part name="R3" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" override_package3d_urn="urn:adsk.eagle:package:21520271/2" override_package_urn="urn:adsk.eagle:footprint:6239920/1" value="50">
 <attribute name="MPN" value="CRCW080550R0FKTA"/>
 </part>
 <part name="D2" library="microbuilder" deviceset="DIODE" device="SOD-323" value="1N4148">
 <attribute name="MPN" value="1N4148WS-E3-08"/>
 </part>
-<part name="C1" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="1.0uF">
+<part name="C1" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" override_package3d_urn="urn:adsk.eagle:package:21519651/2" override_package_urn="urn:adsk.eagle:footprint:21519652/1" value="1.0uF">
 <attribute name="MPN" value="C0805C105K4RAC7210"/>
 </part>
-<part name="C3" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="10uF">
+<part name="C3" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" override_package3d_urn="urn:adsk.eagle:package:21519624/2" override_package_urn="urn:adsk.eagle:footprint:21519625/1" value="10uF">
 <attribute name="MPN" value="LMK212BJ106KG-T"/>
 </part>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
@@ -4779,7 +4779,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="U2" library="microbuilder" deviceset="FAN5331" device="" value="FAN5331SX">
 <attribute name="MPN" value="FAN5331SX"/>
 </part>
-<part name="C6" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="10uF">
+<part name="C6" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" override_package3d_urn="urn:adsk.eagle:package:21520293/2" override_package_urn="urn:adsk.eagle:footprint:21520294/1" value="10uF">
 <attribute name="MPN" value="LMK212BJ106KG-T"/>
 </part>
 <part name="L1" library="microbuilder" deviceset="INDUCTOR" device="" value="10uH">
@@ -4788,37 +4788,37 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="D3" library="microbuilder" deviceset="DIODE" device="SOD-123" value="BAT54T1G">
 <attribute name="MPN" value="BAT54T1G"/>
 </part>
-<part name="R4" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" value="100K">
+<part name="R4" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" override_package3d_urn="urn:adsk.eagle:package:21520281/2" override_package_urn="urn:adsk.eagle:footprint:6239920/1" value="100K">
 <attribute name="MPN" value="CR0805AFX-1003EAS"/>
 </part>
-<part name="R5" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" value="10K">
+<part name="R5" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" override_package3d_urn="urn:adsk.eagle:package:21520285/2" override_package_urn="urn:adsk.eagle:footprint:6239920/1" value="10K">
 <attribute name="MPN" value="CRCW080510K0FKEAC"/>
 </part>
 <part name="GND6" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="C7" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="0.1uF">
+<part name="C7" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" override_package3d_urn="urn:adsk.eagle:package:21520287/2" override_package_urn="urn:adsk.eagle:footprint:21520288/1" value="0.1uF">
 <attribute name="MPN" value="C0805C104M3RACTU"/>
 </part>
 <part name="P+2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+12V" device="" value="+13V"/>
 <part name="U1" library="microbuilder" deviceset="DISP_OLED_UG-2828GDEDF11" device="TOP" value="UG-2828GDEDF11">
 <attribute name="MPN" value="XF2M-3015-1A"/>
 </part>
-<part name="C4" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" value="10uF/16V">
+<part name="C4" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" override_package3d_urn="urn:adsk.eagle:package:21520257/2" override_package_urn="urn:adsk.eagle:footprint:21520262/1" value="10uF/16V">
 <attribute name="MPN" value="LMK212BJ106KG-T"/>
 </part>
 <part name="D1" library="microbuilder" deviceset="DIODE" device="SOD-323" value="1N4148">
 <attribute name="MPN" value="1N4148WS-E3-08"/>
 </part>
 <part name="GND3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="R1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" value="10K">
+<part name="R1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" override_package3d_urn="urn:adsk.eagle:package:21520238/2" override_package_urn="urn:adsk.eagle:footprint:6239920/1" value="10K">
 <attribute name="MPN" value="CRCW080510K0FKEAC"/>
 </part>
-<part name="JP2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1">
+<part name="JP2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1" override_package3d_urn="urn:adsk.eagle:package:21520305/2" override_package_urn="urn:adsk.eagle:footprint:6240062/1">
 <attribute name="MPN" value="10129378-908001BLF"/>
 <attribute name="POPULATE" value="0"/>
 </part>
-<part name="JP1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1">
+<part name="JP1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1" override_package3d_urn="urn:adsk.eagle:package:21520308/2" override_package_urn="urn:adsk.eagle:footprint:6240062/1">
 <attribute name="MPN" value="10129378-908001BLF"/>
 <attribute name="POPULATE" value="0"/>
 </part>
@@ -5359,6 +5359,11 @@ will not be understood (or retained) with this version.
 Since Version 8.3, EAGLE supports the association of 3D packages
 with devices in libraries, schematics, and board files. Those 3D
 packages will not be understood (or retained) with this version.
+</note>
+<note version="9.4" severity="warning">
+Since Version 9.4, EAGLE supports the overriding of 3D packages
+in schematics and board files. Those overridden 3d packages
+will not be understood (or retained) with this version.
 </note>
 </compatibility>
 </eagle>
