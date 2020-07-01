@@ -6188,7 +6188,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </class>
 </classes>
 <parts>
-<part name="C1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" value="10uF">
+<part name="C1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" override_package3d_urn="urn:adsk.eagle:package:21520934/2" override_package_urn="urn:adsk.eagle:footprint:6239686/1" value="10uF">
 <attribute name="MPN" value="LMK212BJ106KG-T"/>
 </part>
 <part name="GND1" library="supply1" deviceset="GND" device=""/>
@@ -6208,10 +6208,10 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="X1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="ESP-12" device="">
 <attribute name="MPN" value="ESP12"/>
 </part>
-<part name="JP2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1">
+<part name="JP2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1" override_package3d_urn="urn:adsk.eagle:package:21520910/2" override_package_urn="urn:adsk.eagle:footprint:6240062/1">
 <attribute name="MPN" value="8Fx1L-254mm"/>
 </part>
-<part name="JP1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1">
+<part name="JP1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1" override_package3d_urn="urn:adsk.eagle:package:21520912/2" override_package_urn="urn:adsk.eagle:footprint:6240062/1">
 <attribute name="MPN" value="8Fx1L-254mm"/>
 </part>
 <part name="GND6" library="SparkFun" deviceset="GND" device=""/>
@@ -6225,7 +6225,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="POPULATE" value="0"/>
 </part>
 <part name="GND5" library="SparkFun" deviceset="GND" device=""/>
-<part name="U1" library="SparkX" deviceset="MMA8452Q" device="">
+<part name="U1" library="SparkX" deviceset="MMA8452Q" device="" override_package3d_urn="urn:adsk.eagle:package:21520916/2" override_package_urn="urn:adsk.eagle:footprint:21520917/1">
 <attribute name="MPN" value="MMA8452QR1"/>
 <attribute name="POPULATE" value="0"/>
 </part>
@@ -6235,14 +6235,14 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </part>
 <part name="GND7" library="SparkFun" deviceset="GND" device=""/>
 <part name="SUPPLY4" library="SparkFun-PowerSymbols" library_urn="urn:adsk.eagle:library:530" deviceset="VIN" device=""/>
-<part name="C2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" value=".1uF">
+<part name="C2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" override_package3d_urn="urn:adsk.eagle:package:21520928/3" override_package_urn="urn:adsk.eagle:footprint:6239686/1" value=".1uF">
 <attribute name="MPN" value="C0805C104M3RACTU"/>
 </part>
-<part name="C4" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" value=".1uF">
+<part name="C4" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" override_package3d_urn="urn:adsk.eagle:package:21520929/2" override_package_urn="urn:adsk.eagle:footprint:6239686/1" value=".1uF">
 <attribute name="MPN" value="C0805C104M3RACTU"/>
 <attribute name="POPULATE" value="0"/>
 </part>
-<part name="C3" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" value="10uF">
+<part name="C3" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" override_package3d_urn="urn:adsk.eagle:package:21520930/2" override_package_urn="urn:adsk.eagle:footprint:6239686/1" value="10uF">
 <attribute name="MPN" value="LMK212BJ106KG-T"/>
 <attribute name="POPULATE" value="0"/>
 </part>
@@ -6739,6 +6739,11 @@ will not be understood (or retained) with this version.
 Since Version 8.3, EAGLE supports the association of 3D packages
 with devices in libraries, schematics, and board files. Those 3D
 packages will not be understood (or retained) with this version.
+</note>
+<note version="9.4" severity="warning">
+Since Version 9.4, EAGLE supports the overriding of 3D packages
+in schematics and board files. Those overridden 3d packages
+will not be understood (or retained) with this version.
 </note>
 </compatibility>
 </eagle>
