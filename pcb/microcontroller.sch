@@ -6209,10 +6209,14 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="MPN" value="ESP12"/>
 </part>
 <part name="JP2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1" override_package3d_urn="urn:adsk.eagle:package:21520910/2" override_package_urn="urn:adsk.eagle:footprint:6240062/1">
+<attribute name="BOTTOM" value="1"/>
 <attribute name="MPN" value="8Fx1L-254mm"/>
+<attribute name="THRU-HOLE" value="1"/>
 </part>
 <part name="JP1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1" override_package3d_urn="urn:adsk.eagle:package:21520912/2" override_package_urn="urn:adsk.eagle:footprint:6240062/1">
+<attribute name="BOTTOM" value="1"/>
 <attribute name="MPN" value="8Fx1L-254mm"/>
+<attribute name="THRU-HOLE" value="1"/>
 </part>
 <part name="GND6" library="SparkFun" deviceset="GND" device=""/>
 <part name="GND8" library="SparkFun" deviceset="GND" device=""/>
@@ -6299,11 +6303,15 @@ GPIO4 and GPIO5 are swapped</text>
 <attribute name="NAME" x="153.67" y="-5.715" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="153.67" y="20.32" size="1.778" layer="96" rot="R180"/>
 <attribute name="MPN" x="147.32" y="5.08" size="1.778" layer="96" rot="R180" display="off"/>
+<attribute name="THRU-HOLE" x="147.32" y="5.08" size="1.778" layer="96" rot="R180" display="off"/>
+<attribute name="BOTTOM" x="147.32" y="5.08" size="1.778" layer="96" rot="R180" display="off"/>
 </instance>
 <instance part="JP1" gate="G$1" x="137.16" y="7.62" smashed="yes">
 <attribute name="NAME" x="130.81" y="18.415" size="1.778" layer="95"/>
 <attribute name="VALUE" x="130.81" y="-7.62" size="1.778" layer="96"/>
 <attribute name="MPN" x="137.16" y="7.62" size="1.778" layer="96" display="off"/>
+<attribute name="THRU-HOLE" x="137.16" y="7.62" size="1.778" layer="96" display="off"/>
+<attribute name="BOTTOM" x="137.16" y="7.62" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="GND6" gate="1" x="251.46" y="63.5" smashed="yes">
 <attribute name="VALUE" x="248.92" y="60.96" size="1.778" layer="96"/>

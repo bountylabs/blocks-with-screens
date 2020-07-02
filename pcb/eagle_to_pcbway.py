@@ -9,10 +9,13 @@ with open(fname+'.csv') as csvfile:
     outcsv = open(fname+'_bom.csv', 'w')
     csvwriter = csv.writer(outcsv, delimiter=',', quotechar='"')
 
+    headerrow = []
     itemnum = 0
     for row in csvreader:
         if itemnum == 0:
             # header row
+            headerrow = row
+
             outrow = []
             outrow.append("Item #")
             outrow.append("Designator")
@@ -32,25 +35,39 @@ with open(fname+'.csv') as csvfile:
             print(', '.join(row))
             print len(row)
             # check if item is populated
-            pop = row[7]
+            pop = row[headerrow.index('POPULATE')]
+            th = row[headerrow.index('THRU-HOLE')]
+            bottom = row[headerrow.index('BOTTOM')]
+
             # remember designators to assemble
-            designator_list = row[4]
+            designator_list = row[headerrow.index('Parts')]
             designators = designator_list.split(", ")
 
             if pop != "0":
+
+                #print row, th, headerrow.index('THRU-HOLE')
+
                 for designator in designators:
                     active_designators[designator] = True
 
                 outrow = []
                 outrow.append(itemnum)  # item number
-                outrow.append(row[4])   # designator
-                outrow.append(row[0])   # quantity
+                outrow.append(row[headerrow.index('Parts')])   # designator
+                outrow.append(row[headerrow.index('Qty')])   # quantity
                 outrow.append("")       # manufacturer
-                outrow.append(row[6])   # manufacturer's part number
-                outrow.append(row[5])   # description
-                outrow.append(row[3])   # package
-                outrow.append("SMD")       # type (smd, thru-hole, etc)
-                outrow.append("")       # notes
+                outrow.append(row[headerrow.index('MPN')])   # manufacturer's part number
+                outrow.append(row[headerrow.index('Description')])   # description
+                outrow.append(row[headerrow.index('Package')])   # package
+                if th == "1":
+                    outrow.append("thru-hole")
+                    if bottom == "1":
+                        outrow.append("Assemble on BOTTOM")
+                    else:
+                        outrow.append("Assemble on TOP")
+
+                else:
+                    outrow.append("SMD")       # type (smd, thru-hole, etc)
+                    outrow.append("")       # notes
 
                 #print outrow
                 csvwriter.writerow(outrow)
