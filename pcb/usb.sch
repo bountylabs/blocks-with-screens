@@ -10075,10 +10075,10 @@ Datasheet</description>
 <attribute name="MPN" value="CRCW080510K0FKEAC"/>
 </part>
 <part name="R6" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:6240565/1" override_package3d_urn="urn:adsk.eagle:package:21520799/2" override_package_urn="urn:adsk.eagle:footprint:6239919/1" value="10K">
-<attribute name="MPN" value="CRCW080510K0FKEAC"/>
+<attribute name="MPN" value="RC0603FR-0710KL"/>
 </part>
 <part name="R5" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:6240565/1" override_package3d_urn="urn:adsk.eagle:package:21520797/2" override_package_urn="urn:adsk.eagle:footprint:6239919/1" value="10K">
-<attribute name="MPN" value="CRCW080510K0FKEAC"/>
+<attribute name="MPN" value="RC0603FR-0710KL"/>
 </part>
 <part name="Q3" library="SparkFun" deviceset="TRANSISTOR_NPN" device="SOT23-3" value="mmbt2222">
 <attribute name="MPN" value="MMBT2222A-G"/>
