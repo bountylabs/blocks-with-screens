@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.6.2">
+<eagle version="9.5.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -6227,7 +6227,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="GND5" library="SparkFun" deviceset="GND" device=""/>
 <part name="U1" library="SparkX" deviceset="MMA8452Q" device="" override_package3d_urn="urn:adsk.eagle:package:21520916/2" override_package_urn="urn:adsk.eagle:footprint:21520917/1">
 <attribute name="MPN" value="MMA8452QR1"/>
-<attribute name="POPULATE" value="0"/>
+<attribute name="POPULATE" value="1"/>
 </part>
 <part name="LED1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="WS2812B" device="5050" package3d_urn="urn:adsk.eagle:package:6240942/1">
 <attribute name="MPN" value="1655"/>
@@ -6240,11 +6240,11 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </part>
 <part name="C4" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" override_package3d_urn="urn:adsk.eagle:package:21520929/2" override_package_urn="urn:adsk.eagle:footprint:6239686/1" value=".1uF">
 <attribute name="MPN" value="C0805C104M3RACTU"/>
-<attribute name="POPULATE" value="0"/>
+<attribute name="POPULATE" value="1"/>
 </part>
 <part name="C3" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" override_package3d_urn="urn:adsk.eagle:package:21520930/2" override_package_urn="urn:adsk.eagle:footprint:6239686/1" value="10uF">
 <attribute name="MPN" value="LMK212BJ106KG-T"/>
-<attribute name="POPULATE" value="0"/>
+<attribute name="POPULATE" value="1"/>
 </part>
 <part name="SUPPLY1" library="SparkFun-PowerSymbols" deviceset="3.3V" device=""/>
 <part name="SUPPLY5" library="SparkFun-PowerSymbols" deviceset="3.3V" device=""/>
