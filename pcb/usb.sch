@@ -10148,7 +10148,9 @@ Datasheet</description>
 <part name="C2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" override_package3d_urn="urn:adsk.eagle:package:21520809/2" override_package_urn="urn:adsk.eagle:footprint:6239686/1" value="10uF">
 <attribute name="MPN" value="CL21A106KPFNNNE"/>
 </part>
-<part name="X1" library="con-jst2.rpt" deviceset="?M02B-SRSS-TB" device="S" override_package3d_urn="urn:adsk.eagle:package:21520875/2" override_package_urn="urn:adsk.eagle:footprint:21520876/1"/>
+<part name="X1" library="con-jst2.rpt" deviceset="?M02B-SRSS-TB" device="S" override_package3d_urn="urn:adsk.eagle:package:21520875/2" override_package_urn="urn:adsk.eagle:footprint:21520876/1">
+<attribute name="MPN" value="SM02B-SRSS-TB"/>
+</part>
 <part name="SUPPLY9" library="SparkFun-PowerSymbols" library_urn="urn:adsk.eagle:library:530" deviceset="V_BATT" device=""/>
 <part name="GND12" library="SparkFun-PowerSymbols" library_urn="urn:adsk.eagle:library:530" deviceset="GND" device=""/>
 </parts>
@@ -10357,6 +10359,7 @@ Datasheet</description>
 <instance part="X1" gate="-1" x="129.54" y="121.92" smashed="yes">
 <attribute name="NAME" x="132.08" y="121.158" size="1.524" layer="95"/>
 <attribute name="VALUE" x="128.778" y="123.317" size="1.524" layer="96"/>
+<attribute name="MPN" x="129.54" y="121.92" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="X1" gate="-2" x="129.54" y="119.38" smashed="yes">
 <attribute name="NAME" x="132.08" y="118.618" size="1.524" layer="95"/>
