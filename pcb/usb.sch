@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.6.2">
+<eagle version="9.5.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -10086,12 +10086,15 @@ Datasheet</description>
 </part>
 <part name="JP2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1" override_package3d_urn="urn:adsk.eagle:package:21520758/2" override_package_urn="urn:adsk.eagle:footprint:6240062/1">
 <attribute name="MPN" value="8Fx1L-254mm"/>
+<attribute name="THRU-HOLE" value="1"/>
 </part>
 <part name="JP1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1" override_package3d_urn="urn:adsk.eagle:package:21520677/2" override_package_urn="urn:adsk.eagle:footprint:6240062/1">
 <attribute name="MPN" value="8Fx1L-254mm"/>
+<attribute name="THRU-HOLE" value="1"/>
 </part>
 <part name="J2" library="Wurth_Elektronik_Electromechanic_Input-Output_Connectors_rev19b_wider_slots" deviceset="614105150621" device="" package3d_urn="urn:adsk.eagle:package:3360156/4" override_package3d_urn="urn:adsk.eagle:package:21520771/2" override_package_urn="urn:adsk.eagle:footprint:21520772/1">
 <attribute name="MPN" value="614105150621"/>
+<attribute name="THRU-HOLE" value="1"/>
 </part>
 <part name="D1" library="microbuilder" deviceset="DIODE-SCHOTTKY" device="SOD-123" override_package3d_urn="urn:adsk.eagle:package:21520835/2" override_package_urn="urn:adsk.eagle:footprint:21520836/1" value="MBR120">
 <attribute name="MPN" value="MBR120ESFT1G"/>
@@ -10225,16 +10228,19 @@ Datasheet</description>
 <attribute name="NAME" x="64.77" y="9.525" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="64.77" y="35.56" size="1.778" layer="96" rot="R180"/>
 <attribute name="MPN" x="58.42" y="20.32" size="1.778" layer="96" rot="R180" display="off"/>
+<attribute name="THRU-HOLE" x="58.42" y="20.32" size="1.778" layer="96" rot="R180" display="off"/>
 </instance>
 <instance part="JP1" gate="G$1" x="48.26" y="22.86" smashed="yes">
 <attribute name="NAME" x="41.91" y="33.655" size="1.778" layer="95"/>
 <attribute name="VALUE" x="41.91" y="7.62" size="1.778" layer="96"/>
 <attribute name="MPN" x="48.26" y="22.86" size="1.778" layer="96" display="off"/>
+<attribute name="THRU-HOLE" x="48.26" y="22.86" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="J2" gate="G$1" x="182.88" y="22.86" smashed="yes">
 <attribute name="NAME" x="180.34" y="33.528" size="1.778" layer="95"/>
 <attribute name="VALUE" x="180.34" y="8.89" size="1.778" layer="96"/>
 <attribute name="MPN" x="182.88" y="22.86" size="1.778" layer="96" display="off"/>
+<attribute name="THRU-HOLE" x="182.88" y="22.86" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="D1" gate="G$1" x="25.4" y="68.58" smashed="yes">
 <attribute name="NAME" x="25.4" y="71.12" size="1.27" layer="95" align="center"/>
