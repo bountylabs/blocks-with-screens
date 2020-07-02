@@ -10093,6 +10093,7 @@ Datasheet</description>
 <attribute name="THRU-HOLE" value="1"/>
 </part>
 <part name="J2" library="Wurth_Elektronik_Electromechanic_Input-Output_Connectors_rev19b_wider_slots" deviceset="614105150621" device="" package3d_urn="urn:adsk.eagle:package:3360156/4" override_package3d_urn="urn:adsk.eagle:package:21520771/2" override_package_urn="urn:adsk.eagle:footprint:21520772/1">
+<attribute name="BOTTOM" value="1"/>
 <attribute name="MPN" value="614105150621"/>
 <attribute name="THRU-HOLE" value="1"/>
 </part>
@@ -10241,6 +10242,7 @@ Datasheet</description>
 <attribute name="VALUE" x="180.34" y="8.89" size="1.778" layer="96"/>
 <attribute name="MPN" x="182.88" y="22.86" size="1.778" layer="96" display="off"/>
 <attribute name="THRU-HOLE" x="182.88" y="22.86" size="1.778" layer="96" display="off"/>
+<attribute name="BOTTOM" x="182.88" y="22.86" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="D1" gate="G$1" x="25.4" y="68.58" smashed="yes">
 <attribute name="NAME" x="25.4" y="71.12" size="1.27" layer="95" align="center"/>
