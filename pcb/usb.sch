@@ -10062,14 +10062,16 @@ Datasheet</description>
 <part name="R2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" override_package3d_urn="urn:adsk.eagle:package:21520789/2" override_package_urn="urn:adsk.eagle:footprint:6239920/1" value="1K">
 <attribute name="MPN" value="ESR10EZPJ102"/>
 </part>
-<part name="J1" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_02" device="" package3d_urn="urn:adsk.eagle:package:38039/1" value="JSTPH"/>
+<part name="J1" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_02" device="" package3d_urn="urn:adsk.eagle:package:38039/1" value="JSTPH">
+<attribute name="POPULATE" value="0"/>
+</part>
 <part name="C1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" override_package3d_urn="urn:adsk.eagle:package:21520831/3" override_package_urn="urn:adsk.eagle:footprint:6239686/1" value="10µF">
 <attribute name="MPN" value="LMK212BJ106KG-T"/>
 </part>
 <part name="C3" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" override_package3d_urn="urn:adsk.eagle:package:21520830/2" override_package_urn="urn:adsk.eagle:footprint:6239686/1" value="10µF">
 <attribute name="MPN" value="LMK212BJ106KG-T"/>
 </part>
-<part name="R3" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" override_package3d_urn="urn:adsk.eagle:package:21520802/2" override_package_urn="urn:adsk.eagle:footprint:6239920/1" value="10K\">
+<part name="R3" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" override_package3d_urn="urn:adsk.eagle:package:21520802/2" override_package_urn="urn:adsk.eagle:footprint:6239920/1" value="10K">
 <attribute name="MPN" value="CRCW080510K0FKEAC"/>
 </part>
 <part name="R6" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:6240565/1" override_package3d_urn="urn:adsk.eagle:package:21520799/2" override_package_urn="urn:adsk.eagle:footprint:6239919/1" value="10K">
@@ -10189,6 +10191,7 @@ Datasheet</description>
 <instance part="J1" gate="G$1" x="116.84" y="121.92" smashed="yes" rot="R180">
 <attribute name="VALUE" x="119.38" y="126.746" size="1.778" layer="96" font="vector" rot="R180"/>
 <attribute name="NAME" x="119.38" y="116.332" size="1.778" layer="95" font="vector" rot="R180"/>
+<attribute name="POPULATE" x="116.84" y="121.92" size="1.778" layer="96" rot="R180" display="off"/>
 </instance>
 <instance part="C1" gate="G$1" x="17.78" y="111.76" smashed="yes">
 <attribute name="NAME" x="18.796" y="112.395" size="1.778" layer="95"/>
