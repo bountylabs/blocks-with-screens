@@ -56,7 +56,15 @@ with open(fname+'.csv') as csvfile:
                 outrow.append(row[headerrow.index('Qty')])   # quantity
                 outrow.append("")       # manufacturer
                 outrow.append(row[headerrow.index('MPN')])   # manufacturer's part number
-                outrow.append(row[headerrow.index('Description')])   # description
+
+                description = ""
+                val = row[headerrow.index('Value')]
+                if val != "":
+                    description = description + val + " "
+
+                description = description + row[headerrow.index('Description')]
+
+                outrow.append(description)   # description
                 outrow.append(row[headerrow.index('Package')])   # package
                 if th == "1":
                     outrow.append("thru-hole")
