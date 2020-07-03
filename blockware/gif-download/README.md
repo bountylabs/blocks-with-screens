@@ -2,6 +2,10 @@
 
 An example of downloading a binary 565 image and rendering it onto the OLED display. Also includes example code for using Arduino OTA for wireless programming.
 
+## Configuring
+
+Create a `secrets.h` file based on `secrets.h.example` that contains your WiFi credentials.
+
 ## Getting set up for development
 
 1. Download [VSCode](https://code.visualstudio.com/)
