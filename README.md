@@ -1,5 +1,5 @@
 # Blocks With Screens
 
-[![Build Status](https://travis-ci.com/johnboiles/blocks-with-screens.svg?branch=master)](https://travis-ci.com/johnboiles/blocks-with-screens)
+![.github/workflows/main.yml](https://github.com/johnboiles/blocks-with-screens/workflows/.github/workflows/main.yml/badge.svg)
 
 Twitterversary blocks, but with screens.
