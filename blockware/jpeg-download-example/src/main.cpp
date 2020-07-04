@@ -4,6 +4,7 @@
 
 #include <Adafruit_SSD1351.h>
 #include <SPI.h>
+#include <Adafruit_GFX.h>
 #include <ESP8266HTTPClient.h>
 #include <JPEGDecoder.h>
 #include <ArduinoOTA.h>
@@ -11,6 +12,10 @@
 #include "secrets.h"
 #include <DefaultConfig.h>
 #include <Colors.h>
+
+#ifndef min
+#define min(a,b) (((a) < (b)) ? (a) : (b))
+#endif
 
 Adafruit_SSD1351 tft = Adafruit_SSD1351(SCREEN_WIDTH, SCREEN_HEIGHT, &SPI, CS_PIN, DC_PIN, RST_PIN);
 

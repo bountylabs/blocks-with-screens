@@ -5,6 +5,14 @@
 #include <SparkFun_MMA8452Q.h>
 #include <Adafruit_NeoPixel.h>
 
+#ifndef min
+#define min(a,b) (((a) < (b)) ? (a) : (b))
+#endif
+
+#ifndef max
+#define max(a,b) (((a) > (b)) ? (a) : (b))
+#endif
+
 // Create instance of the MMA8452 class
 MMA8452Q accel(0x1C);                   
 

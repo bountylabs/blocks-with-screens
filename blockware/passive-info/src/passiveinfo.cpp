@@ -16,6 +16,10 @@
 #include "httphelper.h"
 #include "stocks.h"
 
+#ifndef min
+#define min(a,b) (((a) < (b)) ? (a) : (b))
+#endif
+
 Adafruit_SSD1351 display = Adafruit_SSD1351(16, 12, 13, 14, 15);
 
 float closePrice = 0;
