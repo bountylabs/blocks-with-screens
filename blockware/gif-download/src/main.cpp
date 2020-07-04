@@ -11,11 +11,6 @@
 #include <DefaultConfig.h>
 #include <Colors.h>
 
-// Software bit-banged SPI mode works just fine but is slow
-// Adafruit_SSD1351 tft = Adafruit_SSD1351(SCREEN_WIDTH, SCREEN_HEIGHT, CS_PIN, DC_PIN, MOSI_PIN, SCLK_PIN, RST_PIN);
-
-// Hardware SPI mode only works if you make a hack in SPI.c under the hood. In short, find the two
-// lines with `pinMode(MISO` in them and comment them out
 Adafruit_SSD1351 tft = Adafruit_SSD1351(SCREEN_WIDTH, SCREEN_HEIGHT, &SPI, CS_PIN, DC_PIN, RST_PIN);
 
 int downloadFile(const char *URL, const char *filepath, const char *fingerprint = NULL) {
