@@ -10096,7 +10096,7 @@ Datasheet</description>
 </part>
 <part name="J2" library="Wurth_Elektronik_Electromechanic_Input-Output_Connectors_rev19b_wider_slots" deviceset="614105150621" device="" package3d_urn="urn:adsk.eagle:package:3360156/4" override_package3d_urn="urn:adsk.eagle:package:21520771/2" override_package_urn="urn:adsk.eagle:footprint:21520772/1">
 <attribute name="BOTTOM" value="1"/>
-<attribute name="MPN" value="614105150621"/>
+<attribute name="MPN" value="U-D-M5DD-W-1"/>
 <attribute name="THRU-HOLE" value="1"/>
 </part>
 <part name="D1" library="microbuilder" deviceset="DIODE-SCHOTTKY" device="SOD-123" override_package3d_urn="urn:adsk.eagle:package:21520835/2" override_package_urn="urn:adsk.eagle:footprint:21520836/1" value="MBR120">
