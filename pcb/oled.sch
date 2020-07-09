@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.6.2">
+<eagle version="9.5.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -4815,12 +4815,16 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="MPN" value="CRCW080510K0FKEAC"/>
 </part>
 <part name="JP2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1" override_package3d_urn="urn:adsk.eagle:package:21520305/2" override_package_urn="urn:adsk.eagle:footprint:6240062/1">
-<attribute name="MPN" value="10129378-908001BLF"/>
-<attribute name="POPULATE" value="0"/>
+<attribute name="BOTTOM" value="0"/>
+<attribute name="MPN" value="C124381"/>
+<attribute name="POPULATE" value="1"/>
+<attribute name="THRU-HOLE" value="1"/>
 </part>
 <part name="JP1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1" override_package3d_urn="urn:adsk.eagle:package:21520308/2" override_package_urn="urn:adsk.eagle:footprint:6240062/1">
-<attribute name="MPN" value="10129378-908001BLF"/>
-<attribute name="POPULATE" value="0"/>
+<attribute name="BOTTOM" value="0"/>
+<attribute name="MPN" value="C124381"/>
+<attribute name="POPULATE" value="1"/>
+<attribute name="THRU-HOLE" value="1"/>
 </part>
 <part name="SUPPLY1" library="SparkFun-PowerSymbols" library_urn="urn:adsk.eagle:library:530" deviceset="VIN" device=""/>
 </parts>
@@ -4965,12 +4969,16 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="VALUE" x="232.41" y="106.68" size="1.778" layer="96" rot="R180"/>
 <attribute name="POPULATE" x="226.06" y="91.44" size="1.778" layer="96" rot="R180" display="off"/>
 <attribute name="MPN" x="226.06" y="91.44" size="1.778" layer="96" rot="R180" display="off"/>
+<attribute name="THRU-HOLE" x="226.06" y="91.44" size="1.778" layer="96" rot="R180" display="off"/>
+<attribute name="BOTTOM" x="226.06" y="91.44" size="1.778" layer="96" rot="R180" display="off"/>
 </instance>
 <instance part="JP1" gate="G$1" x="215.9" y="93.98" smashed="yes">
 <attribute name="NAME" x="209.55" y="104.775" size="1.778" layer="95"/>
 <attribute name="VALUE" x="209.55" y="78.74" size="1.778" layer="96"/>
 <attribute name="POPULATE" x="215.9" y="93.98" size="1.778" layer="96" display="off"/>
 <attribute name="MPN" x="215.9" y="93.98" size="1.778" layer="96" display="off"/>
+<attribute name="THRU-HOLE" x="215.9" y="93.98" size="1.778" layer="96" display="off"/>
+<attribute name="BOTTOM" x="215.9" y="93.98" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="SUPPLY1" gate="G$1" x="193.04" y="177.8" smashed="yes">
 <attribute name="VALUE" x="193.04" y="180.594" size="1.778" layer="96" align="bottom-center"/>
