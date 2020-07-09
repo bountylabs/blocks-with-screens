@@ -6206,16 +6206,16 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="MPN" value="CRCW080510K0FKEAC"/>
 </part>
 <part name="X1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="ESP-12" device="">
-<attribute name="MPN" value="ESP12"/>
+<attribute name="MPN" value="ESP-12F(ESP8266MOD)"/>
 </part>
 <part name="JP2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1" override_package3d_urn="urn:adsk.eagle:package:21520910/2" override_package_urn="urn:adsk.eagle:footprint:6240062/1">
 <attribute name="BOTTOM" value="1"/>
-<attribute name="MPN" value="8Fx1L-254mm"/>
+<attribute name="MPN" value="83-15410"/>
 <attribute name="THRU-HOLE" value="1"/>
 </part>
 <part name="JP1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="PINHD-1X8" device="CLEANBIG" package3d_urn="urn:adsk.eagle:package:6240708/1" override_package3d_urn="urn:adsk.eagle:package:21520912/2" override_package_urn="urn:adsk.eagle:footprint:6240062/1">
 <attribute name="BOTTOM" value="1"/>
-<attribute name="MPN" value="8Fx1L-254mm"/>
+<attribute name="MPN" value="83-15410"/>
 <attribute name="THRU-HOLE" value="1"/>
 </part>
 <part name="GND6" library="SparkFun" deviceset="GND" device=""/>
