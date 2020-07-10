@@ -2,6 +2,10 @@
 
 ## Changelog
 
+### OLED Board V4
+
+* Revert back to using 3.3V for the 13V boost circuit to hopefully avoid issues I've seen twice now with the OLED screens developing bad vertical lines of pixels. This is what Adafruit does in their board; perhaps there's a reason for it.
+
 ### USB Board V4
 
 * Use thicker (power) trace for 3.3V

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.5.0">
+<eagle version="9.6.2">
 <drawing>
 <settings>
-<setting alwaysvectorfont="yes"/>
+<setting alwaysvectorfont="no"/>
 <setting keepoldvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
@@ -158,7 +158,7 @@
 <layer number="255" name="routoute" color="7" fill="1" visible="no" active="yes"/>
 </layers>
 <board>
-<fusionsync huburn="a.cGVyc29uYWw6dWUyODFhMTI5" projecturn="a.cGVyc29uYWw6dWUyODFhMTI5IzIwMTkwOTE3MjE1ODk1MzI2" f3durn="urn:adsk.wipprod:dm.lineage:P5lhZWs8S_KHtQ88bDf2NQ" pcbguid="d3e705c3-1af4-4cef-b1e2-384e1dcb5e4e" lastpulledtime="" lastsyncedchangeguid="5ba198aa-53f5-64b5-e4eb-32003e20bcfd"/>
+<fusionsync huburn="a.cGVyc29uYWw6dWUyODFhMTI5" projecturn="a.cGVyc29uYWw6dWUyODFhMTI5IzIwMTkwOTE3MjE1ODk1MzI2" f3durn="urn:adsk.wipprod:dm.lineage:P5lhZWs8S_KHtQ88bDf2NQ" pcbguid="d3e705c3-1af4-4cef-b1e2-384e1dcb5e4e" lastpulledtime="" lastsyncedchangeguid="5ba198aa-53f5-64b5-e4eb-32003e20bcfd" latestrevisionid="" lastsyncedrevisionid="" lastboardhashguid="" lastpushedtime="" linktopcb3d="false"/>
 <plain>
 <wire x1="0" y1="26.162" x2="0" y2="0" width="0" layer="20" grouprefs="EVERYTHING"/>
 <wire x1="0" y1="0" x2="26.162" y2="0" width="0" layer="20" grouprefs="EVERYTHING"/>
@@ -187,7 +187,7 @@
 <text x="2.794" y="7.112" size="0.8128" layer="26" rot="MR180" grouprefs="EVERYTHING">GND</text>
 <text x="2.794" y="4.572" size="0.8128" layer="26" rot="MR180" grouprefs="EVERYTHING">VIN</text>
 <text x="16.637" y="22.606" size="0.8128" layer="25" font="vector">BWS
-OLED V3</text>
+OLED V4</text>
 </plain>
 <libraries>
 <library name="microbuilder">
@@ -1168,6 +1168,30 @@ chip</description>
 <wire x1="17.3736" y1="8.4328" x2="17.3319" y2="8.3911" width="0.4064" layer="1"/>
 <via x="17.3736" y="8.4328" extent="1-16" drill="0.4"/>
 <via x="14.224" y="5.588" extent="1-16" drill="0.4"/>
+<contactref element="C6" pad="1"/>
+<contactref element="U2" pad="5"/>
+<contactref element="U2" pad="4"/>
+<contactref element="L1" pad="P$1"/>
+<wire x1="12.2936" y1="18.4912" x2="10.4648" y2="18.4912" width="0.4064" layer="1"/>
+<wire x1="10.4648" y1="18.4912" x2="10.43" y2="18.5119" width="0.4064" layer="1"/>
+<wire x1="12.2936" y1="18.4912" x2="12.33" y2="18.5119" width="0.4064" layer="1"/>
+<wire x1="10.4648" y1="16.9672" x2="10.4648" y2="15.4432" width="0.4064" layer="1"/>
+<wire x1="10.2616" y1="17.1704" x2="10.4648" y2="16.9672" width="0.4064" layer="1"/>
+<wire x1="10.2616" y1="17.78" x2="10.2616" y2="17.1704" width="0.4064" layer="1"/>
+<wire x1="10.4648" y1="17.9832" x2="10.2616" y2="17.78" width="0.4064" layer="1"/>
+<wire x1="10.4648" y1="18.288" x2="10.4648" y2="17.9832" width="0.4064" layer="1"/>
+<wire x1="10.4648" y1="15.4432" x2="10.483" y2="15.367" width="0.4064" layer="1"/>
+<wire x1="10.4648" y1="18.288" x2="10.43" y2="18.5119" width="0.4064" layer="1"/>
+<wire x1="13.208" y1="18.6944" x2="15.1384" y2="18.6944" width="0.4064" layer="1"/>
+<wire x1="13.1064" y1="18.5928" x2="13.208" y2="18.6944" width="0.4064" layer="1"/>
+<wire x1="12.4968" y1="18.5928" x2="13.1064" y2="18.5928" width="0.4064" layer="1"/>
+<wire x1="15.1384" y1="18.6944" x2="15.19" y2="18.685" width="0.4064" layer="1"/>
+<wire x1="12.4968" y1="18.5928" x2="12.33" y2="18.5119" width="0.4064" layer="1"/>
+<wire x1="6.7633375" y1="10.4346" x2="7.1284" y2="10.7996625" width="0.4064" layer="1"/>
+<wire x1="7.1284" y1="10.7996625" x2="7.1284" y2="12.1068" width="0.4064" layer="1"/>
+<wire x1="7.1284" y1="12.1068" x2="10.4648" y2="15.4432" width="0.4064" layer="1"/>
+<wire x1="5.845" y1="9.591" x2="6.6886" y2="10.4346" width="0.4064" layer="1"/>
+<wire x1="6.6886" y1="10.4346" x2="6.7633375" y2="10.4346" width="0.4064" layer="1"/>
 </signal>
 <signal name="D1/GPIO5">
 <contactref element="JP1" pad="3"/>
@@ -1262,34 +1286,7 @@ chip</description>
 <wire x1="24.4856" y1="9.3472" x2="24.511" y2="9.271" width="0.2032" layer="1"/>
 </signal>
 <signal name="VIN" class="1">
-<contactref element="C6" pad="1"/>
-<contactref element="U2" pad="5"/>
-<contactref element="U2" pad="4"/>
-<contactref element="L1" pad="P$1"/>
 <contactref element="JP1" pad="8"/>
-<wire x1="12.2936" y1="18.4912" x2="10.4648" y2="18.4912" width="0.4064" layer="1"/>
-<wire x1="10.4648" y1="18.4912" x2="10.43" y2="18.5119" width="0.4064" layer="1"/>
-<wire x1="12.2936" y1="18.4912" x2="12.33" y2="18.5119" width="0.4064" layer="1"/>
-<wire x1="10.4648" y1="16.9672" x2="10.4648" y2="15.4432" width="0.4064" layer="1"/>
-<wire x1="10.2616" y1="17.1704" x2="10.4648" y2="16.9672" width="0.4064" layer="1"/>
-<wire x1="10.2616" y1="17.78" x2="10.2616" y2="17.1704" width="0.4064" layer="1"/>
-<wire x1="10.4648" y1="17.9832" x2="10.2616" y2="17.78" width="0.4064" layer="1"/>
-<wire x1="10.4648" y1="18.288" x2="10.4648" y2="17.9832" width="0.4064" layer="1"/>
-<wire x1="10.4648" y1="15.4432" x2="10.483" y2="15.367" width="0.4064" layer="1"/>
-<wire x1="10.4648" y1="18.288" x2="10.43" y2="18.5119" width="0.4064" layer="1"/>
-<wire x1="13.208" y1="18.6944" x2="15.1384" y2="18.6944" width="0.4064" layer="1"/>
-<wire x1="13.1064" y1="18.5928" x2="13.208" y2="18.6944" width="0.4064" layer="1"/>
-<wire x1="12.4968" y1="18.5928" x2="13.1064" y2="18.5928" width="0.4064" layer="1"/>
-<wire x1="15.1384" y1="18.6944" x2="15.19" y2="18.685" width="0.4064" layer="1"/>
-<wire x1="12.4968" y1="18.5928" x2="12.33" y2="18.5119" width="0.4064" layer="1"/>
-<wire x1="1.9304" y1="4.2672" x2="1.7272" y2="4.2672" width="0.4064" layer="1"/>
-<wire x1="3.9624" y1="6.2992" x2="1.9304" y2="4.2672" width="0.4064" layer="1"/>
-<wire x1="3.9624" y1="12.4968" x2="3.9624" y2="6.2992" width="0.4064" layer="1"/>
-<wire x1="6.604" y1="15.1384" x2="3.9624" y2="12.4968" width="0.4064" layer="1"/>
-<wire x1="10.2616" y1="15.1384" x2="6.604" y2="15.1384" width="0.4064" layer="1"/>
-<wire x1="10.3632" y1="15.24" x2="10.2616" y2="15.1384" width="0.4064" layer="1"/>
-<wire x1="1.7272" y1="4.2672" x2="1.651" y2="4.191" width="0.4064" layer="1"/>
-<wire x1="10.3632" y1="15.24" x2="10.483" y2="15.367" width="0.4064" layer="1"/>
 </signal>
 <signal name="D6/GPIO12/MISO">
 <contactref element="JP2" pad="4"/>
