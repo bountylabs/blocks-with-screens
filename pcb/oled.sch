@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.6.2">
+<eagle version="9.5.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -4709,8 +4709,8 @@ type 0309, grid 2.5 mm</description>
 </classes>
 <parts>
 <part name="GND2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="R2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" override_package3d_urn="urn:adsk.eagle:package:21520237/2" override_package_urn="urn:adsk.eagle:footprint:6239920/1" value="600K">
-<attribute name="MPN" value="ERJ-6ENF5903V"/>
+<part name="R2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" override_package3d_urn="urn:adsk.eagle:package:21520237/2" override_package_urn="urn:adsk.eagle:footprint:6239920/1" value="620K">
+<attribute name="MPN" value="0805W8F6203T5E"/>
 </part>
 <part name="C2" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" override_package3d_urn="urn:adsk.eagle:package:21520266/2" override_package_urn="urn:adsk.eagle:footprint:21520267/1" value="10uF/16V">
 <attribute name="MPN" value="LMK212BJ106KG-T"/>
