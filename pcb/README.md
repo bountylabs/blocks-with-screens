@@ -2,6 +2,10 @@
 
 ## Changelog
 
+### USB Board V5
+
+* Turn the battery connector counter-clockwise by 90 degrees to avoid wires hanging off the side of the board and not fitting in the block.
+
 ### OLED Board V4
 
 * Revert back to using 3.3V for the 13V boost circuit to hopefully avoid issues I've seen twice now with the OLED screens developing bad vertical lines of pixels. This is what Adafruit does in their board; perhaps there's a reason for it.
