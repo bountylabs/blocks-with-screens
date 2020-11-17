@@ -1,6 +1,6 @@
 /*************************************************** 
   Taken from Adafruit's SSD1351 example, but with the
-  dealys removed.
+  delays removed.
  ****************************************************/
 
 #include "adafruit_benchmark.h"

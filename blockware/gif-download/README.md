@@ -1,13 +1,11 @@
-# gif-download
+# Gif Download
 
-An example of downloading a binary 565 image and rendering it onto the OLED display. Also includes example code for using Arduino OTA for wireless programming.
+An example of downloading a stream of binary 565 images and rendering them onto the OLED display. Also includes example code for using Arduino OTA for wireless programming.
+
+This also depends on a web component to be deployed to convert a gif to a 565 image stream.
+
+TODO: Document setup of the web component.
 
 ## Configuring
 
 Create a `secrets.h` file based on `secrets.h.example` that contains your WiFi credentials.
-
-## Getting set up for development
-
-1. Download [VSCode](https://code.visualstudio.com/)
-1. Install the [PlatformIO IDE](http://docs.platformio.org/en/latest/ide/vscode.html) plugin for VSCode
-1. If programming over USB/serial, change the `upload_port` line in the `platformio.ini` file to match your local serial port (something like `/dev/cu.wchusbserial123`)

@@ -1,6 +1,6 @@
-# bouncing-logo
+# Bouncing Logo
 
-Bouncing Twitter logo that cycles Twitter colors
+Bouncing Twitter logo that cycles Twitter colors. Channels 1999 DVD player screensaver vibes
 
 ![Demo](static/demo.gif)
 

@@ -10,7 +10,8 @@
 #define ARDUINOJSON_DECODE_UNICODE 1
 #include <ArduinoJson.h>
 #include <OTAUpdates.h>
-#include "config.h"
+#include <DefaultConfig.h>
+#include "secrets.h"
 #include <Colors.h>
 #include <Text.h>
 #include <WifiHelper.h>

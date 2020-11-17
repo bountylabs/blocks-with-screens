@@ -9,18 +9,24 @@
 #include <JPEGDecoder.h>
 #include <ESP8266HTTPClient.h>
 
-#include "passiveinfo.h"
 #include "constants.h"
-#include "wifihelper.h"
 #include "weather.h"
 #include "httphelper.h"
 #include "stocks.h"
+#include <DefaultConfig.h>
+#include <WifiHelper.h>
+#include <OTAUpdates.h>
+#include "secrets.h"
+#include "constants.h"
 
 #ifndef min
 #define min(a,b) (((a) < (b)) ? (a) : (b))
 #endif
 
-Adafruit_SSD1351 display = Adafruit_SSD1351(16, 12, 13, 14, 15);
+void getCurrentWeather(WiFiClientSecure client);
+void getStockPrice(WiFiClientSecure client, String symbol);
+
+Adafruit_SSD1351 tft = Adafruit_SSD1351(SCREEN_WIDTH, SCREEN_HEIGHT, &SPI, CS_PIN, DC_PIN, RST_PIN);
 
 float closePrice = 0;
 float deltaPrice = 0;
@@ -32,22 +38,22 @@ float currentTempF;
 void parseWeatherZipResponse(DynamicJsonDocument& docPtr);
 
 void printAllCharacters() {
-  display.setTextColor(WHITE);
+  tft.setTextColor(WHITE);
     for (int i = 0; i < 256; i++) {
-      display.setCursor(0,0);
-      display.print(i);
-      display.print(" ");
-      display.write(i);
+      tft.setCursor(0,0);
+      tft.print(i);
+      tft.print(" ");
+      tft.write(i);
       delay(500);
-      display.fillScreen(0x000000);
+      tft.fillScreen(0x000000);
     }
   delay(60000);
 }
 
 void formatSPIFFSIfNecessary(void) {
   if (!SPIFFS.exists("/formatComplete.txt")) {
-    display.setTextColor(WHITE);
-    display.println("SPIFFS Formatting...");
+    tft.setTextColor(WHITE);
+    tft.println("SPIFFS Formatting...");
 
     Serial.println("Please wait 30 secs for SPIFFS to be formatted");
     SPIFFS.format();
@@ -105,6 +111,7 @@ int downloadFile(const char *URL, const char *filepath) {
           }
         }
         yield();
+        OTAUpdates_handle();
       }
       f.close();
 
@@ -129,8 +136,8 @@ void jpegRender(int xpos, int ypos) {
   uint16_t mcu_h = JpegDec.MCUHeight;
   uint32_t max_x = JpegDec.width;
   uint32_t max_y = JpegDec.height;
-  display.setTextColor(WHITE);
-  display.printf("Image is %dx%d\n", max_x, max_y);
+  tft.setTextColor(WHITE);
+  tft.printf("Image is %dx%d\n", max_x, max_y);
 
   // Jpeg images are draw as a set of image block (tiles) called Minimum Coding Units (MCUs)
   // Typically these MCUs are 16x16 pixel blocks
@@ -170,27 +177,27 @@ void jpegRender(int xpos, int ypos) {
     uint32_t mcu_pixels = win_w * win_h;
 
     // draw image MCU block only if it will fit on the screen
-    if ( ( mcu_x + win_w) <= display.width() && ( mcu_y + win_h) <= display.height()) {
-      display.startWrite();
+    if ( ( mcu_x + win_w) <= tft.width() && ( mcu_y + win_h) <= tft.height()) {
+      tft.startWrite();
 
       // Now set a MCU bounding window on the TFT to push pixels into (x, y, x + width - 1, y + height - 1)
       // tft.setAddrWindow(mcu_x, mcu_y, mcu_x + win_w - 1, mcu_y + win_h - 1);
-      display.setAddrWindow(mcu_x, mcu_y, win_w, win_h);
+      tft.setAddrWindow(mcu_x, mcu_y, win_w, win_h);
 
       // Write all MCU pixels to the TFT window
       // while (mcu_pixels--) tft.pushColor(*pImg++); // Send MCU buffer to TFT 16 bits at a time
 
       // tft.swapendian((uint8_t *)pImg, mcu_pixels*2);
       // tft.writedata((uint8_t *)pImg, mcu_pixels*2);
-      display.writePixels((uint16_t *)pImg, mcu_pixels);
-      display.endWrite();
+      tft.writePixels((uint16_t *)pImg, mcu_pixels);
+      tft.endWrite();
     // Stop drawing blocks if the bottom of the screen has been reached,
     // the abort function will close the file
-    } else if (( mcu_y + win_h) >= display.height()) {
-      Serial.printf("MCU block does not fit (abort) %d %d %d %d %d %d\n", mcu_x, win_w, display.width(), mcu_y, win_h, display.height());
+    } else if (( mcu_y + win_h) >= tft.height()) {
+      Serial.printf("MCU block does not fit (abort) %d %d %d %d %d %d\n", mcu_x, win_w, tft.width(), mcu_y, win_h, tft.height());
       JpegDec.abort();
     } else {
-      Serial.printf("MCU block does not fit %d %d %d %d %d %d\n", mcu_x, win_w, display.width(), mcu_y, win_h, display.height());
+      Serial.printf("MCU block does not fit %d %d %d %d %d %d\n", mcu_x, win_w, tft.width(), mcu_y, win_h, tft.height());
     }
   }
 }
@@ -212,16 +219,17 @@ void drawFSJpeg(const char *filename, int xpos, int ypos) {
     jpegRender(xpos, ypos);
   } else {
     Serial.println("Jpeg file format not supported!");
-    display.setTextColor(RED);
-    display.println("Jpeg file format not supported!");
+    tft.setTextColor(RED);
+    tft.println("Jpeg file format not supported!");
   }
 }
 
 void setup() {
-  Serial.begin(115200);
-  display.begin();
-  display.fillScreen(0x000000);
-  setupWifi(display);
+  Serial.begin(SERIAL_DATA_RATE);
+  tft.begin();
+  tft.fillScreen(0x000000);
+  ConnectWifi(WIFI_SSID, WIFI_PASS);
+  OTAUpdates_setup("passive-info");
 
   SPIFFS.begin();
   formatSPIFFSIfNecessary();
@@ -230,26 +238,35 @@ void setup() {
 void loop() {
   WiFiClientSecure client;
   // *************** Stock **********************
-  // getStockPrice(client, "TWTR");
-  // display.fillScreen(BLACK);
-  // drawStock(display, "TWTR", closePrice, deltaPrice, 2, 10, 10);
+  getStockPrice(client, "TWTR");
+  tft.fillScreen(BLACK);
+  drawStock(tft, "TWTR", closePrice, deltaPrice, 2, 10, 10);
+  for (int i = 0; i < 30; i++) {
+    OTAUpdates_handle();
+    delay(1000);
+  }
   // ***********************************************
 
+  // TODO: At one time these could both run together. But it seems that we are
+  // running out of memory now. Either the responses got bigger, or we have
+  // a memory bug or both.
 
   // *************** Weather **********************
-  getCurrentWeather(client);
-  display.fillScreen(WHITE);
-  int bytesDownloaded = downloadFile(weatherIconUrl.c_str(), "/out.jpg");
-  drawFSJpeg("/out.jpg", (display.width() - 50) / 2, (display.height() - 50) / 2);
-  drawWeather(display, weatherCityName, weatherIconUrl, currentTempF);
+  // getCurrentWeather(client);
+  // tft.fillScreen(WHITE);
+  // int bytesDownloaded = downloadFile(weatherIconUrl.c_str(), "/out.jpg");
+  // drawFSJpeg("/out.jpg", (tft.width() - 50) / 2, (tft.height() - 50) / 2);
+  // drawWeather(tft, weatherCityName, weatherIconUrl, currentTempF);
+  // for (int i = 0; i < 30; i++) {
+  //   OTAUpdates_handle();
+  //   delay(1000);
+  // }
   // ***********************************************
-
-  delay(600000);
 }
 
 void getCurrentWeather(WiFiClientSecure client) {
   bool successful = false;
-  successful = connectToSecureHost(&client, HOST);
+  successful = ConnectToSecureHost(&client, HOST, HTTPS_PORT);
   if (!successful) {
     return;
   }
@@ -280,7 +297,7 @@ void getCurrentWeather(WiFiClientSecure client) {
 
 void getStockPrice(WiFiClientSecure client, String symbol) {
   bool successful = false;
-  successful = connectToSecureHost(&client, HOST);
+  successful = ConnectToSecureHost(&client, HOST, HTTPS_PORT);
   if (!successful) {
     return;
   }

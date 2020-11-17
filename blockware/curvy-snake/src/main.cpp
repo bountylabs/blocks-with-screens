@@ -4,11 +4,8 @@
 #include <Adafruit_SSD1351.h>
 #include <SPI.h>
 
-#include "secrets.h"
 #include <CurvySnake.h>
-#include <OTAUpdates.h>
 #include <Text.h>
-#include <WifiHelper.h>
 #include <DefaultConfig.h>
 
 Adafruit_SSD1351 tft =
@@ -23,13 +20,11 @@ void setup(void)
   randomSeed(ESP.getCycleCount());
 
   displayReset();
-  ConnectWifi(WIFI_SSID, WIFI_PASSWORD);
-  OTAUpdates_setup("curvy-snake");
+
   CurvySnake_setup();
 }
 
 void loop()
 {
-  OTAUpdates_handle();
   CurvySnake_loop();
 }

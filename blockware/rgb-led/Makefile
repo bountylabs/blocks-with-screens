@@ -1,2 +1,1 @@
-test:
-	pio run
+include ../lib/Makefile/common.mk

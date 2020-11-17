@@ -9,11 +9,8 @@
 #include <WiFiUdp.h>
 #include "secrets.h"
 #include <DefaultConfig.h>
-
-// NETWORK STUFF
-IPAddress local_ip(192,168,4,22);
-IPAddress gateway(192,168,4,9);
-IPAddress subnet(255, 255, 255, 0);
+#include <WifiHelper.h>
+#include <Colors.h>
 
 #ifdef USE_TCP
 WiFiServer wifiServer(80);
@@ -28,30 +25,17 @@ uint8_t image[128*128*2];
 
 int expectedPacket;
 
-void joinNetwork()
-{
-  WiFi.begin(ssid, password);
-  Serial.print("Connecting to ");
-  Serial.print(ssid); Serial.println(" ...");
-
-  int i = 0;
-  while (WiFi.status() != WL_CONNECTED) { // Wait for the Wi-Fi to connect
-    delay(1000);
-    Serial.print(++i); Serial.print(' ');
-  }
-  Serial.println('\n');
-  Serial.println("Connection established!");  
-  Serial.print("IP address:\t");
-  Serial.println(WiFi.localIP());         // Send the IP address of the ESP8266 to the computer
-}
-
 void setup(void) {
   Serial.begin(SERIAL_DATA_RATE);
-  Serial.print("setup");
-  // 15MHz SPI
-  tft.begin(SPI_SPEED);
 
-  joinNetwork();
+  tft.begin(SPI_SPEED);
+  tft.fillScreen(BLACK);
+
+  ConnectWifi(WIFI_SSID, WIFI_PASS);
+  Serial.print("IP address:\t");
+  // Send the IP address of the ESP8266 to the computer
+  Serial.println(WiFi.localIP());
+  tft.println(WiFi.localIP());
 
   #ifdef USE_TCP
   wifiServer.begin();

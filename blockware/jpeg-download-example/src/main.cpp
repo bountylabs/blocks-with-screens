@@ -5,9 +5,10 @@
 #include <Adafruit_SSD1351.h>
 #include <SPI.h>
 #include <Adafruit_GFX.h>
+#include <WifiHelper.h>
+#include <OTAUpdates.h>
 #include <ESP8266HTTPClient.h>
 #include <JPEGDecoder.h>
-#include <ArduinoOTA.h>
 #include <FS.h>
 #include "secrets.h"
 #include <DefaultConfig.h>
@@ -176,30 +177,6 @@ void drawFSJpeg(const char *filename, int xpos, int ypos) {
   }
 }
 
-void setupArduinoOTA() {
-  ArduinoOTA.setHostname("jpeg-example");
-  // No authentication by default
-  // ArduinoOTA.setPassword((const char *)"123");
-  ArduinoOTA.onStart([]() {
-    Serial.println("OTA Start");
-  });
-  ArduinoOTA.onEnd([]() {
-    Serial.println("OTA End");
-  });
-  ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {
-    Serial.printf("OTA Progress: %u%%\r\n", (progress / (total / 100)));
-  });
-  ArduinoOTA.onError([](ota_error_t error) {
-    Serial.printf("OTA Error[%u]: ", error);
-    if (error == OTA_AUTH_ERROR) Serial.println("OTA Auth Failed");
-    else if (error == OTA_BEGIN_ERROR) Serial.println("OTA Begin Failed");
-    else if (error == OTA_CONNECT_ERROR) Serial.println("OTA Connect Failed");
-    else if (error == OTA_RECEIVE_ERROR) Serial.println("OTA Receive Failed");
-    else if (error == OTA_END_ERROR) Serial.println("OTA End Failed");
-  });
-  ArduinoOTA.begin();
-}
-
 void formatSPIFFSIfNecessary(void) {
   if (!SPIFFS.exists("/formatComplete.txt")) {
     tft.setTextColor(WHITE);
@@ -231,23 +208,8 @@ void setup(void) {
   tft.setTextWrap(true);
   tft.setTextSize(1);
 
-  tft.setTextColor(WHITE);
-  tft.println("Connecting to WiFi...");
-
-  // Connect wifi to support OTA programming
-  WiFiClient wifiClient;
-  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-    tft.print(".");
-  }
-  tft.println("!");
-  tft.setTextColor(GREEN);
-  tft.println("Connected!");
-
-  // Configure OTA programming
-  setupArduinoOTA();
+  ConnectWifi(WIFI_SSID, WIFI_PASSWORD);
+  OTAUpdates_setup("jpeg-example");
 
   tft.setTextColor(WHITE);
   tft.println("Configuring SPIFFS...");
@@ -278,7 +240,7 @@ void loop() {
 
   while (true) {
     yield();
-    ArduinoOTA.handle();
+    OTAUpdates_handle();
     delay(1000);
   }
 }

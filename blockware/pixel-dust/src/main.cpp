@@ -1,5 +1,5 @@
 #include <DefaultConfig.h>
-#define SERIALLOG 1
+// #define SERIALLOG 1
 #include <DLog.h>
 #include <Adafruit_SSD1351.h>
 #include <SPI.h>

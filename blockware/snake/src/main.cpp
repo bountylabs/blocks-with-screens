@@ -2,6 +2,7 @@
 #include <Adafruit_SSD1351.h>
 #include <ESP8266WebServer.h>
 #include <ESP8266WiFi.h>
+#include <DefaultConfig.h>
 
 #define BLUE 0xFF
 #define RED 0xF800
@@ -14,6 +15,19 @@
 #define DOWN 3
 #define LEFT 4
 #define HTML "<title>Snake</title><meta content=\"width=device-width,initial-scale=1\"name=viewport><script>function makeRequest(e){request=new XMLHttpRequest,request.open(\"GET\",e),request.send()}document.onkeydown=function(e){\"38\"==(e=e||window.event).keyCode?makeRequest(\"/up.html\"):\"40\"==e.keyCode?makeRequest(\"/down.html\"):\"37\"==e.keyCode?makeRequest(\"/left.html\"):\"39\"==e.keyCode&&makeRequest(\"/right.html\")}</script><style>body{position:relative;width:100%;min-height:100vh;min-height:-webkit-fill-available;font-size:32px;font-family:Futura;padding:0;margin:0}.container{position:relative;text-align:center;margin:auto;top:50%;transform:translateY(-50%)}button{display:inline-block;width:50px;height:50px;border-radius:25px;color:#fff;outline:0;border:none;margin-bottom:20px;font-family:Futura}button:active{opacity:.5}.up{background:#466cb2}.down{background:#e1b551;margin-left:20px;margin-right:20px}.left{background:#16a674}.right{background:#ee565d}</style><div class=container>Snake<br><br><button class=up onclick='makeRequest(\"/up.html\")'>Up</button><br><button class=left onclick='makeRequest(\"/left.html\")'>Left</button> <button class=down onclick='makeRequest(\"/down.html\")'>Down</button> <button class=right onclick='makeRequest(\"/right.html\")'>Right</button></div>"
+
+/**
+ * Forward defines because C++
+ */
+void drawGameBoardCell(int oldX, int oldY, byte on);
+void unrollSnake();
+void showScoreMessage(int score);
+void fixEdge();
+void handleRight();
+void handleLeft();
+void handleUp();
+void handleDown();
+void handleRoot();
 
 /**
  * Bitmaps
@@ -161,7 +175,7 @@ ESP8266WebServer server(80);
 IPAddress IP(192,168,4,15);
 IPAddress mask = (255, 255, 255, 0);
 int connected = 0;
-Adafruit_SSD1351 display = Adafruit_SSD1351(16, 12, 13, 14, 15);
+Adafruit_SSD1351 display = Adafruit_SSD1351(SCREEN_WIDTH, SCREEN_HEIGHT, &SPI, CS_PIN, DC_PIN, RST_PIN);
 
 struct Point {
   int row = 0, col = 0;

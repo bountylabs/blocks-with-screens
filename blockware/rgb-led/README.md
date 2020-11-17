@@ -1,9 +1,5 @@
 # RGB LED Example
 
-Example sketch that uses the (normally unpopulated) SK6812 LED on the Microcontroller board.
+Very simple example that uses the (normally unpopulated) SK6812 LED on the Microcontroller board.
 
-## Getting set up for development
-
-1. Download [VSCode](https://code.visualstudio.com/)
-1. Install the [PlatformIO IDE](http://docs.platformio.org/en/latest/ide/vscode.html) plugin for VSCode
-1. If programming over USB/serial, change the `upload_port` line in the [platformio.ini](https://github.com/johnboiles/EspHeart/blob/master/platformio.ini) file to match your local serial port (something like `/dev/cu.usbserial123`)
+Note, this RGB LED *was not* included in the final assembly of the blocks, so this is only available for reference purposes for those brave enough to solder on their own internal RGB LED to the microcontroller board.

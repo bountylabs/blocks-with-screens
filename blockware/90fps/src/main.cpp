@@ -26,7 +26,7 @@ void flush()
 
 void setup(void)
 {
-  Serial.begin(115200);
+  Serial.begin(SERIAL_DATA_RATE);
   Serial.print("setup");
   // 24MHz SPI
   // For a 128x128 pixel screen with 16-bit color depth this gives us

@@ -30,4 +30,25 @@ void ConnectWifi(const char* ssid, const char* password)
     }
   }
   outputln("Connected!", GREEN);
+  DLOG(PSTR("WiFi connected\n")); 
+  DLOG(PSTR("IP address: %s\n"), WiFi.localIP().toString().c_str());
+  DLOG(PSTR("Netmask: %s\n"), WiFi.subnetMask().toString().c_str());
+  DLOG(PSTR("Gateway: %s\n"), WiFi.gatewayIP().toString().c_str());
+}
+
+bool ConnectToHost(WiFiClient* client, String host, uint16_t port) {
+  if (!client->connect(host, port)) {
+    Serial.println("connection failed");
+    return false;
+  }
+  return true;
+}
+
+bool ConnectToSecureHost(WiFiClientSecure* client, String host, uint16_t port) {
+  client->setInsecure();
+  if (!client->connect(host, port)) {
+    Serial.println("connection failed");
+    return false;
+  }
+  return true;
 }

@@ -5,8 +5,6 @@
 #include <SPI.h>
 #include <math.h>
 
-#include "secrets.h"
-#include <OTAUpdates.h>
 #include <Random.h>
 #include <TLLogos.h>
 #include <Text.h>
@@ -56,9 +54,6 @@ void setup(void)
 
   // initialize srand
   randomSeed(ESP.getCycleCount());
-
-  // ConnectWifi(WIFI_SSID, WIFI_PASSWORD);
-  OTAUpdates_setup("bouncing-logo");
 
   // download logo binaries
   Logos.push_back(tl_blue);
@@ -146,8 +141,6 @@ void tick()
 
 void loop()
 {
-  // OTAUpdates_handle();
-
   uint16_t now = millis();
   uint16_t time = now - lastLoop;
 

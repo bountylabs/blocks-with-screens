@@ -23,6 +23,7 @@ int main(int argc, char** argv) {
     char msg[MAXLINE];
     
     // Creating socket file descriptor
+    printf("creating socket\n");
     if ( (sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
         perror("socket creation failed");
         exit(EXIT_FAILURE);
@@ -33,7 +34,10 @@ int main(int argc, char** argv) {
     // Filling server information
     servaddr.sin_family = AF_INET;
     servaddr.sin_port = htons(PORT);
-    servaddr.sin_addr.s_addr = inet_addr("10.0.0.175");
+    // TODO: Add a way to use the dynamic bonjour video-display.local name
+    char *ip = "10.0.0.137";
+    printf("connecting to %s\n", ip);
+    servaddr.sin_addr.s_addr = inet_addr(ip);
     
     int n, len;
     

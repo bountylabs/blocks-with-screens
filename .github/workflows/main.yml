@@ -6,15 +6,20 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - name: Check out code
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
+
+    - run: |
+        # Hack to get setup-python to work on act
+        if [ ! -f "/etc/lsb-release" ] ; then
+          echo "DISTRIB_RELEASE=18.04" > /etc/lsb-release
+        fi
 
     - name: Set up Python
-      uses: actions/setup-python@v1      
+      uses: actions/setup-python@v2
 
     - name: Install PlatformIO
       run: |

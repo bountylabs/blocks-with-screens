@@ -1,9 +1,9 @@
-# ha-display
+# Home Assistant Deplay
 
-An example of showing some Home Assistant temperature, humidity, and absolute humidity states on the block. Make sure to update your secrets.h, config.h, and adapt the sketch to your Home Assistant entities!
+An example of showing some Home Assistant temperature, humidity, and absolute humidity states on the block. Make sure to update your secrets.h and adapt the program to your Home Assistant entities!
 
-## Getting set up for development
+Warning: These OLED displays can experience burn-in. If you leave your block on nonstop with similar text, the ghost of that text will be visible when you do solid colors on the screen later.
 
-1. Download [VSCode](https://code.visualstudio.com/)
-1. Install the [PlatformIO IDE](http://docs.platformio.org/en/latest/ide/vscode.html) plugin for VSCode
-1. If programming over USB/serial, change the `upload_port` line in the `platformio.ini` file to match your local serial port (something like `/dev/cu.wchusbserial123`)
+## Configuring
+
+Create a `secrets.h` file based on `secrets.h.example` that contains your WiFi credentials, and your Home Assistant information (token, IP, port).
