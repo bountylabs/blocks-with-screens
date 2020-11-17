@@ -6,7 +6,7 @@ A collection of programs meant to run on the blocks.
 
 ### 90fps
 
-A demo that explains how to modify the Adafruit SPITFT library to get the maximum possible display speed from your block.
+A demo of how to squeeze every last bit of graphics performance out of your block by making better use of the hardware SPI APIs in the microcontroller.
 
 ### Accelerometer
 

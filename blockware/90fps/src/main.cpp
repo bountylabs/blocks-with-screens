@@ -28,8 +28,10 @@ void setup(void)
 {
   Serial.begin(115200);
   Serial.print("setup");
-  // 15MHz SPI
-  tft.begin(SPI_SPEED);
+  // 24MHz SPI
+  // For a 128x128 pixel screen with 16-bit color depth this gives us
+  // 24000000 /(128*128*16) = 91.552734375 Hz (or 91.55 FPS max)
+  tft.begin(24000000);
 
   // initialize canvas
   canvas = new GFXcanvas16(SCREEN_WIDTH, SCREEN_HEIGHT);
