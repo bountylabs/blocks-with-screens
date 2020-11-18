@@ -30,6 +30,9 @@ It's kinda like those old pipes screensavers, or snake with curves. Watch random
 
 ### Gif Download
 
+<img alt="Gif Download" src="https://user-images.githubusercontent.com/218876/99469032-c78e7500-28f6-11eb-89ca-39b789fa7b69.gif"><img alt="Server Interface" src="https://user-images.githubusercontent.com/218876/99469116-e42aad00-28f6-11eb-905b-9868b231443c.jpeg" height="300">
+
+
 This demo shows a QR code that takes you to a web page where you can upload a gif, have it translated to a block-friendly format, then the block can download it and begin to display it.
 
 Requires a web component which may or may not be running.
