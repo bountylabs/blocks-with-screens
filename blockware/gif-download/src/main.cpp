@@ -135,12 +135,6 @@ void setup(void) {
   tft.begin(15000000);
 
   tft.fillScreen(BLACK);
-  tft.setCursor(0, 0);
-  tft.setTextWrap(true);
-  tft.setTextSize(1);
-
-  tft.setTextColor(WHITE);
-  tft.printf("Connecting to %s...", WIFI_SSID);
 
   // Connect wifi to support OTA programming
   ConnectWifi(WIFI_SSID, WIFI_PASSWORD);
@@ -171,7 +165,9 @@ void loop() {
 
   int randomId = getRandomNumber(0, INT_MAX);
   char url[64];
-  sprintf(url, "http://blockswithscreens.appspot.com?block=%d", randomId);
+  char *serverURL = "http://blockswithscreens.appspot.com";
+  // char *serverURL = "http://10.0.0.130:3000";
+  sprintf(url, "%s?block=%d", serverURL, randomId);
 
   // The structure to manage the QR code
   QRCode qrcode;
@@ -191,7 +187,7 @@ void loop() {
     }
   }
   char downloadUrl[64];
-  sprintf(downloadUrl, "http://blockswithscreens.appspot.com/api/gif?block=%d", randomId);
+  sprintf(downloadUrl, "%s/api/gif?block=%d", serverURL, randomId);
 
   while (true) {
     delay(5000);
