@@ -8,13 +8,13 @@ A collection of programs meant to run on the blocks.
 
 ![90fps](https://user-images.githubusercontent.com/218876/99465118-7b3f3700-28ee-11eb-94da-636e3e2f11c1.gif)
 
-A demo of how to squeeze every last bit of graphics performance out of your block by making better use of the hardware SPI APIs in the microcontroller.
+A demo of how to squeeze every last bit of graphics performance out of your block by making better use of the hardware SPI APIs in the microcontroller. The interesting bits are in the [README.md](https://github.com/bountylabs/blocks-with-screens/tree/main/blockware/90fps#hacking-the-graphics-library).
 
 ### Adafruit Example
 
 ![adafruit-example](https://user-images.githubusercontent.com/218876/99464803-cf95e700-28ed-11eb-87c7-8762d6e9e07f.gif)
 
-A fork of Adafruit's [SSD1351 OLED example code](https://github.com/adafruit/Adafruit-SSD1351-library/blob/master/examples/test/test.ino) with the `delay`s removed. Useful as an overview of the available graphics APIs in the Adafruit GFX library. 
+A fork of Adafruit's [SSD1351 OLED example code](https://github.com/adafruit/Adafruit-SSD1351-library/blob/master/examples/test/test.ino) with the `delay`s removed. Useful as an overview of the available graphics APIs in the Adafruit GFX library or as a graphics benchmark when tweaking the Adafruit GFX Library code (as detailed in the [90fps README.md](https://github.com/bountylabs/blocks-with-screens/tree/main/blockware/90fps#hacking-the-graphics-library)).
 
 ### Bouncing Logo
 
@@ -35,7 +35,7 @@ It's kinda like those old pipes screensavers, or snake with curves. Watch random
 
 This demo shows a QR code that takes you to a web page where you can upload a gif, have it translated to a block-friendly format, then the block can download it and begin to display it.
 
-Requires a web component which may or may not be running.
+Requires a Node.js-based server component which you can find in in the `gif-download/server` directory.
 
 ### Homeassistant Display
 
@@ -59,7 +59,7 @@ An example that uses the [Adafruit Pixel Dust](https://github.com/adafruit/Adafr
 
 ![rgb-led](https://user-images.githubusercontent.com/218876/99465399-2f40c200-28ef-11eb-95ad-9ac03f76da1b.gif)
 
-An example that uses the (optional) internal RGB LED to change the LED's color based on the orientation of the block. This requires modification of the PCB by soldering on an RGB LED.
+An example that uses the (normally not-included) internal RGB LED. This requires modification of the PCB by soldering on an RGB LED. This is probably not the blockware you're looking for.
 
 ### Snake
 
@@ -75,4 +75,4 @@ An example that downloads stocks and weather.
 
 ### Video Display
 
-An example of real-time video streaming to your block.
+An example of real-time video streaming from your computer to your block.

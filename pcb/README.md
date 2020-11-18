@@ -16,7 +16,7 @@ It consists of a 13V boost regulator to provide the required voltage to drive th
 
 ![Microcontroller Back](https://user-images.githubusercontent.com/218876/99321508-d9064d00-2822-11eb-97be-c0dcf3f74503.png) ![Microcontroller Front](https://user-images.githubusercontent.com/218876/99321512-d99ee380-2822-11eb-9604-5819c3f5eadf.png)
 
-This board is a mounting point for the ESP12 microcontroller and the MMA8452Q 3-axis accelerometer. It also has unpopulated headers for a [SparkFun Qwiic](https://www.sparkfun.com/qwiic) connector and a WS2812B RGB LED if you want to add additional functionality.
+This board is a mounting point for the ESP12 microcontroller and the MMA8452Q 3-axis accelerometer. It also has unpopulated pads for a [SparkFun Qwiic](https://www.sparkfun.com/qwiic) connector and a WS2812B RGB LED if you want to add additional functionality.
 
 ### USB Board
 
