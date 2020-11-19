@@ -3,6 +3,7 @@
  ****************************************************/
 
 #define TELNETLOG 1
+//#define SERIALLOG 1
 #include <DLog.h>
 #include <Adafruit_SSD1351.h>
 #include <SPI.h>
@@ -28,6 +29,8 @@ bool NeedsScreenRefresh;
 
 void setup(void) {
   Serial.begin(SERIAL_DATA_RATE);
+  const char *hostname = "homeassistant-display";
+  DLOGBegin(hostname);
   DLOG("setup");
 
   tft.begin(SPI_SPEED);
@@ -41,7 +44,7 @@ void setup(void) {
 
   displayReset();
   ConnectWifi(WIFI_SSID, WIFI_PASSWORD);
-  OTAUpdates_setup("ha-display");
+  OTAUpdates_setup(hostname);
 
   NeedsScreenRefresh = true;
 }
@@ -67,6 +70,7 @@ void waitAndHandle(unsigned long ms) {
   for (unsigned long i = 0; i < ms; i += 20) {
     OTAUpdates_handle();
     yield();
+    DLOGHandle();
     delay(20);
   }
 }
@@ -82,9 +86,9 @@ void printStatLine(const char *label, const char *format, float value, const cha
 }
 
 void printEnvInfo(float temp, float humidity, float absHumidity) {
-  char tempUnit;
-  sprintf(&tempUnit, "%cF", (char)247);
-  printStatLine("Temp:      ", "%.1f", temp, &tempUnit);
+  char tempUnit[5];
+  sprintf(tempUnit, "%cF", (char)247);
+  printStatLine("Temp:      ", "%.1f", temp, tempUnit);
   printStatLine("Humidity:  ", "%.0f", humidity, "%");
   printStatLine("Abs. Hum.: ", "%.2f", absHumidity, "g/m^3");
 }
@@ -105,6 +109,10 @@ void loop() {
     NeedsScreenRefresh = false;
   }
   tft.setCursor(0, 0);
+
+  DLOG("Got data from Home Assistant\n");
+  DLOG("Inside: %.1fºF %.0f%% %.2fg/m^3\n", insideTemp, insideHumidity, insideAbsHumidity);
+  DLOG("Outside: %.1fºF %.0f%% %.2fg/m^3\n", outsideTemp, outsideHumidity, outsideAbsHumidity);
 
   tft.setTextColor(WHITE, BLACK);
   tft.setTextSize(2);

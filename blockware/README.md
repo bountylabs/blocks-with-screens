@@ -2,7 +2,80 @@
 
 A collection of programs meant to run on the blocks.
 
+## Programming Your Block
+
+All of these blockwares are configured to be compiled and uploaded using [PlatformIO](https://platformio.org/). You can probably also use the Arduino IDE or any other tool that works to compile and upload Arduino-compatible code with ESP8266 processors.
+
+### Using Visual Studio Code
+
+The easiest way to get started is using Visual Studio Code (VSCode) with the [PlatformIO extension](https://platformio.org/install/ide?install=vscode).
+
+First, instal Visual Studio Code either from the [website](https://code.visualstudio.com/) or (on macOS) using Homebrew `brew cask install visual-studio-code`. Next go to View -> Extensions and search for `PlatformIO IDE`. Click the extension and click Install.
+
+![PlatformIO IDE Instructions](https://user-images.githubusercontent.com/218876/99602553-86f63080-29b6-11eb-854a-f876df2631f7.png)
+
+Now, simply open one of the blockware application directories in VSCode (e.g. `blockware/curvy-snake`) and you should have the PlatformIO actions available at the bottom of your VSCode. They look like this:
+
+<img width="413" alt="VSCode PlatformIO Toolbar" src="https://user-images.githubusercontent.com/218876/99601884-2fa39080-29b5-11eb-8d12-8d2f14bf3690.png">
+
+Now, connect your block using a Micro USB cable, turn it on using the switch in the back, then hit the 'Upload' button (right arrow) in the bottom of your VSCode. The program should compile and then upload to your block. It can also be handy to use the Serial Monitor to view any logs from the program that are output over the USB serial port.
+
+If the upload fails with an error message like `Error: Please specify upload_port for environment` or `Timed out waiting for packet header`, then you may need to edit the [`platformio.ini`](https://github.com/bountylabs/blocks-with-screens/blob/main/blockware/curvy-snake/platformio.ini) in the blockware's directory to set a specific `upload_port`. Look in `/dev/` for a `tty` device named something like `usbserial` or `ttyUSB` or `wchusbserial` and change `upload_port` to match the path to that device exactly.
+
+For more info on using the PlatformIO VSCode extension check out the [PlatformIO Quick Start guide](https://docs.platformio.org/en/latest/integration/ide/vscode.html#quick-start).
+
+### Using the PlatformIO CLI
+
+You can alternately use the PlatformIO CLI if that's more your style. Follow one of the [installation methods on the PlatformIO site](https://platformio.org/install/cli). As of this writing, they recommend using their installer script:
+
+```bash
+python3 -c "$(curl -fsSL https://raw.githubusercontent.com/platformio/platformio/master/scripts/get-platformio.py)"
+```
+
+The script will probably instruct you to add something to your `PATH` in order to use the `pio` binary. Something like the following (which you could add to your `.bashrc` / `.zshrc`)
+
+```bash
+export PATH=$HOME/.platformio/penv/bin:$PATH
+```
+
+You can now build and upload blockware from the command line like this:
+
+```bash
+cd blockware/curvy-snake
+pio run --target upload
+```
+
+Or if you want to override the `upload_port` (e.g. for blockwares that support WiFi OTA programming)
+
+```bash
+cd blockware/gif-download
+pio run --target upload --upload-port gif-example.local
+```
+
+### Pro-tips
+
+#### Serial Monitor Reset
+
+In the VSCode PlatformIO Serial Monitor, you can quickly restart the block by pressing `Ctrl-T Ctrl-D` twice. This toggles the `DTR` pin on the USB-serial chip and that pin is connected to the `RST` pin on the microcontroller.
+
+#### Logging using `Dlog.h`
+
+If using the `DLog` library for logging over the serial monitor or telnet you need to add `#define SERIALLOG 1` or `#define TELNETLOG 1` respectively before including `DLog.h` to enable serial logging. For example, for logging to the serial port:
+
+```C
+#define SERIALLOG 1
+#include <DLog.h>
+```
+
+If using `TELNETLOG` then from your computer you can do something like the following to get the logs to your terminal over the network.
+
+```bash
+telnet homeassistant-display.local
+```
+
 ## App descriptions
+
+This repo contains a handful of example blockwares you could run directly or use as a starting point to make your own blockware! Please share back any neat things you make so that others can benefit from it!
 
 ### 90fps
 
