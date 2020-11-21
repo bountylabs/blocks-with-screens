@@ -7,10 +7,10 @@
 #define MOSI_PIN 13 // D7 -- ESP8266 Hardware MOSI
 
 // V1 OLED board pinout
-// NOTE: since GPIO12 is the hardware SPI MOSI pin, this board requires a hack in SPI.c.
+// NOTE: since GPIO12 is the hardware SPI MOSI pin, this board requires a hack in SPI.cpp.
 // In short, find the PlatformIO SPI library and comment out the lines with `pinMode(MISO`.
 // This file is usually somewhere in `~/.platformio/packages`, often here:
-// ~/.platformio/packages/framework-arduinoespressif8266/libraries/SPI/SPI.h
+// ~/.platformio/packages/framework-arduinoespressif8266/libraries/SPI/SPI.cpp
 // #define DC_PIN 12 // D6
 // #define CS_PIN 16 // D0
 // #define RST_PIN 15 // D8
