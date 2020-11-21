@@ -4,7 +4,7 @@
 
 <img alt="Block in its natural habitat" src="https://user-images.githubusercontent.com/218876/99318095-f08e0780-281b-11eb-9c59-674a2c463fbb.jpeg" width="33%"><img alt="Animated 3d block" src="https://user-images.githubusercontent.com/218876/99320417-70b66c00-2820-11eb-983f-6c3783336583.gif" width="33%"><img alt="Puzzle-style block" src="https://user-images.githubusercontent.com/218876/99320816-4b762d80-2821-11eb-8898-2ba34d075f10.jpg" width="33%">
 
-It's Twitterversary blocks, but with screens and internet. Originally a Fall 2019 Twitter HackWeek project by [@johnboiles](github.com/johnboiles), [@magus](github.com/magus), [@mikeperiscope](github.com/mikeperiscope), [@seanfchan](github.com/seanfchan), and [@smartfuse](github.com/smartfuse).
+It's Twitterversary blocks, but with screens and internet. Originally a Fall 2019 Twitter HackWeek project by [@johnboiles](https://github.com/johnboiles), [@magus](https://github.com/magus), [@mikeperiscope](https://github.com/mikeperiscope), [@seanfchan](https://github.com/seanfchan), and [@smartfuse](https://github.com/smartfuse).
 
 ## Components
 
