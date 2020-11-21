@@ -164,5 +164,4 @@ An example that downloads stocks and weather.
 
 An example of real-time video streaming from your computer to your block.
 
-
-_[Source](https://twitter.com/samhaves/status/1177639088540635141)_
+<a href="https://twitter.com/samhaves/status/1177639088540635141"><img width="303" alt="Blockware Live Video Demo" src="https://user-images.githubusercontent.com/290084/99889518-ea789c00-2c0a-11eb-8a01-a325acf3eb22.png"></a>
