@@ -10,4 +10,14 @@ static inline float random()
   return (float)rand() / (float)RAND_MAX;
 }
 
+static inline float random(const int min, const float max)
+{
+  return min + (random() * (max - min));
+}
+
+static inline float random(const int min, const int max)
+{
+  return min + (random() * (max - min));
+}
+
 #endif
