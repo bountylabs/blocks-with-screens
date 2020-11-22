@@ -8,15 +8,24 @@
 #include <Random.h>
 #include <TLLogos.h>
 #include <Text.h>
-#include <Vec2d.h>
+#include <Particle.h>
 #include <DefaultConfig.h>
+
+
+const int tlWidth = 40;
+const int tlHeight = 33;
+const float FIREWORK_CHANCE = 0.05;
+const int FIREWORKS_PER_FRAME = 64;
+const char *username = "@magusnn";
+const char *years = "5 years";
 
 
 Adafruit_SSD1351 tft =
   Adafruit_SSD1351(SCREEN_WIDTH, SCREEN_HEIGHT, &SPI, CS_PIN, DC_PIN, RST_PIN);
 
 std::vector<unsigned char*> Logos;
-std::vector<unsigned int> FireworkColors;
+std::vector<Particle> Particles;
+std::vector<Particle> Explosions;
 
 // in-memory 16-bit canvas
 GFXcanvas16* canvas;
@@ -24,9 +33,6 @@ GFXcanvas16* canvas;
 Vec2d<int> screen = Vec2d<int>();
 const int FPS = floor(1000 / 60); // every ~16ms (60fps)
 uint16_t lastLoop = millis() - FPS + 1;
-
-int tlWidth = 40;
-int tlHeight = 33;
 
 // logo position x,y
 Vec2d<int> position = Vec2d<int>();
@@ -38,10 +44,6 @@ uint8_t sizeUsername = 2;
 Vec2d<int> posUsername = Vec2d<int>();
 
 unsigned char* logo;
-
-const int FIREWORKS_PER_FRAME = 64;
-const char *username = "@magusnn";
-const char *years = "5 years";
 
 
 // NOTE: `loop`, `setup` and `flush` are sort of common operations
@@ -105,14 +107,37 @@ void randomizeLogo()
   logo = nextLogo;
 }
 
-void drawFireworks()
+void drawParticles()
 {
-  for (int i = 0; i < FIREWORKS_PER_FRAME; i++) {
-    int color = FireworkColors[floor(FireworkColors.size() * random())];
-    int x = floor(screen.x * random());
-    int y = floor(screen.y * random());
-    canvas->drawPixel(x, y, color);
+  // randomly add new particles rocketing
+  // if (random() < FIREWORK_CHANCE) {
+
+  // add new firework when all particles are done
+  if (Particles.size() < 1) {
+    Particles.push_back(Particle(random() * screen.x, screen.y, true, randomFireworkColor()));
   }
+
+  // explode and destroy old entities
+  for (int i = 0, max = (int) Particles.size(); i < max; i++) {
+    Particle* p = &Particles[i];
+    if (p->destroy() || p->explode(Particles)) {
+      Particles.erase(Particles.begin() + i);
+    }
+  }
+
+  // tick and draw
+  for (int i = 0, max = (int) Particles.size(); i < max; i++) {
+    Particle* p = &Particles[i];
+    p->tick();
+    p->draw(canvas);
+  }
+
+  // for (int i = 0; i < FIREWORKS_PER_FRAME; i++) {
+  //   int color = FIREWORK_COLORS[floor(FIREWORK_COLORS.size() * random())];
+  //   int x = floor(screen.x * random());
+  //   int y = floor(screen.y * random());
+  //   canvas->drawPixel(x, y, color);
+  // }
 }
 
 void flush()
@@ -133,16 +158,6 @@ void initialize() {
   Logos.push_back(tl_red);
   Logos.push_back(tl_yellow);
 
-  // gather firework colors
-  FireworkColors.push_back(BLUE);
-  FireworkColors.push_back(RED);
-  FireworkColors.push_back(GREEN);
-  FireworkColors.push_back(CYAN);
-  FireworkColors.push_back(MAGENTA);
-  FireworkColors.push_back(YELLOW);
-  FireworkColors.push_back(DARK_GRAY);
-  FireworkColors.push_back(GRAY);
-  FireworkColors.push_back(LIGHT_GRAY);
 
   // randomize starting logo
   randomizeLogo();
@@ -169,7 +184,7 @@ void tick()
   // base
   drawLogo();
   drawText();
-  drawFireworks();
+  drawParticles();
 }
 
 void loop()
