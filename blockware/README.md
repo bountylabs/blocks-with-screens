@@ -20,9 +20,9 @@ The easiest way to get started is using **[Visual Studio Code (VSCode)](https://
 
     ![PlatformIO IDE Instructions](https://user-images.githubusercontent.com/218876/99602553-86f63080-29b6-11eb-854a-f876df2631f7.png)
 
-4. `File -> Open` and select one of the blockware application directories in VSCode (e.g. `blockware/curvy-snake`)
+4. `File -> Open Workspace...` and select the `workspace.code-workspace` file in one of the blockware folders (e.g. `blockware/curvy-snake`)
 
-    **_NOTE_**: You should have the PlatformIO actions available at the bottom of your VSCode
+    **_NOTE_**: In the workspace, you should have the **PlatformIO actions** available at the bottom of your VSCode
 
     <img width="413" alt="VSCode PlatformIO Toolbar" src="https://user-images.githubusercontent.com/218876/99601884-2fa39080-29b5-11eb-8d12-8d2f14bf3690.png">
 
