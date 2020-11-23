@@ -1,3 +1,8 @@
+// Debug code that can be handy for validating that 565 pixel format conversion is working correctly.
+// This will take a 565 pixel format video of the width/height specified below over stdin and convert
+// it to rgb888 and output that over stdout. You might do something like this to use it:
+//     clang 5652bmp.cpp -o 5652bmp
+//     cat 565vid.avi | 5652bmp > rgb888vid.avi
 #include <stdio.h>
 #include <string.h>
 
