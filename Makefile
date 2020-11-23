@@ -10,4 +10,5 @@ test:
 	make -C blockware/rgb-led test
 	make -C blockware/snake test
 	make -C blockware/stocks-and-weather test
+	make -C blockware/twitter-text test
 	make -C blockware/video-display test client/client
