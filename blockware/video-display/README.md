@@ -26,7 +26,11 @@ Then you can use `ffmpeg` to convert a video file into the block-friendly 565 pi
 ffmpeg -i /path/to/input/video.mp4 -vf scale=128x128 -f rawvideo -pix_fmt rgb565 - | ./client/client 10.0.0.150
 ```
 
-You should now see your video on your block!
+You should now see your video on your block! You can also probably stream your webcam with something like this (this is for macOS, but you can probably do something similar with ffmpeg's video4linux support on Linux).
+
+```bash
+ffmpeg -f avfoundation -framerate 10 -video_device_index 0 -i ":0" -vf scale=128x128 -f rawvideo -pix_fmt rgb565 - | ./client/client 10.0.0.138
+```
 
 If you happen to have multiple blocks for some reason you can send video to multiple blocks at once using `tee`:
 
