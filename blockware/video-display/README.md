@@ -23,17 +23,17 @@ make client/client
 Then you can use `ffmpeg` to convert a video file into the block-friendly 565 pixel format and send it using the client to the IP of your block. Replace `10.0.0.150` with the IP of your block and `/path/to/input/video.mp4` with the path to your video file.
 
 ```bash
-ffmpeg -i /path/to/input/video.mp4 -vf scale=128x128 -f rawvideo -pix_fmt rgb565 - | ./client/client 10.0.0.150
+ffmpeg -i /path/to/input/video.mp4 -vf "scale=128:128:force_original_aspect_ratio=decrease,pad=128:128:(ow-iw)/2:(oh-ih)/2" -f rawvideo -pix_fmt rgb565 - | ./client/client 10.0.0.150
 ```
 
 You should now see your video on your block! You can also probably stream your webcam with something like this (this is for macOS, but you can probably do something similar with ffmpeg's video4linux support on Linux).
 
 ```bash
-ffmpeg -f avfoundation -framerate 10 -video_device_index 0 -i ":0" -vf scale=128x128 -f rawvideo -pix_fmt rgb565 - | ./client/client 10.0.0.138
+ffmpeg -f avfoundation -framerate 10 -video_device_index 0 -i ":0" -vf "scale=128:128:force_original_aspect_ratio=decrease,pad=128:128:(ow-iw)/2:(oh-ih)/2" -f rawvideo -pix_fmt rgb565 - | ./client/client 10.0.0.150
 ```
 
 If you happen to have multiple blocks for some reason you can send video to multiple blocks at once using `tee`:
 
 ```bash
-ffmpeg -i /path/to/input/video.mp4 -vf scale=128x128 -f rawvideo -pix_fmt rgb565 - | tee >(./client/client 10.0.0.150) >(./client/client 10.0.0.138)
+ffmpeg -i /path/to/input/video.mp4 -vf -vf "scale=128:128:force_original_aspect_ratio=decrease,pad=128:128:(ow-iw)/2:(oh-ih)/2" -f rawvideo -pix_fmt rgb565 - | tee >(./client/client 10.0.0.150) >(./client/client 10.0.0.138)
 ```
