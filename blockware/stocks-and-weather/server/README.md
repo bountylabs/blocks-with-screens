@@ -6,4 +6,4 @@ TODO: It'd be great to see if we can figure out how to get the API access workin
 
 ## Running Locally
 
-TODO: This is in @seanfchan's brain.
+TODO: This is in @seanfchan's and/or @magus's brain(s).
