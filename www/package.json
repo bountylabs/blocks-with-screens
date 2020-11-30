@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "post-install": "node ./scripts/post-install.js",
+    "dev": "yarn post-install &&  next dev",
+    "build": "yarn post-install && next build",
     "start": "next start"
   },
   "dependencies": {
@@ -17,5 +18,7 @@
     "react-three-fiber": "^5.3.3",
     "three": "^0.123.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "replace-in-file": "^6.1.0"
+  }
 }
