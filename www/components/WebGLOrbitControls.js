@@ -13,7 +13,7 @@ export default function WebGLOrbitControls(props) {
   const { camera, gl, invalidate } = useThree();
 
   useFrame(() => {
-    // console.debug("WebGLOrbitControls", ref);
+    // console.debug("WebGLOrbitControls", ref.current.object);
     ref.current.update();
   });
 
