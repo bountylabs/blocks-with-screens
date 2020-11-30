@@ -6,7 +6,10 @@
     "post-install": "node ./scripts/post-install.js",
     "dev": "yarn post-install &&  next dev",
     "build": "yarn post-install && next build",
-    "start": "next start"
+    "start": "next start",
+    "deploy": "now",
+    "deploy:prod": "now --prod",
+    "deploy:purge": "now rm blocks --safe"
   },
   "dependencies": {
     "@react-spring/three": "^9.0.0-rc.3",
