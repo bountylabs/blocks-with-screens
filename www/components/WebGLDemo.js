@@ -4,6 +4,15 @@ import { Canvas, useFrame } from "react-three-fiber";
 import { useFBX } from "@react-three/drei/useFBX";
 import { useGLTF } from "@react-three/drei/useGLTF";
 import { a, useSpring } from "@react-spring/three";
+import { BlendFunction } from "postprocessing";
+
+import {
+  EffectComposer,
+  DepthOfField,
+  Bloom,
+  Noise,
+  Vignette,
+} from "@react-three/postprocessing";
 
 import WebGLStats from "./WebGLStats";
 import WebGLOrbitControls from "./WebGLOrbitControls";
@@ -11,7 +20,7 @@ import WebGLOrbitControls from "./WebGLOrbitControls";
 export default function WebGLDemo() {
   return (
     <Canvas
-      style={{ background: "rgba(0,0,0,0.8)" }}
+      style={{ background: "white" }}
       gl={{ antialias: true }}
       invalidateFrameloop={false}
       pixelRatio={window.devicePixelRatio}
@@ -20,11 +29,27 @@ export default function WebGLDemo() {
         gl.shadowMap.type = THREE.PCFSoftShadowMap;
       }}
     >
-      <ambientLight intensity={0.5} penumbra={1} />
+      <ambientLight intensity={0.75} penumbra={1} />
+      <spotLight intensity={5} position={[0, 50, 0]} penumbra={1} castShadow />
+      <fog attach="fog" args={["white", 100, 250]} />
 
       <BlockWithScreen />
 
+      <mesh
+        position={[0, -25, 0]}
+        rotation={[-Math.PI / 2, 0, 0]}
+        receiveShadow
+      >
+        <planeBufferGeometry args={[1000, 1000]} attach="geometry" />
+
+        <meshPhysicalMaterial attach="material" color={"white"} />
+      </mesh>
+
       <WebGLOrbitControls autoRotate initCameraPos={[-32, 0, 69]} />
+
+      <EffectComposer>
+        <Noise opacity={0.03} />
+      </EffectComposer>
 
       {/* debug */}
       {/* <WebGLStats /> */}
@@ -86,10 +111,12 @@ function BlockWithScreen(props) {
         setTimeout(() => set_active(!active), 0);
       }}
     >
-      <boxBufferGeometry args={[boxSize, boxSize, boxSize]} />
-      <meshStandardMaterial transparent opacity={0} color={"red"} />
+      <mesh>
+        <boxBufferGeometry args={[boxSize, boxSize, boxSize]} />
+        <meshStandardMaterial transparent opacity={0} color={"red"} />
+      </mesh>
 
-      <a.mesh ref={mesh} scale={[1, 1, 1]} castShadow>
+      <a.mesh ref={mesh} scale={[1, 1, 1]}>
         <React.Suspense fallback={<Box scale={[25, 25, 25]} />}>
           <BlockWithScreenFBX onLoad={handleLoadedModel} />
         </React.Suspense>
@@ -108,6 +135,9 @@ function BlockWithScreenFBX(props) {
   // IMPORTANT: ensure all geometries have valid materials for raycasting
   fbx.traverse((node) => {
     if (!node.isMesh) return;
+
+    node.castShadow = true;
+    node.receiveShadow = true;
 
     node.geometry.groups.forEach((group) => {
       // some groups had invalid materialIndex of -1
