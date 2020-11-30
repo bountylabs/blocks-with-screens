@@ -10,46 +10,60 @@ export default function VirtualBlox(props) {
   // console.debug({ modelSize, boxSize });
 
   const materialRef = React.useRef();
+  const instance = React.useRef({
+    //create canvas for image texture
+    canvas: document.createElement("canvas"),
+  });
 
-  //create canvas for image texture
-  const canvas = document.createElement("canvas");
-  const g = canvas.getContext("2d");
+  function initializeCanvasScreen() {
+    const { canvas } = instance.current;
+    const g = canvas.getContext("2d");
 
-  canvas.width = canvas.height = CANVAS_SIZE;
+    const text = "VirtualBlox";
+    g.font = "Bold 256px Arial";
+    g.fillStyle = "orange";
+    g.strokeStyle = "blue";
+    const {
+      actualBoundingBoxAscent: textHeight,
+      width: textWidth,
+      ...textMetrics
+    } = g.measureText(text);
+    const x = CANVAS_SIZE / 2 - textWidth / 2;
+    const y = CANVAS_SIZE / 2 + textHeight / 4;
+    g.fillText(text, x, y);
+    g.strokeText(text, x, y);
+  }
 
-  // intialize screen as black
-  g.fillStyle = "black";
-  g.fillRect(0, 0, canvas.width, canvas.height);
-  // g.fillStyle = "white";
-  // g.strokeRect(0, 0, canvas.width, canvas.height);
+  React.useLayoutEffect(() => {
+    const { canvas } = instance.current;
+    const g = canvas.getContext("2d");
+    canvas.width = canvas.height = CANVAS_SIZE;
 
-  // // draw text on canvas
-  // const text = "VirtualBlox";
-  // g.font = "Bold 72px Arial";
-  // g.fillStyle = "white";
-  // g.strokeStyle = "black";
-  // const {
-  //   actualBoundingBoxAscent: textHeight,
-  //   width: textWidth,
-  //   ...textMetrics
-  // } = g.measureText(text);
-  // const x = CANVAS_SIZE / 2 - textWidth / 2;
-  // const y = CANVAS_SIZE / 2 - textHeight / 2;
-  // g.fillText(text, x, y);
-  // g.strokeText(text, x, y);
+    // intialize screen as black
+    g.fillStyle = "black";
+    g.fillRect(0, 0, canvas.width, canvas.height);
+    // g.fillStyle = "white";
+    // g.strokeRect(0, 0, canvas.width, canvas.height);
+
+    initializeCanvasScreen();
+
+    // map canvas as texture onto material
+    const texture = new THREE.Texture(canvas);
+    materialRef.current.map = texture;
+
+    // load wasm demo
+    if (typeof window.Module === "undefined") {
+      window.Module = {};
+    }
+    window.Module["VirtualBloxCanvas"] = instance.current.canvas;
+    require("./curvy-snake.js");
+  }, []);
 
   // canvas contents will be used for a texture
   useFrame(() => {
-    const texture = new THREE.Texture(canvas);
-    texture.needsUpdate = true;
-    materialRef.current.map = texture;
+    initializeCanvasScreen();
+    materialRef.current.map.needsUpdate = true;
   });
-
-  if (typeof window.Module === "undefined") {
-    window.Module = {};
-  }
-  window.Module["VirtualBloxCanvas"] = canvas;
-  require("./curvy-snake.js");
 
   return (
     <mesh

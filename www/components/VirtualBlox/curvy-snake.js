@@ -12,8 +12,7 @@
 // before the code. Then that object will be used in the code, and you
 // can continue to use Module afterwards as well.
 var Module = typeof Module !== "undefined" ? Module : {};
-
-Module["canvas"] = window.Module['VirtualBloxCanvas'];
+Module["canvas"] = window.Module["VirtualBloxCanvas"];
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
@@ -77,10 +76,50 @@ var read_, readAsync, readBinary, setWindowTitle;
 var nodeFS;
 var nodePath;
 
+if (ENVIRONMENT_IS_SHELL) {
+  if (typeof read != "undefined") {
+    read_ = function shell_read(f) {
+      return read(f);
+    };
+  }
+
+  readBinary = function readBinary(f) {
+    var data;
+    if (typeof readbuffer === "function") {
+      return new Uint8Array(readbuffer(f));
+    }
+    data = read(f, "binary");
+    assert(typeof data === "object");
+    return data;
+  };
+
+  if (typeof scriptArgs != "undefined") {
+    arguments_ = scriptArgs;
+  } else if (typeof arguments != "undefined") {
+    arguments_ = arguments;
+  }
+
+  if (typeof quit === "function") {
+    quit_ = function (status) {
+      quit(status);
+    };
+  }
+
+  if (typeof print !== "undefined") {
+    // Prefer to use print/printErr where they exist, as they usually work better.
+    if (typeof console === "undefined") console = /** @type{!Console} */ ({});
+    console.log = /** @type{!function(this:Console, ...*): undefined} */ (print);
+    console.warn = console.error = /** @type{!function(this:Console, ...*): undefined} */ (typeof printErr !==
+    "undefined"
+      ? printErr
+      : print);
+  }
+}
+
 // Note that this includes Node.js workers when relevant (pthreads is enabled).
 // Node.js workers are detected as a combination of ENVIRONMENT_IS_WORKER and
 // ENVIRONMENT_IS_NODE.
-if (ENVIRONMENT_IS_WEB || ENVIRONMENT_IS_WORKER) {
+else if (ENVIRONMENT_IS_WEB || ENVIRONMENT_IS_WORKER) {
   if (ENVIRONMENT_IS_WORKER) {
     // Check worker, not web, since window could be polyfilled
     scriptDirectory = self.location.href;
@@ -1652,7 +1691,7 @@ function createExportWrapper(name, fixedasm) {
   };
 }
 
-var wasmBinaryFile = "curvy-snake/curvy-snake.wasm";
+var wasmBinaryFile = "/curvy-snake/curvy-snake.wasm";
 if (!isDataURI(wasmBinaryFile)) {
   wasmBinaryFile = locateFile(wasmBinaryFile);
 }
