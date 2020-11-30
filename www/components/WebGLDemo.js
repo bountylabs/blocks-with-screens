@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { Canvas, useFrame } from "react-three-fiber";
 import { useFBX } from "@react-three/drei/useFBX";
 import { useGLTF } from "@react-three/drei/useGLTF";
+import { a, useSpring } from "@react-spring/three";
 
 import WebGLStats from "./WebGLStats";
 import WebGLOrbitControls from "./WebGLOrbitControls";
@@ -33,23 +34,33 @@ export default function WebGLDemo() {
 }
 
 function BlockWithScreen(props) {
-  const [hovered, set_hovered] = React.useState(false);
+  const [active, set_active] = React.useState(false);
+
+  // subtle floaty effect
+  // create a common spring that will be used later to interpolate other values
+  const [direction, set_direction] = React.useState(false);
+  const duration = 5;
+  const { pos } = useSpring({
+    pos: direction ? [0, -2, 0] : [0, +2, 0],
+    config: { duration: duration * 1000 },
+  });
 
   // This reference will give us direct access to the mesh
   const mesh = React.useRef();
 
-  // // Rotate mesh every frame, this is outside of React without overhead
-  // useFrame(() => (mesh.current.rotation.z += 0.01));
-
-  useFrame(() => {
-    // Hover effect on model
+  useFrame((frameMetadata) => {
+    const clockMod = frameMetadata.clock.elapsedTime % duration;
+    const new_direction = clockMod < duration / 2;
+    if (direction !== new_direction) {
+      set_direction(new_direction);
+    }
   });
 
   React.useEffect(() => {
     traverseMaterials(mesh.current, (material) => {
-      material.wireframe = hovered;
+      material.wireframe = active;
     });
-  }, [hovered]);
+  }, [active]);
 
   function handleLoadedModel(model) {
     const box = new THREE.Box3().setFromObject(model);
@@ -62,20 +73,28 @@ function BlockWithScreen(props) {
     console.debug("handleLoadedModel", { model, box, size });
   }
 
+  const boxSize = 40;
+
   return (
-    <mesh
+    <a.mesh
       {...props}
       scale={[1, 1, 1]}
-      onClick={(event) => set_hovered(!hovered)}
+      position={pos}
+      onClick={(event) => {
+        // setTimeout required to prevent racing
+        // without setTimeout the wireframes may flicker and reset
+        setTimeout(() => set_active(!active), 0);
+      }}
     >
-      <boxBufferGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={"gray"} />
-      <mesh ref={mesh} scale={[1, 1, 1]} castShadow>
+      <boxBufferGeometry args={[boxSize, boxSize, boxSize]} />
+      <meshStandardMaterial transparent opacity={0} color={"red"} />
+
+      <a.mesh ref={mesh} scale={[1, 1, 1]} castShadow>
         <React.Suspense fallback={<Box scale={[25, 25, 25]} />}>
           <BlockWithScreenFBX onLoad={handleLoadedModel} />
         </React.Suspense>
-      </mesh>
-    </mesh>
+      </a.mesh>
+    </a.mesh>
   );
 }
 
