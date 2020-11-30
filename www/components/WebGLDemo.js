@@ -95,7 +95,7 @@ function BlockWithScreen(props) {
     model.position.y = (-1 * size) / 4;
     model.position.z = (-1 * size) / 4;
 
-    console.debug("handleLoadedModel", { model, box, size });
+    // console.debug("handleLoadedModel", { model, box, size });
   }
 
   const boxSize = 40;
@@ -105,7 +105,7 @@ function BlockWithScreen(props) {
       {...props}
       scale={[1, 1, 1]}
       position={pos}
-      onClick={(event) => {
+      onPointerUp={(event) => {
         // setTimeout required to prevent racing
         // without setTimeout the wireframes may flicker and reset
         setTimeout(() => set_active(!active), 0);
