@@ -25,3 +25,7 @@ These are the laser-cuttable sides and back of the block. Since these need to fi
 ### Laser-cut Paper Spacers
 
 These help hold the PCBs inside the block and also helps center them inside the block. These should be cut out of 110 lb card stock paper. The laser width doesn’t matter here since paper bends.
+
+### Block With Screen F3Z File
+
+This Fusion 360 file has all of the components modeled in one place. Used mostly for neat visualizations like the assembly video. Also very useful to visualize the internal spacing when changing PCB components placements. This also contains the original design for the paper spacers.
