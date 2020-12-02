@@ -1,0 +1,11 @@
+Partlist exported from /Users/jboiles/Programming/blocks-with-screens/pcb/microcontroller.sch at 10/21/19 8:57 PM
+
+Part Value Device            Package       Description                
+C10  10uF  C-USC0805         C0805         CAPACITOR, American symbol 
+JP1        PINHD-1X8CLEANBIG 1X08-CLEANBIG PIN HEADER                 
+JP2        PINHD-1X8CLEANBIG 1X08-CLEANBIG PIN HEADER                 
+R10  10K   R-US_R0805        R0805         RESISTOR, American symbol  
+R11  10K   R-US_R0805        R0805         RESISTOR, American symbol  
+R12  10K   R-US_R0805        R0805         RESISTOR, American symbol  
+R13  10K   R-US_R0805        R0805         RESISTOR, American symbol  
+X1         ESP-12            ESP-12                                   

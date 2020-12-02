@@ -1,0 +1,25 @@
+Partlist exported from /Users/jboiles/Programming/blocks-with-screens/pcb/oled.sch at 10/21/19 9:06 PM
+
+Part Value          Device                      Package                     Description                            
+C1   10uF/16V       CAP_CERAMIC0805             0805                        Ceramic Capacitors                     
+C2   10uF/16V       CAP_CERAMIC0805             0805                        Ceramic Capacitors                     
+C3   1.0uF          CAP_CERAMIC0805             0805                        Ceramic Capacitors                     
+C4   1.0uF          CAP_CERAMIC0805             0805                        Ceramic Capacitors                     
+C5   10uF           CAP_CERAMIC0805             0805                        Ceramic Capacitors                     
+C7   10uF           CAP_CERAMIC0805             0805                        Ceramic Capacitors                     
+C8   0.1uF          CAP_CERAMIC0805             0805                        Ceramic Capacitors                     
+D1   1N4148         DIODESOD-323                SOD-323                     Diode                                  
+D2   BAT54T1G       DIODESOD-123                SOD-123                     Diode                                  
+D3   1N4148         DIODESOD-323                SOD-323                     Diode                                  
+JP1                 PINHD-1X8CLEANBIG           1X08-CLEANBIG               PIN HEADER                             
+JP2                 PINHD-1X8CLEANBIG           1X08-CLEANBIG               PIN HEADER                             
+L1   10uH           INDUCTOR                    INDUCTOR_1007               Inductors                              
+R1   10K            RESISTOR_0805MP             _0805MP                     Resistors                              
+R4   600K           RESISTOR0805                0805                        Resistors                              
+R5   50             RESISTOR0805                0805                        Resistors                              
+R6   100K           RESISTOR0805                0805                        Resistors                              
+R7   10K            RESISTOR0805                0805                        Resistors                              
+R8   10K            RESISTOR0805                0805                        Resistors                              
+SJ1  BS0            SOLDERJUMPERREFLOW_NOPASTE  SOLDERJUMPER_REFLOW_NOPASTE SMD Solder JUMPER                      
+U1   UG-2828GDEDF11 DISP_OLED_UG-2828GDEDF11TOP FPC_XF2M-3015-1A            128x128 1.5" RGB OLED - UG-2828GDEDF11 
+U3   FAN5331SX      FAN5331                     SOT23-5@1                   FAN5331 - LED/OLED 20V Boost Converter 

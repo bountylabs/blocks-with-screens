@@ -12,9 +12,9 @@ It's Twitterversary blocks, but with screens and internet. Originally a Fall 201
 
 This is the example software that you can run on the blocks. See [blockware/README.md](https://github.com/bountylabs/blocks-with-screens/blob/main/blockware/README.md) for installation instructions and a listing (with gifs!) of the available blockware.
 
-### PCB
+### CAD
 
-This contains the [Autodesk Eagle](https://www.autodesk.com/products/eagle/free-download) design files for the 3 PCBs that make up the block. See the [README.md](https://github.com/bountylabs/blocks-with-screens/blob/main/pcb/README.md) in that directory for an overview of the responsibilities of the three different boards.
+This contains the various design files building the block hardware. Most importantly, it contains the [Autodesk Eagle](https://www.autodesk.com/products/eagle/free-download) design files for the 3 PCBs that make up the block. See the [README.md](https://github.com/bountylabs/blocks-with-screens/blob/main/cad/pcb/README.md) in that directory for an overview of the responsibilities of the three different boards.
 
 ### VirtualBlox
 
