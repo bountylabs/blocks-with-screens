@@ -3,7 +3,6 @@
 #include <ESP8266WebServer.h>
 #include <ESP8266WiFi.h>
 #include <DefaultConfig.h>
-#include <Random.h>
 
 #define BLUE 0xFF
 #define RED 0xF800
@@ -304,8 +303,8 @@ void generateFood() {
 
     // generate food until it is in the right position
     do {
-      food.col = time_random(8);
-      food.row = time_random(8);
+      food.col = random(8);
+      food.row = random(8);
     } while (gameboard[food.row][food.col] > 0);
   }
 }
