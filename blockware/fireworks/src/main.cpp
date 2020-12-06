@@ -132,9 +132,9 @@ void drawParticles()
   }
 
   // for (int i = 0; i < FIREWORKS_PER_FRAME; i++) {
-  //   int color = FIREWORK_COLORS[floor(FIREWORK_COLORS.size() * random())];
-  //   int x = floor(screen.x * random());
-  //   int y = floor(screen.y * random());
+  //   int color = FIREWORK_COLORS[floor(FIREWORK_COLORS.size() * time_random())];
+  //   int x = floor(screen.x * time_random());
+  //   int y = floor(screen.y * time_random());
   //   canvas->drawPixel(x, y, color);
   // }
 }

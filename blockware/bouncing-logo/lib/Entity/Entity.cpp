@@ -10,13 +10,13 @@ Entity::Entity(int screenWidth, int screenHeight)
   // screen dimensions
   _screen = Vec2d<int>(screenWidth, screenHeight);
   // point position location
-  _pos = Vec2d<float>(screenWidth * random(), screenHeight * random());
+  _pos = Vec2d<float>(screenWidth * time_random(), screenHeight * time_random());
   // forward thrust
   _thrust = 0.15;
   // velocity in x and y direction
   _vel = Vec2d<float>();
   // rotation in degrees
-  _rot = (int)floor(DEGREES_MAX * random());
+  _rot = (int)floor(DEGREES_MAX * time_random());
   _rotD = +6;
   // color of the pixel
   _color = randomColor();
@@ -53,7 +53,7 @@ void Entity::tick()
   recordTrailPoint();
 
   // 1% chance to reverse rotD and color
-  if (random() < 0.01) {
+  if (time_random() < 0.01) {
     _rotD = _rotD * -1;
     _color = randomColor();
   }
