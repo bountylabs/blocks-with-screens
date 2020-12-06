@@ -266,8 +266,8 @@ void handleRight() {
  */
 void initializeGame() {
   randomSeed(analogRead(A0));
-  snake.row = time_random(8);
-  snake.col = time_random(8);
+  snake.row = random(8);
+  snake.col = random(8);
 }
 
 /**
@@ -413,8 +413,8 @@ void handleGameStates() {
     // re-init the game
     win = false;
     gameOver = false;
-    snake.row = time_random(8);
-    snake.col = time_random(8);
+    snake.row = random(8);
+    snake.col = random(8);
     food.row = -1;
     food.col = -1;
     snakeLength = INITIAL_SNAKE_LENGTH;
