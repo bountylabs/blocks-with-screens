@@ -1,6 +1,7 @@
 #include <Adafruit_SSD1351.h>
 
 #include <Vec2d.h>
+#include <vector>
 
 typedef struct _ColorPoint {
   Vec2d<int> point;

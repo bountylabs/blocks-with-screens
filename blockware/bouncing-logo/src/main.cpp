@@ -10,6 +10,7 @@
 #include <Text.h>
 #include <Vec2d.h>
 #include <DefaultConfig.h>
+#include <vector>
 
 
 Adafruit_SSD1351 tft =
