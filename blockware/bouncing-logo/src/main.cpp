@@ -73,14 +73,14 @@ void setup(void)
   flush();
 
   // randomize starting logo
-  logo = Logos[floor(Logos.size() * random())];
+  logo = Logos[floor(Logos.size() * time_random())];
 
   // randomize starting position
-  position.set(floor(random() * screen.x - tlWidth), floor(random() * screen.y - tlHeight));
+  position.set(floor(time_random() * screen.x - tlWidth), floor(time_random() * screen.y - tlHeight));
 
   // randomize starting velocity (0 or 1)
   while (velocity == 0) {
-    velocity.set((random() < 0.5 ? -1 : +1) * 2, (random() < 0.5 ? -1 : +1) * 2);
+    velocity.set((time_random() < 0.5 ? -1 : +1) * 2, (time_random() < 0.5 ? -1 : +1) * 2);
   }
 
   Serial.printf("\nFPS=%d", FPS);
@@ -119,9 +119,9 @@ void tick()
   else {
     // collision!
     // randomize logo
-    unsigned char* nextLogo = Logos[floor(Logos.size() * random())];
+    unsigned char* nextLogo = Logos[floor(Logos.size() * time_random())];
     while (nextLogo == logo) {
-      nextLogo = Logos[floor(Logos.size() * random())];
+      nextLogo = Logos[floor(Logos.size() * time_random())];
     }
 
     logo = nextLogo;

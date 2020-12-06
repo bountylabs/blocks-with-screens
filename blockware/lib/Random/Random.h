@@ -4,20 +4,20 @@
 
 #include <stdlib.h>
 
-static inline float random()
+static inline float time_random()
 {
   // Use current time as seed for random generator
   return (float)rand() / (float)RAND_MAX;
 }
 
-static inline float random(const int min, const float max)
+static inline float time_random(const int min, const float max)
 {
-  return min + (random() * (max - min));
+  return min + (time_random() * (max - min));
 }
 
-static inline float random(const int min, const int max)
+static inline float time_random(const int min, const int max)
 {
-  return min + (random() * (max - min));
+  return min + (time_random() * (max - min));
 }
 
 #endif

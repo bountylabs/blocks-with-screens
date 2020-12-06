@@ -100,9 +100,9 @@ void centerText(const char* text, Vec2d<int> &posVec, uint8_t *size, int yTop, i
 void randomizeLogo()
 {
   // randomize logo
-  unsigned char* nextLogo = Logos[floor(Logos.size() * random())];
+  unsigned char* nextLogo = Logos[floor(Logos.size() * time_random())];
   while (nextLogo == logo) {
-    nextLogo = Logos[floor(Logos.size() * random())];
+    nextLogo = Logos[floor(Logos.size() * time_random())];
   }
   logo = nextLogo;
 }
@@ -110,11 +110,11 @@ void randomizeLogo()
 void drawParticles()
 {
   // randomly add new particles rocketing
-  // if (random() < FIREWORK_CHANCE) {
+  // if (time_random() < FIREWORK_CHANCE) {
 
   // add new firework when all particles are done
   if (Particles.size() < 1) {
-    Particles.push_back(Particle(random() * screen.x, screen.y, true, randomFireworkColor()));
+    Particles.push_back(Particle(time_random() * screen.x, screen.y, true, randomFireworkColor()));
   }
 
   // explode and destroy old entities
@@ -133,9 +133,9 @@ void drawParticles()
   }
 
   // for (int i = 0; i < FIREWORKS_PER_FRAME; i++) {
-  //   int color = FIREWORK_COLORS[floor(FIREWORK_COLORS.size() * random())];
-  //   int x = floor(screen.x * random());
-  //   int y = floor(screen.y * random());
+  //   int color = FIREWORK_COLORS[floor(FIREWORK_COLORS.size() * time_random())];
+  //   int x = floor(screen.x * time_random());
+  //   int y = floor(screen.y * time_random());
   //   canvas->drawPixel(x, y, color);
   // }
 }

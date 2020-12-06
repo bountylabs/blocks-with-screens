@@ -172,7 +172,7 @@ public:
   // pythagorean theorem, hypotenuse length
   float length() const
   {
-    return std::sqrt(x * x + y * y);
+    return sqrt(x * x + y * y);
   }
 
   // orthogonal, i.e. *this->dot(*this->ortho()) == Vec2d() // zero vector

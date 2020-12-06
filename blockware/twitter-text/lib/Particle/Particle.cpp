@@ -14,11 +14,11 @@ Particle::Particle(int x, int y, bool isRocket, int color)
   _trail = {Vec2d<int>(_pos.x, _pos.y), Vec2d<int>(_pos.x, _pos.y), Vec2d<int>(_pos.x, _pos.y)};
 
   if (_isRocket) {
-    _vel.set(random(-3, 3), random(-7, -3));
+    _vel.set(time_random(-3, 3), time_random(-7, -3));
     _resistance = 1.0f;
   } else {
-    float angle = random(TAU);
-    float speed = cos(random(0, TAU)) * 15;
+    float angle = time_random(TAU);
+    float speed = cos(time_random(0, TAU)) * 15;
     _vel.set(cos(angle) * speed, sin(angle) * speed);
     _resistance = 0.92f;
   }
@@ -45,7 +45,7 @@ boolean Particle::explode(std::vector<Particle>& explosions)
         && (
           _pos.x <= MIN_X
           || _pos.x >= MAX_X
-          || random() <= EXPLODE_CHANCE
+          || time_random() <= EXPLODE_CHANCE
         )
       )
     )

@@ -17,7 +17,7 @@ const std::vector<unsigned int> FIREWORK_COLORS{ BLUE,RED,GREEN,CYAN,MAGENTA,YEL
 
 static inline int randomFireworkColor()
 {
-  return FIREWORK_COLORS[floor(FIREWORK_COLORS.size() * random())];
+  return FIREWORK_COLORS[floor(FIREWORK_COLORS.size() * time_random())];
 }
 
 
