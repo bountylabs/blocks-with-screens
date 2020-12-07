@@ -10,6 +10,7 @@ INCLUDE_DIRS = -I../../blockware/curvy-snake\
 -I../../blockware/lib/DefaultConfig\
 -I../../blockware/lib/OTAUpdates\
 -I../../blockware/bouncing-logo/src\
+-I../../blockware/twitter-text/lib/Particle\
 -I.
 
 DEFINES = -DARDUINO=100
@@ -31,6 +32,9 @@ JPEG_DOWNLOAD_EXAMPLE_OBJECTS = ../../blockware/jpeg-download-example/src/main.o
 
 BOUNCING_LOGO_OBJECTS = ../../blockware/bouncing-logo/src/main.o
 
+TWITTER_TEXT_OBJECTS = ../../blockware/twitter-text/src/main.o\
+../../blockware/twitter-text/lib/Particle/Particle.o
+
 COMPILECPP = ~/emsdk/upstream/emscripten/em++
 
 curvy-snake.html: $(VBLOX_OBJECTS) $(CURVY_SNAKE_OBJECTS)
@@ -41,6 +45,9 @@ jpeg-download-example.html: $(VBLOX_OBJECTS) $(JPEG_DOWNLOAD_EXAMPLE_OBJECTS)
 
 bouncing-logo.html: $(VBLOX_OBJECTS) $(BOUNCING_LOGO_OBJECTS)
 	$(COMPILECPP) --bind $(VBLOX_OBJECTS) $(BOUNCING_LOGO_OBJECTS) -o $@
+
+twitter-text.html: $(VBLOX_OBJECTS) $(TWITTER_TEXT_OBJECTS)
+	$(COMPILECPP) --bind $(VBLOX_OBJECTS) $(TWITTER_TEXT_OBJECTS) -o $@
 
 .cpp.o:
 	$(COMPILECPP) --bind -c $< $(INCLUDE_DIRS) $(DEFINES) -o $@

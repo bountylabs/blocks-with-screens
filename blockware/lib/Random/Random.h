@@ -15,6 +15,11 @@ static inline float time_random(const int min, const float max)
   return min + (time_random() * (max - min));
 }
 
+static inline float time_random(const float max)
+{
+    return time_random(0.0f, max);
+}
+
 static inline float time_random(const int min, const int max)
 {
   return min + (time_random() * (max - min));
