@@ -49,6 +49,10 @@ There's an included [script](https://github.com/bountylabs/blocks-with-screens/b
 
 ## Changelog
 
+### OLED Board V5
+
+* Revert the revert to go back to VIN for the 13V boost circuit as it didn't seem to have any effect. And this lightens the load on the 3.3V regulator. This is effectively the same design as OLED Board V3.
+
 ### USB Board V5
 
 * Turn the battery connector counter-clockwise by 90 degrees to avoid wires hanging off the side of the board and not fitting in the block.
