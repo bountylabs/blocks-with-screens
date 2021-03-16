@@ -3,7 +3,7 @@
 <eagle version="9.6.2">
 <drawing>
 <settings>
-<setting alwaysvectorfont="yes"/>
+<setting alwaysvectorfont="no"/>
 <setting keepoldvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
@@ -1166,7 +1166,7 @@ Note, that not all DRC settings must be set by the manufacturer. Several can be 
 </pass>
 </autorouter>
 <elements>
-<element name="U1" library="microbuilder" package="SOT23-5" value="AP211K-3.3" x="5.588" y="19.047" smashed="yes" rot="R90">
+<element name="U1" library="microbuilder" package="SOT23-5" value="AP2112K-3.3" x="5.588" y="19.047" smashed="yes" rot="R90">
 <attribute name="MPN" value="AP2112K-3.3" x="5.588" y="19.047" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="NAME" x="5.21" y="16.764" size="0.8128" layer="25" rot="R180"/>
 <attribute name="VALUE" x="1.193" y="20.828" size="1.016" layer="27"/>

@@ -8787,7 +8787,7 @@ Datasheet</description>
 </class>
 </classes>
 <parts>
-<part name="U1" library="microbuilder" deviceset="VREG_SOT23-5" device="" value="AP211K-3.3">
+<part name="U1" library="microbuilder" deviceset="VREG_SOT23-5" device="" value="AP2112K-3.3">
 <attribute name="MPN" value="AP2112K-3.3"/>
 </part>
 <part name="U3" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="MCP73831" device="/OT" package3d_urn="urn:adsk.eagle:package:6240724/1" override_package3d_urn="urn:adsk.eagle:package:21520838/2" override_package_urn="urn:adsk.eagle:footprint:6240078/1" value="MCP73831T-2ACI/OT">
