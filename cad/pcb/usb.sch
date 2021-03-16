@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.6.2">
+<eagle version="9.5.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -8793,7 +8793,7 @@ Datasheet</description>
 <part name="U3" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="MCP73831" device="/OT" package3d_urn="urn:adsk.eagle:package:6240724/1" override_package3d_urn="urn:adsk.eagle:package:21520838/2" override_package_urn="urn:adsk.eagle:footprint:6240078/1" value="MCP73831T-2ACI/OT">
 <attribute name="MPN" value="MCP73831T-2ACI/OT"/>
 </part>
-<part name="CHG" library="microbuilder" deviceset="LED" device="0805_NOOUTLINE" value="YELLOW">
+<part name="CHG" library="microbuilder" deviceset="LED" device="0805_NOOUTLINE" value="WHITE">
 <attribute name="MPN" value="NCD0805W2"/>
 </part>
 <part name="R2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" override_package3d_urn="urn:adsk.eagle:package:21520789/2" override_package_urn="urn:adsk.eagle:footprint:6239920/1" value="5K">

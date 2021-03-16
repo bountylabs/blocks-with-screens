@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.6.2">
+<eagle version="9.5.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -158,7 +158,7 @@
 <layer number="255" name="routoute" color="7" fill="1" visible="no" active="yes"/>
 </layers>
 <board>
-<fusionsync huburn="a.cGVyc29uYWw6dWUyODFhMTI5" projecturn="a.cGVyc29uYWw6dWUyODFhMTI5IzIwMTkwOTE3MjE1ODk1MzI2" f3durn="urn:adsk.wipprod:dm.lineage:P5lhZWs8S_KHtQ88bDf2NQ" pcbguid="cd0c53a3-0c54-43de-9435-58563155f29e" lastpulledtime="" lastsyncedchangeguid="89411407-e078-885e-39c3-f9a9a76d8070" latestrevisionid="" lastsyncedrevisionid="" lastboardhashguid="036b4d5f-3d3b-f5ef-ad34-bd3b1ec33525" lastpushedtime="2020-08-29T06:20:16Z" linktopcb3d="false"/>
+<fusionsync huburn="a.cGVyc29uYWw6dWUyODFhMTI5" projecturn="a.cGVyc29uYWw6dWUyODFhMTI5IzIwMTkwOTE3MjE1ODk1MzI2" f3durn="urn:adsk.wipprod:dm.lineage:P5lhZWs8S_KHtQ88bDf2NQ" pcbguid="cd0c53a3-0c54-43de-9435-58563155f29e" lastpulledtime="" lastsyncedchangeguid="89411407-e078-885e-39c3-f9a9a76d8070"/>
 <plain>
 <rectangle x1="44.831" y1="46.953" x2="45.339" y2="47.207" layer="42" rot="R90"/>
 <rectangle x1="46.101" y1="47.461" x2="46.355" y2="47.969" layer="42" rot="R90"/>
@@ -1176,7 +1176,7 @@ Note, that not all DRC settings must be set by the manufacturer. Several can be 
 <attribute name="NAME" x="21.39" y="14.986" size="0.8128" layer="25" ratio="18" rot="R180"/>
 <attribute name="VALUE" x="21.336" y="18.615" size="0.4064" layer="27" ratio="10" rot="R90"/>
 </element>
-<element name="CHG" library="microbuilder" package="CHIPLED_0805_NOOUTLINE" value="YELLOW" x="19.304" y="2.54" smashed="yes" rot="MR0">
+<element name="CHG" library="microbuilder" package="CHIPLED_0805_NOOUTLINE" value="WHITE" x="19.304" y="2.54" smashed="yes" rot="MR0">
 <attribute name="MPN" value="NCD0805W2" x="19.304" y="2.54" size="1.778" layer="28" rot="MR0" display="off"/>
 <attribute name="NAME" x="20.193" y="4.572" size="0.8128" layer="26" ratio="18" rot="MR0"/>
 <attribute name="VALUE" x="17.907" y="0.762" size="0.4064" layer="28" ratio="10" rot="MR90"/>
