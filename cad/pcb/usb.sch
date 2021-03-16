@@ -8787,8 +8787,8 @@ Datasheet</description>
 </class>
 </classes>
 <parts>
-<part name="U1" library="microbuilder" deviceset="VREG_SOT23-5" device="" value="MIC5225-3.3v">
-<attribute name="MPN" value="MIC5225-3.3YM5-TR"/>
+<part name="U1" library="microbuilder" deviceset="VREG_SOT23-5" device="" value="AP211K-3.3">
+<attribute name="MPN" value="AP2112K-3.3"/>
 </part>
 <part name="U3" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="MCP73831" device="/OT" package3d_urn="urn:adsk.eagle:package:6240724/1" override_package3d_urn="urn:adsk.eagle:package:21520838/2" override_package_urn="urn:adsk.eagle:footprint:6240078/1" value="MCP73831T-2ACI/OT">
 <attribute name="MPN" value="MCP73831T-2ACI/OT"/>
@@ -8796,8 +8796,8 @@ Datasheet</description>
 <part name="CHG" library="microbuilder" deviceset="LED" device="0805_NOOUTLINE" value="YELLOW">
 <attribute name="MPN" value="NCD0805W2"/>
 </part>
-<part name="R2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" override_package3d_urn="urn:adsk.eagle:package:21520789/2" override_package_urn="urn:adsk.eagle:footprint:6239920/1" value="1K">
-<attribute name="MPN" value="ESR10EZPJ102"/>
+<part name="R2" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" override_package3d_urn="urn:adsk.eagle:package:21520789/2" override_package_urn="urn:adsk.eagle:footprint:6239920/1" value="5K">
+<attribute name="MPN" value="0805W8F4871T5E"/>
 </part>
 <part name="C1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:6240337/1" override_package3d_urn="urn:adsk.eagle:package:21520831/3" override_package_urn="urn:adsk.eagle:footprint:6239686/1" value="10µF">
 <attribute name="MPN" value="CL21A106KPFNNNE"/>
@@ -8854,8 +8854,8 @@ Datasheet</description>
 <part name="ON" library="microbuilder" deviceset="LED" device="0805_NOOUTLINE" value="WHITE">
 <attribute name="MPN" value="NCD0805W2"/>
 </part>
-<part name="R4" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" override_package3d_urn="urn:adsk.eagle:package:21520793/2" override_package_urn="urn:adsk.eagle:footprint:6239920/1" value="1K">
-<attribute name="MPN" value="ESR10EZPJ102"/>
+<part name="R4" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" override_package3d_urn="urn:adsk.eagle:package:21520793/2" override_package_urn="urn:adsk.eagle:footprint:6239920/1" value="5K">
+<attribute name="MPN" value="0805W8F4871T5E"/>
 </part>
 <part name="R1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:6240566/1" override_package3d_urn="urn:adsk.eagle:package:21520834/2" override_package_urn="urn:adsk.eagle:footprint:6239920/1" value="100K">
 <attribute name="MPN" value="0805W8F1003T5E"/>
