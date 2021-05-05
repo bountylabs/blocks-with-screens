@@ -861,7 +861,7 @@ chip</description>
 <attribute name="VALUE" x="11.018" y="12.827" size="1.016" layer="27" rot="R90"/>
 </element>
 <element name="C2" library="microbuilder" package="0805" override_package3d_urn="urn:adsk.eagle:package:21520266/2" override_package_urn="urn:adsk.eagle:footprint:21520267/1" value="10uF/16V" x="21.503" y="10.578" smashed="yes" rot="R270" grouprefs="EVERYTHING">
-<attribute name="MPN" value="LMK212BJ106KG-T" x="21.503" y="10.578" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="MPN" value="CL21A106KOQNNNE" x="21.503" y="10.578" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="NAME" x="20.664" y="12.74" size="0.8128" layer="25" font="vector"/>
 <attribute name="VALUE" x="22.058" y="12.409" size="1.016" layer="27" rot="R90"/>
 </element>
@@ -885,7 +885,7 @@ chip</description>
 <attribute name="VALUE" x="8.685" y="12.7" size="1.016" layer="27" rot="R90"/>
 </element>
 <element name="C3" library="microbuilder" package="0805" override_package3d_urn="urn:adsk.eagle:package:21519624/2" override_package_urn="urn:adsk.eagle:footprint:21519625/1" value="10uF" x="5.845" y="10.541" smashed="yes" rot="R90" grouprefs="EVERYTHING">
-<attribute name="MPN" value="LMK212BJ106KG-T" x="5.845" y="10.541" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="MPN" value="CL21A106KOQNNNE" x="5.845" y="10.541" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="NAME" x="5.08" y="12.697" size="0.8128" layer="25" font="vector"/>
 <attribute name="VALUE" x="5.665" y="12.573" size="1.016" layer="27" rot="R90"/>
 </element>
@@ -895,7 +895,7 @@ chip</description>
 <attribute name="VALUE" x="15.444" y="22.606" size="1.016" layer="27" rot="R180"/>
 </element>
 <element name="C6" library="microbuilder" package="0805" override_package3d_urn="urn:adsk.eagle:package:21520293/2" override_package_urn="urn:adsk.eagle:footprint:21520294/1" value="10uF" x="11.433" y="15.367" smashed="yes" grouprefs="EVERYTHING">
-<attribute name="MPN" value="LMK212BJ106KG-T" x="11.433" y="15.367" size="1.778" layer="27" display="off"/>
+<attribute name="MPN" value="CL21A106KOQNNNE" x="11.433" y="15.367" size="1.778" layer="27" display="off"/>
 <attribute name="NAME" x="9.395" y="15.748" size="0.8128" layer="25" font="vector" rot="R180"/>
 <attribute name="VALUE" x="11.684" y="16.386" size="1.016" layer="27" rot="R90"/>
 </element>
@@ -929,7 +929,7 @@ chip</description>
 <attribute name="VALUE" x="19.729" y="-0.135" size="1.016" layer="27" font="vector" rot="R180"/>
 </element>
 <element name="C4" library="microbuilder" package="0805" override_package3d_urn="urn:adsk.eagle:package:21520257/2" override_package_urn="urn:adsk.eagle:footprint:21520262/1" value="10uF/16V" x="18.833" y="10.541" smashed="yes" rot="R90" grouprefs="EVERYTHING">
-<attribute name="MPN" value="LMK212BJ106KG-T" x="18.833" y="10.541" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="MPN" value="CL21A106KOQNNNE" x="18.833" y="10.541" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="NAME" x="17.989" y="12.647" size="0.8128" layer="25" font="vector"/>
 <attribute name="VALUE" x="21.412" y="8.083" size="1.016" layer="27" rot="R90"/>
 </element>

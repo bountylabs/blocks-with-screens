@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.5.0">
+<eagle version="9.6.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -4755,7 +4755,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="MPN" value="0805W8F6203T5E"/>
 </part>
 <part name="C2" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" override_package3d_urn="urn:adsk.eagle:package:21520266/2" override_package_urn="urn:adsk.eagle:footprint:21520267/1" value="10uF/16V">
-<attribute name="MPN" value="LMK212BJ106KG-T"/>
+<attribute name="MPN" value="CL21A106KOQNNNE"/>
 </part>
 <part name="C5" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" override_package3d_urn="urn:adsk.eagle:package:21520244/3" override_package_urn="urn:adsk.eagle:footprint:21520245/1" value="1.0uF">
 <attribute name="MPN" value="C0805C105K4RAC7210"/>
@@ -4770,7 +4770,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="MPN" value="C0805C105K4RAC7210"/>
 </part>
 <part name="C3" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" override_package3d_urn="urn:adsk.eagle:package:21519624/2" override_package_urn="urn:adsk.eagle:footprint:21519625/1" value="10uF">
-<attribute name="MPN" value="LMK212BJ106KG-T"/>
+<attribute name="MPN" value="CL21A106KOQNNNE"/>
 </part>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="P+1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+12V" device="" value="+13V"/>
@@ -4780,7 +4780,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="MPN" value="FAN5331SX"/>
 </part>
 <part name="C6" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" override_package3d_urn="urn:adsk.eagle:package:21520293/2" override_package_urn="urn:adsk.eagle:footprint:21520294/1" value="10uF">
-<attribute name="MPN" value="LMK212BJ106KG-T"/>
+<attribute name="MPN" value="CL21A106KOQNNNE"/>
 </part>
 <part name="L1" library="microbuilder" deviceset="INDUCTOR" device="" value="10uH">
 <attribute name="MPN" value="L0805R100MPWRT"/>
@@ -4805,7 +4805,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="MPN" value="XF2M-3015-1A"/>
 </part>
 <part name="C4" library="microbuilder" deviceset="CAP_CERAMIC" device="0805" override_package3d_urn="urn:adsk.eagle:package:21520257/2" override_package_urn="urn:adsk.eagle:footprint:21520262/1" value="10uF/16V">
-<attribute name="MPN" value="LMK212BJ106KG-T"/>
+<attribute name="MPN" value="CL21A106KOQNNNE"/>
 </part>
 <part name="D1" library="microbuilder" deviceset="DIODE" device="SOD-323" value="1N4148">
 <attribute name="MPN" value="1N4148WS-E3-08"/>
