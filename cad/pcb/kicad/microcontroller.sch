@@ -1,0 +1,672 @@
+EESchema Schematic File Version 4
+LIBS:microcontroller-cache
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+Wire Wire Line
+	2400 3900 2400 4000
+Wire Wire Line
+	2000 4000 2400 4000
+Connection ~ 2400 4000
+Text Label 2400 3900 0    10   ~ 0
+GND
+Wire Wire Line
+	4000 3600 4600 3600
+Wire Wire Line
+	4600 3600 4600 3900
+Wire Wire Line
+	4600 3900 4600 4000
+Wire Wire Line
+	4900 3900 4600 3900
+Connection ~ 4600 3900
+Text Label 2600 5700 2    70   ~ 0
+GND
+Wire Wire Line
+	6300 5300 6200 5300
+Wire Wire Line
+	6200 5300 6200 5400
+Text Label 6300 5300 0    10   ~ 0
+GND
+Wire Wire Line
+	4000 3000 4100 3000
+Text Label 4100 3000 0    70   ~ 0
+RX
+Wire Wire Line
+	3000 5200 2600 5200
+Text Label 2600 5200 2    70   ~ 0
+RX
+Wire Wire Line
+	4000 2900 4100 2900
+Text Label 4100 2900 0    70   ~ 0
+TX
+Wire Wire Line
+	3000 5100 2600 5100
+Text Label 2600 5100 2    70   ~ 0
+TX
+Wire Wire Line
+	2600 3100 2300 3100
+Text Label 2500 3100 2    70   ~ 0
+CH_PD
+Wire Wire Line
+	2500 2900 2600 2900
+Text Label 2500 2900 2    70   ~ 0
+RESET
+Wire Wire Line
+	3600 5100 4000 5100
+Text Label 4000 5100 0    70   ~ 0
+RESET
+Wire Wire Line
+	3000 5500 2600 5500
+Text Label 2600 5500 2    70   ~ 0
+D3/GPIO0
+Wire Wire Line
+	4000 3300 4800 3300
+Wire Wire Line
+	4800 3300 5000 3300
+Text Label 5000 3300 0    70   ~ 0
+D3/GPIO0
+Connection ~ 4800 3300
+Wire Wire Line
+	3000 5600 2600 5600
+Text Label 2600 5600 2    70   ~ 0
+D4/GPIO2
+Wire Wire Line
+	4000 3400 4100 3400
+Text Label 4100 3400 0    70   ~ 0
+D4/GPIO2
+Wire Wire Line
+	3600 5700 4000 5700
+Text Label 4000 5700 0    70   ~ 0
+D8/GPIO15
+Wire Wire Line
+	4000 3500 4900 3500
+Wire Wire Line
+	4900 3500 5000 3500
+Connection ~ 4900 3500
+Text Label 5000 3500 0    70   ~ 0
+D8/GPIO15
+Wire Wire Line
+	3600 5400 4000 5400
+Text Label 4000 5400 0    70   ~ 0
+D5/GPIO14/SCK
+Wire Wire Line
+	2600 3300 2500 3300
+Text Label 2500 3300 2    70   ~ 0
+D5/GPIO14/SCK
+Wire Wire Line
+	3600 5300 4000 5300
+Text Label 4000 5300 0    70   ~ 0
+D0/GPIO16
+Wire Wire Line
+	2600 3200 2500 3200
+Text Label 2500 3200 2    70   ~ 0
+D0/GPIO16
+Wire Wire Line
+	3600 5200 4000 5200
+Text Label 4000 5200 0    70   ~ 0
+A0
+Wire Wire Line
+	2600 3000 2500 3000
+Text Label 2500 3000 2    70   ~ 0
+A0
+Wire Wire Line
+	3600 5600 4000 5600
+Text Label 4000 5600 0    70   ~ 0
+D7/GPIO13/MOSI
+Wire Wire Line
+	2600 3500 2500 3500
+Text Label 2500 3500 2    70   ~ 0
+D7/GPIO13/MOSI
+Wire Wire Line
+	3000 5800 2600 5800
+Text Label 2600 5800 2    70   ~ 0
+VIN
+Wire Wire Line
+	8700 4600 8700 4700
+Text Label 8700 4600 0    10   ~ 0
+VIN
+Wire Wire Line
+	6300 5200 6200 5200
+Wire Wire Line
+	6200 5200 6200 4900
+Text Label 6300 5200 0    10   ~ 0
+3.3V
+Wire Wire Line
+	3600 5800 4000 5800
+Text Label 4000 5800 0    70   ~ 0
+3.3V
+Wire Wire Line
+	1600 2700 1600 3100
+Wire Wire Line
+	1600 3100 1900 3100
+Text Label 1600 2700 0    10   ~ 0
+3.3V
+Wire Wire Line
+	4800 2800 4800 2900
+Text Label 4800 2800 0    10   ~ 0
+3.3V
+Wire Wire Line
+	2500 2500 2500 2400
+Text Label 2500 2500 0    10   ~ 0
+3.3V
+Wire Wire Line
+	2000 3700 2000 3600
+Wire Wire Line
+	2000 3600 2400 3600
+Wire Wire Line
+	2400 3600 2600 3600
+Wire Wire Line
+	2400 3600 2400 3700
+Wire Wire Line
+	2000 3600 1500 3600
+Connection ~ 2400 3600
+Connection ~ 2000 3600
+Text Label 2000 3700 0    10   ~ 0
+3.3V
+Wire Wire Line
+	3600 5500 4000 5500
+Text Label 4000 5500 0    70   ~ 0
+D6/GPIO12/MISO
+Wire Wire Line
+	2600 3400 2500 3400
+Text Label 2500 3400 2    70   ~ 0
+D6/GPIO12/MISO
+Wire Wire Line
+	4000 3100 4100 3100
+Text Label 4100 3100 0    70   ~ 0
+D1/GPIO5/SCL
+Wire Wire Line
+	6300 5000 6100 5000
+Text Label 6100 5000 2    70   ~ 0
+D1/GPIO5/SCL
+Wire Wire Line
+	3000 5300 2600 5300
+Text Label 2600 5300 2    70   ~ 0
+D1/GPIO5/SCL
+Wire Wire Line
+	4000 3200 4100 3200
+Text Label 4100 3200 0    70   ~ 0
+D2/GPIO4/SDA
+Wire Wire Line
+	6300 5100 6100 5100
+Text Label 6100 5100 2    70   ~ 0
+D2/GPIO4/SDA
+Wire Wire Line
+	3000 5400 2600 5400
+Text Label 2600 5400 2    70   ~ 0
+D2/GPIO4/SDA
+Wire Wire Line
+	8000 5400 7900 5400
+Text Label 7900 5400 2    70   ~ 0
+D2/GPIO4/SDA
+$Comp
+L microcontroller-eagle-import:C-USC0805 C1
+U 1 1 4294FF20
+P 2000 3800
+F 0 "C1" H 2040 3825 59  0000 L BNN
+F 1 "10uF" H 2040 3635 59  0000 L BNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 2000 3800 50  0001 C CNN
+F 3 "" H 2000 3800 50  0001 C CNN
+F 4 "LMK212BJ106KG-T" H 2000 3800 59  0001 L BNN "MPN"
+	1    2000 3800
+	1    0    0    -1  
+$EndComp
+$Comp
+L microcontroller-eagle-import:R-US_R0805 R1
+U 1 1 E0EA0F9E
+P 2100 3100
+F 0 "R1" H 1950 3159 59  0000 L BNN
+F 1 "10K" H 1950 2970 59  0000 L BNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 2100 3100 50  0001 C CNN
+F 3 "" H 2100 3100 50  0001 C CNN
+F 4 "CRCW080510K0FKEAC" H 2100 3100 59  0001 L BNN "MPN"
+	1    2100 3100
+	1    0    0    -1  
+$EndComp
+$Comp
+L microcontroller-eagle-import:R-US_R0805 R2
+U 1 1 7D790F78
+P 2500 2700
+F 0 "R2" H 2350 2759 59  0000 L BNN
+F 1 "10K" H 2350 2570 59  0000 L BNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 2500 2700 50  0001 C CNN
+F 3 "" H 2500 2700 50  0001 C CNN
+F 4 "CRCW080510K0FKEAC" H 2500 2700 59  0001 L BNN "MPN"
+	1    2500 2700
+	0    1    1    0   
+$EndComp
+$Comp
+L microcontroller-eagle-import:R-US_R0805 R3
+U 1 1 D85E66C8
+P 4800 3100
+F 0 "R3" H 4650 3159 59  0000 L BNN
+F 1 "10K" H 4650 2970 59  0000 L BNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 4800 3100 50  0001 C CNN
+F 3 "" H 4800 3100 50  0001 C CNN
+F 4 "CRCW080510K0FKEAC" H 4800 3100 59  0001 L BNN "MPN"
+	1    4800 3100
+	0    -1   -1   0   
+$EndComp
+$Comp
+L microcontroller-eagle-import:R-US_R0805 R4
+U 1 1 DBC21EDB
+P 4900 3700
+F 0 "R4" H 4750 3759 59  0000 L BNN
+F 1 "10K" H 4750 3570 59  0000 L BNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 4900 3700 50  0001 C CNN
+F 3 "" H 4900 3700 50  0001 C CNN
+F 4 "CRCW080510K0FKEAC" H 4900 3700 59  0001 L BNN "MPN"
+	1    4900 3700
+	0    1    1    0   
+$EndComp
+$Comp
+L microcontroller-eagle-import:ESP-12 X1
+U 1 1 6F919911
+P 3300 3100
+F 0 "X1" H 3300 3100 50  0001 C CNN
+F 1 "ESP-12" H 3300 3100 50  0001 C CNN
+F 2 "microcontroller:ESP-12" H 3300 3100 50  0001 C CNN
+F 3 "" H 3300 3100 50  0001 C CNN
+F 4 "ESP-12F(ESP8266MOD)" H 3300 3100 50  0001 L BNN "MPN"
+	1    3300 3100
+	1    0    0    -1  
+$EndComp
+$Comp
+L microcontroller-eagle-import:PINHD-1X8CLEANBIG JP2
+U 1 1 93E45719
+P 3500 5500
+F 0 "JP2" H 3250 5925 59  0000 L BNN
+F 1 "PINHD-1X8CLEANBIG" H 3250 4900 59  0000 L BNN
+F 2 "microcontroller:1X08-CLEANBIG" H 3500 5500 50  0001 C CNN
+F 3 "" H 3500 5500 50  0001 C CNN
+F 4 "1" H 3500 5500 59  0001 L BNN "BOTTOM"
+F 5 "83-15410" H 3500 5500 59  0001 L BNN "MPN"
+F 6 "1" H 3500 5500 59  0001 L BNN "THRU-HOLE"
+	1    3500 5500
+	-1   0    0    1   
+$EndComp
+$Comp
+L microcontroller-eagle-import:PINHD-1X8CLEANBIG JP1
+U 1 1 A75A2B47
+P 3100 5400
+F 0 "JP1" H 2850 5825 59  0000 L BNN
+F 1 "PINHD-1X8CLEANBIG" H 2850 4800 59  0000 L BNN
+F 2 "microcontroller:1X08-CLEANBIG" H 3100 5400 50  0001 C CNN
+F 3 "" H 3100 5400 50  0001 C CNN
+F 4 "1" H 3100 5400 59  0001 L BNN "BOTTOM"
+F 5 "83-15410" H 3100 5400 59  0001 L BNN "MPN"
+F 6 "1" H 3100 5400 59  0001 L BNN "THRU-HOLE"
+	1    3100 5400
+	1    0    0    -1  
+$EndComp
+$Comp
+L microcontroller-eagle-import:3.3V #SUPPLY02
+U 1 1 7668A807
+P 6200 4900
+F 0 "#SUPPLY02" H 6200 4900 50  0001 C CNN
+F 1 "3.3V" H 6200 5010 59  0000 C BNN
+F 2 "" H 6200 4900 50  0001 C CNN
+F 3 "" H 6200 4900 50  0001 C CNN
+	1    6200 4900
+	1    0    0    -1  
+$EndComp
+$Comp
+L microcontroller-eagle-import:I2C_STANDARDJS-1MM J1
+U 1 1 6FEF09A5
+P 6600 5200
+F 0 "J1" H 6400 5510 70  0000 L BNN
+F 1 "SMD" H 6400 4990 70  0000 L TNN
+F 2 "microcontroller:1X04_1MM_RA" H 6600 5200 50  0001 C CNN
+F 3 "" H 6600 5200 50  0001 C CNN
+F 4 "PRT-14417" H 6600 5200 70  0001 L BNN "MPN"
+F 5 "0" H 6600 5200 70  0001 L BNN "POPULATE"
+	1    6600 5200
+	-1   0    0    -1  
+$EndComp
+$Comp
+L microcontroller-eagle-import:WS2812B5050 LED1
+U 1 1 84EE1AB4
+P 8500 5300
+F 0 "LED1" H 8500 5300 50  0001 C CNN
+F 1 "WS2812B5050" H 8500 5300 50  0001 C CNN
+F 2 "microcontroller:WS2812B" H 8500 5300 50  0001 C CNN
+F 3 "" H 8500 5300 50  0001 C CNN
+F 4 "1655" H 8500 5300 50  0001 L BNN "MPN"
+F 5 "0" H 8500 5300 50  0001 L BNN "POPULATE"
+	1    8500 5300
+	1    0    0    -1  
+$EndComp
+$Comp
+L microcontroller-eagle-import:C-USC0805 C2
+U 1 1 C23F38E5
+P 2400 3800
+F 0 "C2" H 2440 3825 59  0000 L BNN
+F 1 ".1uF" H 2440 3635 59  0000 L BNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 2400 3800 50  0001 C CNN
+F 3 "" H 2400 3800 50  0001 C CNN
+F 4 "C0805C104M3RACTU" H 2400 3800 59  0001 L BNN "MPN"
+	1    2400 3800
+	1    0    0    -1  
+$EndComp
+$Comp
+L microcontroller-eagle-import:3.3V #SUPPLY01
+U 1 1 9BB82FD5
+P 4800 2800
+F 0 "#SUPPLY01" H 4800 2800 50  0001 C CNN
+F 1 "3.3V" H 4800 2910 59  0000 C BNN
+F 2 "" H 4800 2800 50  0001 C CNN
+F 3 "" H 4800 2800 50  0001 C CNN
+	1    4800 2800
+	1    0    0    -1  
+$EndComp
+$Comp
+L microcontroller-eagle-import:3.3V #SUPPLY05
+U 1 1 64E24A77
+P 2500 2400
+F 0 "#SUPPLY05" H 2500 2400 50  0001 C CNN
+F 1 "3.3V" H 2500 2510 59  0000 C BNN
+F 2 "" H 2500 2400 50  0001 C CNN
+F 3 "" H 2500 2400 50  0001 C CNN
+	1    2500 2400
+	1    0    0    -1  
+$EndComp
+$Comp
+L microcontroller-eagle-import:3.3V #SUPPLY06
+U 1 1 137BDED3
+P 1600 2700
+F 0 "#SUPPLY06" H 1600 2700 50  0001 C CNN
+F 1 "3.3V" H 1600 2810 59  0000 C BNN
+F 2 "" H 1600 2700 50  0001 C CNN
+F 3 "" H 1600 2700 50  0001 C CNN
+	1    1600 2700
+	1    0    0    -1  
+$EndComp
+$Comp
+L microcontroller-eagle-import:3.3V #SUPPLY07
+U 1 1 B162DFB5
+P 1500 3600
+F 0 "#SUPPLY07" H 1500 3600 50  0001 C CNN
+F 1 "3.3V" H 1500 3710 59  0000 C BNN
+F 2 "" H 1500 3600 50  0001 C CNN
+F 3 "" H 1500 3600 50  0001 C CNN
+	1    1500 3600
+	1    0    0    -1  
+$EndComp
+Text Notes 9200 2900 0    59   ~ 0
+7-Bit I2C Address Jumper
+Text Notes 9200 3100 0    59   ~ 0
+Closed = 0x1C
+Text Notes 9200 3000 0    59   ~ 0
+Open (default) = 0x1D
+Text Notes 3700 2400 0    59   ~ 0
+Note: The Adafruit ESP12 pinout is wrong.\nGPIO4 and GPIO5 are swapped
+$Comp
+L Sensor_Motion:LIS2DE12 U2
+U 1 1 60AED6A5
+P 8350 2400
+F 0 "U2" H 8400 3081 50  0000 C CNN
+F 1 "LIS2DW12" H 8400 2990 50  0000 C CNN
+F 2 "Package_LGA:LGA-12_2x2mm_P0.5mm" H 8500 2950 50  0001 L CNN
+F 3 "https://www.st.com/resource/en/datasheet/lis2DE12.pdf" H 8000 2400 50  0001 C CNN
+	1    8350 2400
+	1    0    0    -1  
+$EndComp
+Text Label 7950 2500 2    70   ~ 0
+D1/GPIO5/SCL
+Text Label 7950 2300 2    70   ~ 0
+D2/GPIO4/SDA
+Wire Wire Line
+	7950 2400 7050 2400
+Wire Wire Line
+	8250 2900 8350 2900
+Connection ~ 8350 2900
+$Comp
+L microcontroller-eagle-import:VIN #SUPPLY0102
+U 1 1 60B2015D
+P 8700 4600
+F 0 "#SUPPLY0102" H 8700 4600 50  0001 C CNN
+F 1 "VIN" H 8700 4822 59  0000 C CNN
+F 2 "" H 8700 4600 50  0001 C CNN
+F 3 "" H 8700 4600 50  0001 C CNN
+	1    8700 4600
+	1    0    0    -1  
+$EndComp
+Text Label 8700 4700 2    70   ~ 0
+VIN
+Wire Wire Line
+	8850 2700 8850 2900
+Wire Wire Line
+	8350 2900 8450 2900
+Connection ~ 8450 2900
+Wire Wire Line
+	8450 2900 8850 2900
+Wire Wire Line
+	7050 2400 7050 2900
+Wire Wire Line
+	7050 2900 8250 2900
+Connection ~ 8250 2900
+$Comp
+L power:GND #PWR0101
+U 1 1 60B3432F
+P 1950 5700
+F 0 "#PWR0101" H 1950 5450 50  0001 C CNN
+F 1 "GND" H 1955 5527 50  0000 C CNN
+F 2 "" H 1950 5700 50  0001 C CNN
+F 3 "" H 1950 5700 50  0001 C CNN
+	1    1950 5700
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0102
+U 1 1 60B36413
+P 7050 2900
+F 0 "#PWR0102" H 7050 2650 50  0001 C CNN
+F 1 "GND" H 7055 2727 50  0000 C CNN
+F 2 "" H 7050 2900 50  0001 C CNN
+F 3 "" H 7050 2900 50  0001 C CNN
+	1    7050 2900
+	1    0    0    -1  
+$EndComp
+Connection ~ 7050 2900
+$Comp
+L power:GND #PWR0104
+U 1 1 60B3D322
+P 4600 4000
+F 0 "#PWR0104" H 4600 3750 50  0001 C CNN
+F 1 "GND" H 4605 3827 50  0000 C CNN
+F 2 "" H 4600 4000 50  0001 C CNN
+F 3 "" H 4600 4000 50  0001 C CNN
+	1    4600 4000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0105
+U 1 1 60B3F598
+P 2400 4000
+F 0 "#PWR0105" H 2400 3750 50  0001 C CNN
+F 1 "GND" H 2405 3827 50  0000 C CNN
+F 2 "" H 2400 4000 50  0001 C CNN
+F 3 "" H 2400 4000 50  0001 C CNN
+	1    2400 4000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1950 5700 3000 5700
+$Comp
+L power:GND #PWR0106
+U 1 1 60B43283
+P 6200 5400
+F 0 "#PWR0106" H 6200 5150 50  0001 C CNN
+F 1 "GND" H 6205 5227 50  0000 C CNN
+F 2 "" H 6200 5400 50  0001 C CNN
+F 3 "" H 6200 5400 50  0001 C CNN
+	1    6200 5400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0107
+U 1 1 60B451BF
+P 8500 5700
+F 0 "#PWR0107" H 8500 5450 50  0001 C CNN
+F 1 "GND" H 8505 5527 50  0000 C CNN
+F 2 "" H 8500 5700 50  0001 C CNN
+F 3 "" H 8500 5700 50  0001 C CNN
+	1    8500 5700
+	1    0    0    -1  
+$EndComp
+$Comp
+L microcontroller-eagle-import:VIN #SUPPLY0103
+U 1 1 60B47F09
+P 2250 6000
+F 0 "#SUPPLY0103" H 2250 6000 50  0001 C CNN
+F 1 "VIN" H 2250 6222 59  0000 C CNN
+F 2 "" H 2250 6000 50  0001 C CNN
+F 3 "" H 2250 6000 50  0001 C CNN
+	1    2250 6000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2600 5800 2600 6000
+Wire Wire Line
+	2600 6000 2250 6000
+$Comp
+L microcontroller-eagle-import:3.3V #SUPPLY0104
+U 1 1 60B4CA0B
+P 4450 6100
+F 0 "#SUPPLY0104" H 4450 6100 50  0001 C CNN
+F 1 "3.3V" H 4450 6322 59  0000 C CNN
+F 2 "" H 4450 6100 50  0001 C CNN
+F 3 "" H 4450 6100 50  0001 C CNN
+	1    4450 6100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4000 5800 4000 6100
+Wire Wire Line
+	4000 6100 4450 6100
+$Comp
+L Device:C C5
+U 1 1 60AF9391
+P 9050 1900
+F 0 "C5" V 9302 1900 50  0000 C CNN
+F 1 "100nF" V 9211 1900 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 9088 1750 50  0001 C CNN
+F 3 "~" H 9050 1900 50  0001 C CNN
+	1    9050 1900
+	0    -1   -1   0   
+$EndComp
+$Comp
+L microcontroller-eagle-import:3.3V #SUPPLY0101
+U 1 1 60AFA29E
+P 8900 1650
+F 0 "#SUPPLY0101" H 8900 1650 50  0001 C CNN
+F 1 "3.3V" H 8900 1872 59  0000 C CNN
+F 2 "" H 8900 1650 50  0001 C CNN
+F 3 "" H 8900 1650 50  0001 C CNN
+	1    8900 1650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8900 1650 8900 1900
+Wire Wire Line
+	8900 1900 8450 1900
+Connection ~ 8900 1900
+$Comp
+L power:GND #PWR0103
+U 1 1 60AFE7F8
+P 9400 1900
+F 0 "#PWR0103" H 9400 1650 50  0001 C CNN
+F 1 "GND" H 9405 1727 50  0000 C CNN
+F 2 "" H 9400 1900 50  0001 C CNN
+F 3 "" H 9400 1900 50  0001 C CNN
+	1    9400 1900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9200 1900 9400 1900
+$Comp
+L Device:C C4
+U 1 1 60B00AB4
+P 7900 1750
+F 0 "C4" H 8015 1796 50  0000 L CNN
+F 1 "10uF" H 8015 1705 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 7938 1600 50  0001 C CNN
+F 3 "~" H 7900 1750 50  0001 C CNN
+	1    7900 1750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C3
+U 1 1 60B011AF
+P 7400 1750
+F 0 "C3" H 7515 1796 50  0000 L CNN
+F 1 "100nF" H 7515 1705 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 7438 1600 50  0001 C CNN
+F 3 "~" H 7400 1750 50  0001 C CNN
+	1    7400 1750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8350 1900 7900 1900
+Connection ~ 7900 1900
+Wire Wire Line
+	7900 1900 7400 1900
+$Comp
+L microcontroller-eagle-import:3.3V #SUPPLY0105
+U 1 1 60B06633
+P 7000 1600
+F 0 "#SUPPLY0105" H 7000 1600 50  0001 C CNN
+F 1 "3.3V" H 7000 1822 59  0000 C CNN
+F 2 "" H 7000 1600 50  0001 C CNN
+F 3 "" H 7000 1600 50  0001 C CNN
+	1    7000 1600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7400 1900 7000 1900
+Wire Wire Line
+	7000 1900 7000 1600
+Connection ~ 7400 1900
+$Comp
+L power:GND #PWR0108
+U 1 1 60B08B2B
+P 8200 1450
+F 0 "#PWR0108" H 8200 1200 50  0001 C CNN
+F 1 "GND" H 8205 1277 50  0000 C CNN
+F 2 "" H 8200 1450 50  0001 C CNN
+F 3 "" H 8200 1450 50  0001 C CNN
+	1    8200 1450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7400 1600 7900 1600
+Wire Wire Line
+	7900 1450 7900 1600
+Connection ~ 7900 1600
+Wire Wire Line
+	7900 1450 8200 1450
+$Comp
+L microcontroller-eagle-import:3.3V #SUPPLY0106
+U 1 1 60B0EF1F
+P 7700 2200
+F 0 "#SUPPLY0106" H 7700 2200 50  0001 C CNN
+F 1 "3.3V" H 7700 2422 59  0000 C CNN
+F 2 "" H 7700 2200 50  0001 C CNN
+F 3 "" H 7700 2200 50  0001 C CNN
+	1    7700 2200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7700 2200 7950 2200
+$EndSCHEMATC
