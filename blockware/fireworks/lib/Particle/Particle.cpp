@@ -45,7 +45,7 @@ boolean Particle::explode(std::vector<Particle>& explosions)
         && (
           _pos.x <= MIN_X
           || _pos.x >= MAX_X
-          || random() <= EXPLODE_CHANCE
+          || randomf() <= EXPLODE_CHANCE
         )
       )
     )

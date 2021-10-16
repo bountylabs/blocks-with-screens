@@ -25,13 +25,12 @@ Adafruit_SSD1351 tft =
 
 std::vector<unsigned char*> Logos;
 std::vector<Particle> Particles;
-std::vector<Particle> Explosions;
 
 // in-memory 16-bit canvas
 GFXcanvas16* canvas;
 // screen dimensions
 Vec2d<int> screen = Vec2d<int>();
-const int FPS = floor(1000 / 60); // every ~16ms (60fps)
+const int FPS = floor(1000 / 30); // every ~16ms (60fps)
 uint16_t lastLoop = millis() - FPS + 1;
 
 // logo position x,y
@@ -100,9 +99,9 @@ void centerText(const char* text, Vec2d<int> &posVec, uint8_t *size, int yTop, i
 void randomizeLogo()
 {
   // randomize logo
-  unsigned char* nextLogo = Logos[floor(Logos.size() * random())];
+  unsigned char* nextLogo = Logos[floor(Logos.size() * randomf())];
   while (nextLogo == logo) {
-    nextLogo = Logos[floor(Logos.size() * random())];
+    nextLogo = Logos[floor(Logos.size() * randomf())];
   }
   logo = nextLogo;
 }
@@ -110,11 +109,11 @@ void randomizeLogo()
 void drawParticles()
 {
   // randomly add new particles rocketing
-  // if (random() < FIREWORK_CHANCE) {
+  // if (randomf() < FIREWORK_CHANCE) {
 
   // add new firework when all particles are done
   if (Particles.size() < 1) {
-    Particles.push_back(Particle(random() * screen.x, screen.y, true, randomFireworkColor()));
+    Particles.push_back(Particle(randomf() * screen.x, screen.y, true, randomFireworkColor()));
   }
 
   // explode and destroy old entities
@@ -192,7 +191,7 @@ void loop()
   uint16_t now = millis();
   uint16_t time = now - lastLoop;
 
-  Serial.printf("frameMs=%d", time);
+  // Serial.printf("frameMs=%d\n", time);
 
   if (time > FPS) {
     // track loop millis to keep steady fps
@@ -208,6 +207,8 @@ void loop()
 
 void setup(void)
 {
+  Particles.reserve(23);
+
   Serial.begin(SERIAL_DATA_RATE);
   tft.begin(SPI_SPEED);
   // initialize screen to black
