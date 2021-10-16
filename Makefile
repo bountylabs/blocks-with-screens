@@ -3,6 +3,7 @@ test:
 	make -C blockware/adafruit-example test
 	make -C blockware/bouncing-logo test
 	make -C blockware/curvy-snake test
+	make -C blockware/fireworks test
 	make -C blockware/gif-download test
 	make -C blockware/homeassistant-display test
 	make -C blockware/jpeg-download-example test
@@ -10,5 +11,4 @@ test:
 	make -C blockware/rgb-led test
 	make -C blockware/snake test
 	make -C blockware/stocks-and-weather test
-	make -C blockware/twitter-text test
 	make -C blockware/video-display test client/client
