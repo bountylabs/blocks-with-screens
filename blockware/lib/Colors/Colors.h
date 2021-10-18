@@ -23,7 +23,7 @@ static inline int randomColor()
 {
   // random color
   const int COLORS[] = {BLUE, RED, GREEN, CYAN, MAGENTA, YELLOW, WHITE};
-  int colorIndex = floor((sizeof(COLORS)/sizeof(int)) * random());
+  int colorIndex = floor((sizeof(COLORS)/sizeof(int)) * randomf());
   return COLORS[colorIndex];
 }
 

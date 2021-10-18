@@ -50,7 +50,7 @@ void setup(void) {
 }
 
 DeserializationError getHAEntity(const char *entityId, JsonDocument &doc) {
-  String resp = HAClient.sendGetHA(String("/api/states/") + String(entityId), "");
+  String resp = HAClient.sendGetHA(String("/api/states/") + String(entityId));
   DeserializationError err = deserializeJson(doc, resp);
   return err;
 }

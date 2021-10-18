@@ -17,11 +17,14 @@ Adafruit_SSD1351 tft = Adafruit_SSD1351(SCREEN_WIDTH, SCREEN_HEIGHT, &SPI, CS_PI
 
 int downloadFile(const char *URL, const char *filepath, const char *fingerprint = NULL) {
   HTTPClient http;
-  if (fingerprint == NULL) {
-    http.begin(URL, fingerprint);
-  } else {
-    http.begin(URL);
+  WiFiClientSecure client;
+
+  if (fingerprint != NULL) {
+    client.setFingerprint(fingerprint);
   }
+
+  http.begin(client, URL);
+
   int httpCode = http.GET();
 
   Serial.printf("[HTTP] GET %s code: %d\n", URL, httpCode);
