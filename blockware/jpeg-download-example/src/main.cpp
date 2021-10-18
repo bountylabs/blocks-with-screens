@@ -22,7 +22,8 @@ Adafruit_SSD1351 tft = Adafruit_SSD1351(SCREEN_WIDTH, SCREEN_HEIGHT, &SPI, CS_PI
 
 int downloadFile(const char *URL, const char *filepath) {
   HTTPClient http;
-  http.begin(URL);
+  WiFiClientSecure client;
+  http.begin(client, URL);
   int httpCode = http.GET();
   int bytesDownloaded = 0;
 

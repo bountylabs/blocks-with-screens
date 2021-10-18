@@ -72,7 +72,9 @@ void formatSPIFFSIfNecessary(void) {
 
 int downloadFile(const char *URL, const char *filepath) {
   HTTPClient http;
-  http.begin(URL, "08:3B:71:72:02:43:6E:CA:ED:42:86:93:BA:7E:DF:81:C4:BC:62:30");
+  WiFiClientSecure client;
+  client.setFingerprint("08:3B:71:72:02:43:6E:CA:ED:42:86:93:BA:7E:DF:81:C4:BC:62:30");
+  http.begin(client, URL);
   int httpCode = http.GET();
   int bytesDownloaded = 0;
 
