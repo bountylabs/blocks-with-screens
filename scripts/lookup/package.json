@@ -1,0 +1,7 @@
+{
+  "name": "scripts",
+  "type": "module",
+  "dependencies": {
+    "node-fetch": "3.0.0"
+  }
+}

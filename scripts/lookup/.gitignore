@@ -1,0 +1,9 @@
+node_modules
+
+# ignore script inputs (names, credentials) and outputs
+input/*
+output/*
+!input/__ANCHOR
+!input/auth.example
+!input/names.txt.example
+!output/__ANCHOR
