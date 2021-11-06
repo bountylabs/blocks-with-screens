@@ -6,6 +6,15 @@
 
 It's Twitterversary blocks, but with screens and internet. Originally a Fall 2019 Twitter HackWeek project by [@johnboiles](https://github.com/johnboiles), [@magus](https://github.com/magus), [@mikeperiscope](https://github.com/mikeperiscope), [@seanfchan](https://github.com/seanfchan), and [@smartfuse](https://github.com/smartfuse).
 
+## Assembly
+
+### [**Click here to view assembly instructions on YouTube**](https://www.youtube.com/watch?v=okVuPwTqczQ)
+
+<a href="https://www.youtube.com/watch?v=okVuPwTqczQ" target="_blank">
+  <img width="990" alt="assembly-video-thumbnail" src="https://user-images.githubusercontent.com/290084/140593898-c1b5b431-b42b-4ffd-b91d-24ff13c8175f.png">
+</a>
+
+
 ## Components
 
 ### Blockware
