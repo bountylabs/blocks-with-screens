@@ -91,17 +91,11 @@ telnet homeassistant-display.local
 
 This repo contains a handful of example blockwares you could run directly or use as a starting point to make your own blockware! Please share back any neat things you make so that others can benefit from it!
 
-### 90fps
-
-![90fps](https://user-images.githubusercontent.com/218876/99465118-7b3f3700-28ee-11eb-94da-636e3e2f11c1.gif)
-
-A demo of how to squeeze every last bit of graphics performance out of your block by making better use of the hardware SPI APIs in the microcontroller. The interesting bits are in the [README.md](https://github.com/bountylabs/blocks-with-screens/tree/main/blockware/90fps#hacking-the-graphics-library).
-
 ### Adafruit Example
 
 ![adafruit-example](https://user-images.githubusercontent.com/218876/99464803-cf95e700-28ed-11eb-87c7-8762d6e9e07f.gif)
 
-A fork of Adafruit's [SSD1351 OLED example code](https://github.com/adafruit/Adafruit-SSD1351-library/blob/master/examples/test/test.ino) with the `delay`s removed. Useful as an overview of the available graphics APIs in the Adafruit GFX library or as a graphics benchmark when tweaking the Adafruit GFX Library code (as detailed in the [90fps README.md](https://github.com/bountylabs/blocks-with-screens/tree/main/blockware/90fps#hacking-the-graphics-library)).
+A fork of Adafruit's [SSD1351 OLED example code](https://github.com/adafruit/Adafruit-SSD1351-library/blob/master/examples/test/test.ino) with the `delay`s removed. Useful as an overview of the available graphics APIs in the Adafruit GFX library or as a graphics benchmark when tweaking the Adafruit GFX Library code.
 
 ### Bouncing Logo
 
