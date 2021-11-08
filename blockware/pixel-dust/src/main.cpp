@@ -5,8 +5,7 @@
 #include <SPI.h>
 #include <Text.h>
 #include <Adafruit_PixelDust.h>
-//#include <SparkFun_MMA8452Q.h>
-#include "LIS2DW12Sensor.h"
+#include <LIS2DW12Sensor.h>
 #include <Colors.h>
 
 // In 80MHz mode, we can do 100 grains at about 120FPS
@@ -241,10 +240,6 @@ unsigned char larry[] = {
   0x00};
 
 // Accelerometer
-//MMA8452Q accel(ACCEL_ADDR);
-
-//TwoWire* dev_i2c = new TwoWire();
-//dev_i2c->begin(I2C_SDA, I2C_SCL);
 LIS2DW12Sensor* acc;
 uint8_t acc_id;
 
@@ -270,7 +265,6 @@ void setup(void) {
 
   if(!sand.begin()) err(1000); // Slow blink = malloc error
 
-  //if(!accel.begin(Wire, ACCEL_ADDR)) err(250);  // Fast bink = I2C error
   acc = new LIS2DW12Sensor(&Wire, 0x31U);
   begin_retval = acc->begin();
   Serial.printf("begin returned: %d\n", begin_retval);
@@ -339,28 +333,9 @@ void loop() {
   }
   tft.endWrite();
 
-  // Wait for the accelerometer to become ready
-  //while (!accel.available()) {
-  //  Serial.println("Waiting on accelerometer");
-  //}
-
   // Read accelerometer and run the physics
   int16_t axes[3];
-  int ret = acc->Get_X_AxesRaw(axes);
-  //Serial.printf("%d get axes returned %d, %d %d %d\n", begin_retval, ret, axes[0], axes[1], axes[2]);
-
-  //Serial.println("hey");
-  //accel.read();
-  //sand.iterate((int)(-accel.x), (int)(-accel.y), (int)(accel.z));
-  //uint8_t acc_id;
-  /*
-  if (acc->ReadID(&acc_id) != 0)
-  {
-    Serial.println("error reading id");
-  }
-  Serial.printf("id is: %d\n", acc_id);
-  */
-
+  acc->Get_X_AxesRaw(axes);
   sand.iterate((int)-axes[0], (int)-axes[1], (int)-axes[2]);
 
   // Log the FPS for debugging once per second
