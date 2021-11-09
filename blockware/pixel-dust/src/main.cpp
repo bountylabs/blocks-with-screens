@@ -5,13 +5,11 @@
 #include <SPI.h>
 #include <Text.h>
 #include <Adafruit_PixelDust.h>
-#include <LIS2DW12Sensor.h>
 #include <Colors.h>
 
 // In 80MHz mode, we can do 100 grains at about 120FPS
 // In 160MHz mode, we can do 100 grains at about 185FPS which feels nice
 
-#define ACCEL_ADDR 0x1C // Accelerometer I2C address
 #define N_GRAINS    100 // Number of grains of sand
 #define MAX_FPS     185 // Maximum redraw rate, frames/second
 #define ELASTICITY  128 // Bounciness (0-255)
@@ -240,8 +238,15 @@ unsigned char larry[] = {
   0x00};
 
 // Accelerometer
-LIS2DW12Sensor* acc;
-uint8_t acc_id;
+#if defined(ACCEL_LIS2DW12)
+#include <LIS2DW12Sensor.h>
+#define ACCEL_ADDR 0x31U
+LIS2DW12Sensor* accel;
+#elif defined(ACCEL_MMA8452Q)
+#include <SparkFun_MMA8452Q.h>
+#define ACCEL_ADDR 0x1C
+MMA8452Q accel(ACCEL_ADDR);
+#endif
 
 // Used for frames-per-second throttle
 uint32_t prevTime = 0;
@@ -265,10 +270,13 @@ void setup(void) {
 
   if(!sand.begin()) err(1000); // Slow blink = malloc error
 
-  acc = new LIS2DW12Sensor(&Wire, 0x31U);
-  begin_retval = acc->begin();
-  Serial.printf("begin returned: %d\n", begin_retval);
-  acc->Enable_X();
+#if defined(ACCEL_LIS2DW12)
+  accel = new LIS2DW12Sensor(&Wire, ACCEL_ADDR);
+  if (!accel->begin()) err(250);
+  accel->Enable_X();
+#elif defined(ACCEL_MMA8452Q)
+  if (!accel.begin(Wire, ACCEL_ADDR)) err(250);
+#endif
 
   Serial.begin(SERIAL_DATA_RATE);
   tft.begin(SPI_SPEED);
@@ -334,9 +342,18 @@ void loop() {
   tft.endWrite();
 
   // Read accelerometer and run the physics
+
+#if defined(ACCEL_LIS2DW12)
   int16_t axes[3];
-  acc->Get_X_AxesRaw(axes);
+  accel->Get_X_AxesRaw(axes);
   sand.iterate((int)-axes[0], (int)-axes[1], (int)-axes[2]);
+#elif defined(ACCEL_MMA8452Q)
+  // Wait for the accelerometer to become ready
+  while (!accel.available()) {}
+  // Read accelerometer and run the physics
+  accel.read();
+  sand.iterate((int)(-accel.x), (int)(-accel.y), (int)(accel.z));
+#endif
 
   // Log the FPS for debugging once per second
   frameCounter++;
