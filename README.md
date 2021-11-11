@@ -8,9 +8,9 @@ It's Twitterversary blocks, but with screens and internet. Originally a Fall 201
 
 ## Assembly
 
-### [**Click here to view assembly instructions on YouTube**](https://www.youtube.com/watch?v=okVuPwTqczQ)
+### [**Click here to view assembly instructions on YouTube**](https://youtu.be/LxgdhXQPZw0)
 
-<a href="https://www.youtube.com/watch?v=okVuPwTqczQ" target="_blank">
+<a href="https://youtu.be/LxgdhXQPZw0" target="_blank">
   <img width="990" alt="assembly-video-thumbnail" src="https://user-images.githubusercontent.com/290084/140593898-c1b5b431-b42b-4ffd-b91d-24ff13c8175f.png">
 </a>
 
