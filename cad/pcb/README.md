@@ -49,6 +49,10 @@ There's an included [script](https://github.com/bountylabs/blocks-with-screens/b
 
 ## Changelog
 
+### Microcontroller Board V4
+
+* MMA8452QR1 accelerometers are #chipshortage'd. Switch to LIS2DW12
+
 ### OLED Board V5
 
 * Revert the revert to go back to VIN for the 13V boost circuit as it didn't seem to have any effect. And this lightens the load on the 3.3V regulator. This is effectively the same design as OLED Board V3.

@@ -32,3 +32,8 @@
 // 15MHz SPI for communication with the OLED display
 // The ESP8266 can supposedly can go up to 30MHz but seems to cause instability
 #define SPI_SPEED 15000000
+
+// V4 Microcontroller board accelerometer
+#define ACCEL_LIS2DW12
+// V2 and V3 Microcontroller board accelerometer
+// #define ACCEL_MMA8452Q
