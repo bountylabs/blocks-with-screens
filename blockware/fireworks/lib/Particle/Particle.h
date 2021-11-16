@@ -2,6 +2,11 @@
 
 #include <Vec2d.h>
 #include <Colors.h>
+#include <vector>
+
+#ifndef PI
+#define PI 3.14159
+#endif
 
 const float TAU = PI * 2;
 const float GRAVITY = 0.01;

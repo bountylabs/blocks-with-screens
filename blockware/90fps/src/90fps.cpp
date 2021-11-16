@@ -70,8 +70,8 @@ void run90FPS(GFXcanvas16 *canvas)
     height = canvas->height();
     width = canvas->width();
     // start at random x, y
-    pos.x = floor(width * time_random());
-    pos.y = floor(height * time_random());
+    pos.x = floor(width * randomf());
+    pos.y = floor(height * randomf());
 
     // init trail
     for (int t = 0; t < TRAIL_LEN; t++)
@@ -81,11 +81,11 @@ void run90FPS(GFXcanvas16 *canvas)
   }
 
   // // 1% chance to reset
-  // if (0.0001 > time_random())
+  // if (0.0001 > randomf())
   // {
   //   canvas->fillScreen(BLACK);
-  //   pos.x = floor(width * time_random());
-  //   pos.y = floor(height * time_random());
+  //   pos.x = floor(width * randomf());
+  //   pos.y = floor(height * randomf());
   // }
 
   // keep a trail of our pos
@@ -93,10 +93,10 @@ void run90FPS(GFXcanvas16 *canvas)
 
   // 10% chance to change direction and color
   // also force change if we accidentally stop
-  if (time_random() < 0.01 || dir.x == 0 && dir.y == 0)
+  if (randomf() < 0.01 || dir.x == 0 && dir.y == 0)
   {
-    dir.x = DIRECTIONS[(int)floor(DIRECTIONS_LEN * time_random())];
-    dir.y = DIRECTIONS[(int)floor(DIRECTIONS_LEN * time_random())];
+    dir.x = DIRECTIONS[(int)floor(DIRECTIONS_LEN * randomf())];
+    dir.y = DIRECTIONS[(int)floor(DIRECTIONS_LEN * randomf())];
 
     randomColor();
   }
@@ -117,9 +117,9 @@ void run90FPS(GFXcanvas16 *canvas)
     dir.x = dir.x * -1;
     pos.x = width - 1;
     // // random chance to flip y when hitting x bound
-    // if (time_random() < 0.1)
+    // if (randomf() < 0.1)
     // {
-    //   dir.y = DIRECTIONS[(int)floor(DIRECTIONS_LEN * time_random())];
+    //   dir.y = DIRECTIONS[(int)floor(DIRECTIONS_LEN * randomf())];
     //   randomColor();
     // }
   }
