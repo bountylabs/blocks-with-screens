@@ -11,6 +11,9 @@
 #include <Particle.h>
 #include <DefaultConfig.h>
 
+#ifndef max
+#define max(X,Y) (((X) > (Y)) ? (X) : (Y))
+#endif
 
 const int tlWidth = 40;
 const int tlHeight = 33;
@@ -59,11 +62,11 @@ void drawText()
 
   canvas->setTextSize(sizeYears);
   canvas->setCursor(posYears.x, posYears.y);
-  canvas->print(years);
+  canvas->print((char*)years);
 
   canvas->setTextSize(sizeUsername);
   canvas->setCursor(posUsername.x, posUsername.y);
-  canvas->print(username);
+  canvas->print((char*)username);
 
   // // test font sizes
   // for (int i = 0; i < 6; i++) {
@@ -121,6 +124,9 @@ void drawParticles()
     Particle* p = &Particles[i];
     if (p->destroy() || p->explode(Particles)) {
       Particles.erase(Particles.begin() + i);
+      
+      i--;
+      max = (int) Particles.size();
     }
   }
 
@@ -130,11 +136,11 @@ void drawParticles()
     p->tick();
     p->draw(canvas);
   }
-
+  
   // for (int i = 0; i < FIREWORKS_PER_FRAME; i++) {
-  //   int color = FIREWORK_COLORS[floor(FIREWORK_COLORS.size() * random())];
-  //   int x = floor(screen.x * random());
-  //   int y = floor(screen.y * random());
+  //   int color = FIREWORK_COLORS[floor(FIREWORK_COLORS.size() * randomf())];
+  //   int x = floor(screen.x * randomf());
+  //   int y = floor(screen.y * randomf());
   //   canvas->drawPixel(x, y, color);
   // }
 }

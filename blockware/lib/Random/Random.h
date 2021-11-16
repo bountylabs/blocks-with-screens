@@ -10,12 +10,17 @@ static inline float randomf()
   return (float)rand() / (float)RAND_MAX;
 }
 
-static inline float random(const int min, const float max)
+static inline float time_random(const int min, const float max)
 {
   return min + (randomf() * (max - min));
 }
 
-static inline float random(const int min, const int max)
+static inline float time_random(const float max)
+{
+    return time_random(0.0f, max);
+}
+
+static inline float time_random(const int min, const int max)
 {
   return min + (randomf() * (max - min));
 }

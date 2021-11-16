@@ -159,7 +159,7 @@ void setup(void) {
 
 int getRandomNumber(int startNum, int endNum) {
   randomSeed(ESP.getCycleCount());
-  return random(startNum, endNum);
+  return time_random(startNum, endNum);
 }
 
 void loop() {

@@ -10,6 +10,7 @@
 #include <Text.h>
 #include <Vec2d.h>
 #include <DefaultConfig.h>
+#include <vector>
 
 
 Adafruit_SSD1351 tft =
@@ -73,14 +74,14 @@ void setup(void)
   flush();
 
   // randomize starting logo
-  logo = Logos[floor(Logos.size() * random())];
+  logo = Logos[floor(Logos.size() * randomf())];
 
   // randomize starting position
-  position.set(floor(random() * screen.x - tlWidth), floor(random() * screen.y - tlHeight));
+  position.set(floor(randomf() * screen.x - tlWidth), floor(randomf() * screen.y - tlHeight));
 
   // randomize starting velocity (0 or 1)
   while (velocity == 0) {
-    velocity.set((random() < 0.5 ? -1 : +1) * 2, (random() < 0.5 ? -1 : +1) * 2);
+    velocity.set((randomf() < 0.5 ? -1 : +1) * 2, (randomf() < 0.5 ? -1 : +1) * 2);
   }
 
   Serial.printf("\nFPS=%d", FPS);
@@ -119,9 +120,9 @@ void tick()
   else {
     // collision!
     // randomize logo
-    unsigned char* nextLogo = Logos[floor(Logos.size() * random())];
+    unsigned char* nextLogo = Logos[floor(Logos.size() * randomf())];
     while (nextLogo == logo) {
-      nextLogo = Logos[floor(Logos.size() * random())];
+      nextLogo = Logos[floor(Logos.size() * randomf())];
     }
 
     logo = nextLogo;
