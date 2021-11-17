@@ -15,6 +15,7 @@ All of these blockwares are configured to be compiled and uploaded using [Platfo
 The easiest way to get started is using **[Visual Studio Code (VSCode)](https://code.visualstudio.com)** with the **[PlatformIO extension](https://platformio.org/install/ide?install=vscode)**.
 
 1. Install **VSCode** either from the [website](https://code.visualstudio.com/) or (on macOS) using Homebrew `brew cask install visual-studio-code`.
+    - **Windows Only** You may need to install drivers for your computer to be able to communicate with the block. [See below](#windows_drivers)
 2. With VSCode open select **View -> Extensions** and search for `PlatformIO IDE`.
 3. Click the extension and click **Install**.
 
@@ -159,3 +160,20 @@ An example that downloads stocks and weather.
 An example of real-time video streaming from your computer to your block.
 
 <a href="https://twitter.com/samhaves/status/1177639088540635141"><img width="303" alt="Blockware Live Video Demo" src="https://user-images.githubusercontent.com/290084/99889518-ea789c00-2c0a-11eb-8a01-a325acf3eb22.png"></a>
+
+<a name="windows_drivers"></a>
+
+### Windows Drivers
+
+Since the PCB is compatible with a [Wemos D1 Mini](https://docs.wemos.cc/en/latest/d1/d1_mini.html) use the [following CH340 driver](https://docs.wemos.cc/en/latest/ch340_driver.html).
+  
+- With your block plugged in to your computer, find it in the device manager
+  - <img width="300" alt="Windows Device Manager" src="https://user-images.githubusercontent.com/4534667/141689947-55a16142-583b-463d-a96e-b03089211171.PNG">
+- Double click on the device
+  - <img width="300" alt="Windows USB Device" src="https://user-images.githubusercontent.com/4534667/141689924-6e61f047-ceda-448c-8746-c0c9a65133e2.PNG">
+- Click on the Driver tab and choose Update Driver
+  - <img width="300" alt="Windows Driver Update" src="https://user-images.githubusercontent.com/4534667/141689944-07717aa9-d80f-4e40-92f9-71bb821d40bf.PNG">
+- Browse to where you downloaded and unzipped the driver
+  - <img width="300" alt="Browse for Driver" src="https://user-images.githubusercontent.com/4534667/141689951-3ffd5e17-2b53-4dac-a595-2c809edc00fb.PNG">
+- Let Windows find the driver files within the folder or subfolder
+  - <img width="300" alt="Browse for Driver" src="https://user-images.githubusercontent.com/4534667/141689948-02682b6d-f7b7-46e6-a258-eba53571a6a5.PNG">
