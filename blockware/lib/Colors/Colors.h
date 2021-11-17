@@ -1,7 +1,7 @@
 #ifndef COLORS_H
 #define COLORS_H
 
-#include <inttypes.h>
+#include <stdint.h>
 #include <Random.h>
 #include <math.h>
 
