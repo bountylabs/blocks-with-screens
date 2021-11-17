@@ -16,8 +16,8 @@
 
 const int tlWidth = 40;
 const int tlHeight = 33;
-const char *username = "@jcasts";
-const char *years = "9 years";
+const char *username = "@twitter";
+const char *years = "5 years";
 
 
 Adafruit_SSD1351 tft =
