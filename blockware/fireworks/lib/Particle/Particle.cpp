@@ -67,11 +67,6 @@ boolean Particle::explode(std::vector<Particle>& explosions)
   return false;
 }
 
-bool Particle::isRocket()
-{
-  return _isRocket;
-}
-
 bool Particle::destroy()
 {
   if (_isRocket) {

@@ -41,7 +41,6 @@ private:
 protected:
 public:
   Particle(int x, int y, bool isRocket, int color);
-  boolean isRocket();
   void draw(GFXcanvas16* canvas);
   void tick();
   boolean explode(std::vector<Particle>& explosions);
