@@ -184,8 +184,8 @@ void centerText(const char* text, Vec2d<int> &posVisVec, Vec2d<int> &posHidVec, 
   }
 
   // center text
-  int16_t textX = max(0, (int) floor(screen.x / 2 - textWidth / 2));
-  int16_t textY = yTop + max(0, (int) floor((yBottom - yTop) / 2 - textHeight / 2));
+  int16_t textX = std::max(0, (int) floor(screen.x / 2 - textWidth / 2));
+  int16_t textY = yTop + std::max(0, (int) floor((yBottom - yTop) / 2 - textHeight / 2));
   posVisVec.set(textX, textY);
 
   int16_t hidTextY = textY > (SCREEN_HEIGHT / 2) ? SCREEN_HEIGHT : 0 - textHeight;

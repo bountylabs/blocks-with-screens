@@ -14,14 +14,14 @@ Particle::Particle(int x, int y, bool isRocket, int color)
   _trail = {Vec2d<int>(_pos.x, _pos.y), Vec2d<int>(_pos.x, _pos.y), Vec2d<int>(_pos.x, _pos.y)};
 
   if (_isRocket) {
-    _vel.set(random(-1, 1), random(-3, -2));
+    _vel.set(time_random(-1, 1), time_random(-3, -2));
     _resistance = 1.025f;
   } else {
     float adj = 1000.00;
-    float angle = random(TAU * adj) / adj;
-    float speed = cos(random(0, TAU)) * 10;
+    float angle = time_random(TAU * adj) / adj;
+    float speed = cos(time_random(0, TAU)) * 10;
     _vel.set(cos(angle) * speed, sin(angle) * speed);
-    _resistance = 0.75f + random(0, 0.15f); // randomizes explosion size. 0.88f is about screen width
+    _resistance = 0.75f + time_random(0, 0.15f); // randomizes explosion size. 0.88f is about screen width
   }
 }
 
