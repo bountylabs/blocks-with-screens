@@ -30,7 +30,7 @@ std::optional<Particle> currRocket;
 GFXcanvas16* canvas;
 // screen dimensions
 Vec2d<int> screen = Vec2d<int>();
-const int FPS = floor(1000 / 30); // (30fps)
+const int FPS = floor(1000.0f / 30.0f); // (30fps)
 uint16_t lastLoop = millis() - FPS + 1;
 
 // logo position x,y
@@ -47,7 +47,7 @@ Vec2d<int> posVisUsername = Vec2d<int>();
 Vec2d<int> posHidUsername = Vec2d<int>();
 Vec2d<int> posUsername = Vec2d<int>();
 // text animation
-uint8_t totalTextAnimSteps = 7;
+float textAnimSpeed = 0.2f;
 uint16_t textDisplayDuration = 10000;
 uint16_t textCoolOffDuration = 1500;
 
@@ -137,18 +137,14 @@ void drawLogo()
 
 void animateText(Vec2d<int> &posVec, Vec2d<int> &posVisVec, Vec2d<int> &posHidVec)
 {
-  int dist = wakeupText ? (posVisVec.y - posHidVec.y) : (posHidVec.y - posVisVec.y);
-  int targetY = wakeupText ? posVisVec.y : posHidVec.y;
+  int targetPos = wakeupText ? posVisVec.y : posHidVec.y;
 
-  if (posVec.y != targetY) {
-    int mv = dist / totalTextAnimSteps;
-    posVec.y += mv;
-    if (mv > 0 && posVec.y > targetY) {
-      posVec.y = targetY;
-    } else if (mv <= 0 && posVec.y < targetY) {
-      posVec.y = targetY;
-    }
-  }
+  // lerp
+  float nextPos = ((1.0f - textAnimSpeed) * posVec.y) + (textAnimSpeed * targetPos);
+
+  // We need to call ceil or floor based on the relative direction of travel or we'll
+  // never quite reach the target value.
+  posVec.y = targetPos > posVec.y ? ceil(nextPos) : floor(nextPos);
 }
 
 void drawText()
