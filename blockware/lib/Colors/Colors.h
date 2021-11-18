@@ -1,6 +1,7 @@
 #ifndef COLORS_H
 #define COLORS_H
 
+#include <algorithm>
 #include <stdint.h>
 #include <Random.h>
 #include <math.h>
