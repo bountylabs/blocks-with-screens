@@ -139,12 +139,14 @@ void animateText(Vec2d<int> &posVec, Vec2d<int> &posVisVec, Vec2d<int> &posHidVe
 {
   int targetPos = wakeupText ? posVisVec.y : posHidVec.y;
 
-  // lerp
-  float nextPos = ((1.0f - textAnimSpeed) * posVec.y) + (textAnimSpeed * targetPos);
+  if (posVec.y != targetPos) {
+    // lerp
+    float nextPos = ((1.0f - textAnimSpeed) * posVec.y) + (textAnimSpeed * targetPos);
 
-  // We need to call ceil or floor based on the relative direction of travel or we'll
-  // never quite reach the target value.
-  posVec.y = targetPos > posVec.y ? ceil(nextPos) : floor(nextPos);
+    // We need to call ceil or floor based on the relative direction of travel or we'll
+    // never quite reach the target value.
+    posVec.y = targetPos > posVec.y ? ceil(nextPos) : floor(nextPos);
+  }
 }
 
 void drawText()
