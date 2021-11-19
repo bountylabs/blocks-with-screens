@@ -9,14 +9,16 @@
 #endif
 
 const float TAU = PI * 2;
-const float GRAVITY = 0.01;
+const float GRAVITY = 0.07;
 const int MAX_HEIGHT = floor(0.1 * 128);
 const int MIN_X = floor(0.1 * 128);
-const int MIN_HEIGHT = floor(0.8 * 128);
+const int MIN_HEIGHT = floor(0.7 * 128);
 const int MAX_X = floor(0.8 * 128);
-const float EXPLODE_CHANCE = 0.08;
-const int EXPLOSION_PARTICLES = 22;
-const int MAX_AGE = 5;
+const float EXPLODE_CHANCE = 0.05;
+const int EXPLOSION_PARTICLES = 100;
+const int MAX_AGE = 120;
+const int FADE_AGE = MAX_AGE / 2;
+const int MIN_FADE_AGE = MAX_AGE / 6;
 
 const std::vector<unsigned int> FIREWORK_COLORS{ BLUE,RED,GREEN,CYAN,MAGENTA,YELLOW,DARK_GRAY,GRAY,LIGHT_GRAY };
 

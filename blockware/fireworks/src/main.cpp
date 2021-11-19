@@ -11,73 +11,161 @@
 #include <Particle.h>
 #include <DefaultConfig.h>
 
-#ifndef max
-#define max(X,Y) (((X) > (Y)) ? (X) : (Y))
-#endif
+#include <LIS2DW12Sensor.h>
+
 
 const int tlWidth = 40;
 const int tlHeight = 33;
-const float FIREWORK_CHANCE = 0.05;
-const int FIREWORKS_PER_FRAME = 64;
-const char *username = "@magusnn";
+const char *username = "@twitter";
 const char *years = "5 years";
 
 
 Adafruit_SSD1351 tft =
   Adafruit_SSD1351(SCREEN_WIDTH, SCREEN_HEIGHT, &SPI, CS_PIN, DC_PIN, RST_PIN);
 
-std::vector<unsigned char*> Logos;
 std::vector<Particle> Particles;
+std::optional<Particle> currRocket;
 
 // in-memory 16-bit canvas
 GFXcanvas16* canvas;
 // screen dimensions
 Vec2d<int> screen = Vec2d<int>();
-const int FPS = floor(1000 / 30); // every ~16ms (60fps)
+const int FPS = floor(1000.0f / 30.0f); // (30fps)
 uint16_t lastLoop = millis() - FPS + 1;
 
 // logo position x,y
 Vec2d<int> position = Vec2d<int>();
 // years settings
 uint8_t sizeYears = 2;
+Vec2d<int> posVisYears = Vec2d<int>();
+Vec2d<int> posHidYears = Vec2d<int>();
 Vec2d<int> posYears = Vec2d<int>();
+int yPosYears;
 // username settings
 uint8_t sizeUsername = 2;
+Vec2d<int> posVisUsername = Vec2d<int>();
+Vec2d<int> posHidUsername = Vec2d<int>();
 Vec2d<int> posUsername = Vec2d<int>();
+// text animation
+float textAnimSpeed = 0.2f;
+uint16_t textDisplayDuration = 10000;
+uint16_t textCoolOffDuration = 1500;
 
-unsigned char* logo;
+// logo color animation
+unsigned long lastLogoColorUpdate;
+uint16_t sourceLogoColor = 0x0000;
+uint16_t nextLogoColor = LOGO_BLUE;
+uint16_t logoColorStep;
+uint16_t defaultLogoColorSteps = 80;
+uint16_t fastLogoColorSteps = 40;
+uint16_t totalLogoColorSteps = defaultLogoColorSteps;
 
+// Accelerometer
+LIS2DW12Sensor* acc;
+uint32_t accState;
+bool wakeupText = true;
+bool wakeupAll = true;
+unsigned long lastWakeUpdate;
+unsigned long lastTextEnabled;
+unsigned long lastTextUpdate;
+unsigned int wakeMaxDuration = 90000;
 
 // NOTE: `loop`, `setup` and `flush` are sort of common operations
 // Modify `initialize` and `tick` to customize this demo
 
+void pickNextLogoColor() {
+  if (wakeupAll && (nextLogoColor <= 0 || sourceLogoColor <= 0)) {
+    nextLogoColor = std::max(sourceLogoColor, nextLogoColor);
+    sourceLogoColor = 0x0000;
+  }
+  
+  if (wakeupAll || nextLogoColor <= 0) {
+    while(sourceLogoColor == nextLogoColor || nextLogoColor <= 0) {
+      nextLogoColor = randomLogoColor();
+    }
+  } else {
+    nextLogoColor = 0x0000;
+  }
+}
+
+uint16_t getLogoColor() {
+  // When asleep, only keep color logo on screen for 2s, otherwise 10s
+  unsigned int onScreenTime = sourceLogoColor > 0 && !wakeupAll ? 2000 : 10000;
+  
+  // If we've just woken up, set logo color to animate in quickly
+  if (wakeupAll && (nextLogoColor == 0 || sourceLogoColor == 0)) {
+    uint16_t currStep = nextLogoColor == 0 ? (totalLogoColorSteps - logoColorStep) : logoColorStep;
+    logoColorStep = (currStep * fastLogoColorSteps / totalLogoColorSteps) + 1; // Add 1 to make sure we animate
+    totalLogoColorSteps = fastLogoColorSteps;
+    pickNextLogoColor();
+  }
+
+  if (logoColorStep >= totalLogoColorSteps) {
+    totalLogoColorSteps = defaultLogoColorSteps;
+    sourceLogoColor = nextLogoColor;
+    lastLogoColorUpdate = millis();
+    logoColorStep = 0;
+  } else if (logoColorStep > 0) {
+    // Update color to next step
+    logoColorStep += 1;
+    return getColorMix(sourceLogoColor, nextLogoColor, totalLogoColorSteps, logoColorStep);
+  } else if (millis() - lastLogoColorUpdate > onScreenTime) {
+    // It's time to start animating the color change
+    pickNextLogoColor();
+    logoColorStep = 1;
+  }
+
+  return sourceLogoColor;
+}
+
 void drawLogo()
 {
-    canvas->drawRGBBitmap(position.x, position.y, (uint16_t*)logo, tlWidth, tlHeight);
+  uint16_t logoColor = getLogoColor();
+  // Draw Logo 1 pixel at a time to allow changing the color
+  int16_t larryStartY = (SCREEN_HEIGHT - tlHeight) / 2;
+  int16_t larryStartX = (SCREEN_WIDTH - tlWidth) / 2;
+  for (uint8_t y = 0; y < tlHeight; y++) {
+    for (uint8_t x = 0; x < tlWidth; x++) {
+      uint16_t color = ((uint16_t *)tl_blue)[y * tlWidth + x];
+      if (color > 0) {
+        uint16_t c = colorize(color, logoColor);
+        canvas->drawPixel(larryStartX + x, larryStartY + y, c);
+      }
+    }
+  }
+}
+
+void animateText(Vec2d<int> &posVec, Vec2d<int> &posVisVec, Vec2d<int> &posHidVec)
+{
+  int targetPos = wakeupText ? posVisVec.y : posHidVec.y;
+
+  if (posVec.y != targetPos) {
+    // lerp
+    float nextPos = ((1.0f - textAnimSpeed) * posVec.y) + (textAnimSpeed * targetPos);
+
+    // We need to call ceil or floor based on the relative direction of travel or we'll
+    // never quite reach the target value.
+    posVec.y = targetPos > posVec.y ? ceil(nextPos) : floor(nextPos);
+  }
 }
 
 void drawText()
 {
+  animateText(posYears, posVisYears, posHidYears);
+  animateText(posUsername, posVisUsername, posHidUsername);
+
   canvas->setTextColor(WHITE);
 
   canvas->setTextSize(sizeYears);
   canvas->setCursor(posYears.x, posYears.y);
-  canvas->print((char*)years);
+  canvas->print(years);
 
   canvas->setTextSize(sizeUsername);
   canvas->setCursor(posUsername.x, posUsername.y);
-  canvas->print((char*)username);
-
-  // // test font sizes
-  // for (int i = 0; i < 6; i++) {
-  //   canvas->setCursor(0, i * 20);
-  //   canvas->setTextColor(RED);
-  //   canvas->setTextSize(i);
-  //   canvas->println("Hello World!");
-  // }
+  canvas->print(username);
 }
 
-void centerText(const char* text, Vec2d<int> &posVec, uint8_t *size, int yTop, int yBottom)
+void centerText(const char* text, Vec2d<int> &posVisVec, Vec2d<int> &posHidVec, uint8_t *size, int yTop, int yBottom)
 {
   int16_t  x1, y1;
   uint16_t textWidth, textHeight;
@@ -94,87 +182,105 @@ void centerText(const char* text, Vec2d<int> &posVec, uint8_t *size, int yTop, i
   }
 
   // center text
-  int16_t textX = max(0, (int) floor(screen.x / 2 - textWidth / 2));
-  int16_t textY = yTop + max(0, (int) floor((yBottom - yTop) / 2 - textHeight / 2));
-  posVec.set(textX, textY);
-}
+  int16_t textX = std::max(0, (int) floor(screen.x / 2 - textWidth / 2));
+  int16_t textY = yTop + std::max(0, (int) floor((yBottom - yTop) / 2 - textHeight / 2));
+  posVisVec.set(textX, textY);
 
-void randomizeLogo()
-{
-  // randomize logo
-  unsigned char* nextLogo = Logos[floor(Logos.size() * randomf())];
-  while (nextLogo == logo) {
-    nextLogo = Logos[floor(Logos.size() * randomf())];
-  }
-  logo = nextLogo;
+  int16_t hidTextY = textY > (SCREEN_HEIGHT / 2) ? SCREEN_HEIGHT : 0 - textHeight;
+  posHidVec.set(textX, hidTextY);
 }
 
 void drawParticles()
 {
-  // randomly add new particles rocketing
-  // if (randomf() < FIREWORK_CHANCE) {
-
-  // add new firework when all particles are done
-  if (Particles.size() < 1) {
-    Particles.push_back(Particle(randomf() * screen.x, screen.y, true, randomFireworkColor()));
+  if (!currRocket) {
+    // random chance to add new firework if there's no rocket and particles count is below threshold
+    if (wakeupAll && Particles.size() < 80 && randomf() <= 0.1) {
+      currRocket = Particle(randomf() * screen.x, screen.y, true, randomFireworkColor());
+    }
+  } else if (currRocket.value().explode(Particles)) {
+    // clear the optional rocket value once it's exploded, making room for another to be fired
+    currRocket.reset();
+  } else {
+    // Tick and draw rocket
+    Particle* rocket = &currRocket.value();
+    rocket->tick();
+    rocket->draw(canvas);
   }
 
-  // explode and destroy old entities
-  for (int i = 0, max = (int) Particles.size(); i < max; i++) {
+  // Destroy old firework particles
+  for (int i = (int) Particles.size() - 1; i >= 0; i--) {
     Particle* p = &Particles[i];
-    if (p->destroy() || p->explode(Particles)) {
+    if (p->destroy()) {
       Particles.erase(Particles.begin() + i);
-      
-      i--;
-      max = (int) Particles.size();
     }
   }
 
-  // tick and draw
+  // Tick and draw firework particles
   for (int i = 0, max = (int) Particles.size(); i < max; i++) {
     Particle* p = &Particles[i];
     p->tick();
     p->draw(canvas);
   }
-  
-  // for (int i = 0; i < FIREWORKS_PER_FRAME; i++) {
-  //   int color = FIREWORK_COLORS[floor(FIREWORK_COLORS.size() * randomf())];
-  //   int x = floor(screen.x * randomf());
-  //   int y = floor(screen.y * randomf());
-  //   canvas->drawPixel(x, y, color);
-  // }
+}
+
+void updateWakeState()
+{
+  unsigned long now = millis();
+  unsigned long timeSinceUpdate = now - lastWakeUpdate;
+
+  if (timeSinceUpdate > wakeMaxDuration) {
+    wakeupAll = false;
+  }
+  if (wakeupText && now - lastTextEnabled > textDisplayDuration) {
+    lastTextUpdate = now;
+    wakeupText = false;
+  }
+
+  // Read accelerometer
+  int16_t axes[3];
+  acc->Get_X_AxesRaw(axes);
+  // Scale values down to be less sensitive
+  uint32_t newAccState = (axes[0] / 256 << 16) | (axes[1] / 256 << 8) | axes[2] / 256;
+
+  // Update wake state
+  bool changed = newAccState != accState;
+  if (changed) {
+    if (now - lastTextUpdate > textCoolOffDuration) {
+      lastTextEnabled = now;
+      wakeupText = true;
+    }
+    lastTextUpdate = now;
+    wakeupAll = true;
+    lastWakeUpdate = now;
+    accState = newAccState;
+  }
+}
+
+void initText()
+{
+  centerText(username, posVisUsername, posHidUsername, &sizeUsername, 0, position.y);
+  centerText(years, posVisYears, posHidYears, &sizeYears, position.y + tlHeight, 128);
+  posYears.x = posHidYears.x;
+  posYears.y = posHidYears.y;
+  posUsername.x = posHidUsername.x;
+  posUsername.y = posHidUsername.y;
 }
 
 void flush()
 {
   // write canvas to screen
   tft.drawRGBBitmap(0, 0, (uint16_t*)canvas->getBuffer(), screen.x, screen.y);
-  // tft.startWrite();
-  // SPI.writeBytes((uint8_t *)canvas->getBuffer(), 128 * 128 * 2);
-  // tft.endWrite();
 }
 
 void initialize() {
-  // download logo binaries
-  Logos.push_back(tl_blue);
-  Logos.push_back(tl_green);
-  Logos.push_back(tl_orange);
-  Logos.push_back(tl_purple);
-  Logos.push_back(tl_red);
-  Logos.push_back(tl_yellow);
-
-
-  // randomize starting logo
-  randomizeLogo();
+  // reserve particles memory space
+  Particles.reserve(EXPLOSION_PARTICLES * 2);
 
   // center logo
   position.set(floor(screen.x / 2 - tlWidth / 2), floor(screen.y / 2 - tlHeight / 2));
 
-  // center text
-  centerText(username, posUsername, &sizeUsername, 0, position.y);
-  centerText(years, posYears, &sizeYears, position.y + tlHeight, 128);
-
   // base
+  initText();
   drawLogo();
   drawText();
 }
@@ -187,9 +293,10 @@ void tick()
   // redraw entire canvas on every tick
 
   // base
+  updateWakeState();
+  drawParticles();
   drawLogo();
   drawText();
-  drawParticles();
 }
 
 void loop()
@@ -197,7 +304,8 @@ void loop()
   uint16_t now = millis();
   uint16_t time = now - lastLoop;
 
-  // Serial.printf("frameMs=%d\n", time);
+  //Serial.printf("frameMs=%d\n", time);
+  //Serial.printf("FPS=%g\n", floor(1000.0f / (float)time));
 
   if (time > FPS) {
     // track loop millis to keep steady fps
@@ -213,15 +321,10 @@ void loop()
 
 void setup(void)
 {
-  Particles.reserve(23);
-
   Serial.begin(SERIAL_DATA_RATE);
   tft.begin(SPI_SPEED);
   // initialize screen to black
   tft.fillScreen(BLACK);
-
-  // initialize srand
-  randomSeed(ESP.getCycleCount());
 
   // save dimensions
   screen.x = tft.width();
@@ -231,13 +334,21 @@ void setup(void)
   canvas = new GFXcanvas16(screen.x, screen.y);
   canvas->fillScreen(BLACK);
 
+  // initialize srand
+  randomSeed(ESP.getCycleCount());
+
+  // setup accelerometer
+  Wire.begin();
+  acc = new LIS2DW12Sensor(&Wire, 0x31U);
+  int begin_retval = acc->begin();
+  Serial.printf("begin returned: %d\n", begin_retval);
+  acc->Enable_X();
+  // Max is 700000 in 160MHz mode and 400000 in 80MHz mode
+  Wire.setClock(700000); // Run I2C at 700 KHz for faster screen updates
+
   // initialize contains demo specific setup
   initialize();
 
   flush();
 }
-
-
-
-
 
