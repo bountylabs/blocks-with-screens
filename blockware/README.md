@@ -88,6 +88,17 @@ If using `TELNETLOG` then from your computer you can do something like the follo
 telnet homeassistant-display.local
 ```
 
+#### Ensure PlatformIO is up to date
+
+- Open the VSCode PlatformIO CLI (`⌘ + Shift + P` type `platformio cli` and press `Enter`)
+- In the TERMINAL window at the bottom of VSCode, type in the command below
+
+```sh
+make update
+```
+
+Your PlatformIO dependencies should not all be up to date. Running the command again will report each at `[Up-to-date]` 🎉
+
 ## Demo Blockwares
 
 This repo contains a handful of example blockwares you could run directly or use as a starting point to make your own blockware! Please share back any neat things you make so that others can benefit from it!
