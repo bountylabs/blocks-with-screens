@@ -31,9 +31,6 @@ This contains the various design files building the block hardware. Most importa
 
 ### VirtualBlox
 
-An experimental block simulator from [@mikeperiscope](github.com/mikeperiscope). You can compile blockware along with VirtualBlox and run block software locally for testing! This gives a quicker development iteration cycle than uploading to the block itself.
+An experimental block simulator. You can compile blockware along with VirtualBlox and run block software locally for testing! This gives a quicker development iteration cycle than uploading to the block itself.
 
-VirtualBlox mostly consists of a Makefile in the VirtualBlox/emscripten directory, along with a collection of stub classes and functions to simulate enough Arduino stuff to satisfy the compiler. To run one of the VirtualBlox demos, first install the emscripten compiler [here](https://emscripten.org/docs/getting_started/downloads.html).  
-Then go to VirtualBlox/emscripten, and check out the Makefile to see which of the demos are currently supported. These will have make targets like bouncing-logo.html, fireworks.html, etc.  
-Try 'make fireworks.html' and then run a local web server (npm http-server is a good one, or 'php -S localhost:8080').  
-Browse to the server (127.0.0.1:8080/fireworks.html) and you should see some excellent fireworks in your browser.
+VirtualBlox mostly consists of a Makefile in the VirtualBlox/emscripten directory, along with a collection of stub classes and functions to simulate enough Arduino stuff to satisfy the compiler. See VirtualBlox/README.md for info on running these.

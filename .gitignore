@@ -5,3 +5,6 @@
 .pio
 .vscode
 secrets.h
+*.o
+*.wasm
+*.dSYM

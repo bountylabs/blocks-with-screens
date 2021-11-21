@@ -1,6 +1,7 @@
 #include <stdio.h>
-#include <emscripten.h>
+// #include <emscripten.h>
 #include "ESP8266HTTPClient.h"
+#include <memory.h>
 
 FakeWiFi WiFi;
 
@@ -89,7 +90,7 @@ int HTTPClient::GET()
     int error;
     printf("GET called, retrieving %s\n", _url);
 
-    emscripten_wget_data(_url, &_dataBuffer, &_bufferSize, &error);
+    // emscripten_wget_data(_url, &_dataBuffer, &_bufferSize, &error);
     printf("retrieved %d bytes, error %d\n", _bufferSize, error);
 
     if (error == 0)
