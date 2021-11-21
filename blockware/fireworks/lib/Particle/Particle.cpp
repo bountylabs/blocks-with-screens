@@ -5,6 +5,15 @@
 #include <Colors.h>
 #include <Random.h>
 
+Vec2d<float> Particle::__gravity = Vec2d<float>(0, GRAVITY);
+
+void Particle::update_gravity(const Vec2d<float> &gravity_xy)
+{
+  __gravity = gravity_xy;
+  __gravity.normalize();
+  __gravity *= GRAVITY;
+}
+
 Particle::Particle(int x, int y, bool isRocket, int color)
 {
   _age = 0;
@@ -94,7 +103,9 @@ void Particle::tick()
 
   _vel.x *= _resistance;
   _vel.y *= _resistance;
-  _vel.y += GRAVITY;
+
+  _vel.x += __gravity.x;
+  _vel.y += __gravity.y;
 
   _pos.x += _vel.x;
   _pos.y += _vel.y;

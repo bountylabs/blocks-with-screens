@@ -256,6 +256,15 @@ void updateWakeState()
   }
 }
 
+void updateGravity()
+{
+  // Read accelerometer
+  int16_t axes[3];
+  acc->Get_X_AxesRaw(axes);
+
+  Particle::update_gravity(Vec2d<float>(-axes[0], -axes[1]));
+}
+
 void initText()
 {
   centerText(username, posVisUsername, posHidUsername, &sizeUsername, 0, position.y);
@@ -294,6 +303,7 @@ void tick()
 
   // base
   updateWakeState();
+  updateGravity();
   drawParticles();
   drawLogo();
   drawText();
