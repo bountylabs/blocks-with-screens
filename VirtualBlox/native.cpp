@@ -11,6 +11,7 @@ FakeSerial Serial;
 FakeESP ESP;
 void* SPI;
 
+#define SCALE 2
 #define WIDTH 128
 #define HEIGHT 128
  
@@ -51,7 +52,8 @@ int main(int argc, char *argv[]) {
   
   SDL_Window* window;
 
-  SDL_CreateWindowAndRenderer(WIDTH, WIDTH, 0, &window, &renderer);
+  SDL_CreateWindowAndRenderer(WIDTH * SCALE, WIDTH * SCALE, 0, &window, &renderer);
+  SDL_RenderSetScale(renderer, SCALE, SCALE);
 
   if (renderer == NULL) {
     fprintf(stderr, "could not create renderer: %s\n", SDL_GetError());
