@@ -1,10 +1,19 @@
+# PCB files
 *.s#*
 *.b#*
 *.job
+
+# Apple cruft
 .DS_Store
+
+# PlatformIO build files
 .pio
+
+# VSCode
 .vscode
+
+# Secret passwords and such
 secrets.h
+
+# C/C++ object files
 *.o
-*.wasm
-*.dSYM

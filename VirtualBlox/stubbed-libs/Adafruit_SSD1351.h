@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdint.h>
-#include "Adafruit_GFX.h"
+#include <Adafruit_GFX.h>
 
 #define DEG_TO_RAD 0.01745329252
 extern void* SPI;
