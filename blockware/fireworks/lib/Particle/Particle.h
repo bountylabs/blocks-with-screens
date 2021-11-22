@@ -47,7 +47,7 @@ private:
 
 protected:
 public:
-  static void update_gravity(const Vec2d<float> &gravity_xy);
+  static void updateGravity(const Vec2d<float> &gravity_xy);
 public:
   Particle(int x, int y, bool isRocket, int color);
   void draw(GFXcanvas16* canvas);

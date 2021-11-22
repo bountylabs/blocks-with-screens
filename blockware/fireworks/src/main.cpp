@@ -255,7 +255,7 @@ void updateWakeState(const int16_t (&accelAxes)[3])
 
 void updateGravity(const int16_t (&accelAxes)[3])
 {
-  Particle::update_gravity(Vec2d<float>(-accelAxes[0], -accelAxes[1]));
+  Particle::updateGravity(Vec2d<float>(-accelAxes[0], -accelAxes[1]));
 }
 
 void readAccelerometer(int16_t (&accelAxes)[3])

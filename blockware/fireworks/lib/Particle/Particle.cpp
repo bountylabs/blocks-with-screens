@@ -7,7 +7,7 @@
 
 Vec2d<float> Particle::__gravity = Vec2d<float>(0, GRAVITY);
 
-void Particle::update_gravity(const Vec2d<float> &gravity_xy)
+void Particle::updateGravity(const Vec2d<float> &gravity_xy)
 {
   __gravity = gravity_xy;
   __gravity.normalize();
