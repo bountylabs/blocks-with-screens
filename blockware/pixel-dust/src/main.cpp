@@ -272,7 +272,7 @@ void setup(void) {
 
 #if defined(ACCEL_LIS2DW12)
   accel = new LIS2DW12Sensor(&Wire, ACCEL_ADDR);
-  if (!accel->begin()) err(250);
+  // if (!accel->begin()) err(250);
   accel->Enable_X();
 #elif defined(ACCEL_MMA8452Q)
   if (!accel.begin(Wire, ACCEL_ADDR)) err(250);
