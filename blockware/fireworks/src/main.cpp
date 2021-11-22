@@ -223,7 +223,7 @@ void drawParticles()
   }
 }
 
-void updateWakeState()
+void updateWakeState(const int16_t (&accelAxes)[3])
 {
   unsigned long now = millis();
   unsigned long timeSinceUpdate = now - lastWakeUpdate;
@@ -236,11 +236,8 @@ void updateWakeState()
     wakeupText = false;
   }
 
-  // Read accelerometer
-  int16_t axes[3];
-  acc->Get_X_AxesRaw(axes);
-  // Scale values down to be less sensitive
-  uint32_t newAccState = (axes[0] / 256 << 16) | (axes[1] / 256 << 8) | axes[2] / 256;
+  // Scale accelerometer values down to be less sensitive
+  uint32_t newAccState = (accelAxes[0] / 256 << 16) | (accelAxes[1] / 256 << 8) | accelAxes[2] / 256;
 
   // Update wake state
   bool changed = newAccState != accState;
@@ -256,13 +253,14 @@ void updateWakeState()
   }
 }
 
-void updateGravity()
+void updateGravity(const int16_t (&accelAxes)[3])
 {
-  // Read accelerometer
-  int16_t axes[3];
-  acc->Get_X_AxesRaw(axes);
+  Particle::update_gravity(Vec2d<float>(-accelAxes[0], -accelAxes[1]));
+}
 
-  Particle::update_gravity(Vec2d<float>(-axes[0], -axes[1]));
+void readAccelerometer(int16_t (&accelAxes)[3])
+{
+  acc->Get_X_AxesRaw(accelAxes);
 }
 
 void initText()
@@ -302,8 +300,10 @@ void tick()
   // redraw entire canvas on every tick
 
   // base
-  updateWakeState();
-  updateGravity();
+  int16_t accelAxes[3];
+  readAccelerometer(accelAxes);
+  updateWakeState(accelAxes);
+  updateGravity(accelAxes);
   drawParticles();
   drawLogo();
   drawText();
