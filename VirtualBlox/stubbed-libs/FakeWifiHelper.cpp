@@ -1,5 +1,7 @@
 #include <stdio.h>
-// #include <emscripten.h>
+#if defined(EMSCRIPTEN)
+#include <emscripten.h>
+#endif
 #include "ESP8266HTTPClient.h"
 #include <memory.h>
 
@@ -90,7 +92,9 @@ int HTTPClient::GET()
     int error;
     printf("GET called, retrieving %s\n", _url);
 
-    // emscripten_wget_data(_url, &_dataBuffer, &_bufferSize, &error);
+#if defined(EMSCRIPTEN)
+    emscripten_wget_data(_url, &_dataBuffer, &_bufferSize, &error);
+#endif
     printf("retrieved %d bytes, error %d\n", _bufferSize, error);
 
     if (error == 0)
