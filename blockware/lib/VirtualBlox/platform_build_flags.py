@@ -13,9 +13,14 @@ except FileNotFoundError:
 
 prefix = pathlib.Path(out.decode('utf-8').strip())
 
-# Find the arch of installed SDL2
-out = subprocess.check_output(f"lipo -info {prefix}/lib/libSDL2.a | awk '{{ print $NF }}'", shell=True)
-arch = out.decode('utf-8').strip()
+# Find the arch of installed SDL2 (macOS only to support Apple Silicon)
+# Sometimes for some reason, platformio tries to build native as x86_64
+# even on arm. Not totally sure why that is.
+arch_flag = ""
+if sys.platform == "darwin":
+    out = subprocess.check_output(f"lipo -info {prefix}/lib/libSDL2.a | awk '{{ print $NF }}'", shell=True)
+    arch = out.decode('utf-8').strip()
+    arch_flag = f"-arch {arch}"
 
 # Get the needed SDL flags
 sdl_flags = subprocess.check_output("sdl2-config --cflags --libs", shell=True).decode('utf-8').strip()
@@ -39,7 +44,7 @@ lib_includes = "\n".join([f"-I{libs_dir}/{lib}" for lib in libs])
 # Build the big flags list
 flags = [
     "-std=c++17",
-    f"-arch {arch}",
+    arch_flag,
     sdl_flags,
     "-DARDUINO=100",
     f"-I{script_dir}/stubs",
