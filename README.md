@@ -28,9 +28,3 @@ This is the example software that you can run on the blocks. See [blockware/READ
 ### CAD
 
 This contains the various design files building the block hardware. Most importantly, it contains the [Autodesk Eagle](https://www.autodesk.com/products/eagle/free-download) design files for the 3 PCBs that make up the block. See the [README.md](https://github.com/bountylabs/blocks-with-screens/blob/main/cad/pcb/README.md) in that directory for an overview of the responsibilities of the three different boards.
-
-### VirtualBlox
-
-An experimental block simulator. You can compile blockware along with VirtualBlox and run block software locally for testing! This gives a quicker development iteration cycle than uploading to the block itself.
-
-VirtualBlox mostly consists of a Makefile in the VirtualBlox/emscripten directory, along with a collection of stub classes and functions to simulate enough Arduino stuff to satisfy the compiler. See VirtualBlox/README.md for info on running these.
