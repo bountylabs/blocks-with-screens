@@ -3,7 +3,7 @@ bouncing-logo
 curvy-snake
 
 # Make sure the stubbed secrets can still be added
-!stubbed-libs/secrets.h
+!stubs/secrets.h
 
 # Emscripten-generaged files
 *.html

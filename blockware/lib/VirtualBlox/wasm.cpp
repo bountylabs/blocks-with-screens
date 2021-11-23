@@ -1,3 +1,4 @@
+#if defined(EMSCRIPTEN)
 #include "Adafruit_SSD1351.h"
 #include <unistd.h>
 #include <string.h>
@@ -73,3 +74,4 @@ int main(int argc, char *argv[]) {
   //renderloop();
   return 0;
 }
+#endif
