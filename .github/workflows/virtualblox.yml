@@ -23,5 +23,5 @@ jobs:
     - name: Build VirtualBlox wasms
       working-directory: ./blockware/lib/VirtualBlox
       run: |
-        source ../emsdk/emsdk_env.sh
+        source ../../../emsdk/emsdk_env.sh
         make -j all
