@@ -15,7 +15,7 @@ using std::string;
 class Print {
 public:
     virtual size_t write(uint8_t) = 0;
-    virtual void print(char* str) {
+    virtual void print(const char* str) {
         for (int i = 0; i < strlen(str); i++)
         {
             write(str[i]);

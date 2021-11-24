@@ -12,7 +12,7 @@
 #include <DefaultConfig.h>
 
 #include <LIS2DW12Sensor.h>
-
+#include <optional>
 
 const int tlWidth = 40;
 const int tlHeight = 33;
