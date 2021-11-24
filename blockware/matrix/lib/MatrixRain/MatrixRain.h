@@ -1,14 +1,12 @@
 #pragma once
 
 #include <Adafruit_SSD1351.h>
+#include <vector>
 
 #include <Vec2d.h>
-#include <vector>
 
 class MatrixRain {
 private:
-  bool debug = false;
-
   // reference to the drawing canvas, used by draw functions
   GFXcanvas16* canvas;
   // whether this instance is currently active
@@ -30,6 +28,10 @@ private:
   // offset to ensure this letter is centered
   std::vector<Vec2d<uint8_t>> center_vec;
 
+  void activateCell(int cell);
+  void randomizeLetter(int index);
+  void drawLetter(int letter);
+
 protected:
 public:
   static Vec2d<uint8_t> cell;
@@ -38,11 +40,6 @@ public:
   MatrixRain(GFXcanvas16* canvas, int column, uint8_t white_darkness, uint8_t darkness_rate);
   MatrixRain(GFXcanvas16* canvas, int column);
   void toggleActive(void);
-  void activateCell(int cell);
-  void randomizeLetter(int index);
-  void drawLetter(int letter);
   void draw();
   void tick();
 };
-
-

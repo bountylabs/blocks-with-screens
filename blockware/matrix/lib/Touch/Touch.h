@@ -5,25 +5,23 @@
 
 class Touch {
 private:
-  static const uint8_t axes_count = 3;
-  static const uint8_t axes_history_length = 15;
+  static const uint8_t AXES_COUNT = 3;
+  static const uint8_t AXES_HISTORY_LENGTH = 15;
   static const int16_t DEFAULT_SENSITIVITY = 25;
-
-  bool debug = false;
 
   uint8_t current_axes = 0;
   int16_t sensitivity;
 
   // store whether the axis is at rest (and ready for detecting event)
-  bool axis_ready[axes_count];
+  bool axis_ready[AXES_COUNT];
   // store taps
-  bool event_is_tap[axes_count];
+  bool event_is_tap[AXES_COUNT];
 
   // arrays to store current and previous reads from accelerometer
-  int16_t axes_read[axes_count];
-  int16_t previous_axes[axes_count];
+  int16_t axes_read[AXES_COUNT];
+  int16_t previous_axes[AXES_COUNT];
   // track sliding window of 15 accelerometer readings to detect taps
-  int16_t axes_history[axes_history_length][axes_count];
+  int16_t axes_history[AXES_HISTORY_LENGTH][AXES_COUNT];
 
 protected:
 public:
