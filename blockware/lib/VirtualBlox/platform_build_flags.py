@@ -49,7 +49,7 @@ lib_includes = "\n".join([f"-I{libs_dir}/{lib}" for lib in libs])
 
 # Build the big flags list
 flags = [
-    "-std=c++17",
+    "-std=c++20",
     arch_flag,
     sdl_flags,
     "-DARDUINO=100",
