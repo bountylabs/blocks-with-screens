@@ -9,6 +9,9 @@
 #include <sys/socket.h> 
 #include <arpa/inet.h> 
 #include <netinet/in.h>
+#if !defined(EMSCRIPTEN)
+#include <SDL2/SDL.h>
+#endif
 
 using namespace std::chrono;
 milliseconds start_time_ms;
@@ -149,6 +152,9 @@ void yield()
 
 void delay(int delay_ms)
 {
+#if !defined(EMSCRIPTEN)
+    SDL_Delay(delay_ms);
+#endif
 }
 
 void millis_start()
