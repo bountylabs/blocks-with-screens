@@ -1,3 +1,4 @@
+#if defined(EMSCRIPTEN)
 #include "Adafruit_SSD1351.h"
 #include <SDL2/SDL.h>
 #include <emscripten.h>
@@ -68,3 +69,4 @@ int main(int argc, char *argv[]) {
 
   return 0;
 }
+#endif
