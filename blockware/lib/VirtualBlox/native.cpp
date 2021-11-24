@@ -65,14 +65,22 @@ int main(int argc, char *argv[]) {
 
   SDL_Event e;
   bool quit = false;
+  unsigned int lastRunTime = SDL_GetTicks();
   while (!quit){
       while (SDL_PollEvent(&e)){
           if (e.type == SDL_QUIT){
               quit = true;
           }
       }
-      renderloop();   
+      // Frame limit so we don't murder battery unnecessarily
+      unsigned int now = SDL_GetTicks();
+      double delta = now - lastRunTime;
+      if (delta > 1000/60.0) {
+          lastRunTime = now;
+          renderloop();
+      }
   }
+
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);
   SDL_Quit();
