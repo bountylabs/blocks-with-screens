@@ -1,0 +1,27 @@
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: |
+        sudo apt update && sudo apt install -y libsdl2-dev
+        git clone https://github.com/emscripten-core/emsdk.git
+        cd emsdk
+        ./emsdk install latest
+        ./emsdk activate latest
+
+    - name: Build VirtualBlox wasms
+      working-directory: ./blockware/lib/VirtualBlox
+      run: |
+        source ../../../emsdk/emsdk_env.sh
+        make -j all

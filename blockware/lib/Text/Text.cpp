@@ -19,7 +19,7 @@ void outputln(const char* message, int color, int size)
   tft.setTextWrap(true);
   tft.setTextSize(size);
   tft.setTextColor(color);
-  tft.println(message);
+  tft.println((char *)message);
 }
 
 void displayReset() {

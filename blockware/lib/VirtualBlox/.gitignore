@@ -1,0 +1,14 @@
+# Binaries generated from the makefile
+bouncing-logo
+curvy-snake
+
+# Make sure the stubbed secrets can still be added
+!stubs/secrets.h
+
+# Emscripten-generaged files
+*.html
+*.js
+*.wasm
+
+# Debug symbols
+*.dSYM
