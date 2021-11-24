@@ -4,7 +4,7 @@ BLOCKWARE_DIR = ../../
 STUBS_DIR = ./stubs
 DEFINES = -DARDUINO=100
 COMPILEWASM = em++
-WASMFLAGS = -Wno-unused-command-line-argument
+WASMFLAGS = -Wno-unused-command-line-argument -s USE_SDL=2
 
 INCLUDE_DIRS = \
 	-I${BLOCKWARE_DIR}/curvy-snake\

@@ -1,6 +1,5 @@
-#if defined(EMSCRIPTEN)
 #include "Adafruit_SSD1351.h"
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #include <emscripten.h>
 #include <iostream>
 #include <string.h>
@@ -13,12 +12,12 @@ FakeSerial Serial;
 FakeESP ESP;
 void *SPI;
 
+#define SCALE 2
 #define WIDTH 128
 #define HEIGHT 128
 
 using namespace std;
-SDL_Surface *sim_screen;
-int cc;
+SDL_Renderer *renderer;
 
 uint16_t pixels565[128 * 128];
 
@@ -29,37 +28,36 @@ void Adafruit_SSD1351::drawRGBBitmap(int16_t x, int16_t y, uint16_t *bitmap,
 
 void renderloop() {
   loop();
-  SDL_Flip(sim_screen);
-  SDL_LockSurface(sim_screen);
 
-  int bpp = sim_screen->format->BytesPerPixel;
   for (int x = 0; x < WIDTH; x++) {
     for (int y = 0; y < HEIGHT; y++) {
-      Uint8 *p = (Uint8 *)sim_screen->pixels + y * sim_screen->pitch + x * bpp;
-      uint16_t *pixel = &pixels565[y * 128 + x];
-
-      p[0] = Uint8((*pixel & 0xF800) >> 8); // red
-      p[1] = Uint8((*pixel & 0x07E0) >> 3);
-      p[2] = Uint8((*pixel & 0x001F) << 3);
+      uint16_t *pixel = &pixels565[y * WIDTH + x];
+      Uint8 red = Uint8((*pixel & 0xF800) >> 8);
+      Uint8 green = Uint8((*pixel & 0x07E0) >> 3);
+      Uint8 blue = Uint8((*pixel & 0x001F) << 3);
+      SDL_SetRenderDrawColor(renderer, red, green, blue, 255);
+      SDL_RenderDrawPoint(renderer, x, y);
     }
   }
-  SDL_UnlockSurface(sim_screen);
+  SDL_RenderPresent(renderer);
 }
 
 int main(int argc, char *argv[]) {
-  cc = 0;
-
-  memset(pixels565, 0, 128 * 128 * 2);
+  memset(pixels565, 0, WIDTH * HEIGHT * 2);
 
   if (SDL_Init(SDL_INIT_VIDEO) < 0) {
     cout << "Failed SDL_Init " << SDL_GetError() << endl;
     return 1;
   }
 
-  sim_screen = SDL_SetVideoMode(WIDTH, HEIGHT, 32, SDL_ANYFORMAT);
-  if (sim_screen == NULL) {
-    cout << "Failed SDL_SetVideoMode: " << SDL_GetError() << endl;
-    SDL_Quit();
+  SDL_Window *window;
+
+  SDL_CreateWindowAndRenderer(WIDTH * SCALE, WIDTH * SCALE, 0, &window,
+                              &renderer);
+  SDL_RenderSetScale(renderer, SCALE, SCALE);
+
+  if (renderer == NULL) {
+    fprintf(stderr, "could not create renderer: %s\n", SDL_GetError());
     return 1;
   }
 
@@ -68,7 +66,5 @@ int main(int argc, char *argv[]) {
   millis_start();
   setup();
 
-  // renderloop();
   return 0;
 }
-#endif
