@@ -1,13 +1,35 @@
 #ifndef _ADAFRUIT_GFX_H
 #define _ADAFRUIT_GFX_H
 
+#include "glcdfont.h"
+
 #if ARDUINO >= 100
  #include "Arduino.h"
  #include "Print.h"
 #else
  #include "WProgram.h"
 #endif
-#include "gfxfont.h"
+
+// NOTE: I only have the Feather M0 Express, M4 Express and PyPortal boards to test with.
+#if defined(ADAFRUIT_FEATHER_M0_EXPRESS) /* UNTESTED: */ || defined(ADAFRUIT_METRO_M0_EXPRESS) || defined(ADAFRUIT_CIRCUITPLAYGROUND_M0) || defined(ADAFRUIT_ITSYBITSY_M0) || defined(ADAFRUIT_HALLOWING)
+ #define UNIFONT_USE_FLASH
+ #define UNIFONT_USE_SPI
+#endif
+
+#if defined(ADAFRUIT_FEATHER_M4_EXPRESS) || defined(ADAFRUIT_PYPORTAL) /* UNTESTED: */ || defined(ADAFRUIT_TRELLIS_M4_EXPRESS) || defined(ADAFRUIT_GRAND_CENTRAL_M4) || defined(ADAFRUIT_ITSYBITSY_M4_EXPRESS) || defined(ADAFRUIT_METRO_M4_EXPRESS)
+ #define UNIFONT_USE_FLASH
+ #define UNIFONT_USE_QSPI
+#endif
+
+#ifdef UNIFONT_USE_FLASH
+ #include <SPI.h>
+ #include <Adafruit_SPIFlash.h>
+ #include <Adafruit_SPIFlash_FatFs.h>
+
+ #ifdef UNIFONT_USE_QSPI
+  #include <Adafruit_QSPI_GD25Q.h>
+ #endif // UNIFONT_USE_QSPI
+#endif // UNIFONT_USE_FLASH
 
 /// A generic graphics superclass that can handle all sorts of drawing. At a minimum you can subclass and provide drawPixel(). At a maximum you can do a ton of overriding to optimize. Used for any/all Adafruit displays!
 class Adafruit_GFX : public Print {
@@ -17,7 +39,7 @@ class Adafruit_GFX : public Print {
   Adafruit_GFX(int16_t w, int16_t h); // Constructor
 
   // This MUST be defined by the subclass:
-  virtual void drawPixel(int16_t x, int16_t y, uint16_t color) = 0;    ///< Virtual drawPixel() function to draw to the screen/framebuffer/etc, must be overridden in subclass. @param x X coordinate.  @param y Y coordinate. @param color 16-bit pixel color. 
+  virtual void drawPixel(int16_t x, int16_t y, uint16_t color) = 0;    ///< Virtual drawPixel() function to draw to the screen/framebuffer/etc, must be overridden in subclass. @param x X coordinate.  @param y Y coordinate. @param color 16-bit pixel color.
 
   // TRANSACTION API / CORE DRAW API
   // These MAY be overridden by the subclass to provide device-specific
@@ -51,6 +73,9 @@ class Adafruit_GFX : public Print {
 
   // These exist only with Adafruit_GFX (no subclass overrides)
   void
+#ifdef UNIFONT_USE_FLASH
+    loadUnifontFile(),
+#endif // UNIFONT_USE_FLASH
     drawCircle(int16_t x0, int16_t y0, int16_t r, uint16_t color),
     drawCircleHelper(int16_t x0, int16_t y0, int16_t r, uint8_t cornername,
       uint16_t color),
@@ -95,73 +120,27 @@ class Adafruit_GFX : public Print {
       uint16_t *bitmap, uint8_t *mask, int16_t w, int16_t h),
     drawChar(int16_t x, int16_t y, unsigned char c, uint16_t color,
       uint16_t bg, uint8_t size),
-    drawChar(int16_t x, int16_t y, unsigned char c, uint16_t color,
-	      uint16_t bg, uint8_t size_x, uint8_t size_y),
+    setCursor(int16_t x, int16_t y),
+    setTextColor(uint16_t c),
+    setTextColor(uint16_t c, uint16_t bg),
+    setTextSize(uint8_t s),
+    setTextWrap(boolean w),
+    setRTL(boolean r),
+    cp437(boolean x=true),
     getTextBounds(const char *string, int16_t x, int16_t y,
       int16_t *x1, int16_t *y1, uint16_t *w, uint16_t *h),
     getTextBounds(const __FlashStringHelper *s, int16_t x, int16_t y,
       int16_t *x1, int16_t *y1, uint16_t *w, uint16_t *h),
     getTextBounds(const String &str, int16_t x, int16_t y,
-      int16_t *x1, int16_t *y1, uint16_t *w, uint16_t *h),
-    setTextSize(uint8_t s),
-    setTextSize(uint8_t sx, uint8_t sy),
-    setFont(const GFXfont *f = NULL);
+      int16_t *x1, int16_t *y1, uint16_t *w, uint16_t *h);
+  int
+    drawCodepoint(int16_t x, int16_t y, uint16_t c, uint16_t color,
+      uint16_t bg, uint8_t size);
 
-  /**********************************************************************/
-  /*!
-    @brief  Set text cursor location
-    @param  x    X coordinate in pixels
-    @param  y    Y coordinate in pixels
-  */
-  /**********************************************************************/
-  void setCursor(int16_t x, int16_t y) { cursor_x = x; cursor_y = y; }
+  size_t
+    writeCodepoint(uint16_t c),
+    printUTF8(char *string);
 
-  /**********************************************************************/
-  /*!
-    @brief   Set text font color with transparant background
-    @param   c   16-bit 5-6-5 Color to draw text with
-    @note    For 'transparent' background, background and foreground
-             are set to same color rather than using a separate flag.
-  */
-  /**********************************************************************/
-  void setTextColor(uint16_t c) { textcolor = textbgcolor = c; }
-
-  /**********************************************************************/
-  /*!
-    @brief   Set text font color with custom background color
-    @param   c   16-bit 5-6-5 Color to draw text with
-    @param   bg  16-bit 5-6-5 Color to draw background/fill with
-  */
-  /**********************************************************************/
-  void setTextColor(uint16_t c, uint16_t bg) {
-    textcolor   = c;
-    textbgcolor = bg;
-  }
-
-  /**********************************************************************/
-  /*!
-  @brief  Set whether text that is too long for the screen width should
-          automatically wrap around to the next line (else clip right).
-  @param  w  true for wrapping, false for clipping
-  */
-  /**********************************************************************/
-  void setTextWrap(boolean w) { wrap = w; }
-
-  /**********************************************************************/
-  /*!
-    @brief  Enable (or disable) Code Page 437-compatible charset.
-            There was an error in glcdfont.c for the longest time -- one
-            character (#176, the 'light shade' block) was missing -- this
-            threw off the index of every character that followed it.
-            But a TON of code has been written with the erroneous
-            character indices. By default, the library uses the original
-            'wrong' behavior and old sketches will still work. Pass
-            'true' to this function to use correct CP437 character values
-            in your code.
-    @param  x  true = enable (new behavior), false = disable (old behavior)
-  */
-  /**********************************************************************/
-  void cp437(boolean x=true) { _cp437 = x; }
 
 #if ARDUINO >= 100
   virtual size_t write(uint8_t);
@@ -169,53 +148,20 @@ class Adafruit_GFX : public Print {
   virtual void   write(uint8_t);
 #endif
 
-  /************************************************************************/
-  /*!
-    @brief      Get width of the display, accounting for current rotation
-    @returns    Width in pixels
-  */
-  /************************************************************************/
-  int16_t width(void) const { return _width; };
+  int16_t height(void) const;
+  int16_t width(void) const;
 
-  /************************************************************************/
-  /*!
-    @brief      Get height of the display, accounting for current rotation
-    @returns    Height in pixels
-  */
-  /************************************************************************/
-  int16_t height(void) const { return _height; }
+  uint8_t getRotation(void) const;
 
-  /************************************************************************/
-  /*!
-    @brief      Get rotation setting for display
-    @returns    0 thru 3 corresponding to 4 cardinal rotations
-  */
-  /************************************************************************/
-  uint8_t getRotation(void) const { return rotation; }
-
-  // get current cursor position (get rotation safe maximum values,
-  // using: width() for x, height() for y)
-  /************************************************************************/
-  /*!
-    @brief  Get text cursor X location
-    @returns    X coordinate in pixels
-  */
-  /************************************************************************/
-  int16_t getCursorX(void) const { return cursor_x; }
-
-  /************************************************************************/
-  /*!
-    @brief      Get text cursor Y location
-    @returns    Y coordinate in pixels
-  */
-  /************************************************************************/
-  int16_t getCursorY(void) const { return cursor_y; };
+  // get current cursor position (get rotation safe maximum values, using: width() for x, height() for y)
+  int16_t getCursorX(void) const;
+  int16_t getCursorY(void) const;
 
  protected:
   void
     charBounds(char c, int16_t *x, int16_t *y,
       int16_t *minx, int16_t *miny, int16_t *maxx, int16_t *maxy);
-  int16_t
+  const int16_t
     WIDTH,          ///< This is the 'raw' display width - never changes
     HEIGHT;         ///< This is the 'raw' display height - never changes
   int16_t
@@ -227,14 +173,20 @@ class Adafruit_GFX : public Print {
     textcolor,      ///< 16-bit background color for print()
     textbgcolor;    ///< 16-bit text color for print()
   uint8_t
-    textsize_x,      ///< Desired magnification in X-axis of text to print()
-    textsize_y,      ///< Desired magnification in Y-axis of text to print()
+    textsize,       ///< Desired magnification of text to print()
     rotation;       ///< Display rotation (0 thru 3)
+  int8_t direction; ///< 1 for LTR, -1 for RTL.
   boolean
     wrap,           ///< If set, 'wrap' text at right edge of display
-    _cp437;         ///< If set, use correct CP437 charset (default is off)
-  GFXfont
-    *gfxFont;       ///< Pointer to special font
+    unifileavailable;///< if set, unifont.bin is available on the SPI filesystem
+  UnifontBlock *unifont;
+ private:
+  inline uint8_t index_for_block(uint8_t block);
+  void fix_diacritics(uint16_t *s, size_t length);
+#ifdef UNIFONT_USE_FLASH
+  File
+    unifile;        // file handle to unifont.bin, if available
+#endif // UNIFONT_USE_FLASH
 };
 
 
@@ -247,44 +199,23 @@ class Adafruit_GFX_Button {
   void initButton(Adafruit_GFX *gfx, int16_t x, int16_t y,
    uint16_t w, uint16_t h, uint16_t outline, uint16_t fill,
    uint16_t textcolor, char *label, uint8_t textsize);
-  void initButton(Adafruit_GFX *gfx, int16_t x, int16_t y,
-   uint16_t w, uint16_t h, uint16_t outline, uint16_t fill,
-   uint16_t textcolor, char *label, uint8_t textsize_x, uint8_t textsize_y);
   // New/alt initButton() uses upper-left corner & size
   void initButtonUL(Adafruit_GFX *gfx, int16_t x1, int16_t y1,
    uint16_t w, uint16_t h, uint16_t outline, uint16_t fill,
    uint16_t textcolor, char *label, uint8_t textsize);
-  void initButtonUL(Adafruit_GFX *gfx, int16_t x1, int16_t y1,
-   uint16_t w, uint16_t h, uint16_t outline, uint16_t fill,
-   uint16_t textcolor, char *label, uint8_t textsize_x, uint8_t textsize_y);
   void drawButton(boolean inverted = false);
   boolean contains(int16_t x, int16_t y);
 
-  /**********************************************************************/
-  /*!
-    @brief    Sets button state, should be done by some touch function
-    @param    p  True for pressed, false for not.
-  */
-  /**********************************************************************/
-  void press(boolean p) { laststate = currstate; currstate = p; }
-
+  void press(boolean p);
+  boolean isPressed();
   boolean justPressed();
   boolean justReleased();
-
-  /**********************************************************************/
-  /*!
-    @brief    Query whether the button is currently pressed
-    @returns  True if pressed
-  */
-  /**********************************************************************/
-  boolean isPressed(void) { return currstate; };
 
  private:
   Adafruit_GFX *_gfx;
   int16_t       _x1, _y1; // Coordinates of top-left corner
   uint16_t      _w, _h;
-  uint8_t       _textsize_x;
-  uint8_t       _textsize_y;
+  uint8_t       _textsize;
   uint16_t      _outlinecolor, _fillcolor, _textcolor;
   char          _label[10];
 
@@ -299,13 +230,7 @@ class GFXcanvas1 : public Adafruit_GFX {
   ~GFXcanvas1(void);
   void     drawPixel(int16_t x, int16_t y, uint16_t color),
            fillScreen(uint16_t color);
-  /**********************************************************************/
-  /*!
-    @brief    Get a pointer to the internal buffer memory
-    @returns  A pointer to the allocated buffer
-  */
-  /**********************************************************************/
-  uint8_t *getBuffer(void) const { return buffer; }
+  uint8_t *getBuffer(void);
  private:
   uint8_t *buffer;
 };
@@ -319,13 +244,8 @@ class GFXcanvas8 : public Adafruit_GFX {
   void     drawPixel(int16_t x, int16_t y, uint16_t color),
            fillScreen(uint16_t color),
            writeFastHLine(int16_t x, int16_t y, int16_t w, uint16_t color);
-  /**********************************************************************/
-  /*!
-   @brief    Get a pointer to the internal buffer memory
-   @returns  A pointer to the allocated buffer
-  */
-  /**********************************************************************/
-  uint8_t *getBuffer(void) const { return buffer; }
+
+  uint8_t *getBuffer(void);
  private:
   uint8_t *buffer;
 };
@@ -337,15 +257,8 @@ class GFXcanvas16 : public Adafruit_GFX {
   GFXcanvas16(uint16_t w, uint16_t h);
   ~GFXcanvas16(void);
   void      drawPixel(int16_t x, int16_t y, uint16_t color),
-            fillScreen(uint16_t color),
-            byteSwap(void);
-  /**********************************************************************/
-  /*!
-    @brief    Get a pointer to the internal buffer memory
-    @returns  A pointer to the allocated buffer
-  */
-  /**********************************************************************/
-  uint16_t *getBuffer(void) const { return buffer; }
+            fillScreen(uint16_t color);
+  uint16_t *getBuffer(void);
  private:
   uint16_t *buffer;
 };
