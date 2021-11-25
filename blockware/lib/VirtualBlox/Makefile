@@ -4,7 +4,7 @@ BLOCKWARE_DIR = ../../
 STUBS_DIR = ./stubs
 DEFINES = -DARDUINO=100
 COMPILEWASM = em++
-WASMFLAGS = -Wno-unused-command-line-argument -s USE_SDL=2
+WASMFLAGS = -std=c++1z -Wno-unused-command-line-argument -s USE_SDL=2
 
 INCLUDE_DIRS = \
 	-I${BLOCKWARE_DIR}/curvy-snake\
@@ -30,6 +30,9 @@ VBLOX_OBJECTS_WASM = \
 	${STUBS_DIR}/FakeArduinoOTA.wasm.o\
 	${STUBS_DIR}/FakeOTAUpdates.wasm.o\
 	${STUBS_DIR}/JPEGDecoder.wasm.o\
+	${STUBS_DIR}/LIS2DW12Sensor.wasm.o\
+	${STUBS_DIR}/Wire.wasm.o\
+	${STUBS_DIR}/Adafruit_PixelDust.wasm.o\
 	wasm.wasm.o
 
 CURVY_SNAKE_OBJECTS_WASM = \
@@ -45,16 +48,22 @@ FIREWORKS_OBJECTS_WASM = \
 	${BLOCKWARE_DIR}/fireworks/src/main.wasm.o \
 	${BLOCKWARE_DIR}/fireworks/lib/Particle/Particle.wasm.o
 
+PIXEL_DUST_OBJECTS_WASM = \
+	${BLOCKWARE_DIR}/pixel-dust/src/main.wasm.o \
+
 ALL_OBJECTS = \
 	$(VBLOX_OBJECTS_WASM) \
 	$(CURVY_SNAKE_OBJECTS_WASM) \
 	$(JPEG_DOWNLOAD_EXAMPLE_OBJECTS_WASM) \
 	$(BOUNCING_LOGO_OBJECTS_WASM) \
-	$(FIREWORKS_OBJECTS_WASM)
+	$(FIREWORKS_OBJECTS_WASM) \
+	$(PIXEL_DUST_OBJECTS_WASM)
 
 ALL_TARGETS = \
 	curvy-snake.html \
-	bouncing-logo.html
+	bouncing-logo.html \
+	fireworks.html \
+	pixel-dust.html
 
 curvy-snake.html: $(VBLOX_OBJECTS_WASM) $(CURVY_SNAKE_OBJECTS_WASM)
 	$(COMPILEWASM) $(WASMFLAGS) --bind $(VBLOX_OBJECTS_WASM) $(CURVY_SNAKE_OBJECTS_WASM) -o $@
@@ -66,9 +75,11 @@ curvy-snake.html: $(VBLOX_OBJECTS_WASM) $(CURVY_SNAKE_OBJECTS_WASM)
 bouncing-logo.html: $(VBLOX_OBJECTS_WASM) $(BOUNCING_LOGO_OBJECTS_WASM)
 	$(COMPILEWASM) $(WASMFLAGS) --bind $(VBLOX_OBJECTS_WASM) $(BOUNCING_LOGO_OBJECTS_WASM) -o $@
 
-# Not working right now. Needs stubs for the accelerometer
-# fireworks.html: $(VBLOX_OBJECTS_WASM) $(FIREWORKS_OBJECTS_WASM)
-# 	$(COMPILEWASM) $(WASMFLAGS) --bind $(VBLOX_OBJECTS_WASM) $(FIREWORKS_OBJECTS_WASM) -o $@
+fireworks.html: $(VBLOX_OBJECTS_WASM) $(FIREWORKS_OBJECTS_WASM)
+	$(COMPILEWASM) $(WASMFLAGS) --bind $(VBLOX_OBJECTS_WASM) $(FIREWORKS_OBJECTS_WASM) -o $@
+
+pixel-dust.html: $(VBLOX_OBJECTS_WASM) $(PIXEL_DUST_OBJECTS_WASM)
+	$(COMPILEWASM) $(WASMFLAGS) --bind $(VBLOX_OBJECTS_WASM) $(PIXEL_DUST_OBJECTS_WASM) -o $@
 
 %.wasm.o: %.cpp
 	$(COMPILEWASM) $(WASMFLAGS) --bind -c $< $(INCLUDE_DIRS) $(DEFINES) -o $@

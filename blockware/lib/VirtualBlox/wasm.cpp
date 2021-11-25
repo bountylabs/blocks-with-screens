@@ -20,11 +20,34 @@ void *SPI;
 using namespace std;
 SDL_Renderer *renderer;
 
+int addr_x;
+int addr_y;
+int addr_w;
+int addr_h;
+
 uint16_t pixels565[128 * 128];
 
 void Adafruit_SSD1351::drawRGBBitmap(int16_t x, int16_t y, uint16_t *bitmap,
                                      int16_t w, int16_t h) {
   memcpy(pixels565, bitmap, w * h * 2);
+}
+
+void Adafruit_SSD1351::drawPixel(int16_t x, int16_t y, uint16_t color)
+{
+  pixels565[y*WIDTH + x] = color;
+}
+
+void Adafruit_SSD1351::setAddrWindow(int x, int y, int w, int h)
+{
+  addr_x = x;
+  addr_y = y;
+  addr_w = w;
+  addr_h = h;
+}
+
+void Adafruit_SSD1351::SPI_WRITE16(uint16_t w)
+{
+  pixels565[addr_y*WIDTH + addr_x] = w;
 }
 
 void renderloop() {

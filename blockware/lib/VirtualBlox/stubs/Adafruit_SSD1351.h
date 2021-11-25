@@ -9,6 +9,8 @@
 #define DEG_TO_RAD 0.01745329252
 extern void* SPI;
 
+unsigned long micros();
+
 class FakeSerial {
 public:
     void begin(int rate);
@@ -48,6 +50,8 @@ public:
     void begin(uint32_t freq = 0);
     void drawRGBBitmap(int16_t x, int16_t y, uint16_t *bitmap,
       int16_t w, int16_t h);
+    void drawPixel(int16_t x, int16_t y, uint16_t color);
+    void SPI_WRITE16(uint16_t w);
     void setTextColor(int16_t color);
     void println(char* str);
     void print(const char* str);

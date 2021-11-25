@@ -71,10 +71,12 @@ void Adafruit_SSD1351::endWrite()
 
 }
 
+/*
 void Adafruit_SSD1351::setAddrWindow(int x, int y, int w, int h)
 {
 
 }
+*/
 
 void Adafruit_SSD1351::writePixels(uint16_t* pixels, int num_pixels)
 {
@@ -157,6 +159,16 @@ void delay(int delay_ms)
 #endif
 }
 
+void pinMode(uint8_t pin, uint8_t mode)
+{
+
+}
+
+void digitalWrite(uint8_t pin, uint8_t val)
+{
+
+}
+
 void millis_start()
 {
     start_time_ms = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
@@ -168,6 +180,22 @@ uint16_t millis()
     milliseconds duration = now - start_time_ms;
     
     return (uint16_t)duration.count();
+}
+
+unsigned long micros()
+{
+    microseconds now = duration_cast<microseconds>(system_clock::now().time_since_epoch());
+    microseconds duration = now - (start_time_ms*1000);
+    
+    return (unsigned long)duration.count();
+}
+
+long random_arduino(long max)
+{
+    long r = random();
+    double rd = (double)r / (double)RAND_MAX;
+    long result = rd * (double)max;
+    return result;
 }
 
 void randomSeed(uint32_t seed)
