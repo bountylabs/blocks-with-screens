@@ -2,6 +2,10 @@
 
 #include <Adafruit_SSD1351.h>
 
+#ifndef PROGMEM
+#define PROGMEM
+#endif
+
 #include <Vec2d.h>
 
 class Alphabets {

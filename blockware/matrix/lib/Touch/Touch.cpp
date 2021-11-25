@@ -5,6 +5,9 @@
 #include <DLog.h>
 
 #include "Touch.h"
+#include <memory>
+// note: ‘memcpy’ is defined in header ‘<cstring>’; did you forget to ‘#include <cstring>’?
+#include <cstring>
 
 #define ACCEL_ADDR 0x31U
 
