@@ -31,21 +31,21 @@ Touch* touch;
 // MatrixRain vector for columns
 std::vector<MatrixRain> rain_vec;
 
-Vec2d<uint8_t> pan = Vec2d<uint8_t>(2, 0);
+Vec2d<int8_t> pan = Vec2d<int8_t>(2, 0);;
 
 void tick()
 {
-  // tick Touch instance
-  touch->tick();
-  // detect tap on y axis
-  if (touch->isTap(Touch::Y_AXIS)) {
-    DLOG("\n[Touch] tap! (toggling active on the MatrixRain)");
-    // toggle active on the MatrixRain instances
-    for (std::size_t i = 0; i < rain_vec.size(); i++) {
-      MatrixRain* rain = &rain_vec[i];
-      rain->toggleActive();
-    }
-  }
+  // // tick Touch instance
+  // touch->tick();
+  // // detect tap on y axis
+  // if (touch->isTap(Touch::Y_AXIS)) {
+  //   DLOG("\n[Touch] tap! (toggling active on the MatrixRain)");
+  //   // toggle active on the MatrixRain instances
+  //   for (std::size_t i = 0; i < rain_vec.size(); i++) {
+  //     MatrixRain* rain = &rain_vec[i];
+  //     rain->toggleActive();
+  //   }
+  // }
 
   // ==============================
   // === DRAW =====================
@@ -55,6 +55,40 @@ void tick()
 
   // clear entire screen
   Canvas::canvas->fillScreen(BLACK);
+
+  // randomly change pan vector
+  // if (randomf() < 0.05) {
+  //   pan = Vec2d<int8_t>(pan.x * -1, 0);
+  // }
+
+  // detect whether we are at left or right runway bound edges
+  // when a column goes off either edge (less than -0.5x screen width or greater than 1.5x screen width) we can recycle
+  // a recycle is just creating a new instance of matrixrain at the edge opposite where we hit
+  MatrixRain left_edge = rain_vec[0];
+  MatrixRain right_edge = rain_vec[rain_vec.size() - 1];
+  // hit left edge?
+  // shift all left by one and extend Nth (last) element of right runway
+  if (left_edge.recycle() == 'l') {
+    DLOG("\nleft_edge recycle!");
+    for (std::size_t i = 0; i < rain_vec.size() - 1; i++) {
+      rain_vec[i] = rain_vec[i + 1];
+    }
+  }
+  // hit right edge?
+  // shift all right by one and add a new 0th extending left runway
+  if (right_edge.recycle() == 'r') {
+    DLOG("\nright_edge recycle!");
+    for (std::size_t i = rain_vec.size() - 1; i > 0; i--) {
+      rain_vec[i] = rain_vec[i - 1];
+    }
+    right_edge.reset(-0.5 * Canvas::canvas->width(), 0);
+    rain_vec[0] = right_edge;
+
+    // for (std::size_t i = 0; i < rain_vec.size(); i++) {
+    //   MatrixRain rain = rain_vec[i];
+    //   DLOG("\n[MatrixRain#%02d] [(%d, %d)]", i, rain.x, rain.y);
+    // }
+  }
 
   // draw everything
   // for each MatrixRain, call tick and draw
@@ -85,10 +119,12 @@ void initialize()
   // initialize Touch instance
   touch = new Touch(&Wire);
 
-  // generate all MatrixRain instances and push onto vector
-  uint8_t columns = Canvas::canvas->width() / MatrixRain::cell.x;
+  // generate enough MatrixRain instances to cover 2 screen widths and push onto vector
+  uint8_t columns = (2 * Canvas::canvas->width()) / MatrixRain::cell.x;
+  // begin at negative 0.5x screen width (not visible runway)
+  int start_x = -0.5 * Canvas::canvas->width();
   for (uint8_t i = 0; i < columns; i++) {
-    rain_vec.push_back(MatrixRain(Canvas::canvas, i));
+    rain_vec.push_back(MatrixRain(Canvas::canvas, i, start_x));
   }
 }
 

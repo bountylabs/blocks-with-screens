@@ -13,9 +13,6 @@ private:
   bool active;
   // column acts as an identifier for this column, e.g. 4
   uint8_t column;
-  // cartesian location of this column
-  // shifts via pan vector passed in tick
-  uint8_t x, y;
   // darkness level at which letter changes from white to green
   // also controls the rate at which new letters form (only tip is white)
   uint8_t white_darkness;
@@ -38,10 +35,15 @@ protected:
 public:
   static Vec2d<uint8_t> cell;
 
-  void init(GFXcanvas16* canvas, uint8_t column, uint8_t white_darkness, uint8_t darkness_rate);
-  MatrixRain(GFXcanvas16* canvas, uint8_t column, uint8_t white_darkness, uint8_t darkness_rate);
-  MatrixRain(GFXcanvas16* canvas, uint8_t column);
+  // cartesian location of this column
+  // shifts via pan vector passed in tick
+  int x, y;
+
+  void init(GFXcanvas16* canvas, uint8_t column, int start_x, uint8_t white_darkness, uint8_t darkness_rate);
+  MatrixRain(GFXcanvas16* canvas, uint8_t column, int start_x);
   void toggleActive(void);
   void draw();
-  void tick(Vec2d<uint8_t> &pan);
+  void tick(Vec2d<int8_t> &pan);
+  char recycle();
+  void reset(int x, int y);
 };

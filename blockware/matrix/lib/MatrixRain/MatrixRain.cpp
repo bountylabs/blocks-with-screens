@@ -1,13 +1,14 @@
-#include <Adafruit_SSD1351.h>
-#include <math.h>
-
-#include <Colors.h>
 // set SERIALLOG to 1 to enable serial logging
 // set TELNETLOG to 1 to enable telnet logging
 // see DLog.h
 // NOTE: Enabling logging will significantly impact performance of this blockware
-#define SERIALLOG 0
+#define SERIALLOG 1
 #include <DLog.h>
+
+#include <Adafruit_SSD1351.h>
+#include <math.h>
+
+#include <Colors.h>
 #include <Random.h>
 
 #include "Alphabets.h"
@@ -44,13 +45,27 @@ uint8_t rand_darkness_rate()
   return (uint8_t)time_random(MIN_DARKNESS_RATE, MAX_DARKNESS_RATE);
 }
 
-void MatrixRain::init(GFXcanvas16* _canvas, uint8_t _column, uint8_t _white_darkness, uint8_t _darkness_rate)
+// can be used too ensure we do not overflow integer values
+// stops at specified max, otherwise increments
+template <typename T>
+void safe_bounded_inc(T& value, T increment, T max)
+{
+  T delta = max - value;
+  if (delta > increment) {
+    value += increment;
+    return;
+  }
+
+  value = max;
+}
+
+void MatrixRain::init(GFXcanvas16* _canvas, uint8_t _column, int _start_x, uint8_t _white_darkness, uint8_t _darkness_rate)
 {
   active = true;
   canvas = _canvas;
   column = _column;
 
-  x = _column * cell.x;
+  x = _start_x + (_column * cell.x);
   y = 0;
 
   white_darkness = _white_darkness;
@@ -71,26 +86,9 @@ void MatrixRain::init(GFXcanvas16* _canvas, uint8_t _column, uint8_t _white_dark
   }
 }
 
-// can be used too ensure we do not overflow integer values
-// stops at specified max, otherwise increments
-void safe_bounded_inc(uint8_t &value, uint8_t increment, uint8_t max) {
-  uint8_t delta = max - value;
-  if (delta > increment) {
-    value += increment;
-    return;
-  }
-
-  value = max;
-}
-
-MatrixRain::MatrixRain(GFXcanvas16* _canvas, uint8_t _column, uint8_t _white_darkness, uint8_t _darkness_rate)
+MatrixRain::MatrixRain(GFXcanvas16* _canvas, uint8_t _column, int _start_x)
 {
-  init(_canvas, _column, _white_darkness, _darkness_rate);
-}
-
-MatrixRain::MatrixRain(GFXcanvas16* _canvas, uint8_t _column)
-{
-  init(_canvas, _column, rand_white_darkness(), rand_darkness_rate());
+  init(_canvas, _column, _start_x, rand_white_darkness(), rand_darkness_rate());
 }
 
 void MatrixRain::toggleActive()
@@ -102,7 +100,7 @@ void MatrixRain::activateCell(uint8_t cell)
 {
   next_cell = cell;
   darkness_vec[next_cell] = VISIBLE_DARKNESS;
-  DLOG("\n[MatrixRain#%02d] activateCell [cell=%02d]", column, cell);
+  // DLOG("\n[MatrixRain#%02d] activateCell [cell=%02d]", column, cell);
 }
 
 void MatrixRain::randomizeLetter(uint8_t index)
@@ -146,23 +144,52 @@ void MatrixRain::drawLetter(uint8_t index)
   canvas->printUTF8((char*)letter);
 }
 
+char MatrixRain::recycle()
+{
+  if (x < -0.5 * canvas->width()) {
+    return 'l';
+  }
+
+  if (x > 1.5 * canvas->width()) {
+    return 'r';
+  }
+
+  return 'n';
+}
+
+void MatrixRain::reset(int _x, int _y)
+{
+  x = _x;
+  y = _y;
+  for (std::size_t i = 0; i < darkness_vec.size(); i++) {
+    darkness_vec[i] = NOT_VISIBLE_DARKNESS;
+  }
+}
+
 void MatrixRain::draw()
 {
+  // skip columns outside visible canvas bounds
+  if (x <= -1 * cell.x || (x + (0.75 * cell.x)) >= canvas->width()) {
+    // DLOG("\n[MatrixRain#%02d] [(%d, %d)] SKIP", column, x, y);
+    return;
+  }
+
+  // DLOG("\n[MatrixRain#%02d] [(%d, %d)] DRAW", column, x, y);
+
   for (std::size_t i = 0; i < letter_vec.size(); i++) {
     this->drawLetter(i);
   }
 }
 
-void MatrixRain::tick(Vec2d<uint8_t> &pan)
+void MatrixRain::tick(Vec2d<int8_t>& pan)
 {
   // do nothing when not active
   if (!active) {
     return;
   }
 
-  DLOG("[MatrixRain#%02d][pan(%d, %d)]", column, pan.x, pan.y);
-  // safe_bounded_inc(x, pan.x, canvas->width());
-  // safe_bounded_inc(y, pan.y, canvas->height());
+  // safe_bounded_inc(x, (int)pan.x, 256);
+  x += pan.x;
 
   bool rainVisible = false;
 
@@ -178,8 +205,7 @@ void MatrixRain::tick(Vec2d<uint8_t> &pan)
       // overflow will skip stop condition (darkness == 255)
       // resulting in infinite loop of same speed since the stop condition (!rainVisible) will never become true
       safe_bounded_inc(darkness_vec[i], darkness_rate, NOT_VISIBLE_DARKNESS);
-
-      DLOG("\n[MatrixRain#%02d] [cell=%02d, darkness=%03d]", column, i, darkness_vec[i]);
+      // DLOG("\n[MatrixRain#%02d] [cell=%02d, darkness=%03d]", column, i, darkness_vec[i]);
     }
 
     // update rain by advancing white letters (rain droplet)
@@ -202,15 +228,15 @@ void MatrixRain::tick(Vec2d<uint8_t> &pan)
   // then random chance to set first letter to 0 darkness (visible and white)
   // this starts the cycle over again
   if (!rainVisible) {
-    DLOG("\n[MatrixRain#%02d] !rainVisible", column);
+    // DLOG("\n[MatrixRain#%02d] !rainVisible", column);
 
     if (randomf() <= RESTART_CHANCE) {
       white_darkness = rand_white_darkness();
       darkness_rate = rand_darkness_rate();
       this->activateCell(0);
-      DLOG(
-        "\n[MatrixRain#%02d] RESTART [white_darkness=%03d, darkness_rate=%02d]",
-        column, white_darkness, darkness_rate);
+      // DLOG(
+      //   "\n[MatrixRain#%02d] RESTART [white_darkness=%03d,
+      //   darkness_rate=%02d]", column, white_darkness, darkness_rate);
     }
   }
 }
