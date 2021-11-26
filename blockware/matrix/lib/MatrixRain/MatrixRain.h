@@ -11,9 +11,11 @@ private:
   GFXcanvas16* canvas;
   // whether this instance is currently active
   bool active;
-  // horizontal location of this column, based on int column provided to constructor
+  // column acts as an identifier for this column, e.g. 4
   uint8_t column;
-  uint8_t column_x;
+  // cartesian location of this column
+  // shifts via pan vector passed in tick
+  uint8_t x, y;
   // darkness level at which letter changes from white to green
   // also controls the rate at which new letters form (only tip is white)
   uint8_t white_darkness;
@@ -24,22 +26,22 @@ private:
   // the vector of all darkness values for this column
   std::vector<uint8_t> darkness_vec;
   // store whether this cell is fading out
-  int next_cell;
+  uint8_t next_cell;
   // offset to ensure this letter is centered
   std::vector<Vec2d<uint8_t>> center_vec;
 
-  void activateCell(int cell);
-  void randomizeLetter(int index);
-  void drawLetter(int letter);
+  void activateCell(uint8_t cell);
+  void randomizeLetter(uint8_t index);
+  void drawLetter(uint8_t letter);
 
 protected:
 public:
   static Vec2d<uint8_t> cell;
 
-  void init(GFXcanvas16* canvas, int column, uint8_t white_darkness, uint8_t darkness_rate);
-  MatrixRain(GFXcanvas16* canvas, int column, uint8_t white_darkness, uint8_t darkness_rate);
-  MatrixRain(GFXcanvas16* canvas, int column);
+  void init(GFXcanvas16* canvas, uint8_t column, uint8_t white_darkness, uint8_t darkness_rate);
+  MatrixRain(GFXcanvas16* canvas, uint8_t column, uint8_t white_darkness, uint8_t darkness_rate);
+  MatrixRain(GFXcanvas16* canvas, uint8_t column);
   void toggleActive(void);
   void draw();
-  void tick();
+  void tick(Vec2d<uint8_t> &pan);
 };

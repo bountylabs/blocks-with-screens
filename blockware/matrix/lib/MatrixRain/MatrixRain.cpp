@@ -44,12 +44,15 @@ uint8_t rand_darkness_rate()
   return (uint8_t)time_random(MIN_DARKNESS_RATE, MAX_DARKNESS_RATE);
 }
 
-void MatrixRain::init(GFXcanvas16* _canvas, int _column, uint8_t _white_darkness, uint8_t _darkness_rate)
+void MatrixRain::init(GFXcanvas16* _canvas, uint8_t _column, uint8_t _white_darkness, uint8_t _darkness_rate)
 {
   active = true;
   canvas = _canvas;
   column = _column;
-  column_x = _column * cell.x;
+
+  x = _column * cell.x;
+  y = 0;
+
   white_darkness = _white_darkness;
   darkness_rate = _darkness_rate;
 
@@ -68,12 +71,24 @@ void MatrixRain::init(GFXcanvas16* _canvas, int _column, uint8_t _white_darkness
   }
 }
 
-MatrixRain::MatrixRain(GFXcanvas16* _canvas, int _column, uint8_t _white_darkness, uint8_t _darkness_rate)
+// can be used too ensure we do not overflow integer values
+// stops at specified max, otherwise increments
+void safe_bounded_inc(uint8_t &value, uint8_t increment, uint8_t max) {
+  uint8_t delta = max - value;
+  if (delta > increment) {
+    value += increment;
+    return;
+  }
+
+  value = max;
+}
+
+MatrixRain::MatrixRain(GFXcanvas16* _canvas, uint8_t _column, uint8_t _white_darkness, uint8_t _darkness_rate)
 {
   init(_canvas, _column, _white_darkness, _darkness_rate);
 }
 
-MatrixRain::MatrixRain(GFXcanvas16* _canvas, int _column)
+MatrixRain::MatrixRain(GFXcanvas16* _canvas, uint8_t _column)
 {
   init(_canvas, _column, rand_white_darkness(), rand_darkness_rate());
 }
@@ -83,14 +98,14 @@ void MatrixRain::toggleActive()
   active = !active;
 }
 
-void MatrixRain::activateCell(int cell)
+void MatrixRain::activateCell(uint8_t cell)
 {
   next_cell = cell;
   darkness_vec[next_cell] = VISIBLE_DARKNESS;
   DLOG("\n[MatrixRain#%02d] activateCell [cell=%02d]", column, cell);
 }
 
-void MatrixRain::randomizeLetter(int index)
+void MatrixRain::randomizeLetter(uint8_t index)
 {
   // weight all letters equally for now by selecting a random index between the two lengths
   int letterIndex = time_random(0, Alphabets::alphabet_length + Alphabets::hiragana_length);
@@ -113,7 +128,7 @@ void MatrixRain::randomizeLetter(int index)
   center_vec[index] = centerCellVec2d(Alphabets::alphabet_textSize);
 }
 
-void MatrixRain::drawLetter(int index)
+void MatrixRain::drawLetter(uint8_t index)
 {
   const char* letter = letter_vec[index];
   uint8_t darkness = darkness_vec[index];
@@ -125,9 +140,9 @@ void MatrixRain::drawLetter(int index)
 
   canvas->setTextColor(darken(color, darkness));
 
-  int x = column_x + center.x;
-  int y = (cell.y * index) + center.y;
-  canvas->setCursor(x, y);
+  int letter_x = x + center.x;
+  int letter_y = y + (cell.y * index) + center.y;
+  canvas->setCursor(letter_x, letter_y);
   canvas->printUTF8((char*)letter);
 }
 
@@ -138,11 +153,16 @@ void MatrixRain::draw()
   }
 }
 
-void MatrixRain::tick()
+void MatrixRain::tick(Vec2d<uint8_t> &pan)
 {
   // do nothing when not active
-  if (!active)
+  if (!active) {
     return;
+  }
+
+  DLOG("[MatrixRain#%02d][pan(%d, %d)]", column, pan.x, pan.y);
+  // safe_bounded_inc(x, pan.x, canvas->width());
+  // safe_bounded_inc(y, pan.y, canvas->height());
 
   bool rainVisible = false;
 
@@ -157,13 +177,7 @@ void MatrixRain::tick()
       // ensure we do not overflow darkness values
       // overflow will skip stop condition (darkness == 255)
       // resulting in infinite loop of same speed since the stop condition (!rainVisible) will never become true
-      uint8_t delta = NOT_VISIBLE_DARKNESS - darkness_vec[i];
-      if (delta > darkness_rate) {
-        darkness_vec[i] += darkness_rate;
-      }
-      else {
-        darkness_vec[i] = NOT_VISIBLE_DARKNESS;
-      }
+      safe_bounded_inc(darkness_vec[i], darkness_rate, NOT_VISIBLE_DARKNESS);
 
       DLOG("\n[MatrixRain#%02d] [cell=%02d, darkness=%03d]", column, i, darkness_vec[i]);
     }

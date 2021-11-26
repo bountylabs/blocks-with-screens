@@ -31,6 +31,8 @@ Touch* touch;
 // MatrixRain vector for columns
 std::vector<MatrixRain> rain_vec;
 
+Vec2d<uint8_t> pan = Vec2d<uint8_t>(2, 0);
+
 void tick()
 {
   // tick Touch instance
@@ -58,7 +60,7 @@ void tick()
   // for each MatrixRain, call tick and draw
   for (std::size_t i = 0; i < rain_vec.size(); i++) {
     MatrixRain* rain = &rain_vec[i];
-    rain->tick();
+    rain->tick(pan);
     rain->draw();
   }
 
