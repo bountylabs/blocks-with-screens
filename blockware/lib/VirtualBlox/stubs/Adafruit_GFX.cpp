@@ -34,7 +34,6 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "Adafruit_GFX.h"
 #include "glcdfont.c"
 #include "utf8_decode.h"
-#include "utf8_decode.c"
 
 #ifdef __AVR__
   #include <avr/pgmspace.h>
