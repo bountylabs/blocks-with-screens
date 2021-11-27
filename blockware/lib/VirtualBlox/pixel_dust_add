@@ -1,0 +1,20 @@
+<div class="slidecontainer">
+    <input type="range" min="-32767" max="32767" value="0" class="slider" id="xslider">
+    <input type="range" min="-32767" max="32767" value="0" class="slider" id="yslider">
+    <input type="range" min="-32767" max="32767" value="0" class="slider" id="zslider">
+    </div>
+    <script type='text/javascript'>
+      var xslider = document.getElementById("xslider");
+      var yslider = document.getElementById("yslider");
+      var zslider = document.getElementById("zslider");
+
+      function updateAccel()
+      {
+        // call c function
+        Module.updateAccelerometer(parseInt(xslider.value), parseInt(yslider.value), parseInt(zslider.value));
+      }
+
+      xslider.oninput = updateAccel;
+      yslider.oninput = updateAccel;
+      zslider.oninput = updateAccel;
+    </script>

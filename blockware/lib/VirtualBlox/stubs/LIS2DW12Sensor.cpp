@@ -41,6 +41,8 @@
 
 #include "LIS2DW12Sensor.h"
 
+extern void getAccelerometerData(int16_t* x, int16_t* y, int16_t* z);
+
 
 // /* Class Implementation ------------------------------------------------------*/
 
@@ -306,9 +308,11 @@ LIS2DW12StatusTypeDef LIS2DW12Sensor::Get_X_AxesRaw(int16_t *value)
 {
   LIS2DW12StatusTypeDef ret = LIS2DW12_STATUS_OK;
 
-  value[0] = 0;
-  value[1] = 0;
-  value[2] = 0;
+  getAccelerometerData(&value[0], &value[1], &value[2]);
+
+  //value[0] = 0;
+  //value[1] = 0;
+  //value[2] = 0;
 
   return ret;
 }
