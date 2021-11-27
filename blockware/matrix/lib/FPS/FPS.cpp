@@ -28,13 +28,13 @@ FPS::FPS()
 
 bool FPS::tick() {
   uint16_t now = millis();
-  uint16_t time = now - lastLoop;
+  uint16_t delta = now - lastLoop;
 
 #if DEBUG
-  DLOG("[FPS][Target=%d,Actual=%d]\n", fps, floor(1000 / time));
+  DLOG("[FPS][Target=%d,Actual=%d]\n", fps, floor(1000 / delta));
 #endif
 
-  if (time < fps) {
+  if (delta < millisPerFrame) {
 #if DEBUG
     DLOG("[WARNING][FPS] throttling FPS to [%d]; skipping tick\n", fps);
 #endif
