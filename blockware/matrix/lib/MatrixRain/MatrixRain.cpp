@@ -12,6 +12,7 @@
 #include <Random.h>
 
 #include "Alphabets.h"
+#include "Canvas.h"
 #include "MatrixRain.h"
 
 const char* UNKNOWN = "?";
@@ -48,9 +49,9 @@ uint8_t rand_darkness_rate()
 // can be used too ensure we do not overflow integer values
 // stops at specified max, otherwise increments
 template <typename T>
-void safe_bounded_inc(T& value, T increment, T max)
+void safe_bounded_inc(T& value, int increment, int max)
 {
-  T delta = max - value;
+  int delta = max - value;
   if (delta > increment) {
     value += increment;
     return;
@@ -59,10 +60,9 @@ void safe_bounded_inc(T& value, T increment, T max)
   value = max;
 }
 
-void MatrixRain::init(GFXcanvas16* _canvas, uint8_t _column, int _start_x, uint8_t _white_darkness, uint8_t _darkness_rate)
+void MatrixRain::init(uint8_t _column, int _start_x, uint8_t _white_darkness, uint8_t _darkness_rate)
 {
   active = true;
-  canvas = _canvas;
   column = _column;
 
   x = _start_x + (_column * cell.x);
@@ -75,7 +75,8 @@ void MatrixRain::init(GFXcanvas16* _canvas, uint8_t _column, int _start_x, uint8
   letter_vec = {};
   darkness_vec = {};
   center_vec = {};
-  int letterCount = canvas->height() / cell.y;
+  // build enough to the screen height, plus 2 extra for runway outside visible window
+  int letterCount = (Canvas::canvas->height() / cell.y) + 2;
   for (int i = 0; i < letterCount; i++) {
     // allocate space then immediately replace with random letter
     letter_vec.push_back(UNKNOWN);
@@ -86,9 +87,9 @@ void MatrixRain::init(GFXcanvas16* _canvas, uint8_t _column, int _start_x, uint8
   }
 }
 
-MatrixRain::MatrixRain(GFXcanvas16* _canvas, uint8_t _column, int _start_x)
+MatrixRain::MatrixRain(uint8_t _column, int _start_x)
 {
-  init(_canvas, _column, _start_x, rand_white_darkness(), rand_darkness_rate());
+  init(_column, _start_x, rand_white_darkness(), rand_darkness_rate());
 }
 
 void MatrixRain::toggleActive()
@@ -136,25 +137,12 @@ void MatrixRain::drawLetter(uint8_t index)
   bool isWhite = darkness < white_darkness;
   uint16_t color = isWhite ? WHITE : NEON_GREEN;
 
-  canvas->setTextColor(darken(color, darkness));
+  Canvas::canvas->setTextColor(darken(color, darkness));
 
   int letter_x = x + center.x;
   int letter_y = y + (cell.y * index) + center.y;
-  canvas->setCursor(letter_x, letter_y);
-  canvas->printUTF8((char*)letter);
-}
-
-char MatrixRain::recycle()
-{
-  if (x < -0.5 * canvas->width()) {
-    return 'l';
-  }
-
-  if (x > 1.5 * canvas->width()) {
-    return 'r';
-  }
-
-  return 'n';
+  Canvas::canvas->setCursor(letter_x, letter_y);
+  Canvas::canvas->printUTF8((char*)letter);
 }
 
 void MatrixRain::reset(int _x, int _y)
@@ -169,7 +157,7 @@ void MatrixRain::reset(int _x, int _y)
 void MatrixRain::draw()
 {
   // skip columns outside visible canvas bounds
-  if (x <= -1 * cell.x || (x + (0.75 * cell.x)) >= canvas->width()) {
+  if (x <= -1 * cell.x || (x + (0.75 * cell.x)) >= Canvas::canvas->width()) {
     // DLOG("\n[MatrixRain#%02d] [(%d, %d)] SKIP", column, x, y);
     return;
   }
@@ -181,16 +169,75 @@ void MatrixRain::draw()
   }
 }
 
-void MatrixRain::tick(Vec2d<int8_t>& pan)
+void MatrixRain::debug(const char* message)
 {
-  // do nothing when not active
-  if (!active) {
-    return;
+  DLOG(
+    "\n\n[MatrixRain#%02d] [%s] [white_darkness=%03d, darkness_rate=%02d, "
+    "next_cell=%02d]",
+    column, message, white_darkness, darkness_rate, next_cell);
+  for (std::size_t i = 0; i < darkness_vec.size(); i++) {
+    DLOG("\n  [cell=%02d, darkness=%03d]", i, darkness_vec[i]);
   }
+}
 
-  // safe_bounded_inc(x, (int)pan.x, 256);
+void MatrixRain::pan(Vec2d<int8_t>& pan)
+{
   x += pan.x;
+  y += pan.y;
 
+  // if y is outside bounds, shift and interpolate darkness on new shifted letter slot
+  // e.g.
+  // shifting up, insert at bottom with darkness = last darkness + increment
+  // shifting down, insert at top with darkness = first darkness - increment
+  if (y + cell.y < 0) {
+    // this->debug("ShiftUp::BEFORE");
+
+    for (std::size_t i = 0; i < letter_vec.size() - 1; i++) {
+      letter_vec[i] = letter_vec[i + 1];
+      darkness_vec[i] = darkness_vec[i + 1];
+      center_vec[i] = center_vec[i + 1];
+    }
+    // darkness_vec[darkness_vec.size() - 1] = darkness_vec[darkness_vec.size() - 2] - darkness_rate;
+    darkness_vec[darkness_vec.size() - 1] = darkness_vec[darkness_vec.size() - 1];
+    if (darkness_vec[darkness_vec.size() - 1] != NOT_VISIBLE_DARKNESS) {
+      safe_bounded_inc(darkness_vec[darkness_vec.size() - 1], -1 * darkness_rate, 0);
+      if (darkness_vec[darkness_vec.size() - 1] <= white_darkness) {
+        darkness_vec[darkness_vec.size() - 1] = NOT_VISIBLE_DARKNESS;
+      }
+    }
+
+    if (next_cell > 0 && next_cell < darkness_vec.size() - 1) {
+      next_cell -= 1;
+    }
+    this->randomizeLetter(darkness_vec.size() - 1);
+    y = 0;
+
+    // this->debug("ShiftUp::AFTER");
+  }
+  else if (y > cell.y) {
+    // this->debug("ShiftDown::BEFORE");
+
+    for (std::size_t i = letter_vec.size() - 1; i > 0; i--) {
+      letter_vec[i] = letter_vec[i - 1];
+      darkness_vec[i] = darkness_vec[i - 1];
+      center_vec[i] = center_vec[i - 1];
+    }
+    // darkness_vec[0] = darkness_vec[1] + darkness_rate;
+    darkness_vec[0] = darkness_vec[1];
+    if (darkness_vec[0] <= white_darkness) {
+      darkness_vec[0] = white_darkness;
+    }
+    safe_bounded_inc(darkness_vec[0], darkness_rate, NOT_VISIBLE_DARKNESS);
+    this->randomizeLetter(0);
+    next_cell += 1;
+    y = 0;
+
+    // this->debug("ShiftDown::AFTER");
+  }
+}
+
+void MatrixRain::light()
+{
   bool rainVisible = false;
 
   // for each letter
@@ -239,4 +286,17 @@ void MatrixRain::tick(Vec2d<int8_t>& pan)
       //   darkness_rate=%02d]", column, white_darkness, darkness_rate);
     }
   }
+}
+
+void MatrixRain::tick(Vec2d<int8_t>& pan)
+{
+  // do nothing when not active
+  if (!active) {
+    return;
+  }
+
+  // handle the pan vector by translating entire column
+  this->pan(pan);
+  // handle lighting and darkening cells in column
+  this->light();
 }

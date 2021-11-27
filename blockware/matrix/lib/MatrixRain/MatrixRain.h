@@ -7,8 +7,6 @@
 
 class MatrixRain {
 private:
-  // reference to the drawing canvas, used by draw functions
-  GFXcanvas16* canvas;
   // whether this instance is currently active
   bool active;
   // column acts as an identifier for this column, e.g. 4
@@ -30,6 +28,9 @@ private:
   void activateCell(uint8_t cell);
   void randomizeLetter(uint8_t index);
   void drawLetter(uint8_t letter);
+  void debug(const char* message);
+  void pan(Vec2d<int8_t>& pan);
+  void light();
 
 protected:
 public:
@@ -39,11 +40,10 @@ public:
   // shifts via pan vector passed in tick
   int x, y;
 
-  void init(GFXcanvas16* canvas, uint8_t column, int start_x, uint8_t white_darkness, uint8_t darkness_rate);
-  MatrixRain(GFXcanvas16* canvas, uint8_t column, int start_x);
+  void init(uint8_t column, int start_x, uint8_t white_darkness, uint8_t darkness_rate);
+  MatrixRain(uint8_t column, int start_x);
   void toggleActive(void);
   void draw();
-  void tick(Vec2d<int8_t> &pan);
-  char recycle();
+  void tick(Vec2d<int8_t>& pan);
   void reset(int x, int y);
 };

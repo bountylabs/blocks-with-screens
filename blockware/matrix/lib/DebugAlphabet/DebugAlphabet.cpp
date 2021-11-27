@@ -7,16 +7,17 @@
 #include <Random.h>
 
 #include "Alphabets.h"
+#include "Canvas.h"
 #include "DebugAlphabet.h"
 
-void DebugAlphabet::debug_alphabet(GFXcanvas16* canvas)
+void DebugAlphabet::debug_alphabet()
 {
-  int charsPerLine = canvas->width() / Alphabets::alphabet_textSize.x;
+  int charsPerLine = Canvas::canvas->width() / Alphabets::alphabet_textSize.x;
 
   // 0 thru 3 corresponding to 4 cardinal rotations
-  // canvas->setRotation(3);
-  canvas->setTextSize(1);
-  canvas->setTextColor(NEON_GREEN);
+  // Canvas::canvas->setRotation(3);
+  Canvas::canvas->setTextSize(1);
+  Canvas::canvas->setTextColor(NEON_GREEN);
 
   DLOG("\n\n====================================\n\n");
 
@@ -39,23 +40,23 @@ void DebugAlphabet::debug_alphabet(GFXcanvas16* canvas)
     // y); optionally print text measurements
     int16_t text_x, text_y;
     uint16_t text_width, text_height;
-    canvas->getTextBounds(text, 0, 0, &text_x, &text_y, &text_width, &text_height);
+    Canvas::canvas->getTextBounds(text, 0, 0, &text_x, &text_y, &text_width, &text_height);
     DLOG("\n[%s] i=%d,mx=%d,ln=%d -> %dx%d (%d, %d)", text, i, mx, ln,
                   text_width, text_height, x, y);
 
-    canvas->setCursor(x, y);
-    canvas->printUTF8((char*)text);
+    Canvas::canvas->setCursor(x, y);
+    Canvas::canvas->printUTF8((char*)text);
   }
 }
 
-void DebugAlphabet::debug_hiragana(GFXcanvas16* canvas)
+void DebugAlphabet::debug_hiragana()
 {
-  int charsPerLine = canvas->width() / Alphabets::hiragana_textSize.x;
+  int charsPerLine = Canvas::canvas->width() / Alphabets::hiragana_textSize.x;
 
   // 0 thru 3 corresponding to 4 cardinal rotations
-  // canvas->setRotation(3);
-  canvas->setTextSize(1);
-  canvas->setTextColor(NEON_GREEN);
+  // Canvas::canvas->setRotation(3);
+  Canvas::canvas->setTextSize(1);
+  Canvas::canvas->setTextColor(NEON_GREEN);
 
   DLOG("\n\n====================================\n\n");
 
@@ -82,11 +83,11 @@ void DebugAlphabet::debug_hiragana(GFXcanvas16* canvas)
     // optionally print text measurements
     int16_t text_x, text_y;
     uint16_t text_width, text_height;
-    canvas->getTextBounds(text, 0, 0, &text_x, &text_y, &text_width, &text_height);
+    Canvas::canvas->getTextBounds(text, 0, 0, &text_x, &text_y, &text_width, &text_height);
     DLOG("\n[%s] i=%d,mx=%d,ln=%d -> %dx%d (%d, %d)", text, i, mx, ln,
                   text_width, text_height, x, y);
 
-    canvas->setCursor(x, y);
-    canvas->printUTF8((char*)text);
+    Canvas::canvas->setCursor(x, y);
+    Canvas::canvas->printUTF8((char*)text);
   }
 }
