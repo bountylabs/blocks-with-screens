@@ -250,6 +250,8 @@ MMA8452Q accel(ACCEL_ADDR);
 
 // Used for frames-per-second throttle
 uint32_t prevTime = 0;
+uint32_t usPerLoop = 1000000 / MAX_FPS;
+uint32_t loopTimeRemainder = 0;
 
 uint32_t frameCounter = 0;
 uint32_t lastFrameMessage = 0;
@@ -317,6 +319,7 @@ void loop() {
   // things like gravity appear constant in the simulation.
   uint32_t t;
   while(((t = micros()) - prevTime) < (1000000L / MAX_FPS));
+  uint32_t loopTimeUs = t - prevTime + loopTimeRemainder;
   prevTime = t;
 
   uint8_t i;
@@ -343,17 +346,33 @@ void loop() {
 
   // Read accelerometer and run the physics
 
+int accelValues[3];
 #if defined(ACCEL_LIS2DW12)
   int16_t axes[3];
   accel->Get_X_AxesRaw(axes);
-  sand.iterate((int)-axes[0], (int)-axes[1], (int)-axes[2]);
+
+  accelValues[0] = (int)-axes[0];
+  accelValues[1] = (int)-axes[1];
+  accelValues[2] = (int)-axes[2];
 #elif defined(ACCEL_MMA8452Q)
   // Wait for the accelerometer to become ready
   while (!accel.available()) {}
   // Read accelerometer and run the physics
   accel.read();
-  sand.iterate((int)(-accel.x), (int)(-accel.y), (int)(accel.z));
+
+  accelValues[0] = (int)(-accel.x);
+  accelValues[1] = (int)(-accel.y);
+  accelValues[2] = (int)(accel.z);
 #endif
+
+  // iterate enough times to maintain MAX_FPS update speed
+  while (loopTimeUs >= usPerLoop)
+  {
+    sand.iterate(accelValues[0], accelValues[1], accelValues[2]);
+    loopTimeUs -= usPerLoop;
+  }
+
+  loopTimeRemainder = loopTimeUs;
 
   // Log the FPS for debugging once per second
   frameCounter++;

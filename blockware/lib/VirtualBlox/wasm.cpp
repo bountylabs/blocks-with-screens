@@ -124,7 +124,7 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
-  emscripten_set_main_loop(renderloop, 120, 0);
+  emscripten_set_main_loop(renderloop, 0, 0);
 
   millis_start();
   setup();
