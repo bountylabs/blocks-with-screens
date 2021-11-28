@@ -180,7 +180,7 @@ void MatrixRain::debug(const char* message)
   }
 }
 
-void MatrixRain::pan(Vec2d<int8_t>& pan)
+void MatrixRain::pan(Vec2d<float>& pan)
 {
   x += pan.x;
   y += pan.y;
@@ -288,7 +288,7 @@ void MatrixRain::light()
   }
 }
 
-void MatrixRain::tick(Vec2d<int8_t>& pan)
+void MatrixRain::tick(Vec2d<float>& pan)
 {
   // do nothing when not active
   if (!active) {

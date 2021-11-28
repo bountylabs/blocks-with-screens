@@ -42,42 +42,78 @@ void Matrix::handleTouch()
 {
   // tick Touch instance
   touch->tick();
-  // detect tap on y axis
-  if (touch->isTap(Touch::Y_AXIS)) {
-    DLOG("\n[Touch] tap! (toggling active on the MatrixRain)");
-    // toggle active on the MatrixRain instances
-    for (std::size_t i = 0; i < rain_vec.size(); i++) {
-      MatrixRain* rain = &rain_vec[i];
-      rain->toggleActive();
-    }
-  }
+
+  // // detect tap on y axis
+  // if (touch->isTap(Touch::Y_AXIS)) {
+  //   DLOG("\n[Touch] tap! (toggling active on the MatrixRain)");
+  //   // toggle active on the MatrixRain instances
+  //   for (std::size_t i = 0; i < rain_vec.size(); i++) {
+  //     MatrixRain* rain = &rain_vec[i];
+  //     rain->toggleActive();
+  //   }
+  // }
+
+  // if (touch->isRest()) {
+  //   DLOG("\n[Touch] resting...");
+  // }
 }
 
-void Matrix::randomPan()
+// linear interpolation of value x from (x1, x2) range into (y1, y2) range
+float interpolate(float x, float x1, float x2, float y1, float y2)
 {
-  // randomly change pan vector in increments of 1
-  if (randomf() < 0.0025) {
-    int sign = randomf() < 0.5 ? +1 : -1;
-    pan.x += sign * PAN_INC;
-    // DLOG("\n[Matrix::randomPan] [pan.y += %d] (%d, %d)", pan.x, pan.y);
-  } else if (randomf() < 0.005) {
-    int sign = randomf() < 0.5 ? +1 : -1;
-    pan.y += sign * PAN_INC;
-    // DLOG("\n[Matrix::randomPan] [pan.x += %d] (%d, %d)", pan.x, pan.y);
+  // keep x within bounds of (x1,x2)
+  if (x > x2) {
+    x = x2;
+  } else if (x < x1) {
+    x = x1;
   }
 
-  // DLOG("\n[Matrix::randomPan] [bounds=(%d, %d)] (%d, %d)]", PAN_MIN, PAN_MAX, pan.x, pan.y);
-  // DLOG("\n[Matrix::randomPan] [pan.x < PAN_MIN=%s]", pan.x < PAN_MIN ? "true" : "false");
-  // DLOG("\n[Matrix::randomPan] [pan.x > PAN_MAX=%s]", pan.x > PAN_MAX ? "true" : "false");
-  // DLOG("\n[Matrix::randomPan] [pan.y < PAN_MIN=%s]", pan.y < PAN_MIN ? "true" : "false");
-  // DLOG("\n[Matrix::randomPan] [pan.y > PAN_MAX=%s]", pan.y > PAN_MAX ? "true" : "false");
+  // DLOG("\n[interpolate] [x=%.2f,x1=%.2f,x2=%.2f,y1=%.2f,y2=%.2f]", x, x1, x2, y1, y2);
+  float result = y1 + ((x - x1) / (x2 - x1)) * (y2 - y1);
+  // DLOG("\n[interpolate] result = %.2f", result);
+  return result;
+}
 
-  if (pan.x < PAN_MIN || pan.x > PAN_MAX) {
-    pan.x = (int)time_random(PAN_MIN, PAN_MAX);
-    // DLOG("\n[Matrix::randomPan] [pan.x outside bounds, randomizing] (%d, %d)]", pan.x, pan.y);
-  } else if (pan.y < PAN_MIN || pan.y > PAN_MAX) {
-    pan.y = (int)time_random(PAN_MIN, PAN_MAX);
-    // DLOG("\n[Matrix::randomPan] [pan.y outside bounds, randomizing] (%d, %d)]", pan.x, pan.y);
+void Matrix::handlePan()
+{
+  // when at rest, randomly adjust pan
+  if (touch->isRest()) {
+    // randomly change pan vector in increments of 1
+    if (randomf() < 0.0025) {
+      int sign = randomf() < 0.5 ? +1 : -1;
+      pan.x += sign * PAN_INC;
+      // DLOG("\n[Matrix::handlePan] [pan.y += %d] (%d, %d)", pan.x, pan.y);
+    }
+    else if (randomf() < 0.005) {
+      int sign = randomf() < 0.5 ? +1 : -1;
+      pan.y += sign * PAN_INC;
+      // DLOG("\n[Matrix::handlePan] [pan.x += %d] (%d, %d)", pan.x, pan.y);
+    }
+
+    // DLOG("\n[Matrix::handlePan] [bounds=(%d, %d)] (%d, %d)]", PAN_MIN, PAN_MAX, pan.x, pan.y);
+    // DLOG("\n[Matrix::handlePan] [pan.x < PAN_MIN=%s]", pan.x < PAN_MIN ? "true" : "false");
+    // DLOG("\n[Matrix::handlePan] [pan.x > PAN_MAX=%s]", pan.x > PAN_MAX ? "true" : "false");
+    // DLOG("\n[Matrix::handlePan] [pan.y < PAN_MIN=%s]", pan.y < PAN_MIN ? "true" : "false");
+    // DLOG("\n[Matrix::handlePan] [pan.y > PAN_MAX=%s]", pan.y > PAN_MAX ? "true" : "false");
+
+    if (pan.x < PAN_MIN || pan.x > PAN_MAX) {
+      pan.x = (int)time_random(PAN_MIN, PAN_MAX);
+      // DLOG("\n[Matrix::handlePan] [pan.x outside bounds, randomizing] (%d, %d)]", pan.x, pan.y);
+    }
+    else if (pan.y < PAN_MIN || pan.y > PAN_MAX) {
+      pan.y = (int)time_random(PAN_MIN, PAN_MAX);
+      // DLOG("\n[Matrix::handlePan] [pan.y outside bounds, randomizing] (%d, %d)]", pan.x, pan.y);
+    }
+  }
+  else {
+    // Convert accelerometer data into velocity
+    // x (-2000, +2000)
+    // z (-3000, +1500)
+    float x = touch->X();
+    float z = touch->Z();
+    pan.x = interpolate(x, -2000.0f, 2000.0f, PAN_MAX, PAN_MIN);
+    pan.y = interpolate(z, -3000.0f, 1500.0f, PAN_MAX, PAN_MIN);
+    // DLOG("\n[Matrix::handlePan] [vx=%02f][vy=%02f]", pan.x, pan.y);
   }
 }
 
@@ -140,7 +176,7 @@ void Matrix::draw()
 void Matrix::tick()
 {
   this->handleTouch();
-  this->randomPan();
+  this->handlePan();
   this->handleEdges();
   this->draw();
 }

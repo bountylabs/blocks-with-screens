@@ -24,9 +24,9 @@
 
 class Matrix {
 private:
-  static const int8_t PAN_MIN = -3;
-  static const int8_t PAN_MAX = +3;
-  static const int8_t PAN_INC = +1;
+  static constexpr float PAN_MIN = -3.0f;
+  static constexpr float PAN_MAX = +3.0f;
+  static constexpr float PAN_INC = +1.0f;
 
   // Touch instance
   // Can detect taps on all 3 cartesian axes
@@ -35,13 +35,13 @@ private:
   // MatrixRain vector for columns
   std::vector<MatrixRain> rain_vec;
 
-  Vec2d<int8_t> pan = Vec2d<int8_t>(0, -1);
+  Vec2d<float> pan = Vec2d<float>(0.0f, -1.0f);
 
   int leftEdgeX;
   int rightEdgeX;
 
   void handleTouch();
-  void randomPan();
+  void handlePan();
   void handleEdges();
   void draw();
 

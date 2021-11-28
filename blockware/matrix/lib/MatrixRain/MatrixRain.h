@@ -29,7 +29,7 @@ private:
   void randomizeLetter(uint8_t index);
   void drawLetter(uint8_t letter);
   void debug(const char* message);
-  void pan(Vec2d<int8_t>& pan);
+  void pan(Vec2d<float>& pan);
   void light();
 
 protected:
@@ -38,12 +38,12 @@ public:
 
   // cartesian location of this column
   // shifts via pan vector passed in tick
-  int x, y;
+  float x, y;
 
   void init(uint8_t column, int start_x, uint8_t white_darkness, uint8_t darkness_rate);
   MatrixRain(uint8_t column, int start_x);
   void toggleActive(void);
   void draw();
-  void tick(Vec2d<int8_t>& pan);
+  void tick(Vec2d<float>& pan);
   void reset(int x, int y);
 };

@@ -13,9 +13,10 @@
 
 LIS2DW12Sensor* Touch::accel;
 
-void Touch::init(TwoWire *wire, int16_t _sensitivity) {
+void Touch::init(TwoWire* wire, int16_t _sensitivity)
+{
   // setup global static accelerometer
-   Touch::accel = new LIS2DW12Sensor(wire, ACCEL_ADDR);
+  Touch::accel = new LIS2DW12Sensor(wire, ACCEL_ADDR);
 
   // `accel->begin()` always returns `false`
   // if (!accel->begin()) {
@@ -27,23 +28,31 @@ void Touch::init(TwoWire *wire, int16_t _sensitivity) {
 
   sensitivity = _sensitivity;
 
-  // init axes_history with zeroes
-  for (uint8_t i = 0; i < AXES_HISTORY_LENGTH; i++) {
-    for (uint8_t axis = 0; axis < AXES_COUNT; axis++) {
+  for (uint8_t axis = 0; axis < AXES_COUNT; axis++) {
+    // init axes_history with zeroes
+    for (uint8_t i = 0; i < AXES_HISTORY_LENGTH; i++) {
       axes_history[i][axis] = 0;
     }
+
+    // init axis_ready as true
+    axis_ready[axis] = true;
+    // init event_is_tap as false
+    event_is_tap[axis] = false;
   }
 }
 
-Touch::Touch(TwoWire *wire) {
+Touch::Touch(TwoWire* wire)
+{
   init(wire, DEFAULT_SENSITIVITY);
 }
 
-Touch::Touch(TwoWire *wire, int16_t sensitivity) {
+Touch::Touch(TwoWire* wire, int16_t sensitivity)
+{
   init(wire, sensitivity);
 }
 
-void Touch::tick() {
+void Touch::tick()
+{
   // reset events on every tick
   for (uint8_t axis = 0; axis < AXES_COUNT; axis++) {
     event_is_tap[axis] = false;
@@ -58,21 +67,25 @@ void Touch::tick() {
   Touch::accel->Get_X_AxesRaw(axes_read);
   for (uint8_t axis = 0; axis < AXES_COUNT; axis++) {
     // store absolute delta from previous measurement (previous_axes)
+    axes_history_raw[current_axes][axis] = axes_read[axis];
     axes_history[current_axes][axis] = std::abs(axes_read[axis] - previous_axes[axis]);
   }
   // copy read values into previous_axes
   memcpy(previous_axes, axes_read, AXES_COUNT * sizeof(int16_t));
 
   // debug axes array only if magnitude above small threshold
-  if (axes_history[current_axes][0] > 5 || axes_history[current_axes][1] > 5 || axes_history[current_axes][2] > 5) {
-    DLOG("\n [accel] axes[%02d][%05d, %05d, %05d]", current_axes, axes_history[current_axes][0], axes_history[current_axes][1], axes_history[current_axes][2]);
+  if (axes_history[current_axes][0] > 5 || axes_history[current_axes][1] > 5 ||
+      axes_history[current_axes][2] > 5) {
+    DLOG("\n [accel] axes[%02d] delta[%05d, %05d, %05d] raw[%05d, %05d, %05d]",
+         current_axes, axes_history[current_axes][0], axes_history[current_axes][1],
+         axes_history[current_axes][2], axes_history_raw[current_axes][0],
+         axes_history_raw[current_axes][1], axes_history_raw[current_axes][2]);
   }
 
   // What is a tap?
   // Well on the accelerometer a tap looks like a steady state, followed by changes, followed by steady state
   // We can detect this pattern in accelerometer readings and fire a 'tap' event when it is observed
   // Example accelerometer readings for taps (x,y,z)
-
 
   // evaluate current axes_history array to detect taps
   // check each axis independently
@@ -93,7 +106,8 @@ void Touch::tick() {
       axis_ready[axis] = false;
       event_is_tap[axis] = true;
       DLOG("[axis=%d] hasJump!", axis);
-    } else if (!hasJump && !axis_ready[axis]) {
+    }
+    else if (!hasJump && !axis_ready[axis]) {
       // no jumps detected, reset axis ready state
       axis_ready[axis] = true;
       DLOG("[axis=%d] resetting back to ready state", axis);
@@ -101,6 +115,34 @@ void Touch::tick() {
   }
 }
 
-bool Touch::isTap(int axis) {
+bool Touch::isRest()
+{
+  bool isRest = true;
+  for (uint8_t axis = 0; axis < AXES_COUNT; axis++) {
+    if (!axis_ready[axis]) {
+      isRest = false;
+    }
+  }
+
+  return isRest;
+}
+
+int16_t Touch::X()
+{
+  return axes_history_raw[current_axes][0];
+}
+
+int16_t Touch::Y()
+{
+  return axes_history_raw[current_axes][1];
+}
+
+int16_t Touch::Z()
+{
+  return axes_history_raw[current_axes][2];
+}
+
+bool Touch::isTap(int axis)
+{
   return event_is_tap[axis];
 }

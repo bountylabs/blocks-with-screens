@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Adafruit_SSD1351.h>
 // Accelerometer
 #include <LIS2DW12Sensor.h>
 
@@ -22,6 +23,7 @@ private:
   int16_t previous_axes[AXES_COUNT];
   // track sliding window of 15 accelerometer readings to detect taps
   int16_t axes_history[AXES_HISTORY_LENGTH][AXES_COUNT];
+  int16_t axes_history_raw[AXES_HISTORY_LENGTH][AXES_COUNT];
 
 protected:
 public:
@@ -35,6 +37,10 @@ public:
   Touch(TwoWire *wire);
   Touch(TwoWire *wire, int16_t sensitivity);
   void tick(void);
+  bool isRest();
+  int16_t X();
+  int16_t Y();
+  int16_t Z();
   bool isTap(int axis);
 };
 
