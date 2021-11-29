@@ -18,6 +18,7 @@
 #define DARK_GRAY 0x4108
 #define GRAY 0x618C
 #define LIGHT_GRAY 0xA294
+#define NEON_GREEN 0x77CA
 
 // logo colors
 #define LOGO_BLUE 0x1e1d

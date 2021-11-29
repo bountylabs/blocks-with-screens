@@ -1,3 +1,5 @@
+#pragma once
+
 #include <Adafruit_SSD1351.h>
 
 #include <math.h>
