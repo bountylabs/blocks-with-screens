@@ -31,6 +31,8 @@ static inline int randomFireworkColor()
 
 class Particle {
 private:
+  static Vec2d<float> __gravity;
+private:
   int _age;         // how old is this particle?
   bool _isRocket;   // is this particle rocketing?
   Vec2d<float> _pos;  // x,y coords
@@ -44,6 +46,8 @@ private:
   float _resistance;
 
 protected:
+public:
+  static void updateGravity(const Vec2d<float> &gravity_xy);
 public:
   Particle(int x, int y, bool isRocket, int color);
   void draw(GFXcanvas16* canvas);
