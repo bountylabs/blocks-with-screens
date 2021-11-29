@@ -38,7 +38,7 @@ public:
 
   // cartesian location of this column
   // shifts via pan vector passed in tick
-  float x, y;
+  int x, y;
 
   void init(uint8_t column, int start_x, uint8_t white_darkness, uint8_t darkness_rate);
   MatrixRain(uint8_t column, int start_x);

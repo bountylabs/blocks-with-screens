@@ -182,8 +182,11 @@ void MatrixRain::debug(const char* message)
 
 void MatrixRain::pan(Vec2d<float>& pan)
 {
-  x += pan.x;
-  y += pan.y;
+  x += (int)pan.x;
+  y += (int)pan.y;
+  // x = (int)floor(x);
+  // y = (int)floor(x);
+  // DLOG("\n[MatrixRain#%02d] (%d, %d)", column, x, y);
 
   // if y is outside bounds, shift and interpolate darkness on new shifted letter slot
   // e.g.
