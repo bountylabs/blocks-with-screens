@@ -1,10 +1,14 @@
 # Makefile for building web assembly versions of blockware
 
+# Mark pixel-dust.html as PHONY so we always build it
+.PHONY: pixel-dust.html
+
 BLOCKWARE_DIR = ../../
 STUBS_DIR = ./stubs
 DEFINES = -DARDUINO=100
 COMPILEWASM = em++
 WASMFLAGS = -std=c++1z -Wno-unused-command-line-argument -s USE_SDL=2
+EM_OUT_DIR = ./build
 
 INCLUDE_DIRS = \
 	-I${BLOCKWARE_DIR}/curvy-snake\
@@ -79,7 +83,8 @@ fireworks.html: $(VBLOX_OBJECTS_WASM) $(FIREWORKS_OBJECTS_WASM)
 	$(COMPILEWASM) $(WASMFLAGS) --bind $(VBLOX_OBJECTS_WASM) $(FIREWORKS_OBJECTS_WASM) -o $@
 
 pixel-dust.html: $(VBLOX_OBJECTS_WASM) $(PIXEL_DUST_OBJECTS_WASM)
-	$(COMPILEWASM) $(WASMFLAGS) --bind $(VBLOX_OBJECTS_WASM) $(PIXEL_DUST_OBJECTS_WASM) -o $@
+	mkdir -p $(EM_OUT_DIR)/pixel-dust
+	$(COMPILEWASM) $(WASMFLAGS) --bind $(VBLOX_OBJECTS_WASM) $(PIXEL_DUST_OBJECTS_WASM) -o $(EM_OUT_DIR)/pixel-dust/$@
 
 %.wasm.o: %.cpp
 	$(COMPILEWASM) $(WASMFLAGS) --bind -c $< $(INCLUDE_DIRS) $(DEFINES) -o $@

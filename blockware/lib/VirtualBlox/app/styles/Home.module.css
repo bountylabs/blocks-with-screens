@@ -1,0 +1,25 @@
+.container {
+  height: 100%;
+}
+
+.spacer {
+  height: 4px;
+  width: 4px;
+}
+
+.slidersContainer {
+  display: flex;
+  flex-direction: column;
+  width: 125px;
+}
+
+.slider {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.slidersContainer  span {
+  font-size: 14px;
+}
