@@ -5,10 +5,10 @@ curvy-snake
 # Make sure the stubbed secrets can still be added
 !stubs/secrets.h
 
-# Emscripten-generaged files
-*.html
-*.js
-*.wasm
+# Emscripten-generated files in this directory
+./*.html
+./*.js
+./*.wasm
 
 # Debug symbols
 *.dSYM

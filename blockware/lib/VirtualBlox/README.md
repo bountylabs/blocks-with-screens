@@ -44,6 +44,15 @@ python3 -m http.server 8080 &
 
 And then open the wasm at http://localhost:8080/curvy-snake.html
 
+## Running Virtual Blox App
+
+```
+./scripts/watch.sh pixel-dust
+```
+
+This will kickoff a local dev server and watch the `pixel-dust` blockware folder for changes and rebuild the `pixel-dust.html` target.
+The **Virtual Blox App** is available at http://localhost:3000
+
 ## Supporting new blockwares
 
 VirtualBlox contains a collection of stub classes and functions (in the `VirtualBlox/stubs` directory) to simulate enough Arduino stuff to satisfy the compiler. To work with new blockwares, it's very likely you'll have to add new stubbed libraries.
