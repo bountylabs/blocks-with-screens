@@ -64,8 +64,6 @@ void updateAccelerometer(int x, int y, int z)
   _last_x_accel = x;
   _last_y_accel = y;
   _last_z_accel = z;
-
-  printf("got %d %d %d\n", x, y, z);
 }
 
 void getAccelerometerData(int16_t* x, int16_t* y, int16_t* z)
