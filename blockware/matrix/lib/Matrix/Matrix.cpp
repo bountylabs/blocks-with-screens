@@ -102,7 +102,7 @@ void Matrix::handlePan()
     }
     else if (pan.y < PAN_MIN || pan.y > PAN_MAX) {
       pan.y = (int)time_random(PAN_MIN, PAN_MAX);
-      // DLOG("\n[Matrix::handlePan] [pan.y outside bounds, randomizing] (%d, %d)]", pan.x, pan.y);
+      // DLOG("\n[Matrix::handlePan] [pan.y outside bounds, randomizing] [vx=%02f,vy=%02f]", pan.x, pan.y);
     }
   }
   else {
@@ -113,7 +113,7 @@ void Matrix::handlePan()
     float z = touch->Z();
     pan.x = interpolate(x, -2000.0f, 2000.0f, PAN_MAX, PAN_MIN);
     pan.y = interpolate(z, -3000.0f, 1500.0f, PAN_MAX, PAN_MIN);
-    // DLOG("\n[Matrix::handlePan] [vx=%02f][vy=%02f]", pan.x, pan.y);
+    // DLOG("\n[Matrix::handlePan] [vx=%02f,vy=%02f]", pan.x, pan.y);
   }
 }
 
@@ -130,26 +130,28 @@ void Matrix::handleEdges()
   // which effectively shifts all elements left by one and moves the 0th element to be the last spot
   // i.e. the last thing we will iterate when walking from head for size iterations
 
-  MatrixRain left_edge = rain_vec[0];
-  MatrixRain right_edge = rain_vec[rain_vec.size() - 1];
   // hit left edge?
   // shift all left by one and extend Nth (last) element of right runway
+  MatrixRain left_edge = rain_vec[0];
+  float leftOverflow = left_edge.x - leftEdgeX;
   if (left_edge.x < leftEdgeX) {
     // DLOG("\nleft_edge recycle!");
     for (std::size_t i = 0; i < rain_vec.size() - 1; i++) {
       rain_vec[i] = rain_vec[i + 1];
     }
-    left_edge.reset(rightEdgeX, 0);
+    left_edge.reset(rightEdgeX + leftOverflow, 0);
     rain_vec[rain_vec.size() - 1] = left_edge;
   }
   // hit right edge?
   // shift all right by one and add a new 0th extending left runway
+  MatrixRain right_edge = rain_vec[rain_vec.size() - 1];
+  float rightOverflow = right_edge.x - rightEdgeX;
   if (right_edge.x > rightEdgeX) {
     // DLOG("\nright_edge recycle!");
     for (std::size_t i = rain_vec.size() - 1; i > 0; i--) {
       rain_vec[i] = rain_vec[i - 1];
     }
-    right_edge.reset(leftEdgeX, 0);
+    right_edge.reset(leftEdgeX + rightOverflow, 0);
     rain_vec[0] = right_edge;
   }
 }

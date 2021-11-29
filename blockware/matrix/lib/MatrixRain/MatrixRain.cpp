@@ -156,6 +156,8 @@ void MatrixRain::reset(int _x, int _y)
 
 void MatrixRain::draw()
 {
+  // DLOG("\n[MatrixRain#%02d] [(%d, %d)] DRAW", column, x, y);
+
   // skip columns outside visible canvas bounds
   if (x <= -1 * cell.x || (x + (0.75 * cell.x)) >= Canvas::canvas->width()) {
     // DLOG("\n[MatrixRain#%02d] [(%d, %d)] SKIP", column, x, y);
