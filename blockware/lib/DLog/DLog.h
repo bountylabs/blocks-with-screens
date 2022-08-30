@@ -19,7 +19,7 @@
 } while (0)
 RemoteDebug Debug;
 #elif SERIALLOG
-#define DLOG(msg, ...) Serial.printf(msg, ##__VA_ARGS__);
+#define DLOG(msg, ...) log_d(msg, ##__VA_ARGS__);
 #define DLOGBegin(hostname)
 #define DLOGHandle()
 #else

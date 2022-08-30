@@ -1,11 +1,11 @@
 #include <DefaultConfig.h>
-// #define SERIALLOG 1
+#define SERIALLOG 1
 #include <DLog.h>
 #include <Adafruit_SSD1351.h>
 #include <SPI.h>
-#include <Text.h>
 #include <Adafruit_PixelDust.h>
 #include <Colors.h>
+#include <WiFi.h>
 
 // In 80MHz mode, we can do 100 grains at about 120FPS
 // In 160MHz mode, we can do 100 grains at about 185FPS which feels nice
@@ -17,7 +17,12 @@
 // Sand object, last 2 args are accelerometer scaling and grain elasticity
 Adafruit_PixelDust sand(SCREEN_WIDTH, SCREEN_HEIGHT, N_GRAINS, 1, ELASTICITY);
 
-Adafruit_SSD1351 tft = Adafruit_SSD1351(SCREEN_WIDTH, SCREEN_HEIGHT, &SPI, CS_PIN, DC_PIN, RST_PIN);
+Adafruit_SSD1351 *tft;
+
+void displayReset() {
+  tft->fillScreen(BLACK);
+  tft->setCursor(0, 0);
+}
 
 // Colors for each one of the grains
 uint16_t colors[N_GRAINS];
@@ -249,37 +254,50 @@ MMA8452Q accel(ACCEL_ADDR);
 #endif
 
 // Used for frames-per-second throttle
-uint32_t prevTime = 0;
+    uint32_t prevTime = 0;
 
 uint32_t frameCounter = 0;
 uint32_t lastFrameMessage = 0;
 
 int begin_retval;
 
-void err(int x) {
-  uint8_t i;
-  pinMode(LED_BUILTIN, OUTPUT);       // Using onboard LED
-  for(i=1;;i++) {                     // Loop forever...
-    digitalWrite(LED_BUILTIN, i & 1); // LED on/off blink to alert user
-    delay(x);
-  }
-}
 
 void setup(void) {
-  Wire.begin();
+  setCpuFrequencyMhz(240);
+  log_d("CPU Running at %dMHz", getCpuFrequencyMhz());
+  Serial.begin(SERIAL_DATA_RATE);
+  Wire.begin(SDA_PIN, SCL_PIN);
 
-  if(!sand.begin()) err(1000); // Slow blink = malloc error
+  if(!sand.begin()) {
+        log_e("sand.begin error");
+  }
 
 #if defined(ACCEL_LIS2DW12)
   accel = new LIS2DW12Sensor(&Wire, ACCEL_ADDR);
   // if (!accel->begin()) err(250);
   accel->Enable_X();
 #elif defined(ACCEL_MMA8452Q)
-  if (!accel.begin(Wire, ACCEL_ADDR)) err(250);
+  if (!accel.begin(Wire, ACCEL_ADDR)) {
+    log_e("Accelerometer error");
+  };
+
 #endif
 
-  Serial.begin(SERIAL_DATA_RATE);
-  tft.begin(SPI_SPEED);
+  SPIClass *spi = new SPIClass();
+  spi->begin(SCLK_PIN, -1, MOSI_PIN, CS_PIN);
+  tft = new Adafruit_SSD1351(SCREEN_WIDTH, SCREEN_HEIGHT, spi, CS_PIN, DC_PIN, RST_PIN);
+  tft->begin(SPI_SPEED);
+
+  log_e("Setup complete");
+
+  pinMode(BUTTON_A, INPUT_PULLUP);
+  pinMode(BUTTON_B, INPUT_PULLUP);
+  pinMode(BUTTON_UP, INPUT_PULLUP);
+  pinMode(BUTTON_DOWN, INPUT_PULLUP);
+  pinMode(BUTTON_LEFT, INPUT_PULLUP);
+  pinMode(BUTTON_RIGHT, INPUT_PULLUP);
+  pinMode(BUTTON_SELECT, INPUT_PULLUP);
+  pinMode(BUTTON_START, INPUT_PULLUP);
 
   // Max is 700000 in 160MHz mode and 400000 in 80MHz mode
   Wire.setClock(700000); // Run I2C at 700 KHz for faster screen updates
@@ -296,7 +314,7 @@ void setup(void) {
       if (color > 0) {
         sand.setPixel(larryStartX + x, larryStartY + y);             // Set pixel in the simulation
       }
-      tft.drawPixel(larryStartX + x, larryStartY + y, color);
+      tft->drawPixel(larryStartX + x, larryStartY + y, color);
     }
   }
 
@@ -308,6 +326,8 @@ void setup(void) {
   sand.randomize(); // Initialize random sand positions
 
   lastFrameMessage = micros();
+
+  // WiFi.begin("Boiles", "stinaissohot");
 }
 
 void loop() {
@@ -324,22 +344,22 @@ void loop() {
 
   // Display frame calculated on the prior pass.  It's done immediately after the
   // FPS sync (rather than after calculating) for consistent animation timing.
-  tft.startWrite();
+  tft->startWrite();
   for(i = 0; i < N_GRAINS; i++) {
     // Clear the old position of the grain
-    tft.setAddrWindow(grains[i].x, grains[i].y, 1, 1);
-    tft.SPI_WRITE16(BLACK);
+    tft->setAddrWindow(grains[i].x, grains[i].y, 1, 1);
+    tft->SPI_WRITE16(BLACK);
 
     sand.getPosition(i, &x, &y);
 
     // Write the new position of the pixel
-    tft.setAddrWindow(x, y, 1, 1);
-    tft.SPI_WRITE16(colors[i]);
+    tft->setAddrWindow(x, y, 1, 1);
+    tft->SPI_WRITE16(colors[i]);
 
     // Save the grain position so we can erase it after the next iteration
     grains[i] = {x, y};
   }
-  tft.endWrite();
+  tft->endWrite();
 
   // Read accelerometer and run the physics
 
@@ -352,14 +372,40 @@ void loop() {
   while (!accel.available()) {}
   // Read accelerometer and run the physics
   accel.read();
-  sand.iterate((int)(-accel.x), (int)(-accel.y), (int)(accel.z));
+  // log_e("accel.read() %d %d %d", accel.x, accel.y, accel.z);
+  sand.iterate((int)(accel.x), (int)(-accel.y), (int)(accel.z));
 #endif
 
   // Log the FPS for debugging once per second
   frameCounter++;
   if ((t - lastFrameMessage) > 1000000L) {
-    DLOG("FPS: %f\n", (float)frameCounter/((t - lastFrameMessage)/1000000.0));
+    DLOG("FPS: %f", (float)frameCounter/((t - lastFrameMessage)/1000000.0));
     frameCounter = 0;
     lastFrameMessage = t;
+  }
+
+  if (digitalRead(BUTTON_A) == LOW) {
+    log_d("Button A pressed");
+  }
+  if (digitalRead(BUTTON_B) == LOW) {
+    log_d("Button B pressed");
+  }
+  if (digitalRead(BUTTON_UP) == LOW) {
+    log_d("Button UP pressed");
+  }
+  if (digitalRead(BUTTON_DOWN) == LOW) {
+    log_d("Button DOWN pressed");
+  }
+  if (digitalRead(BUTTON_LEFT) == LOW) {
+    log_d("Button LEFT pressed");
+  }
+  if (digitalRead(BUTTON_RIGHT) == LOW) {
+    log_d("Button RIGHT pressed");
+  }
+  if (digitalRead(BUTTON_SELECT) == LOW) {
+    log_d("Button SELECT pressed");
+  }
+  if (digitalRead(BUTTON_START) == LOW) {
+    log_d("Button START pressed");
   }
 }
