@@ -372,7 +372,7 @@ void loop() {
   while (!accel.available()) {}
   // Read accelerometer and run the physics
   accel.read();
-  // log_e("accel.read() %d %d %d", accel.x, accel.y, accel.z);
+  // log_d("accel.read() %d %d %d", accel.x, accel.y, accel.z);
   sand.iterate((int)(accel.x), (int)(-accel.y), (int)(accel.z));
 #endif
 
@@ -386,21 +386,27 @@ void loop() {
 
   if (digitalRead(BUTTON_A) == LOW) {
     log_d("Button A pressed");
+    sand.iterate(-232, 10310, 910);
   }
   if (digitalRead(BUTTON_B) == LOW) {
     log_d("Button B pressed");
+    sand.iterate(-34, -10300, 910);
   }
   if (digitalRead(BUTTON_UP) == LOW) {
     log_d("Button UP pressed");
+    sand.iterate(-34, -10300, 910);
   }
   if (digitalRead(BUTTON_DOWN) == LOW) {
     log_d("Button DOWN pressed");
+    sand.iterate(-232, 10310, 910);
   }
   if (digitalRead(BUTTON_LEFT) == LOW) {
     log_d("Button LEFT pressed");
+    sand.iterate(-10232, 310, 910);
   }
   if (digitalRead(BUTTON_RIGHT) == LOW) {
     log_d("Button RIGHT pressed");
+    sand.iterate(10232, 310, 910);
   }
   if (digitalRead(BUTTON_SELECT) == LOW) {
     log_d("Button SELECT pressed");
